@@ -6,6 +6,7 @@
 /runtime/*.log
 /runtime/latest_run.json
 /runtime/simulator.log
+/runtime/*.lock
 /planning/target/
 /mapping/build/
 **/__pycache__/
