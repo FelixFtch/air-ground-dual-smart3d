@@ -5,7 +5,9 @@ This guide takes a fresh Ubuntu machine from zero to `./lab start --rviz` with G
 Two routes for the UE side:
 
 - **Route A — restore the reference environment** (fastest, exact): unpack `/media/felix/MoFang2T1/AirGround_Dual_Go2_Bee_Full_2026-10-05_0001_EDT` (75.5 GB; includes the UE project, engine, shader caches, both Python envs) plus the ~32 GB of reused engine/SDK archives listed in its `00_README_恢复说明.md`, then overlay the code snapshot `AirGround_Dual_Go2_Bee_Code_2026-10-10_0015_EDT`. You land on the exact machine state the recordings were made on.
-- **Route B — assemble from CARLA upstream** (no access to the backups): build CARLA's UE 5.8 fork from source, create a CarlaUnreal project, and import the levels from this repo's `ue/` folder. The handmade levels only use engine cubes plus the five materials under `Content/OHZTest/Materials`, so any CARLA UE 5.8 source checkout can open them; the only external piece is CARLA's own `CarlaGameMode`, which every CARLA source build has.
+- **Route B — assemble from CARLA upstream** (no access to the backups): build the **CARLA fork of UE 5.8** — `github.com/carla-simulator/UnrealEngine`, the branch matching CARLA 0.10.x (e.g. `carla58`) — then get a CARLA 0.10.x source checkout for the `CarlaUnreal` project and plugins, and import the levels from this repo's `ue/` folder. The handmade levels only use engine cubes plus the five materials under `Content/OHZTest/Materials`; the only external piece is CARLA's own `CarlaGameMode`, which every CARLA source build has.
+
+> **Do not confuse the two UE 5.8s.** Epic's vanilla UE 5.8 editor (Windows or Linux) is enough to *edit* the levels (see Option 1 in [`ue/README.md`](../ue/README.md)), but the dual-robot stack drives the editor through the CARLA Python API — *running* it requires the CARLA UE 5.8 fork, not vanilla UE.
 
 ## 1. System prerequisites
 

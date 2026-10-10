@@ -11,7 +11,19 @@ These are the handmade levels, about 400 KB total. The 57 GB of CARLA towns, tex
 
 Scene origin, ground height, bounds, and pedestrian count live in `profiles/scenes/air_ground_lab.yaml`. Map coordinates are `x=carla.x, y=-carla.y, z=carla.z-0.22`.
 
-## Opening inside an existing Windows CARLA project
+## Option 1 — plain UE 5.8 editor, no CARLA needed (enough for scene editing)
+
+The handmade levels use only engine cubes plus the materials in this repo, so Epic's vanilla UE 5.8 editor (Windows or Linux) is enough to view and edit them:
+
+1. Install UE 5.8 (exact 5.8.x) and create a new Blank project (no starter content needed).
+2. Copy this repo's `Content/AirGroundLab` and `Content/OHZTest` into that project's `Content/`.
+3. Open `AirGroundLab/Maps/AirGroundLab_Main`. A warning about the missing `CarlaGameMode` is expected — the level opens with the default GameMode and all geometry and materials intact.
+4. Edit freely. Keep the ground flat and walkable where Go2 patrols; keep the Bee corridor flyable between 1.2 m and 3.2 m.
+5. Copy the edited `.umap` (plus any new materials) back. After it lands in a CARLA project, check World Settings → GameMode Override still points at `CarlaGameMode` — a plain-editor save can clear it; reselect it if so.
+
+Do **not** try to open `CarlaUnreal.uproject` itself in vanilla UE 5.8: it references CARLA plugins vanilla UE does not have. Always go through a new blank project and copy `Content` instead.
+
+## Option 2 — opening inside an existing CARLA UE 5.8 project
 
 You need a CARLA UE 5.8 project (`CarlaUnreal.uproject`) that already opens on your machine. Copy these two directories as-is into that project's `Content`:
 
