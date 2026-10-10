@@ -16,18 +16,16 @@ Two independent tasks live in this repo. Pick your lane:
 
 **OHZ shape work:** the agreed replacement is the velocity-shaped ground shadow — standing person = disc (Go2) / vertical cylinder (Bee); walking person = ground rectangle from the feet along the velocity direction, length scaled by speed. It must land as a second shape kind next to the existing ellipse, not as an edit to it. Conventions in [`ohz/README.md`](ohz/README.md).
 
-## Platform map: what is possible where
+## Reproducing the stack
 
-**This repository alone does not reproduce the live dual-robot stack.** Git carries source, profiles, YOLO26 weights, and the ~400 KB handmade UE levels. Everything the launcher depends on — the ~58 GB CARLA UE 5.8 project, the UE engine build, the shared Python env (CARLA 0.10.0 API + torch + ultralytics), ROS 2 Humble, and the systemd user services — lives only on the Linux machine (or in the SSD backups below).
+Everything first-party is in this repository: code, Rust planner, C++ map service, YOLO26 weights, profiles, and the handmade UE levels. Three heavy dependencies cannot travel through Git — the CARLA UE 5.8 project + engine, a Python 3.10 env, and ROS 2 Humble — and [`docs/SETUP_LINUX.md`](docs/SETUP_LINUX.md) walks through all of them, ending at `./lab start --rviz` with both robots moving on your own copy. Fastest route: restore the reference environment snapshot listed there; fully-from-upstream route: build CARLA UE 5.8 yourself and import the levels from `ue/`.
 
 | Task | On Windows | On the Linux host |
 |---|---|---|
 | Author/edit UE scenes | Yes — your own CARLA UE 5.8 project + `ue/Content` import (see [`ue/README.md`](ue/README.md)); hand the `.umap` back | Yes, plus run it with robots |
 | Read/modify OHZ and planning code | Yes (editing only) | Yes, plus `cargo build` / `cmake` / pytest |
-| Run `./lab start --rviz` (full dual-robot stack) | **No.** Needs systemd user units, ROS 2 Humble, and the Linux CARLA/UE install | Yes |
-| See robots running | Only via the Linux host (SSH / remote desktop / a restored backup machine) | Yes — RViz on ROS domain 45 |
-
-To set up a **second machine** that can run everything: restore from the full environment snapshot `/media/felix/MoFang2T1/AirGround_Dual_Go2_Bee_Full_2026-10-05_0001_EDT` (75.5 GB, plus the ~32 GB of reused engine/SDK archives listed in its `00_README_恢复说明.md`), then overlay the newest code snapshot `AirGround_Dual_Go2_Bee_Code_2026-10-10_0015_EDT`. Known portability notes: the bundled venvs use `torch 2.14.0+cu126`, which newer GPUs (e.g. RTX 5090) must replace with a CUDA 12.8+ build (rebuild SAM3 kernels after swapping; start with `--people yolo26`); on Ubuntu 24.04 install Python 3.10 and adjust the two `/opt/ros/humble` paths in `simulation/lifecycle.py` for Jazzy. UE levels hand off between Windows and Linux unchanged.
+| Run `./lab start --rviz` (full dual-robot stack) | No — needs systemd user units, ROS 2 Humble, and the Linux CARLA/UE install | Yes, after [`docs/SETUP_LINUX.md`](docs/SETUP_LINUX.md) |
+| See robots running | Via the Linux host (SSH / remote desktop / a machine set up with the guide) | Yes — RViz on ROS domain 45 |
 
 After cloning, build the two native components once on the Linux machine:
 
