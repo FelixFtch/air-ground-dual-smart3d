@@ -1,55 +1,55 @@
-# 速度驱动的 OHZ 形状：从人身后穿行
+# Velocity-Shaped OHZ: Passing Behind Pedestrians
 
-日期：2026-10-04。状态：讨论结论，**代码尚未修改**。现行 OHZ 仍是 `perception/hazards.py` 里固定 1 秒扫掠的椭圆。
+Date: 2026-10-04. Status: discussion conclusions, **no code changed yet**. The current OHZ is still the fixed 1-second sweep ellipse in `perception/hazards.py`.
 
-## 观察
+## Observation
 
-有人从机器人前方横穿时，SMART3D 经常从人的前方（人要去的方向）绕。人继续往前走，又把刚选的路挡住，路径被一路往人前进的方向推，反而绕远。
+When a pedestrian crosses in front of the robot, SMART3D often detours around the front of the pedestrian (the direction they are heading). The pedestrian keeps walking and blocks the newly chosen path again, so the path keeps being pushed in the pedestrian's direction of travel, and the robot ends up taking the long way around.
 
-## 原因
+## Cause
 
-- 现行 OHZ：把人与机器人尺寸之和 ρ 沿速度方向扫 1 秒，中心前移半程；身后只留 ρ，前方多出 v×1 s。
-- SMART 把 OHZ 当静态区域：节点落在里面就剪，边穿过就作废，直到下次刷新。它不知道人"什么时候在哪"。
-- 机器人到交叉点通常要几秒。OHZ 前端刚碰到机器人路线时，从人前方绕最短，于是选前方；每次刷新 OHZ 再往前推一截，形成追着人绕。
-- 原版 SMART（Shen 等，RA-L 2023，arXiv 2305.06487）的 OHZ 是以障碍当前位置为圆心的圆，r = v·T_OH + r_i + r_R，T_OH = 0.4 s，假设障碍朝向未知。
+- Current OHZ: sweeps the sum of pedestrian and robot radii ρ along the velocity direction for 1 second, with the center shifted forward by half the sweep; only ρ remains behind, and v×1 s extends ahead.
+- SMART treats the OHZ as a static region: nodes falling inside are pruned, edges crossing it are invalidated, until the next refresh. It does not know "where the pedestrian will be when".
+- The robot typically takes several seconds to reach the crossing point. When the OHZ front first touches the robot's route, going around the front is shortest, so the front is chosen; each OHZ refresh pushes it further forward, producing a chase-around-the-pedestrian behavior.
+- The original SMART (Shen et al., RA-L 2023, arXiv 2305.06487) uses an OHZ that is a circle centered at the obstacle's current position, r = v·T_OH + r_i + r_R, T_OH = 0.4 s, assuming obstacle heading is unknown.
 
-## 想法
+## Idea
 
-1. 有速度估计的人，OHZ 变成前长后短的水滴；没有速度的人保持圆。形状只由速度估计决定，不另做置信度调整。
-2. 水滴取人在有限加速度 a 下、[0, T] 内可能到达的位置：t 时刻圆心为 p + v·t，半径为 ρ + ½·a·t²。
-   - 前端：ρ + v·T + ½·a·T²
-   - 两侧：ρ + ½·a·T²
-   - 身后：保持 ρ。t ≤ 2v/a 时，正在前进的人来不及回到身后（v = 1 m/s、a = 1.5 m/s² 时约 1.3 s）。
-3. 只在 LRZ 内使用这个变体，T 取机器人穿过 LRZ 所需时间的量级。LRZ 外沿用现有做法。
-4. 判断时把水滴近似成半径沿预测方向逐渐变大的胶囊，点和边都有闭式判断，开销与椭圆相当。
-5. 人群里每个移动的人身后形成通道：同向人流的通道连成可以跟随的"车道"；横穿人流可以依次从人身后穿过。
+1. For pedestrians with a velocity estimate, the OHZ becomes a teardrop that is long in front and short behind; pedestrians without velocity stay circular. The shape is determined solely by the velocity estimate, with no additional confidence adjustment.
+2. The teardrop covers positions the pedestrian could reach within [0, T] under a bounded acceleration a: at time t the circle center is p + v·t with radius ρ + ½·a·t².
+   - Front: ρ + v·T + ½·a·T²
+   - Sides: ρ + ½·a·T²
+   - Behind: keep ρ. For t ≤ 2v/a, a pedestrian moving forward cannot get back behind (about 1.3 s for v = 1 m/s, a = 1.5 m/s²).
+3. Use this variant only inside the LRZ, with T on the order of the time the robot needs to cross the LRZ. Outside the LRZ, keep the current approach.
+4. For the checks, approximate the teardrop as a capsule whose radius grows along the predicted direction; both point and edge checks have closed forms, with cost comparable to the ellipse.
+5. Channels form behind every moving pedestrian in a crowd: channels behind same-direction flows link into followable "lanes"; a crossing flow can be traversed by passing behind pedestrians one after another.
 
-## 成立条件与风险
+## Validity Conditions and Risks
 
-- **大多数人要有速度**：没有速度的人按圆处理，身后没有通道。2026-10-04 空场景 100 s 录制对照 CARLA 真值：YOLO26m + 地图关联约 64% 的正确检测带速度，线上 1 Hz 的 SAM3 约 26%。
-- **时间窗**：人走过后约 2v/a 秒内从其身后穿过有物理依据；更久则只是依赖"人一般不会突然回头"。
-- **刹停余地**：机器人必须随时能停下。本栈的人体本身也在 LiDAR 体素里，执行前还有按实测几何的扫掠检查兜底。
-- **密度**：缝隙小于机器人尺寸时没有通道，退化为冻结机器人问题（Trautman & Krause，IROS 2010；Trautman 等，IJRR 2015）。
-- **人的反应**：靠近机器人时人会减速或侧移，两侧的 ½·a·t² 加宽不能省。
-- **舒适度**：紧贴人身后安全但不舒服，可另设一个最小距离。
+- **Most pedestrians must have velocity**: pedestrians without velocity are treated as circles, with no channel behind them. From a 100 s recording in the empty scene on 2026-10-04 compared against CARLA ground truth: YOLO26m + map association gives velocity for about 64% of correct detections, online SAM3 at 1 Hz about 26%.
+- **Time window**: passing behind a pedestrian within roughly 2v/a seconds after they walk past has physical justification; any later it only relies on "pedestrians generally do not suddenly turn around".
+- **Braking margin**: the robot must be able to stop at any time. The pedestrian body is also in the LiDAR voxels in this stack, and execution is additionally backed by a sweep check against measured geometry.
+- **Density**: when gaps are smaller than the robot size there is no channel, and the problem degenerates into the frozen robot problem (Trautman & Krause, IROS 2010; Trautman et al., IJRR 2015).
+- **Pedestrian reaction**: pedestrians slow down or sidestep near robots, so the ½·a·t² widening on the sides cannot be dropped.
+- **Comfort**: passing tight behind a pedestrian is safe but uncomfortable; a separate minimum distance could be set.
 
-## 可选的进一步做法（横穿场景）
+## Possible Further Steps (Crossing Scenarios)
 
-- 时空判断：树节点按代价换算到达时间，与人在该时刻的位置比较（SIPP，Phillips & Likhachev ICRA 2011；速度障碍，Fiorini & Shiller IJRR 1998）。
-- 路径-速度分解：横穿的人在"沿路径距离-时间"图上是一条斜带，减速让行即从人身后穿过；迎面的人才改路径（Kant & Zucker IJRR 1986；Baidu Apollo EM Planner 的 ST 图）。
+- Space-time checks: tree nodes convert cost into arrival time and compare against the pedestrian's position at that time (SIPP, Phillips & Likhachev ICRA 2011; velocity obstacles, Fiorini & Shiller IJRR 1998).
+- Path-velocity decomposition: a crossing pedestrian is a diagonal band in the "distance-along-path vs. time" plot; slowing to yield means passing behind the pedestrian, and only oncoming pedestrians require a path change (Kant & Zucker IJRR 1986; the ST graph in Baidu Apollo's EM Planner).
 
-## 验证计划
+## Validation Plan
 
-- 场景：UE 中等密度的横穿人流，计划用 MetaHuman Crowd 添加人物。
-- 对比三种做法：现行椭圆、速度水滴、水滴加调速让行。
-- 指标：穿越时间、与人的最小距离、绕行长度、从人身后穿过的比例、重规划次数。
-- MetaHuman 人物接入前先确认：
-  - 是否带碰撞体。CARLA 的射线雷达靠碰撞求交，没有碰撞体就不会出现在 LiDAR 和 OctoMap 里，只剩相机这一路能看到。
-  - 真值从哪里取。它们不是 CARLA walker，`world.get_actors().filter('walker.*')` 拿不到，需要从 UE 侧导出位置和速度。
+- Scenario: a medium-density crossing pedestrian flow in UE, planning to add characters via MetaHuman Crowd.
+- Compare three approaches: the current ellipse, the velocity teardrop, and the teardrop plus speed-adjusted yielding.
+- Metrics: crossing time, minimum distance to pedestrians, detour length, fraction of passes made behind pedestrians, number of replans.
+- Before integrating MetaHuman characters, confirm:
+  - Whether they carry collision bodies. CARLA ray-based LiDAR relies on collision for intersection; without a collision body they will not appear in LiDAR or OctoMap, leaving only the camera stream able to see them.
+  - Where ground truth comes from. They are not CARLA walkers, so `world.get_actors().filter('walker.*')` will not return them; positions and velocities need to be exported from the UE side.
 
-## 参考
+## References
 
 - Koschi, Pek, Beikirch, Althoff. Set-Based Prediction of Pedestrians in Urban Environments Considering Formalized Traffic Rules. ITSC 2018.
-- Vassallo 等. How do walkers avoid a mobile robot crossing their way? Gait & Posture 2017（arXiv 1609.07955）；以及 2018 年后续。
-- Kirby, Simmons, Forlizzi. COMPANION. RO-MAN 2009（非对称高斯个人空间，前宽后窄）。
-- Mavrogiannis 等. Core Challenges of Social Robot Navigation: A Survey. ACM THRI 2023.
+- Vassallo et al. How do walkers avoid a mobile robot crossing their way? Gait & Posture 2017 (arXiv 1609.07955); plus the 2018 follow-up.
+- Kirby, Simmons, Forlizzi. COMPANION. RO-MAN 2009 (asymmetric Gaussian personal space, wide in front and narrow behind).
+- Mavrogiannis et al. Core Challenges of Social Robot Navigation: A Survey. ACM THRI 2023.

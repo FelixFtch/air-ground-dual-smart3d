@@ -1,32 +1,32 @@
-# 双机性能、实时 OHZ 显示与远距障碍保护部署
+# Dual-robot performance, real-time OHZ display, and far-range obstacle protection deployment
 
-日期：2026-09-29。已部署到独立工程 `/data/robotics/air_ground_smart3d`，epoch `d8abf6971bf446178d00718be716308c`。Town10、Factory和单Go2空场工程均未修改。相机仍640×360，SAM3总2 Hz，雷达计入9 m/清除40 m、体素0.25 m和运动速度均保持原配置。
+Date: 2026-09-29. Deployed to the isolated project `/data/robotics/air_ground_smart3d`, epoch `d8abf6971bf446178d00718be716308c`. Town10, Factory, and the single-Go2 empty-scene projects were not modified. Cameras remain 640×360, SAM3 total 2 Hz, and LiDAR 9 m marking / 40 m clearing, 0.25 m voxels, and motion speeds all keep their original configuration.
 
-## 实际修改
+## Actual changes
 
-1. **整树和快速状态分离**：`TreeSnapshotWriter`先原子写入不可变整树文件，再在state中引用。相同规划对象不再编码/哈希，相同几何复用文件；RViz仅在2 Hz树回调读取整树，位姿/路径回调使用紧凑state。引用检查epoch/机器人/session/tree-instance/SHA256；文件保留6秒读取宽限及最新4版，缓存有界。控制器仍持有原来的完整规划对象，路径与每轮碰撞验证未减少。
-2. **地图增量分类**：Rust `Map::delta`仅比较changed keys；保留完整clone、原验证顺序、失败不提交与refresh语义。没有以缓存跳过整树/路径碰撞检查。
-3. **当前OHZ不再等待慢规划结果**：原先robot.people_hazards完全来自上一轮planner，2秒观测TTL在规划返回时往往已过。现在一次读人物文档，在共同当前仿真时刻为两机器人生成执行同源OHZ，供显示；planner.people_hazards保留历史规划证据。仅在所有实际观测/投影均不晚于选定时刻时纠正文档头时间竞争；真实未来数据仍拒绝。不延长TTL，不伪造速度，不改变模型或历史门限。
-4. **远距真实表面不会被同帧其他射线擦除**：此前include_endpoint=false只排除各射线自己的末端，另一条远回波射线仍可能穿过该体素；远点又不在9 m内的hits集合，因此被清空。现在额外传递40 m内、地图内的真实far命中，整批free集合排除这些命中体素，并刷新已有occupied体素的测量时间。裁剪端点不当作真实命中；远处未知/已空体素不因此新建占用；以后没有该回波而有实际穿越射线时仍可清空。没有距离/高度/超时自动消融。
+1. **Full-tree / fast-state separation**: `TreeSnapshotWriter` first atomically writes an immutable full-tree file, then references it from state. Identical planning objects are no longer encoded/hashed, and identical geometry reuses the file; RViz reads the full tree only in the 2 Hz tree callback, while pose/path callbacks use compact state. References are checked by epoch/robot/session/tree-instance/SHA256; files keep a 6-second read grace and the latest 4 versions, with bounded caching. The controller still holds the original full planning objects; path and per-round collision verification are not reduced.
+2. **Map delta classification**: Rust `Map::delta` compares changed keys only; the full clone, original validation order, fail-without-commit, and refresh semantics are kept. No full-tree/path collision check is skipped via caching.
+3. **Current OHZ no longer waits for slow planning results**: previously robot.people_hazards came entirely from the previous planner round, and the 2-second observation TTL had often already expired when planning returned. Now the person document is read once, and execution-homologous OHZs for both robots are generated at a common current simulation time for display; planner.people_hazards retains the historical planning evidence. The document-header time race is corrected only when all actual observations/projections are no later than the chosen time; genuinely future data is still rejected. No TTL extension, no fabricated velocities, no changes to the model or history gates.
+4. **Far-range real surfaces are no longer erased by other rays in the same frame**: previously include_endpoint=false excluded only each ray's own endpoint, so another far-echo ray could still pass through that voxel; the far point was also not in the within-9 m hits set and was therefore cleared. Now real far hits within 40 m and inside the map are additionally passed in; the whole free batch excludes those hit voxels and refreshes the measurement time of existing occupied voxels. Clipped endpoints are not treated as real hits; distant unknown/already-free voxels do not gain occupancy from this; if the echo later disappears while real rays pass through, they can still be cleared. No distance/height/timeout auto-decay.
 
-## 部署与地图保留
+## Deployment and map retention
 
-只停止本实验runtime、SAM3、RGB-D采集与显示发布服务，UE和RViz进程保留。旧epoch `b9487babdb21404eae45177d61426a32` 正常停止时保存1016125个已观测体素，map.ot为5899501字节；从该停止快照恢复两机位置、方向、巡航目标、里程与完成计数。UE PID始终774790，前后resolved_profiles逐字节一致。地图没有清空；规划树在新runtime中重新初始化，旧自由空间仍需新传感器证据才允许执行。
+Only this experiment's runtime, SAM3, RGB-D capture, and display publishing services were stopped; UE and RViz processes were kept. The old epoch `b9487babdb21404eae45177d61426a32` saved 1016125 observed voxels on normal stop, map.ot at 5899501 bytes; both robots' positions, orientations, patrol goals, odometry, and completion counts were restored from that stopped snapshot. The UE PID stayed 774790, and the resolved profiles before and after are byte-identical. The map was not cleared; planning trees were reinitialized in the new runtime, and old free space still needs new sensor evidence to be executable.
 
-## 验证及测量边界
+## Verification and measurement boundaries
 
-- 最终候选完整Python回归 **395项通过**；Rust工作区 **108项通过**，离线benchmark显式运行，不计入默认测试。包含已有地图、时间顺序、执行、人物、改根/恢复回归。
-- 同一份实际双机规划状态离线对照：2290889 B→30470 B（约98.7%缩小）；重建后的全部nodes、edges、path与原始内容完全相同。首次写两树约33.8 ms；不变状态重复发布编码中位数12.15→0.135 ms。该数值不是整体规划提速比例。
-- 百万体素12轮交替release基准：32 changed keys增量中位数59.84→26.81 ms，4096 keys为59.43→28.26 ms，仅时间刷新61.63→28.15 ms。完整clone仍约26 ms、约102.8 MB分配，未解决地图复制成本，也未宣称内存下降。
-- 55秒部署后在线样本：Go2行走53.91 m/完成2目标，UAV20.10 m/完成1目标；无地图/规划错误。双雷达实际融合约3.66/3.68 Hz，最新融合年龄P95约0.58/0.64秒。前测约2.92 Hz，完整规划抽样均值0.544/1.010秒，后测0.195/0.445秒；但重启后树从约11700/8800节点变成约5000/4400节点，机器人/行人位置也不同，**不能把全部在线差异归因于性能补丁**。
-- 60秒OHZ验收171采样：共享人物有效的94次中，两机当前OHZ均93次可用（98.9%），一次约0.35秒发布交错；过期live OHZ残留0，people_error为0。同一窗口旧planner字段分别仅82/94和53/94次有效。两种形状各117个采样条目因有效速度拉长。
-- 45秒真实ROS验收：91条树消息，平均0.497秒、最大0.883秒；双机各431个健康状态样本，树缺失0、非初始化DELETEALL为0。有OHZ的268个state样本全部在ROS出现；双机各831次球体ADD，其中各391次长轴大于短轴。Go2为厚0.08m的二维椭圆，UAV为三维椭球。
-- 远距回归在真实OctoMap子进程重现：UAV先命中A=[12.125,0.26,3.125]；Go2远距同时看到A与B=[13.125,0.27,3.30]。旧程序将A体素[48,1,12]误清；新程序保持占用并刷新时间，下一帧只有B且射线穿过A时仍正确清空。还覆盖低射线不改高空障碍、旧/同时间跨机free、restore首次观测、未知不入图、虚拟裁剪端点不保护、坏输入事务、binary refresh与planner presence_only。
+- The final candidate's full Python regression: **395 passed**; Rust workspace: **108 passed**, with offline benchmarks run explicitly and not counted in default tests. Includes existing map, time ordering, execution, person, re-rooting/recovery regressions.
+- Offline comparison on the same actual dual-robot planning state: 2290889 B→30470 B (about 98.7% reduction); all rebuilt nodes, edges, and path are completely identical to the original content. First write of the two trees about 33.8 ms; repeated-publish encoding of unchanged state median 12.15→0.135 ms. This number is not an overall planning speedup ratio.
+- Million-voxel 12-round alternating release benchmark: 32-changed-keys delta median 59.84→26.81 ms, 4096 keys 59.43→28.26 ms, time-refresh-only 61.63→28.15 ms. The full clone is still about 26 ms with about 102.8 MB allocation; map copying cost is unresolved and no memory reduction is claimed.
+- 55-second post-deployment online sample: Go2 walked 53.91 m / completed 2 goals, UAV 20.10 m / completed 1 goal; no map/planning errors. Both LiDARs actually fused at about 3.66/3.68 Hz, latest-fusion age P95 about 0.58/0.64 seconds. Pre-test about 2.92 Hz, full-planning sample mean 0.544/1.010 seconds, post-test 0.195/0.445 seconds; but after restart the trees went from about 11700/8800 nodes to about 5000/4400 nodes, and robot/pedestrian positions also differ, **so the entire online difference must not be attributed to the performance patch**.
+- 60-second OHZ acceptance with 171 samples: of the 94 times the shared person was valid, both robots' current OHZ were available 93 times (98.9%), with one about 0.35-second publish stagger; stale live OHZ leftovers 0, people_error 0. In the same window the old planner field was valid only 82/94 and 53/94 times respectively. Both shape kinds had 117 sample entries lengthened by valid velocity.
+- 45-second real ROS acceptance: 91 tree messages, mean 0.497 s, max 0.883 s; 431 healthy state samples per robot, tree misses 0, non-initialization DELETEALL 0. All 268 state samples with OHZ appeared in ROS; 831 sphere ADDs per robot, of which 391 each had the major axis longer than the minor axis. The Go2 uses a 0.08 m-thick 2D ellipse, and the UAV a 3D ellipsoid.
+- Far-range regression reproduced in a real OctoMap subprocess: the UAV first hit A=[12.125,0.26,3.125]; the Go2 at long range saw both A and B=[13.125,0.27,3.30] simultaneously. The old program wrongly cleared A's voxel [48,1,12]; the new program keeps occupancy and refreshes the time, and when the next frame has only B with a ray passing through A, it still correctly clears. Also covers low rays not altering overhead obstacles, old/same-time cross-robot free, restore first observation, unknown not entering the map, virtual clipped endpoints not protected, bad-input transactions, binary refresh, and planner presence_only.
 
-## 仍然存在的边界
+## Remaining boundaries
 
-显示连续不等于识别永远有效。每相机实际约1 Hz，可靠速度仍需至少4次有效位置；小人物掩码、深度不足、视野离开或运动不一致时，没有可用的预测速度。此时保留普通几何避障；不延长过期椭圆制造连续假象。上述在线验收不是长期压力测试。被旧程序误清的静态部分不会凭空复原，后续近距离真实命中会重新入图。
+Continuous display does not mean recognition is always valid. Each camera actually runs at about 1 Hz, and reliable velocity still needs at least 4 valid positions; with small person masks, insufficient depth, the view leaving, or inconsistent motion, there is no usable predicted velocity. Ordinary geometric avoidance is kept in that case; expired ellipses are not extended to fabricate continuity. The above online acceptance is not a long-term stress test. Static parts wrongly cleared by the old program will not reappear out of thin air; later close-range real hits will re-enter the map.
 
-原生SMART3D仍按规划请求消费同源人物形状；本次修复主要去掉显示等待规划的延迟，不声称实现了高频神经网络运动预测。后续地图分块、清障队列和全树精确缓存均未在本轮实现。
+Native SMART3D still consumes homologous person shapes per planning request; this fix mainly removes the display-waiting-for-planning delay and does not claim high-frequency neural-network motion prediction. Follow-up map chunking, the clearing queue, and exact full-tree caching were not implemented this round.
 
-证据文件：本目录的deployment-checkpoint、前后采样、OHZ/ROS实测、两个离线benchmark、最终测试日志及source-sha256。当前启动方式保持 `./lab start --rviz`；保留地图/进度启动仍使用 `--resume-map <已停止run>/shared/map.ot --resume-state <已停止run>/state.json`。
+Evidence files: this directory's deployment-checkpoint, before/after samples, OHZ/ROS measurements, two offline benchmarks, final test logs, and source-sha256. The current launch method stays `./lab start --rviz`; map/progress-preserving launch still uses `--resume-map <stopped run>/shared/map.ot --resume-state <stopped run>/state.json`.

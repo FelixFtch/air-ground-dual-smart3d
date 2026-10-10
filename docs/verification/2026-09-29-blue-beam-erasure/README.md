@@ -1,22 +1,22 @@
-# 蓝色高架横梁远距消退：后续取证
+# Blue overhead beam far-range erasure: follow-up forensics
 
-2026-09-29。此轮没有改变地图概率、标记/清除距离、规划或SAM3；没有清图/重启导航。为精确追踪测量射线，只给既有LiDAR预览NPZ增加capture_origin_xyz并重启该预览服务。其约22秒预览中断为此次已知诊断重启，不能当作建图雷达故障。
+2026-09-29. This round changed no map probabilities, marking/clearing ranges, planning, or SAM3; no map clearing or navigation restart. To trace measurement rays precisely, only `capture_origin_xyz` was added to the existing LiDAR preview NPZ and that preview service was restarted. Its ~22-second preview interruption is this known diagnostic restart and must not be treated as a mapping LiDAR fault.
 
-## 已确认
+## Confirmed
 
-- 75秒375次采样，蓝梁ROI占用最大152格降至14格；RViz实际生成的ROI marker数量始终与display occupied完全相同，stride=1，无按机器人距离裁剪。
-- 最近机器人距梁<5m时平均135格，5–9m约85格，两机均>9m约29格。远处仍有真实梁回波，例Go2 13.35m处8点、17.38m处2点。
-- 带精确拍摄原点的75秒已有LiDAR预览取证：Go2 552帧、UAV570帧。按测试场景已知梁几何仅用于离线评分，穿过真实实体后却回报更远终点的射线为0；擦过梁外包体素、没有穿过梁实体的射线分别13807、7986条，其中远于9m的分别1465、952条。预览不是全部mapper已接受帧的审计日志，不能把这些数量直接称为最终清除次数或归因到单一传感器。
-- 标准RGB-D轴向深度、半像素和坐标变换符合本地UE/CARLA源码；地面重建高度误差为毫米内。UAV帧626872蓝梁424个有效深度像素、距离中位12.35m，而当前前深度仅融合/清除6m、辅助3m，所以该帧深度不能清到远梁。
+- Over 75 seconds and 375 samples, blue-beam ROI occupancy fell from a maximum of 152 cells to 14; the number of ROI markers RViz actually produced always exactly matched display occupied, stride=1, with no clipping by robot distance.
+- With the nearest robot <5 m from the beam the average was 135 cells, at 5–9 m about 85 cells, and with both robots >9 m about 29 cells. Real beam echoes still occur at range, e.g. 8 points for Go2 at 13.35 m and 2 points at 17.38 m.
+- 75-second existing-LiDAR-preview forensics with exact capture origins: Go2 552 frames, UAV 570 frames. The known beam geometry from the test scenario was used only for offline scoring; rays that pass through the real solid yet report a farther endpoint number 0; rays grazing the beam's outer bounding voxels without passing through the beam solid number 13807 and 7986 respectively, of which 1465 and 952 are farther than 9 m. The preview is not an audit log of all mapper-accepted frames; these counts must not be called final clearing counts or attributed to a single sensor.
+- Standard RGB-D axial depth, half-pixel, and coordinate transforms match the local UE/CARLA source; ground reconstruction height error is within millimeters. UAV frame 626872 has 424 valid depth pixels on the blue beam with median distance 12.35 m, while current forward depth only fuses/clears 6 m and auxiliary 3 m, so that frame's depth cannot clear the distant beam.
 
-## 根因机制与上次修复范围
+## Root-cause mechanism and scope of the previous fix
 
-25cm体素被任意一条free射线穿过不等于格内全部空间为空。薄梁只占体素一部分，远距离稀疏光束可擦过剩余空隙；Go2与UAV都可能产生这种free。当前prob_miss=.1的单次负证据(-2.197)能直接翻转已经饱和clamp_max=.88(+1.992)的occupied。远距不新增占用，且上次far保护只保留同帧真实命中的格，不保护后续帧没有回波的格，也不为占用概率增加正证据。
+A 25 cm voxel being crossed by any single free ray does not mean all space in the cell is empty. A thin beam occupies only part of the voxel, and sparse beams at long range can graze the remaining gaps; both Go2 and the UAV can produce such free evidence. With the current prob_miss=.1, a single negative observation (-2.197) can directly flip an occupied cell already saturated at clamp_max=.88 (+1.992). Long range adds no occupancy, and the previous far protection only keeps cells with real hits in the same frame; it does not protect cells without echoes in later frames, nor add positive evidence to occupancy probability.
 
-真实OctoMap最小复现：新射线距旧真实表面13.26cm、完全可能错过5cm薄物体，却穿过同一25cm格并单次清掉。另一个新射线穿过体素中心、仍距旧表面14.18cm，证明只要求穿过体素中心也不能根治。上轮同帧hit优先修复正确，但不能称已根治蓝梁跨帧消退。
+Minimal reproduction on real OctoMap: a new ray 13.26 cm from the old real surface — entirely able to miss a 5 cm thin object — yet crosses the same 25 cm cell and clears it in a single update. Another new ray passes through the voxel center while still 14.18 cm from the old surface, proving that requiring passage through the voxel center is not a cure either. The previous round's same-frame hit-priority fix was correct, but it cannot be claimed to have cured the blue beam's cross-frame erasure.
 
-## 修复取舍（尚未实施）
+## Fix trade-offs (not yet implemented)
 
-恢复对等正负概率证据可以缓解：保持hit .9、max .88，miss .25/.3/.4分别需2/3/5帧有效free；真实far命中也应补充正证据，不能仅刷新时间。单纯改概率最终仍会被长期擦边误清，不是根治；动态残影消除也会更慢。
+Restoring symmetric positive/negative probability evidence would mitigate this: keeping hit .9 and max .88, miss .25/.3/.4 would require 2/3/5 valid free frames respectively; real far hits should also add positive evidence, not merely refresh timestamps. Changing probabilities alone would still eventually suffer long-term grazing mis-clears and is not a cure; dynamic ghost removal would also become slower.
 
-若要求同时保留静态薄梁和快速清除真实动态目标，需要更准确的空间证据：保留实际命中表面/更细的障碍子体素，避免把擦过大体素空余部分的射线当作整个障碍消失。应分别测试静态梁、人在相同位置停留后离开、双机不同方向与远距低密度。不能把蓝梁写成永久禁区、禁止Go2清高处或读取UE障碍真值来伪装修好感知。
+If both the static thin beam and fast clearing of real dynamic targets must be kept, more accurate spatial evidence is needed: retain actually hit surfaces / finer obstacle sub-voxels, and avoid treating a ray that grazes the empty part of a large voxel as the whole obstacle disappearing. Static beam, a person staying in place then leaving, and dual robots from different directions with long-range low density should each be tested separately. The blue beam must not be written as a permanent forbidden zone, Go2 forbidden from clearing high up, or UE obstacle ground truth read to fake fixed perception.

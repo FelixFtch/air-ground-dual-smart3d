@@ -1,137 +1,137 @@
-# Go2＋无人机：共享三维地图与多机器人 SMART3D 实施计划
+# Go2 + UAV: Shared 3D Map and Multi-Robot SMART3D Implementation Plan
 
-更新：2026-09-29。状态：**第一组 Go2＋Fighter Drone＋6 行人的独立空场正在运行验证；二维／真三维 SMART 与共享 OctoMap 已落地。后续阶段仍按下文逐项验收，不能把第一组成功视为整套计划完成。**
+Updated: 2026-09-29. Status: **Group 1 (Go2 + Fighter Drone + 6 pedestrians) is running verification in a standalone empty scene; 2D/true-3D SMART and the shared OctoMap are in place. Later phases are still accepted item by item as described below — Group 1's success must not be treated as completion of the whole plan.**
 
-新工程根目录为 `/data/robotics/air_ground_smart3d/`，仿真工程独立保存于 `/data/sim/AirGroundLab_UE58/CarlaUnreal/`。已有源码、profiles、启动器及运行验证；Town10、Factory、原单狗空场保留。仅共享已编译引擎和只读 CARLA Python 环境。
+The new project root is `/data/robotics/air_ground_smart3d/`; the simulation project is kept separately at `/data/sim/AirGroundLab_UE58/CarlaUnreal/`. Source code, profiles, launchers, and run verification already exist; Town10, Factory, and the original single-Go2 empty scene are preserved. Only the compiled engine and the read-only CARLA Python environment are shared.
 
-## 0. 9 月 29 日落地更新
+## 0. September 29 Implementation Update
 
-| 项目 | 当前状态与明确边界 |
+| Item | Current state and explicit boundaries |
 |---|---|
-| 外观选择 | 首选 Go2＋Fighter Drone；Robot Bee、Cute Robot 3、Slime Creator 进入外观目录。Slime 目标高度35cm。AirSim QuadRotor1保留为模型备选，不安装AirSim规划器 |
-| 身份隔离 | robot_id、role、TF、传感器、规划进程、日志独立；外观与移动能力分开。第一组go2_01为XY/yaw，uav_01为XYZ/yaw |
-| UE载体 | Fighter真正具有XYZ移动、全机身扫掠、速度/加速度/边界检查、实际位姿反馈；11项独立运行测试通过。运动学飞行，不代表PX4物理飞行控制 |
-| 原生SMART | 固定来源的LINKS Lab Rust RRT*/SMART。Go2是SMART<f32,2>，无人机是SMART<f32,3>；地图增量、三维清障恢复和换目标重定根适配修改均记录在planning/CORE_PROVENANCE.json及README。不是完全未修改的上游 |
-| 共享地图 | 真正C++ OcTree概率占用；两机捕获时传感器位姿、多源射线、占用/自由/未知、增量revision、.ot快照；伙伴位置临时约束与长期地图分离 |
-| 传感器校准 | 真实floor worldZ=.20124996，map原点Z=.22；Go2 mapZ=.33保持worldZ=.55。深度采用像素中心u+.5/v+.5与前向X深度；不通过忽略z=0障碍解决地面误标 |
-| 无人机盲区 | 前向RGB-D之外，六个96×96近端广角深度视图覆盖全方向，仅融合3m；前向RGB与depth每sim帧配对，融合器只处理有界最新队列 |
-| 实际导航 | 已出现Go2多目标巡航和UAV实际上升越墙、到达首目标；后续长跑/冷启动以docs/verification报告为准 |
-| RViz | 青色地面二维树、橙色空中三维树；直接使用Rust导出的XYZ与parent edges；共享体素、路径、两机TF、RGB预览。包络盒明确标作碰撞体，不伪装成UE模型 |
-| 人物 | 6个真实可碰撞行人，不同速度长路线；本里程碑以真实传感器几何更新地图，不读取行人真值做感知。SAM3多人/多相机OHZ移植尚未实施，不冒充已完成 |
-| 尚待后续 | 其余角色的可切换Actor注册、SAM3共享模型调度、预测OHZ、多机时空避碰策略、3/4机压力实验、Factory多机移植、地面楼层/楼梯 |
+| Appearance choice | Go2 + Fighter Drone is the primary choice; Robot Bee, Cute Robot 3, and Slime Creator moved into the appearance catalog. Slime target height 35 cm. AirSim QuadRotor1 kept as a model candidate; the AirSim planner is not installed |
+| Identity isolation | robot_id, role, TF, sensors, planning processes, and logs are independent; appearance and mobility are separated. In Group 1, go2_01 is XY/yaw, uav_01 is XYZ/yaw |
+| UE carrier | Fighter genuinely has XYZ motion, full-body sweep, velocity/acceleration/bounds checks, and actual pose feedback; 11 independent run tests passed. Kinematic flight — this does not represent PX4 physical flight control |
+| Native SMART | Fixed-origin LINKS Lab Rust RRT*/SMART. Go2 is SMART<f32,2>, the UAV is SMART<f32,3>; the map-increment, 3D clearing-recovery, and retarget-reroot adaptations are recorded in planning/CORE_PROVENANCE.json and the README. Not a completely unmodified upstream |
+| Shared map | Real C++ OcTree probabilistic occupancy; per-robot capture sensor poses, multi-source rays, occupied/free/unknown, incremental revision, .ot snapshots; transient peer-position constraints kept separate from the long-term map |
+| Sensor calibration | Real floor worldZ=.20124996, map origin Z=.22; Go2 mapZ=.33 keeps worldZ=.55. Depth uses pixel-center u+.5/v+.5 and forward-X depth; ground mislabeling is not worked around by ignoring z=0 obstacles |
+| UAV blind spots | Beyond forward RGB-D, six 96×96 near-field wide-angle depth views cover all directions, fused only within 3 m; forward RGB and depth are paired per sim frame, and the fuser processes only bounded latest queues |
+| Actual navigation | Go2 multi-goal patrol and a UAV actually climbing over a wall and reaching its first goal have occurred; later long runs/cold starts are per the docs/verification reports |
+| RViz | Cyan ground 2D tree, orange aerial 3D tree; directly uses the Rust-exported XYZ and parent edges; shared voxels, paths, both robots' TF, RGB preview. The envelope box is explicitly labeled a collision body, not disguised as a UE model |
+| People | 6 real collidable pedestrians on long routes at different speeds; this milestone updates the map with real sensor geometry and does not read pedestrian ground truth for perception. The SAM3 multi-person/multi-camera OHZ port is not yet implemented and is not claimed as done |
+| Still pending | Switchable Actor registration for the remaining roles, SAM3 shared-model scheduling, predictive OHZ, multi-robot spatiotemporal collision-avoidance strategy, 3/4-robot stress tests, Factory multi-robot port, ground floors/stairs |
 
-最小启动顺序已封装：`./lab start --rviz` → CARLA 2400 → 两机传感器与共享地图 → 独立2D/3D worker与执行 → ROS45/RViz。停止用`./lab stop`，不按进程名批量kill。默认不新建网页控制台。
+The minimal startup sequence is packaged: `./lab start --rviz` → CARLA 2400 → both robots' sensors and shared map → independent 2D/3D workers and execution → ROS45/RViz. Stop with `./lab stop`; do not batch-kill by process name. By default no new web console is created.
 
-## 1. 最终交付与第一阶段范围
+## 1. Final Deliverable and Phase 1 Scope
 
-最终目标是同一个 CARLA UE5.8 世界内运行多只 Go2 和多架无人机：各自携带雷达、可选 RGB-D，向同一份三维地图贡献观测；各自维护自己的 SMART 树、任务、控制权和运行状态。Go2 使用按地面和机身净空生成的二维通行图，无人机使用真正 XYZ 状态的三维 SMART。人物预测和其他机器人的运动约束独立于长期环境地图。
+The final goal is multiple Go2 robots and multiple UAVs running in the same CARLA UE5.8 world: each carrying LiDAR and optional RGB-D, contributing observations to the same 3D map; each maintaining its own SMART tree, tasks, control authority, and run state. Go2 uses a 2D traversability map generated from the ground and body clearance; the UAV uses true-3D SMART with XYZ state. Pedestrian prediction and other robots' motion constraints stay independent of the long-term environment map.
 
-第一组完整验收为 **1 Go2＋1 无人机**；随后扩到 **2 Go2＋1 无人机**；**2 Go2＋2 无人机**作为容量压力档。这是测试阶梯，不是已经确认的 4090 最大承载数量。
+Full acceptance for Group 1 is **1 Go2 + 1 UAV**; then extend to **2 Go2 + 1 UAV**; **2 Go2 + 2 UAV** is the capacity stress tier. This is a test ladder, not a confirmed maximum load for the 4090.
 
-第一阶段使用有环境光的独立空场，设置地面、矮墙、横梁、窄通道和可移动方盒。初期几何导航验证现已加入6名可碰撞行人；SAM3共享推理属于后续独立验收。工厂作为第二种场景配置，复用已经验收的多机链路。
+Phase 1 uses a standalone empty scene with ambient light, featuring ground, low walls, beams, narrow passages, and movable boxes. The initial geometry-navigation validation now includes 6 collidable pedestrians; SAM3 shared inference is a separate later acceptance. The factory serves as the second scene configuration, reusing the already-accepted multi-robot chain.
 
-无人机首先采用平稳的运动学运动，有完整 XYZ/yaw 位姿反馈、速度/加速度限制及实体扫掠碰撞。首阶段不承担 PX4、真实旋翼动力学、真实飞行稳定器和实机定位验证。只复用 AirSim 模型，不安装完整 AirSim 仿真插件，也不替换 CARLA GameMode。
+The UAV first uses smooth kinematic motion with full XYZ/yaw pose feedback, velocity/acceleration limits, and solid sweep collision. Phase 1 does not cover PX4, real rotor dynamics, real flight stabilizers, or physical-vehicle localization verification. Only the AirSim model is reused; the full AirSim simulation plugin is not installed and the CARLA GameMode is not replaced.
 
-Go2 第一阶段在同一连续地面层运行；多层重叠地面、楼梯与地面层切换另列后续任务，不能把它们隐含为普通二维 costmap 已支持的能力。
+Go2 in Phase 1 runs on the same continuous ground level; multi-level overlapping floors, stairs, and ground-level switching are listed separately as follow-up tasks and must not be implied as capabilities an ordinary 2D costmap already supports.
 
-初始几何实验使用现有80×80 m空场的独立副本；Go2先保留60×60 m导航范围，UAV先在40×40 m、中心高度0.8–6 m的可控区域验证，再扩到场内更大空域。高度均相对实测地面基准，飞行上限与允许高度由场景profile明确给出。三维初始采样数量通过连通性与耗时确定，不把二维Factory的210,000次初始化直接复制过来。
+Initial geometry experiments use an independent copy of the existing 80×80 m empty scene; Go2 keeps a 60×60 m navigation range at first, and the UAV first validates in a controlled area of 40×40 m at center heights 0.8–6 m before expanding to larger airspace in the scene. Heights are all relative to the measured ground datum; flight ceilings and permitted altitudes are given explicitly by the scene profile. The 3D initial sample count is determined by connectivity and runtime — the 2D Factory's 210,000 initializations are not copied over directly.
 
-## 2. 9 月 28 日实施前基线（历史核对；当前进度以第0节与验收报告为准）
+## 2. Pre-Implementation Baseline as of September 28 (historical cross-check; current progress is per Section 0 and the acceptance reports)
 
-| 内容 | 已确认的现状 | 后续还缺什么 |
+| Item | Confirmed current state | What is still missing |
 |---|---|---|
-| 原 Go2 Factory / 空场 | 有此前运行验收、独立目录、传感器、SMART、执行器和 SAM3 人物 OHZ | 保留版本，建立多机隔离副本；本轮未重新启动 |
-| 独立源码仓库 | `/data/robotics/sam3-rgbd-smart3d-navigation`，HEAD `815eb64befb080c0b3d7a8aaffed2c4b472787a1`，本轮工作区干净 | 提取后的独立启动器仍缺一次完整仿真冷启动验收 |
-| 离线核验 | Python 436 项＋180 子测试通过、2 项跳过；Rust 94＋81 项通过 | 不等同于新的多机运行验收或第三方认证 |
-| Go2 当前规划维度 | worker 明确为 `SMART<f32,2>` | 保持其二维用途；另加三维 worker |
-| 真三维 SMART | 本机有 `SMART<f32,3>` 和真实 XYZ 示例 | 示例雷达是对真值盒子的合成射线，尚未接真实 PointCloud2 地图 |
-| USB 无人机 | 有 Town10 运动学传感器、ROS2、LiDAR、三态体素、执行器和历史运行证据 | 旧桥时间戳和清空射线原点需修正；旧载体没有独立可见机身 |
-| 新版无人机分支 | 先前已核对 GitHub `e99f32a` 比 USB `3fab808` 领先 13 提交 | 只选取有关隔离、位姿和生命周期的修复；EGO 等独立链路不混入 SMART 主链 |
-| 无人机模型 | AirSim QuadRotor1 的两份 FBX、5 张纹理和 UE 原资产已保存；UE5.8 加载导出成功，31 文件校验通过 | 装配、材质外观、比例、碰撞体及 CARLA Actor 注册尚待验收 |
-| OctoMap | 本机 `/opt/ros/humble/include/octomap` 有库头文件；上游支持占用/空闲/未知及多源更新 | 新的共享服务、版本协议、桥接与吞吐未实现；编译依赖仍需 P0 确认 |
-| SAM3 多相机 | 当前每个服务加载一份 BF16 CUDA 模型 | 共享权重、独立视频会话和公平调度未实现 |
-| 多机器人 profile | 有可借鉴的 USB 契约和统一工程蓝图 | 当前执行器仍有固定 `car1` 身份、话题与路径，不能复制改名即称多机 |
+| Original Go2 Factory / empty scene | Prior run acceptance, independent directories, sensors, SMART, executor, and SAM3 people OHZ exist | Keep the versions and build isolated multi-robot copies; not relaunched this round |
+| Standalone source repo | `/data/robotics/sam3-rgbd-smart3d-navigation`, HEAD `815eb64befb080c0b3d7a8aaffed2c4b472787a1`, working tree clean this round | The extracted standalone launcher still lacks one full simulation cold-start acceptance |
+| Offline verification | Python 436 + 180 subtests passed, 2 skipped; Rust 94 + 81 passed | Not equivalent to a new multi-robot run acceptance or third-party certification |
+| Go2 current planning dimension | The worker is explicitly `SMART<f32,2>` | Keep its 2D use; add a 3D worker separately |
+| True-3D SMART | The local machine has `SMART<f32,3>` and a real XYZ example | The example's LiDAR is synthetic rays against ground-truth boxes and is not yet connected to real PointCloud2 maps |
+| USB UAV | Has Town10 kinematic sensors, ROS2, LiDAR, tri-state voxels, executor, and historical run evidence | The old bridge's timestamps and clear-ray origins need fixing; the old carrier has no independent visible body |
+| New UAV branch | Previously verified that GitHub `e99f32a` is 13 commits ahead of the USB `3fab808` | Select only fixes related to isolation, pose, and lifecycle; independent chains like EGO must not mix into the SMART main chain |
+| UAV model | Both FBX files of the AirSim QuadRotor1, 5 textures, and the UE original assets are saved; UE5.8 import-export succeeded, 31 files verified | Rigging, material appearance, scale, collision body, and CARLA Actor registration pending acceptance |
+| OctoMap | The local `/opt/ros/humble/include/octomap` has the library headers; upstream supports occupied/free/unknown and multi-source updates | The new shared service, version protocol, bridging, and throughput are not implemented; build dependencies still need P0 confirmation |
+| SAM3 multi-camera | Each service currently loads one BF16 CUDA model | Shared weights, independent video sessions, and fair scheduling are not implemented |
+| Multi-robot profile | A reusable USB contract and a unified project blueprint exist | The current executor still has the hardcoded `car1` identity, topics, and paths; copying and renaming cannot be called multi-robot |
 
-现有数据参考：2026-09-27 空场三人物、Go2 静止的三分钟窗口，SAM3 实际 3.41 Hz、显存 9,319–9,346 MiB，预测时间可用率约 97.25%–99.89%。这是指定单机窗口，不是复杂工厂、多机或长跑结论。
+Existing data reference: a three-minute window on 2026-09-27 in the empty scene with three pedestrians and the Go2 stationary — SAM3 actual 3.41 Hz, VRAM 9,319–9,346 MiB, prediction-time availability about 97.25%–99.89%. This is one specified single-robot window, not a conclusion about the complex factory, multiple robots, or long runs.
 
-9月28日单机基线配置参考：RGB 与配准深度 848×480、配置 10 Hz；普通 LiDAR 128 线、24 万点/秒、10 Hz、量程 80 m。原 Lab costmap 为 60×60 m、0.25 m；Factory 为 300×300 m、0.25 m。配置频率不代表实际完成频率，雷达量程也不等于实际入图/清空范围。
+2026-09-28 single-robot baseline configuration reference: RGB and registered depth 848×480, configured 10 Hz; ordinary LiDAR 128 channels, 240k points/s, 10 Hz, 80 m range. The original Lab costmap was 60×60 m at 0.25 m; Factory 300×300 m at 0.25 m. Configured rates do not represent actual achieved rates, and LiDAR range does not equal the actual ingest/clearing range.
 
-本轮前一次硬件查询：4090 24 GiB，整卡已用约 7.6 GiB，另一个模型进程活动，三次计算占用 100%/56%/76%；系统内存可用约 42 GiB。这不是导航基线，容量测试开始前必须重新记录背景负载，不能自动停止那个进程。
+One hardware query before this round: 4090 24 GiB, the whole card at about 7.6 GiB used, another model process active, three compute samples at 100%/56%/76%; about 42 GiB system memory available. This is not a navigation baseline — background load must be re-recorded before capacity testing begins, and that process must not be stopped automatically.
 
-## 3. 不污染旧工程的文件与版本边界
+## 3. File and Version Boundaries to Avoid Contaminating Old Projects
 
-下列稳定根目录保留，不作为新多机程序的写入目标：
+The following stable roots are preserved and are not write targets for the new multi-robot programs:
 
-- Town10：`/home/felix/Documents/ChatGPT/ue5robot/`
-- Factory：`/data/robotics/ue58_factory_go2/`
-- 空场：`/data/robotics/ue58_ohz_test_go2/`
-- 已发布提取仓库：`/data/robotics/sam3-rgbd-smart3d-navigation/`
-- USB 与 SSD 原始备份：只作为来源和恢复材料。
+- Town10: `/home/felix/Documents/ChatGPT/ue5robot/`
+- Factory: `/data/robotics/ue58_factory_go2/`
+- Empty scene: `/data/robotics/ue58_ohz_test_go2/`
+- Published extracted repo: `/data/robotics/sam3-rgbd-smart3d-navigation/`
+- USB and SSD raw backups: source and recovery material only.
 
-新工程采用以下布局（具体文件以README为准），保留统一系统的分层思想，但不搬入其尚未实现的整套框架：
+The new project uses the following layout (the README is authoritative for concrete files), retaining the unified system's layered concept without importing its not-yet-implemented framework wholesale:
 
 ```text
 /data/robotics/air_ground_smart3d/
   README.md
-  docs/plans/                   本计划、变更决策与验收说明
-  provenance/                   来源提交、文件校验、依赖锁和派生说明
-  contracts/                    观测、地图版本、候选路径与运动回执
+  docs/plans/                   this plan, change decisions, and acceptance notes
+  provenance/                   source commits, file checksums, dependency locks, and derivation notes
+  contracts/                    observations, map versions, candidate paths, and motion receipts
   profiles/
-    robots/go2.yaml             地面运动、机身、执行器能力
-    robots/quadrotor.yaml       XYZ 运动、机身、飞行边界
-    sensors/                    相机/雷达参数与外参
-    scenes/                     空场、Factory 的地图身份与范围
-    teams/                      1+1、2+1、2+2 实例组合
-  sim_io/                       CARLA 时钟、spawn、传感器与捕获帧绑定
-  mapping/                      单一 OctoMap 权威服务、Go2 地面投影
-  planning/                     原生 SMART 2D/3D worker 与碰撞适配
-  perception/                   SAM3 多会话、RGB-D 人物状态和 OHZ
-  execution/                    Go2/UAV 执行适配及每实例唯一控制权
-  team/                         同伴状态、短期意图与窄路协调
-  observability/                RViz、指标与有限日志；不包含网页控制台
-  simulation/                   独立地图和 UAV Actor 的源码/导入脚本
-  third_party/                  固定版本与必要补丁，不包含完整模型权重
-  tests/                        契约、离线回放、仿真集成测试
-  experiments/                  场景种子、组合、共享与 OHZ 对照
+    robots/go2.yaml             ground motion, body, executor capabilities
+    robots/quadrotor.yaml       XYZ motion, body, flight bounds
+    sensors/                    camera/LiDAR parameters and extrinsics
+    scenes/                     map identity and bounds for the empty scene and Factory
+    teams/                      1+1, 2+1, 2+2 instance combinations
+  sim_io/                       CARLA clock, spawn, sensors, and capture-frame binding
+  mapping/                      single OctoMap authority service, Go2 ground projection
+  planning/                     native SMART 2D/3D workers and collision adaptation
+  perception/                   SAM3 multi-session, RGB-D people state, and OHZ
+  execution/                    Go2/UAV execution adapters and per-instance exclusive control authority
+  team/                         peer state, short-term intent, and narrow-passage coordination
+  observability/                RViz, metrics, and bounded logs; no web console
+  simulation/                   source/import scripts for the standalone map and UAV Actors
+  third_party/                  pinned versions and necessary patches; no full model weights
+  tests/                        contracts, offline replay, simulation integration tests
+  experiments/                  scene seeds, combinations, sharing and OHZ controls
   runtime/<scene>/<run>/
-    shared/                     环境图、地图元数据、动态约束
+    shared/                     environment map, map metadata, dynamic constraints
     robots/go2_01/              tree/route/lease/memory/logs
     robots/uav_01/              tree/route/lease/memory/logs
 ```
 
-P0 在新目录建立本地 Git，使用 `codex/air-ground-shared-map` 分支，记录源版本。本文本轮不执行 Git 初始化、提交或推送。后续源码、配置、测试和文档入 Git；模型权重、UE 构建产物、虚拟环境、大地图快照、运行日志与密钥不入 Git。
+P0 sets up a local Git in the new directory using the `codex/air-ground-shared-map` branch, recording source versions. This document does not run Git init, commit, or push this round. Later, source code, configs, tests, and docs go into Git; model weights, UE build artifacts, virtual environments, large map snapshots, run logs, and secrets do not.
 
-UE 引擎可以只读复用已编译版本。新增 UAV C++ 功能需要独立 CARLA 工程/工作树与模块输出；不能因为源代码分目录，却仍覆盖 Factory 正在使用的插件二进制。大资产可采用文件系统支持的写时复制；禁止对会修改的资产使用硬链接。地图、工程设置和构建输出都有各自归属。
+The UE engine can be reused read-only as the already-compiled build. New UAV C++ features need an independent CARLA project/worktree and module outputs; splitting source into separate directories must not still end up overwriting plugin binaries that Factory is using. Large assets may use filesystem-supported copy-on-write; hardlinks on assets that will be modified are forbidden. Maps, project settings, and build outputs each have their own home.
 
-AirSim 模型固定保存于 `/data/sim/assets/airsim/quadrotor1/1ca93f6f77e4/`。原始资产不改写，装配和碰撞修改生成新的派生版本。
+The AirSim model is pinned at `/data/sim/assets/airsim/quadrotor1/1ca93f6f77e4/`. Original assets are not rewritten; rigging and collision modifications produce new derived versions.
 
-新运行实例暂拟 CARLA 2400（并检查附属端口）、ROS domain 45、可选只读 RGB-D 服务 22287；实施前检查占用。它们与旧 2100/2200、已提取仓库 2300 和旧 ROS domain 42/43/44 区分。一个多机世界内共享 ROS domain、`/clock` 和 `map`，机器人不各自启动一个 UE 世界。
+New run instances tentatively use CARLA 2400 (with auxiliary ports checked), ROS domain 45, and an optional read-only RGB-D service 22287; check occupancy before implementation. These are kept distinct from the old 2100/2200, the extracted repo's 2300, and the old ROS domains 42/43/44. Within one multi-robot world the ROS domain, `/clock`, and `map` are shared; robots do not each start their own UE world.
 
-## 4. Profile、实例与控制权
+## 4. Profiles, Instances, and Control Authority
 
-| 配置层 | 内容 | 禁止混入 |
+| Config layer | Content | Must not mix in |
 |---|---|---|
-| 机器人型号 | 类型、尺寸、机身包络、速度/加速度上限、运动维度、执行器能力、地面规则 | 某一次运行的目标、地图、租约 |
-| 传感器装配 | 分辨率、频率、LiDAR 参数、外参、自体过滤体 | 其他机器人 Actor ID 或最新位姿 |
-| 场景 | map frame、内容版本、合法范围、地面层、地图保存身份 | 硬编码某台机器的运动状态 |
-| 机器人实例 | `robot_id`、型号、装配、初始位置、命名空间、任务与 runtime 路径 | 通过共享文件覆盖另一实例状态 |
-| 团队组合 | 实例集合、共享开关、能力分配、协调策略 | 按字符串替换复制整套服务 |
+| Robot model | Type, size, body envelope, velocity/acceleration limits, motion dimensions, executor capabilities, ground rules | Goals, maps, or leases of any particular run |
+| Sensor rig | Resolution, rates, LiDAR parameters, extrinsics, self-filter volumes | Other robots' Actor IDs or latest poses |
+| Scene | map frame, content version, legal bounds, ground level, map-save identity | Hardcoded motion state of any one robot |
+| Robot instance | `robot_id`, model, rig, initial position, namespace, tasks, and runtime paths | Overriding another instance's state via shared files |
+| Team composition | Instance set, sharing switches, capability assignment, coordination policy | Copying a whole service set via string replacement |
 
-实例为 `go2_01`、`go2_02`、`uav_01`、`uav_02`。TF 使用 `go2_01/base_link`、`uav_01/base_link` 等唯一名字，传感器话题按实例隔离；全局 `map` 一致。每台机器只有一个实际写入运动的执行器，独立持有控制权与动作序号。
+Instances are `go2_01`, `go2_02`, `uav_01`, `uav_02`. TF uses unique names such as `go2_01/base_link`, `uav_01/base_link`; sensor topics are isolated per instance; the global `map` is consistent. Each robot has exactly one executor that actually writes motion, independently holding control authority and action sequence numbers.
 
-启动预检查输出完整解析后的配置和哈希。重复 ID、重复 TF、指向旧 runtime 的路径、两个执行器争用同一 Actor、地面 profile 绑定 UAV 执行器等情况直接报出配置冲突。
+Startup preflight prints the fully resolved configuration and hashes. Duplicate IDs, duplicate TF, paths pointing at old runtimes, two executors contending for the same Actor, or a ground profile bound to a UAV executor are reported directly as configuration conflicts.
 
-现有 Go2 profile 的轮廓、相机外参和速度先作为有来源的基线保留；不会在多机迁移时顺便改低障碍阈值、前向急停、SAM3 road 规则或旧巡航点。新的空地场景使用几何与人物感知，不启用 Town10 的 road 永久禁行逻辑。
+The existing Go2 profile's footprint, camera extrinsics, and speeds are kept first as a sourced baseline; the multi-robot migration will not incidentally lower obstacle thresholds, forward emergency stop, SAM3 road rules, or old patrol points. The new empty scene uses geometry and people perception and does not enable Town10's permanent road-ban logic.
 
-## 5. 共享三维环境地图
+## 5. Shared 3D Environment Map
 
-主方案确定为 **单一 C++ 地图服务＋OctoMap OcTree**。官方库提供占用、空闲和未知表示；我们负责多传感器同步、来源去重、更新版本、机器人通行视图和执行接口。[OctoMap 官方说明](https://octomap.github.io/)
+The main approach is fixed as **a single C++ map service + OctoMap OcTree**. The official library provides occupied, free, and unknown representations; we own multi-sensor synchronization, source deduplication, update versioning, per-robot traversability views, and the execution interface. [Official OctoMap documentation](https://octomap.github.io/)
 
-借鉴旧 Exyn mapper 的输入、批处理与 hit/miss 经验，不并行维护 Exyn 与 OctoMap 两份权威地图。JIE 暂用于旧地图导入/查看方面的参考，不把其地面规划器接到 SMART 前面。现有 JIE semantic bridge 累积语义体素、忽略动态类别，缺少完整射线清空，不能直接充当新地图服务。
+We borrow the old Exyn mapper's input, batching, and hit/miss experience, but do not maintain Exyn and OctoMap as two parallel authoritative maps. JIE serves for now as a reference for old-map import/viewing, and its ground planner is not put in front of SMART. The existing JIE semantic bridge accumulates semantic voxels and ignores dynamic categories but lacks complete ray clearing, so it cannot directly serve as the new map service.
 
-### 5.1 观测合同
+### 5.1 Observation Contract
 
-每帧至少携带：
+Each frame carries at least:
 
 ```text
 scene_id, scene_epoch, robot_id, sensor_id, frame_seq
@@ -140,212 +140,212 @@ points_in_sensor_frame, T_map_sensor_at_capture, sensor_origin
 range/validity metadata, calibration_id
 ```
 
-唯一键使用 `scene_epoch + robot_id + sensor_id + frame_seq`。同一条观测重发不得重复加权；不同机器人真实采集的观测是不同证据。不得将共享地图重新当作点云输入反复累积。
+The unique key is `scene_epoch + robot_id + sensor_id + frame_seq`. A resent observation must not be double-weighted; observations genuinely captured by different robots are distinct evidence. The shared map must not be re-fed as point-cloud input for repeated accumulation.
 
-修复旧桥缺口：ROS stamp 使用采集时间，不使用回调 `now()`；射线原点和终点使用同帧传感器变换，不使用 `latest_pose`。CARLA 到 ROS 的轴转换在一个明确入口完成。真实旋转雷达将来若有逐点时间，需要去畸变；本次不宣称已经解决实机定位漂移。
+Fix the old-bridge gaps: ROS stamps use capture time, not callback `now()`; ray origins and endpoints use the same-frame sensor transform, not `latest_pose`. The CARLA-to-ROS axis conversion happens at one explicit entry point. If a real spinning LiDAR later carries per-point timestamps it will need motion-distortion correction; this round does not claim physical-vehicle localization drift is solved.
 
-### 5.2 更新规则
+### 5.2 Update Rules
 
-- 有效命中终点更新占用，射线穿过的体素更新空闲，未观测部分保持未知。
-- 使用体素射线遍历，不照抄旧大步长等距采样，避免漏过薄障碍。
-- 命中近处物体后不得清空后方遮挡空间；无回波/无深度不自动表示空闲。CARLA 明确的远平面深度若用于清理，必须保留仿真专用标记。
-- 每帧对体素去重，限制 log-odds 饱和，明确命中/空闲冲突处理与允许乱序窗口。跨传感器冲突不能用“最后到达消息覆盖”解决。
-- 先用 0.25 m 体素保持与原 Go2 分辨率可比；根据薄障碍验收再比较 0.20 m 或更细。旧 UAV 的 0.8 m 设置不直接复用。
-- 初期复用已验证的保守近距观测范围作为基线，再单独扩大无人机有效标记范围；传感器 80 m 量程不能直接等同于 80 m 可靠清障。
+- Valid hit endpoints update occupied; voxels the ray passes through update free; unobserved parts stay unknown.
+- Use voxel ray traversal; do not copy the old large-step equidistant sampling, to avoid missing thin obstacles.
+- After hitting a near object, the occluded space behind must not be cleared; no-return/no-depth does not automatically mean free. If CARLA's explicit far-plane depth is used for cleanup, it must keep a simulation-only marker.
+- Deduplicate voxels per frame, bound log-odds saturation, and make hit/free conflict handling and the allowed out-of-order window explicit. Cross-sensor conflicts must not be resolved by last-message-wins.
+- Start with 0.25 m voxels to stay comparable with the original Go2 resolution; compare 0.20 m or finer after thin-obstacle acceptance. The old UAV's 0.8 m setting is not reused directly.
+- Initially reuse the verified conservative near-range observation range as a baseline, then separately widen the UAV's effective marking range; an 80 m sensor range is not automatically 80 m of reliable clearing.
 
-新地图区分“当前观测占用”与人为永久禁区；动态人物和同伴不能因为多次看见就成为不可清除的永久墙。预测 OHZ 不写入长期占用地图。跟踪过期只能取消预测或标记状态不确定，不能据此清空真实几何。
+The new map distinguishes currently observed occupancy from man-made permanent forbidden zones; dynamic pedestrians and peers must not become un-clearable permanent walls just because they were seen repeatedly. Predicted OHZ is not written into the long-term occupancy map. Tracking expiry can only cancel predictions or mark state uncertain — it must not clear real geometry on that basis.
 
-### 5.3 增量与版本
+### 5.3 Increments and Versions
 
-地图发布 `scene_epoch + base_revision + revision + changed_cells/regions`，变化包含 occupied、free、unknown 三种结果。任何影响通行的操作都产生新版本，包含清理、导入、裁剪或后续允许的衰减，不能只用旧 `scan_seq` 代替地图版本。
+The map publishes `scene_epoch + base_revision + revision + changed_cells/regions`, with changes covering the three outcomes occupied, free, unknown. Any traversal-affecting operation produces a new version, including cleanup, import, pruning, or later permitted decay; the old `scan_seq` alone must not stand in for the map version.
 
-规划器保存本地只读快照，一次规划读取一致版本；不在每条候选边上调用一次 ROS 远程查询。初版可用有序增量＋局部稀疏快照缓存，暂不引入分布式数据库或 GPU 地图服务。检测到增量缺口时重新获取快照，不清空整个图。
+The planner keeps a local read-only snapshot so one planning pass reads a consistent version; it does not make a ROS remote query per candidate edge. The first version can use ordered increments + a partial sparse snapshot cache; no distributed database or GPU map service for now. When an increment gap is detected, re-fetch the snapshot instead of clearing the whole map.
 
-地图备份保留完整概率状态及元数据，例如完整 `.ot`、校验、坐标、分辨率、场景内容版本；不能只保存丢失概率历史的显示点云。运行 episode 改变后创建新 epoch；只有显式匹配场景坐标和内容版本的快照才允许恢复。临时轨迹/OHZ 不随静态地图直接恢复为有效状态。
+Map backups keep the full probabilistic state and metadata, e.g. complete `.ot`, checksums, coordinates, resolution, scene content version; saving only a display point cloud that lost the probability history is not acceptable. A new epoch is created when the run episode changes; only snapshots explicitly matching scene coordinates and content version may be restored. Transient trajectories/OHZ do not come back as valid state along with the static map.
 
-已可靠关联到合作机器人或动态人物的临时几何占用单独管理，不作为静态 `.ot` 快照恢复；关联不确定的历史几何证据可以保留，恢复后实际近端执行仍需新鲜观测。不能因为当前视角遮挡，就把先前已知占用自动改为空闲或未知。
+Transient geometric occupancy reliably associated with a cooperating robot or a dynamic pedestrian is managed separately and is not restored as part of the static `.ot` snapshot; historical geometric evidence with uncertain association may be kept, but near-field execution after restore still needs fresh observations. Previously known occupancy must not be automatically flipped to free or unknown just because the current viewpoint is occluded.
 
-## 6. 同一环境图，两个通行模型
+## 6. One Environment Map, Two Traversability Models
 
-共享图保存物理占用，不按某台机器的轮廓统一膨胀。
+The shared map stores physical occupancy and is not uniformly inflated by any one robot's footprint.
 
-**Go2：** 结合当地地面高度、支撑、台阶/坡度范围、机身高度和 XY 轮廓形成二维通行层，交给 Go2 的 Nav2 costmap 视图和 SMART 2D。地面本身不能成为机身障碍；高处横梁只有侵入机身净空才阻塞通行。第一阶段平地设置明确地面基准，不偷偷改变原 Factory 已关闭支撑检查的运行配置。
+**Go2:** Combines local ground height, support, step/slope limits, body height, and the XY footprint into a 2D traversability layer fed to the Go2's Nav2 costmap view and SMART 2D. The ground itself must not become a body obstacle; an overhead beam blocks passage only if it intrudes into the body clearance. Phase 1 flat ground sets an explicit ground datum and does not quietly change the original Factory run configuration where support checking is disabled.
 
-新Go2实例的几何占用来源统一为共享图投影，不再同时运行旧LiDAR独立积累层作为第二个几何权威来源，避免共享图已清空而旧层仍挡路。人工禁区与短期预测单独分层、保留来源，各层只能撤销自己产生的约束；Nav2导出视图也记录对应地图版本。
+The new Go2 instance's geometric occupancy source is unified as the shared-map projection; the old standalone LiDAR accumulation layer no longer runs alongside as a second geometric authority, avoiding the case where the shared map has already cleared a cell but the old layer still blocks it. Manually drawn forbidden zones and short-term predictions are separate layers that keep their provenance, and each layer can only revoke constraints it created itself; the Nav2 exported view also records the corresponding map version.
 
-**UAV：** 直接检查三维机身与飞行范围。第一版用包含所有螺旋桨的保守包络，按实际装配测量；后续可使用方向相关盒体。状态、路径、目标均含 Z，碰撞检查覆盖整条边的扫掠体积，包括上下空间，不仅检查两个端点或一条中心射线。
+**UAV:** Directly checks the 3D body and flight bounds. The first version uses a conservative envelope containing all propellers, measured against the actual rig; orientation-dependent boxes may come later. State, paths, and goals all include Z; collision checks cover the swept volume of the entire edge, including above and below — not just two endpoints or one center ray.
 
-每个通行视图记录使用的 body/profile/calibration 版本。统一约定物体尺寸、机器人尺寸和安全余量的责任边界，防止 costmap 膨胀、SMART OHZ 和执行器把同一余量重复加三次。
+Each traversability view records the body/profile/calibration versions in use. Agree uniformly on the responsibility boundaries among object size, robot size, and safety margins, so that costmap inflation, SMART OHZ, and the executor do not each add the same margin three times.
 
-两者都允许在未知区域建立候选树；实际执行只放行已观测为空闲的近端路径，并要求该机器人近期雷达已融合、最新占用和伙伴位置检查通过。默认保留已知空闲分类直到新证据改变它，不因某体素3秒未被重复射线穿过就自动禁止通行；逐格时间限制可作为实验策略单独启用。近端长度由实际速度、制动能力与延迟决定。尚未扫描目标不等于不可达；无法观察的方向应先获得观测，不用未经验证的前进替代观测。
+Both allow building candidate trees in unknown areas; actual execution releases only near-field paths already observed free, and requires that robot's recent LiDAR to be fused and its latest-occupancy and peer-position checks to pass. The known-free classification is kept by default until new evidence changes it — a voxel is not automatically forbidden just because no ray has passed through it for 3 seconds; per-cell time limits may be enabled separately as an experimental policy. The near-field length is determined by actual speed, braking capability, and latency. An unscanned goal is not the same as unreachable; directions that cannot be observed should first be observed, not replaced by unverified forward motion.
 
-## 7. 真三维 SMART 接入与树恢复
+## 7. True-3D SMART Integration and Tree Recovery
 
-选择一份固定的 SMART 核心作为共同依赖，记录官方来源、现有静态增量/清空恢复/定向 OHZ 扩展，避免从两个 checkout 任意拼接。官方算法使用 RRT* 初始化与动态更新，本机真实三维示例可参考 XYZ 类型与接口组织。[官方 SMART3D](https://github.com/LinksLabUConn/SMART3D)
+Pick one pinned SMART core as the shared dependency, recording the official source plus the existing static-increment/clearing-recovery/directional-OHZ extensions, to avoid arbitrary stitching from two checkouts. The official algorithm uses RRT* initialization with dynamic updates; the local true-3D example is a reference for XYZ types and interface organization. [Official SMART3D](https://github.com/LinksLabUConn/SMART3D)
 
-Go2 适配保持 `SMART<f32,2>`；UAV 新增 `SMART<f32,3>`。共用版本协议和通用碰撞接口，状态和边检查器按平台分别实现。现有三维示例把真值盒子整体加入地图的做法，不进入正式感知链路。
+The Go2 adaptation keeps `SMART<f32,2>`; the UAV adds `SMART<f32,3>`. They share the version protocol and generic collision interface, while state and edge checkers are implemented per platform. The existing 3D example's approach of adding whole ground-truth boxes to the map does not enter the formal perception chain.
 
-更新顺序：安装一致的最新地图视图 → 对新增占用定位并裁掉相关无效边 → 对明确恢复空闲的区域重新验证历史边/候选连接 → 应用当前动态约束 → 验证实际位置连接与整条提交路径 → 交给执行器。
+Update order: install a consistent latest map view → locate newly occupied cells and prune the related invalid edges → re-validate historical edges/candidate connections over regions explicitly restored to free → apply current dynamic constraints → verify actual-position connectivity and the whole submitted path → hand over to the executor.
 
-**已确认的缺口：现有 `maintain_static_clear_coverage` 只在 `N == 2` 执行，使用 XY 采样。** 先复用通用历史边与邻域重连；若三维空域缺少覆盖，在该机制内实现维度通用的增量补点和连接。不能只改类型参数或把二维边抬高，就宣称障碍移除后三维树已经恢复。
+**Confirmed gap: the existing `maintain_static_clear_coverage` only runs at `N == 2`, using XY sampling.** First reuse the generic historical-edge and neighborhood reconnection; if 3D airspace lacks coverage, implement dimension-generic incremental point refills and connections inside that mechanism. Changing only the type parameter or lifting 2D edges must not be claimed as 3D tree recovery after obstacle removal.
 
-优先保持现存树，新增/消失障碍触发相关修复。初版记录所有扫描、碰撞检查和修复耗时；180 ms 修复参数不代表整次全树检查都受相同硬预算约束。证明瓶颈后才加边/体素空间索引、版本缓存或分批维护。
+Preserving the existing tree takes priority; appearing/disappearing obstacles trigger the relevant repairs. The first version records all scan, collision-check, and repair times; the 180 ms repair parameter does not mean every full-tree check is under the same hard budget. Only after proving the bottleneck, add edge/voxel spatial indexes, version caches, or batched maintenance.
 
-正常地图检查不发送固定周期停车。新路径携带机器人 ID、目标版本、地图版本和路径 ID；执行器按当前实测位置重新检查交接。旧路径结果不能覆盖新任务。没有路径时给出 unknown、几何封锁、同伴占用、计算预算等可诊断原因。
+Normal map checks do not send fixed-interval stops. New paths carry robot ID, goal version, map version, and path ID; the executor re-checks the handoff against the current measured position. Old path results must not override new tasks. When there is no path, give a diagnosable reason such as unknown, geometric blockage, peer occupancy, or compute budget.
 
-整树重新初始化只作为明确故障/持续无法恢复时的受控回退，记录原因并保留环境地图；普通行人经过、地图清空更新不触发整树重启，也不使用清空地图看门狗。
+Whole-tree reinitialization is only a controlled fallback for explicit failures/persistent unrecoverable states, with the reason recorded and the environment map kept; ordinary pedestrians passing by and map clearing updates do not trigger whole-tree restarts, and no clear-map watchdog is used.
 
-## 8. 无人机载体、运动与模型接入
+## 8. UAV Carrier, Motion, and Model Integration
 
-AirSim 原始机身网格包围盒约 0.982×0.982×0.293 m，但尚未包含完整螺旋桨装配和安全余量，不能直接写死为最终碰撞尺寸。先验证模型比例、坐标轴、材质、四个螺旋桨位置和实际包络，再注册独立 UAV Actor。
+The AirSim raw body mesh bounding box is about 0.982×0.982×0.293 m, but it does not yet include the full propeller rig or safety margins and must not be hardcoded as the final collision size. First verify model scale, axes, materials, the four propeller positions, and the actual envelope, then register the independent UAV Actor.
 
-旧 `kinematic_drone` 是无机身传感器 rig，分别更新传感器变换。新链路改为一个真实机体 Actor，RGB、深度和雷达刚性附着；传感器桥只读取，唯一无人机执行器移动该 Actor。
+The old `kinematic_drone` was a bodyless sensor rig with sensor transforms updated separately. The new chain uses one real body Actor with RGB, depth, and LiDAR rigidly attached; the sensor bridge only reads, and the single UAV executor moves that Actor.
 
-Actor需明确设置为可移动、关闭不需要的刚体动力学、配置有效简单碰撞；不能仅给默认静态道具换一个mesh路径就视为已支持无人机运动。初期保持roll/pitch水平，XYZ和yaw由运动学适配器控制。
+The Actor must be explicitly set movable, with unneeded rigid-body dynamics disabled and a valid simple collision configured; swapping the mesh path on a default static prop must not count as UAV motion support. Initially keep roll/pitch level, with XYZ and yaw controlled by the kinematic adapter.
 
-不能直接关闭 Go2 地面检查来冒充飞行：当前 `Go2KinematicMovement` 固定高度模式仍拒绝垂直位移。新增独立 UAV 运动策略，复用有限步长与碰撞扫掠思想，但完整检查 XYZ、旋转包络、限速、限加速度和合法空域。
+Simply disabling Go2 ground checks cannot fake flight: the current `Go2KinematicMovement` fixed-height mode still rejects vertical displacement. Add an independent UAV motion strategy, reusing the bounded-step and collision-sweep ideas, but fully checking XYZ, rotating envelope, speed limits, acceleration limits, and legal airspace.
 
-反馈至少包含实测 XYZ、朝向、实际速度、完成距离/角度、阻挡原因与时间戳。以 UE 实际变换为仿真反馈，不以已发送目标代替位姿。收到碰撞后不得继续用期望位姿驱动相机和建图。
+Feedback includes at least measured XYZ, heading, actual speed, completed distance/angle, blocking reason, and timestamps. UE's actual transform is the simulation feedback; sent goals must not stand in for pose. After a collision, cameras and mapping must not keep being driven by the desired pose.
 
-遥控/暂停/恢复也按实例隔离；初期只实现需要的 XYZ/yaw 命令。EGO、A*、MIGHTY 和 PX4 可保留为以后独立对照，但本项目正式无人机路径来源必须是三维 SMART。
+Remote control/pause/resume is also isolated per instance; initially only the needed XYZ/yaw commands are implemented. EGO, A*, MIGHTY, and PX4 may remain as later independent baselines, but this project's official UAV path source must be 3D SMART.
 
-## 9. 共享动态信息与互相避让
+## 9. Shared Dynamic Information and Mutual Avoidance
 
-每台机器人广播带时刻的自身实际机身占用、速度和短期已确认路径。使用自己的位置通信属于合作信息；它与读取 UE 行人真值替代视觉估计是两回事。未知外部对象仍由传感器处理。
+Each robot broadcasts its actual timestamped body occupancy, velocity, and short-term confirmed path. Communicating one's own position is cooperative information; it is a different matter from reading UE pedestrian ground truth in place of visual estimation. Unknown external objects are still handled by sensors.
 
-自身点云按实际机身与外参过滤；其他机器人从静态环境积累中分离，并保留临时碰撞约束。屏蔽机器人回波时只处理其自身占用，不把它后面被遮挡的空间当空闲清掉。动态约束更新/失效与环境地图清空分别处理。
+Its own point cloud is filtered by actual body and extrinsics; other robots are separated out of the static environment accumulation and keep transient collision constraints. When masking a robot's echoes, handle only its own occupancy — do not clear the occluded space behind it as free. Dynamic-constraint update/expiry and environment-map clearing are handled separately.
 
-分两步：
+Two steps:
 
-1. **当前位置＋短期运动约束**：各自 SMART 避开伙伴的机身和有效短期轨迹，验证迎面、交叉与不同高度通过。
-2. **简单通行协调**：只在窄路冲突时按明确优先级和通行许可决定谁等、谁走；有超时/撤销，防止两台无限互让。这个模块不改其他机器人的树，也不直接发运动。
+1. **Current position + short-term motion constraints:** each SMART avoids the peer's body and valid short-term trajectory; verify head-on, crossing, and different-altitude passages.
+2. **Simple passage coordination:** only on narrow-passage conflicts, decide who waits and who goes by explicit priority and passage permission; with timeouts/revocation, preventing two robots infinitely yielding to each other. This module does not modify another robot's tree and does not directly send motion.
 
-实验开关包括环境共享、同伴意图、通行协调。关闭共享只影响协作功能，不应顺带关闭本机实体碰撞或原有近端避障。暂不增加全局任务拍卖、分布式一致性集群、复杂 MAPF 或新 VLM 编排。
+Experiment switches include environment sharing, peer intent, and passage coordination. Turning off sharing only affects cooperative features and must not incidentally disable local physical collision or the existing near-field avoidance. No global task auctioning, distributed consensus swarms, complex MAPF, or new VLM orchestration for now.
 
-## 10. SAM3 与 OHZ 的多机扩展
+## 10. Multi-Robot Extension of SAM3 and OHZ
 
-先通过雷达建图与 SMART 导航，然后接回已经验证的 SAM3 ID＋同帧 RGB-D＋多帧位置估速。继续不用卡尔曼滤波；不把位置差分包装成 SAM3 神经速度头，不把人物真值送给估计器。
+First LiDAR mapping and SMART navigation, then wire back the already-verified SAM3 ID + same-frame RGB-D + multi-frame position-derived velocity. Still no Kalman filtering; position differencing must not be dressed up as a SAM3 neural velocity head, and pedestrian ground truth must not be fed to estimators.
 
-实现一个模型服务、每相机独立会话：权重常驻一次；视频缓存、对象 ID、帧计数、conditioning 历史、相机标定与位姿缓存全部隔离。当前单相机服务没有这个功能，必须有跨会话污染测试后再上线。[SAM3 官方代码](https://github.com/facebookresearch/sam3)
+Implement one model service with an independent session per camera: weights resident once; video caches, object IDs, frame counts, conditioning history, and camera calibration/pose caches all isolated. The current single-camera service does not have this; cross-session contamination tests are required before going live. [Official SAM3 code](https://github.com/facebookresearch/sam3)
 
-调度采用有界队列和公平轮询/明确优先级；每相机只保留有限待处理最新帧，保留真实采集时间，避免慢推理形成旧帧长队。单个推理调用内部必须绑定所属会话，不能因并发改变全局 tracker 状态。权重共享减少重复显存，不消除多路推理计算和每会话 CPU 内存。
+Scheduling uses bounded queues and fair round-robin/explicit priority; each camera keeps only a bounded set of pending latest frames with true capture times, avoiding long queues of stale frames behind slow inference. A single inference call must be bound to its session internally; concurrency must not mutate global tracker state. Weight sharing removes duplicate VRAM but not multi-stream inference compute or per-session CPU memory.
 
-人物 ID 初版使用 `robot_id/camera_id/session_id/local_track_id`，不宣称跨视角全局 ReID。两个相机看见同一个人时先保留有来源的约束；可能重复的占用需保守处理，不能相互累加到永久图。后续只有测得明显冗余时才做时空关联，暂不引入 Qwen 做人物 ID 合并。
+Person IDs in the first version use `robot_id/camera_id/session_id/local_track_id`; no cross-view global ReID is claimed. When two cameras see the same person, first keep the sourced constraints; potentially duplicated occupancy is handled conservatively and must not accumulate onto the permanent map. Later, spatiotemporal association only if measured redundancy is clear; no Qwen for person-ID merging for now.
 
-Go2 继续使用已验证平面人物速度与定向胶囊 OHZ。UAV 避人需要有限高度的人体占用范围；不能把二维圆无限拉成整片空域障碍。先从有效深度估计人体三维范围，沿地面运动方向扫掠；在平地行人测试中明确 `v_z=0` 假设及不确定高度余量，尚不宣称复杂上下楼运动预测。三维椭球可作为独立形状对照，不能替代范围/速度验证。
+Go2 keeps the verified planar pedestrian velocity and directional capsule OHZ. UAV people avoidance needs a bounded-height body occupancy range; a 2D circle must not be stretched infinitely into a whole-airspace obstacle. First estimate the body's 3D extent from valid depth and sweep along the ground-motion direction; in flat-ground pedestrian tests, state the `v_z=0` assumption and the height-uncertainty margin explicitly — no claim yet of predicting complex up/down-stair motion. A 3D ellipsoid may serve as an independent shape comparison but cannot replace range/velocity validation.
 
-同伴机器人有已知 profile 尺寸和通信位姿，直接构造三维动态约束，不需要 SAM3 重新认出每个合作机器人。
+Peer robots have known profile dimensions and communicated poses, so 3D dynamic constraints are built directly; SAM3 does not need to re-recognize each cooperating robot.
 
-SAM3 可逐实例开关：允许所有机器人运行雷达导航、只有部分机器人开启人物视觉并共享结果；这是一种明确的感知配置，不冒充每台都达到相同视觉更新率。
+SAM3 can be toggled per instance: all robots may run LiDAR navigation while only some enable people vision and share the results; this is an explicit perception configuration, not a pretense that every robot achieves the same vision update rate.
 
-## 11. 实施顺序、交付物与退出条件
+## 11. Implementation Order, Deliverables, and Exit Criteria
 
-| 阶段 | 具体工作 | 可见交付/通过条件 |
+| Phase | Concrete work | Visible deliverable / pass criteria |
 |---|---|---|
-| P0 固定基线 | 新目录、Git/依赖锁、来源清单、既有文件哈希、端口与 OctoMap 编译检查；独立工程/输出路径 | 旧工程无改动；提取单机链在隔离实例完成一次冷启动与关闭 |
-| P1 实例隔离 | profile/instance 配置、替换运行入口的 car1 硬编码、统一时钟与 TF、独立租约/日志 | 两个测试实例无串话题、串目标、串状态；重复身份启动被拒绝 |
-| P2 UAV 最小闭环 | 模型导入与装配、独立 Actor、XYZ 执行器、刚性传感器绑定 | UAV 能按命令升降、转向、停止；上下左右碰撞有效；实际位姿与 RViz 一致 |
-| P3 单机三维建图 | 先用一台雷达接 OctoMap，精确扫描位姿、free/occupied/unknown、快照/增量 | 墙位置与采集姿态一致；添加/移除方盒可正确更新；遮挡后方不误清 |
-| P4 UAV 真三维 SMART | 3D worker、机身扫掠检查、增量裁边与清空重连 | 实际飞越矮墙/绕过横梁；路径 Z 变化；障碍变化重复20次不清图、不靠每次重建树 |
-| P5 1+1 共享几何 | 双雷达融合、Go2 地面投影、各自树、远端障碍出现/清空通知 | 同一横梁 Go2 可从下方过、UAV 对应高度被阻；远端观测确实改变另一机的规划视图 |
-| P6 伙伴动态避让 | 伙伴实际占用、短期意图、随后加入简单窄路许可 | 交叉、迎面、上下错层、不留永久机身影子；共享和协调开关各自有效 |
-| P7 SAM3/OHZ | 一路回归→共享权重两路→按性能增加；人物高度范围 | 图像/深度/位姿/会话无串流；速度和 OHZ 持续性达到冻结的单路/多路标准 |
-| P8 三台/四台容量 | 同场景逐台增加，再逐路开视觉，记录瓶颈 | 给出带传感器规格、场景、频率和背景负载的最大已验收组合 |
-| P9 Factory 与发布 | 独立工厂实例、小范围→目标范围、运行包、冷启动和备份 | 空场与 Factory 各有清晰启动/停止入口，关闭再启动可恢复环境图与任务配置 |
+| P0 pinned baseline | New directory, Git/dependency locks, source manifest, existing-file hashes, port and OctoMap build checks; independent project/output paths | No changes to old projects; the extracted single-robot chain completes one cold start and shutdown in an isolated instance |
+| P1 instance isolation | profile/instance config, replace the car1 hardcoding in the run entry, unified clock and TF, independent leases/logs | Two test instances with no cross-talk in topics, goals, or state; duplicate-identity startup rejected |
+| P2 UAV minimal closed loop | Model import and rigging, independent Actor, XYZ executor, rigid sensor binding | The UAV can climb, turn, and stop on command; collisions effective above/below/left/right; actual pose matches RViz |
+| P3 single-robot 3D mapping | First attach one LiDAR to OctoMap with exact scan poses, free/occupied/unknown, snapshot/increment | Wall positions match capture poses; adding/removing boxes updates correctly; the area behind occluders is not wrongly cleared |
+| P4 UAV true-3D SMART | 3D worker, body sweep checks, incremental edge pruning and clearing reconnection | Actually flies over low walls/around beams; path Z varies; obstacle changes repeated 20 times without clearing the map or rebuilding the tree each time |
+| P5 1+1 shared geometry | Dual-LiDAR fusion, Go2 ground projection, individual trees, remote obstacle appear/clear notifications | Under the same beam the Go2 passes below while the UAV is blocked at the corresponding altitude; a remote observation genuinely changes the other robot's planning view |
+| P6 peer dynamic avoidance | Peer actual occupancy, short-term intent, then simple narrow-passage permissions | Crossing, head-on, and vertical separation without permanent robot shadows; the sharing and coordination switches each effective |
+| P7 SAM3/OHZ | One stream regression → shared-weight two streams → add per performance; person height range | No cross-stream leakage of images/depth/poses/sessions; velocity and OHZ continuity meet the frozen single-stream/multi-stream criteria |
+| P8 three/four-robot capacity | Add robots one by one in the same scene, then enable vision per stream, recording bottlenecks | Report the maximum accepted combination with sensor specs, scene, rates, and background load |
+| P9 Factory and release | Independent factory instance, small scope → target scope, run package, cold start and backup | Empty scene and Factory each have clear start/stop entries; restart recovers the environment map and task configuration |
 
-可并行：一个 agent 负责配置/生命周期，一个负责共享地图合同与离线回放，一个负责 UAV Actor/执行器；SMART 3D 适配使用固定地图 fixture 并行开发。集成按 P0→P9 依赖推进，每个 agent 有明确文件责任，不同时修改同一份核心源码。
+Parallelizable: one agent owns configuration/lifecycle, one owns the shared-map contract and offline replay, one owns the UAV Actor/executor; SMART 3D adaptation develops in parallel against fixed map fixtures. Integration proceeds by the P0→P9 dependencies; each agent has explicit file responsibility and no two agents modify the same core source simultaneously.
 
-## 12. 必须通过的行为测试
+## 12. Behavioral Tests That Must Pass
 
-| 测试 | 要验证的结果 |
+| Test | Result to verify |
 |---|---|
-| 同一墙，两台不同角度扫描 | 地图中位置一致；轴转换、外参、capture pose 正确 |
-| 重发、乱序、旧 episode | 重发不重复加权，超出允许窗口可诊断，旧世界数据被拒绝 |
-| 雷达前有近物体，后方未知 | 清空射线在表面停止，不穿过物体清后方 |
-| 机体高速转向时延迟LiDAR回调 | 地图墙面不随回调延迟拖动，射线起点仍与capture pose一致 |
-| 一条边两端空、中间有障碍 | 按机身扫掠拒绝该边，不只检查端点 |
-| 移除障碍，旧边两端均在清除区外 | 仍能根据相交区域找到相关历史边并重连 |
-| 同时新增 A、移除 B | 旧边必须用新完整地图重新验证，不能穿过新增 A |
-| 横梁与矮墙 | 同一环境数据下 Go2/UAV 得到不同通行结果，UAV 路径确实改变 Z |
-| 动态人物/伙伴离开 | 预测约束正确更新；真实自由射线清理残留；遮挡区保留最后有效状态与时间，原本未知仍未知 |
-| 行进中地图更新 | 无无障碍周期性 hold；旧路径不能从过时位姿重新接入 |
-| 多相机看同一人/不同人 | tracker、深度、捕获位姿不串会话；不要求初版全局 ID 一致 |
-| 停一个实例 | 其他机器人继续运行，地图和其他控制权不被删除 |
-| 缺TF、传感器停更、非法动作、Actor/world更换 | 给出明确状态并停止旧命令；恢复依赖新鲜数据和有效控制权，不通过重置地图处理 |
-| 清洁冷启动两次 | 资产、依赖、地图恢复身份、传感器新 epoch 与启动顺序均正确 |
+| Same wall scanned by two robots at different angles | Consistent position in the map; axis conversion, extrinsics, and capture pose correct |
+| Resend, out-of-order, old episode | Resends not double-weighted, beyond the allowed window diagnosable, old-world data rejected |
+| Near object in front of the LiDAR, unknown behind | Clearing rays stop at the surface and do not pass through the object to clear behind it |
+| Delayed LiDAR callback during fast body turns | Map walls do not drag with callback delay; ray origins still match the capture pose |
+| An edge free at both ends with an obstacle in the middle | The edge is rejected by body sweep, not endpoint-only checks |
+| Obstacle removed, both ends of an old edge outside the cleared region | Related historical edges are still found via the intersection region and reconnected |
+| A added and B removed simultaneously | Old edges must be revalidated against the new complete map and must not pass through the new A |
+| Beams and low walls | From the same environment data Go2/UAV get different traversal outcomes, and the UAV path genuinely changes Z |
+| Dynamic pedestrian/peer leaves | Predicted constraints update correctly; real free rays clean residues; occluded areas keep the last valid state and time; originally unknown stays unknown |
+| Map updates while moving | No obstacle-free periodic holds; old paths must not re-enter from stale poses |
+| Multiple cameras see the same/different people | tracker, depth, and capture poses do not cross sessions; global ID consistency not required in the first version |
+| Stop one instance | Other robots keep running; the map and other control authorities are not deleted |
+| Missing TF, sensor stalls, illegal actions, Actor/world swaps | Explicit status given and old commands stopped; recovery depends on fresh data and valid control authority, not map resets |
+| Two clean cold starts | Assets, dependencies, map-restore identity, new sensor epochs, and startup order all correct |
 
-占用→裁边、真实空闲→重连的延迟分别统计；地图发布、规划器收到、边失效、路径交接四个时间点都记录。保留树 ID、节点复用量、历史边恢复数、新增点数和全树重置次数，证明是在修复原树。
+Latencies for occupied→edge pruning and real-free→reconnection are tallied separately; all four timestamps — map publish, planner receipt, edge invalidation, path handoff — are recorded. Keep tree ID, node reuse counts, historical-edge recovery counts, new point counts, and whole-tree reset counts, proving the original tree is being repaired.
 
-实验评分可读取 UE 方盒、行人、机器人真值进行碰撞距离/速度误差测量；评分进程与正式传感器/估计器输入分开，来源在日志中可核对。
+Experiment scoring may read UE box, pedestrian, and robot ground truth for collision-distance/velocity error measurement; the scoring process is separate from the formal sensor/estimator inputs, with provenance checkable in logs.
 
-## 13. 4090 容量测试与预算
+## 13. 4090 Capacity Testing and Budgets
 
-先固定环境光、渲染质量、相机规格、雷达、地图范围、树预算和人流种子；一次只改变机器人数量或视觉路数，不能同时降画质后宣称规模扩展无代价。
+First fix ambient light, render quality, camera specs, LiDAR, map extent, tree budget, and pedestrian-flow seed; change only robot count or vision-stream count at a time — lowering quality simultaneously and then claiming cost-free scaling is not allowed.
 
-| 档位 | 机器人 | 感知开启顺序 |
+| Tier | Robots | Perception enablement order |
 |---|---|---|
-| B0 | 1 Go2 | 原已验收链参考；新地图单机基线 |
-| B1 | 1 UAV | 单机真实3D建图、规划与执行基线 |
-| B2 | 1 Go2＋1 UAV | 全部几何→一路SAM3→两路SAM3 |
-| B3 | 2 Go2＋1 UAV | 全部几何→按需求逐路SAM3 |
-| B4 | 2 Go2＋2 UAV | 压力档；不预先承诺满配视觉 |
+| B0 | 1 Go2 | Previously accepted chain as reference; new-map single-robot baseline |
+| B1 | 1 UAV | Single-robot true-3D mapping, planning, and execution baseline |
+| B2 | 1 Go2 + 1 UAV | All geometry → one SAM3 stream → two SAM3 streams |
+| B3 | 2 Go2 + 1 UAV | All geometry → SAM3 streams added as needed |
+| B4 | 2 Go2 + 2 UAV | Stress tier; no upfront commitment to full vision |
 
-每档预热后至少15分钟，最终候选组合至少1小时；先空场再 Factory。预热和长跑都记录峰值，统计中明确样本量；若作共享收益对照，使用相同路线/行人种子重复多次，不能从一次成功下结论。
+Each tier runs at least 15 minutes after warm-up, and final candidate combinations at least 1 hour; empty scene first, then Factory. Record peaks in both warm-up and long runs, state sample sizes explicitly in statistics; for shared-benefit comparisons, repeat multiple times with the same routes/pedestrian seeds — no conclusions from a single success.
 
-必须记录：
+Must record:
 
-- GPU整卡显存峰值、模型分配/保留量、UE渲染耗时、每路相机实际输出率。
-- CPU各核心/线程压力、RAM峰值、地图更新队列、SAM3各会话CPU缓存增长。
-- 仿真时间/墙钟时间比，不能通过让仿真慢到半速却仍声称10Hz实时。
-- 每路 LiDAR、RGB-D、人物输出的采集帧龄 p50/p95/p99，OHZ可用率和最长缺口。
-- 建图提交延迟、地图版本滞后、全检查/裁边/重连分别耗时、执行控制频率和停顿。
-- 各地图已观测体素数、树节点/边数和RViz发布负载；不以二维空场内存外推三维工厂。
+- GPU whole-card VRAM peak, model allocated/reserved memory, UE render time, actual output rate per camera stream.
+- CPU per-core/thread pressure, RAM peak, map update queue, SAM3 per-session CPU cache growth.
+- Simulation-time/wall-clock ratio; no claiming 10 Hz real-time while the simulation runs at half speed.
+- Capture frame age p50/p95/p99 for each LiDAR, RGB-D, and people output stream; OHZ availability and longest gap.
+- Mapping commit latency, map-version lag, full-check/prune/reconnect times separately, execution control rate and stalls.
+- Observed voxel counts per map, tree node/edge counts, and RViz publish load; no extrapolating 2D empty-scene memory to the 3D factory.
 
-建议初始工程目标：显存保留约2–3 GiB、RAM可用不少于8 GiB；20 Hz控制目标、10 Hz雷达配置下实际尽量不低于8 Hz、5 Hz地图更新；几何帧龄p95目标不高于0.3秒。SAM3保持原数据新鲜度门槛，逐路比较有效频率及预测连续性。这些是**待单机基线确认并冻结的验收目标**，不是当前已测结果或普适安全保证。
+Suggested initial engineering targets: VRAM headroom of about 2–3 GiB, at least 8 GiB RAM available; with a 20 Hz control target and 10 Hz LiDAR configuration, actually achieve no less than 8 Hz where possible and 5 Hz map updates; geometry frame-age p95 target no higher than 0.3 s. SAM3 keeps the original data-freshness threshold, comparing effective rate and prediction continuity per stream. These are **acceptance targets pending confirmation and freezing against the single-robot baseline**, not currently measured results or a universal safety guarantee.
 
-若达不到，首先定位UE相机渲染、CPU射线/建图、SAM3吞吐或3D边检查哪个超载；分别调整相机数/频率、有限缓存、分辨率、地图范围/体素和有界修复。改变规格后重新报告能力，不靠加大超时、隐藏旧数据或每台重复加载一份模型掩盖问题。
+If targets are missed, first locate whether UE camera rendering, CPU rays/mapping, SAM3 throughput, or 3D edge checks are overloaded; adjust camera count/rate, bounded caches, resolution, map extent/voxels, and bounded repair respectively. After changing specs, re-report capability — do not mask problems with larger timeouts, hidden stale data, or loading a model copy per robot.
 
-容量结果最终表述必须具体，例如“在某场景、某分辨率和人流下，2Go2+1UAV、2路SAM3，连续1小时达到这些频率和延迟”，不写无条件的“4090可以跑4台”。
+Capacity results must finally be stated concretely, e.g. "in this scene, at this resolution and pedestrian flow, 2 Go2 + 1 UAV with 2 SAM3 streams sustained these rates and latencies for 1 hour straight" — never an unconditional "the 4090 can run 4 robots".
 
-## 14. RViz、启动顺序与发布要求
+## 14. RViz, Startup Order, and Release Requirements
 
-保持本次工程不含网页控制台。RViz 显示共享三维占用、Go2二维通行层、每台不同颜色的真实树/路径/机身、各自LRZ、有效人物/伙伴OHZ与速度。面板明确机器人ID、地图版本、感知帧龄、当前目标、控制权和阻挡原因。大树显示可降发布频率，但不能用画出来的假连接代替规划树。
+Keep this project free of a web console. RViz shows shared 3D occupancy, the Go2 2D traversability layer, each robot's real tree/path/body in its own color, individual LRZs, and valid people/peer OHZ and velocities. Panels state robot ID, map version, perception frame age, current goal, control authority, and blocking reason. Large-tree display may lower the publish rate, but drawn fake connections must not replace the planning tree.
 
-计划提供一个统一入口，支持 `plan`、`preflight`、`up --scene ... --team ...`、`status`、`snapshot`、`down`；具体命令属于后续交付，本轮尚不可执行。
+The plan is one unified entry point supporting `plan`, `preflight`, `up --scene ... --team ...`, `status`, `snapshot`, `down`; the concrete commands are a later deliverable and not executable this round.
 
-启动按可观测就绪条件推进：
+Startup proceeds by observable readiness conditions:
 
-1. 解析配置、检查来源/端口/依赖和资源，选择恢复或新建地图。
-2. 启动唯一 UE 世界与时钟控制者，确认 CARLA RPC、地图身份和时间在推进。
-3. 生成各机器人，验证真实 Actor、TF、传感器帧配对。
-4. 建图服务启动并恢复合法快照，发布首个新 epoch 快照。
-5. 各通行视图和 SMART worker 启动，执行器先保持待命。
-6. 需要时启动 SAM3 会话、伙伴状态与协调，确认消息新鲜。
-7. 按显式任务配置授予每台控制权，启动巡航/导航；RViz可单独开关。
+1. Parse configs, check sources/ports/dependencies and resources, and choose map restore or creation.
+2. Start the single UE world and clock owner; confirm CARLA RPC, map identity, and advancing time.
+3. Spawn each robot; verify real Actors, TF, and sensor frame pairing.
+4. The mapping service starts, restores a legal snapshot, and publishes the first new-epoch snapshot.
+5. Each traversability view and SMART worker starts; executors stay on standby at first.
+6. Start SAM3 sessions, peer state, and coordination as needed; confirm message freshness.
+7. Grant each robot control authority per the explicit task configuration and start patrol/navigation; RViz can be toggled separately.
 
-停止只管理本次run创建的PID/服务与Actor：先撤销运动许可并停止，保存环境图与任务配置，再关闭感知、规划、地图、最后关闭所属UE。禁止宽泛 `pkill python/Unreal`。重启后旧租约、旧动态预测和旧 capture cache 均不复活；树可从保存环境图重新初始化，路线和任务配置按明确恢复策略装载。
+Shutdown manages only the PIDs/services and Actors created by this run: first revoke motion permission and stop, save the environment map and task configuration, then shut down perception, planning, and mapping, and finally the owning UE. Broad `pkill python/Unreal` is forbidden. After restart, old leases, old dynamic predictions, and the old capture cache do not come back; trees may reinitialize from the saved environment map, and routes and task configuration load per an explicit recovery policy.
 
-发布包括：源码提交、固定依赖、模型来源、场景内容版本、profile解析结果、地图快照、启动说明、两次冷启动证据、容量报告与回退说明。新版本写入独立SSD备份目录，使用清单校验后更新“当前版本”索引，不删除旧已验收版本。GitHub推送范围后续单独确认，不能把Fab完整资产或用户原始工程当作普通源码上传。
+A release includes: source commits, pinned dependencies, model provenance, scene content version, resolved profile output, map snapshots, startup instructions, two cold-start evidences, capacity report, and rollback notes. New versions are written to a separate SSD backup directory, verified by manifest, then the "current version" index is updated, without deleting previously accepted versions. The GitHub push scope is confirmed separately later; Fab full assets or the user's original projects must not be uploaded as ordinary source.
 
-## 15. 第一份可验收成果
+## 15. First Acceptable Deliverable
 
-第一份成果不是满配四台，而是：**同一空场内，Go2沿地面行走，UAV在不同高度飞行；两者共同观察一个可移动障碍，该障碍出现时分别裁掉各自相关树枝，移走后分别恢复连接，地图全过程保留；停止后能按同一入口重新拉起。**
+The first deliverable is not four robots at full configuration, but: **in the same empty scene, the Go2 walks on the ground while the UAV flies at different altitudes; both observe one movable obstacle together — when it appears, each prunes its own related tree branches, and after it is removed each restores its connections, with the map preserved throughout; after stopping, everything can be brought back up through the same entry point.**
 
-这条通过后，再验收伙伴避让、SAM3跨相机、第三/第四台，以及Factory复杂场景。每个阶段都保留独立开关与可重复对照，避免故障时只能靠清图或重新启动整个系统。
+After this passes, accept peer avoidance, SAM3 cross-camera, the third/fourth robots, and the complex Factory scene. Every phase keeps independent switches and repeatable controls, so a failure never leaves map-wiping or a full system restart as the only options.
 
-## 16. 主要本机证据与参考
+## 16. Main Local Evidence and References
 
-- [已发布源码的核验边界](/data/robotics/sam3-rgbd-smart3d-navigation/docs/CERTIFICATION.md)
-- [已提取源码与启动器说明](/data/robotics/sam3-rgbd-smart3d-navigation/README.md)
-- [SAM3/OHZ空场连续性记录](/data/robotics/ue58_ohz_test_go2/docs/verification/2026-09-27-ohz-continuity.md)
-- [现有Go2导航配置](/data/robotics/ue58_ohz_test_go2/configs/car1_navigation_profile.json)
-- [二维worker入口](/data/robotics/sam3-rgbd-smart3d-navigation/runtime/native_smart3d/src/main.rs:30)
-- [SMART增量与清空恢复源码](/data/robotics/sam3-rgbd-smart3d-navigation/runtime/native_smart3d/vendor/smart3d_observed/src/smart/smart.rs)
-- [本机三维示例](/data/robotics/smart3d/SMART3D-upstream/examples/smart_multi_agent_3d/main.rs:235)
-- [统一工程蓝图及未完成项](/data/robotics/semantic_smart3d/README.md)
-- [无人机模型包说明](/data/sim/assets/airsim/quadrotor1/1ca93f6f77e4/README.zh-CN.md)
-- [Go2现有运动组件](/data/sim/CARLA_UE58_Research/Carla-ue58/Unreal/CarlaUnreal/Plugins/Carla/Source/Carla/Actor/Go2KinematicMovement.cpp)
-- USB来源：`/media/felix/FeliXFANG/drone1_full_code_backups/drone1_ue5_realtime_mapping_3fab808_20260701_210952/source_worktree`，固定提交 `3fab808af94e0f93f185ed3e605d5f1626a12e63`。
-- 新版UAV分支：`FelixFtch/drone1-ue5-realtime-mapping` 的 `codex/drone1-rolling-local-3d-fallback-20260701`，此前核对到 `e99f32a27e3b8c54ca8b9e394b0b7e46782e2943`；实施时锁定具体提交并复核所选差异。
+- [Verification boundaries of the published source](/data/robotics/sam3-rgbd-smart3d-navigation/docs/CERTIFICATION.md)
+- [Extracted source and launcher notes](/data/robotics/sam3-rgbd-smart3d-navigation/README.md)
+- [SAM3/OHZ empty-scene continuity record](/data/robotics/ue58_ohz_test_go2/docs/verification/2026-09-27-ohz-continuity.md)
+- [Existing Go2 navigation configuration](/data/robotics/ue58_ohz_test_go2/configs/car1_navigation_profile.json)
+- [2D worker entry point](/data/robotics/sam3-rgbd-smart3d-navigation/runtime/native_smart3d/src/main.rs:30)
+- [SMART incremental and clearing recovery source](/data/robotics/sam3-rgbd-smart3d-navigation/runtime/native_smart3d/vendor/smart3d_observed/src/smart/smart.rs)
+- [Local 3D example](/data/robotics/smart3d/SMART3D-upstream/examples/smart_multi_agent_3d/main.rs:235)
+- [Unified project blueprint and unfinished items](/data/robotics/semantic_smart3d/README.md)
+- [UAV model package notes](/data/sim/assets/airsim/quadrotor1/1ca93f6f77e4/README.zh-CN.md)
+- [Existing Go2 motion component](/data/sim/CARLA_UE58_Research/Carla-ue58/Unreal/CarlaUnreal/Plugins/Carla/Source/Carla/Actor/Go2KinematicMovement.cpp)
+- USB source: `/media/felix/FeliXFANG/drone1_full_code_backups/drone1_ue5_realtime_mapping_3fab808_20260701_210952/source_worktree`, pinned commit `3fab808af94e0f93f185ed3e605d5f1626a12e63`.
+- New UAV branch: `codex/drone1-rolling-local-3d-fallback-20260701` of `FelixFtch/drone1-ue5-realtime-mapping`, previously verified at `e99f32a27e3b8c54ca8b9e394b0b7e46782e2943`; pin the exact commit at implementation time and re-review the selected diffs.
 
-本计划只把已查证代码作为复用依据，不将历史日志、文档中的目标或合成benchmark当作新系统已经运行成功的证据。
+This plan treats only verified code as grounds for reuse; historical logs, goals stated in documents, or synthetic benchmarks are not evidence that the new system has already run successfully.

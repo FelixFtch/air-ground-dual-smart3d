@@ -53,13 +53,13 @@ try:
     for existing in actors.get_all_level_actors():
         if existing.get_actor_label().startswith('RICH_'):
             actors.destroy_actor(existing)
-    H, T = 2.6, 0.4          # 墙高/厚
-    # ① 外圈断续回廊(|坐标|=14,四角留 6m 门)
+    H, T = 2.6, 0.4          # wall height/thickness
+    # ① broken outer ring corridor (|coord|=14, 6 m gates left at the four corners)
     wall('ring_N_a', -8, 14, H / 2, 12, T, H, 'red');  wall('ring_N_b', 8, 14, H / 2, 12, T, H, 'red')
     wall('ring_S_a', -8, -14, H / 2, 12, T, H, 'red'); wall('ring_S_b', 8, -14, H / 2, 12, T, H, 'red')
     wall('ring_E_a', 14, -8, H / 2, T, 12, H, 'blue'); wall('ring_E_b', 14, 8, H / 2, T, 12, H, 'blue')
     wall('ring_W_a', -14, -8, H / 2, T, 12, H, 'blue');wall('ring_W_b', -14, 8, H / 2, T, 12, H, 'blue')
-    # ② 两个房间(±20,±20),20x20,每边留 4m 门
+    # ② two rooms (±20,±20), 20x20, 4 m door gap on each side
     for cx, cy, mat in ((-20, -20, 'yellow'), (20, 20, 'yellow')):
         for side in ('N', 'S', 'E', 'W'):
             gap = 4
@@ -71,18 +71,18 @@ try:
                 sx, sx2 = cx + 10, cx - 10
                 wall(f'room{cx}_{side}L', sx if side == 'E' else sx2, cy - 6, H / 2, T, 8, H, mat)
                 wall(f'room{cx}_{side}R', sx if side == 'E' else sx2, cy + 6, H / 2, T, 8, H, mat)
-    # 房间内隔断(错开门缝)
+    # interior room partitions (door gaps offset)
     wall('roomNW_div', -20, -20, H / 2, T, 12, H, 'red')
     wall('roomSE_div', 20, 20, H / 2, T, 12, H, 'blue')
-    # ③ 四根立柱
+    # ③ four pillars
     for x, y, mat in ((12, 12, 'red'), (-12, 12, 'blue'), (12, -12, 'blue'), (-12, -12, 'red')):
         wall(f'pillar_{x}_{y}', x, y, H / 2, 1.2, 1.2, H, mat)
-    # ④ 高空横梁(UAV 上界 3.2m,梁底 3.4m)
+    # ④ overhead beams (UAV ceiling 3.2 m, beam bottom 3.4 m)
     wall('beam_NS', 0, 0, 5.0, 0.6, 16, 0.4, 'blue')
     wall('beam_EW', -6, 6, 5.0, 16, 0.6, 0.4, 'red')
     assert unreal.EditorLoadingAndSavingUtils.save_current_level(), 'save failed'
     report['saved'] = True
-    # 保存后重载验证
+    # reload after save to verify persistence
     assert unreal.EditorLoadingAndSavingUtils.new_blank_map(False)
     world = unreal.EditorLoadingAndSavingUtils.load_map(TARGET)
     labels = {a.get_actor_label() for a in unreal.get_editor_subsystem(

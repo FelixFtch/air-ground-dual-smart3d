@@ -1,40 +1,40 @@
-# 40 米清障：真实射线覆盖与旧表面正证据恢复
+# 40 m clearing: real-ray coverage and positive-evidence recovery of old surfaces
 
-2026-09-29。仅修改独立 air_ground_smart3d 实验；没有修改 Town10、Factory、UE 场景、相机、SAM3 频率、移动速度、概率参数或规划参数。用户不希望新建传感器录制／回放工作，本轮只做独立合成回归和短时只读运行指标核验，未保存新原始图像/点云序列。
+2026-09-29. Only the isolated air_ground_smart3d experiment was modified; Town10, Factory, the UE scene, cameras, SAM3 frequency, motion speed, probability parameters, and planning parameters were not changed. The user did not want new sensor recording/playback work, so this round only did isolated synthetic regressions and a short read-only runtime metrics check; no new raw image/point-cloud sequences were saved.
 
-## 已确认与修复
+## Confirmed and fixed
 
-1. 运行中的双机清除范围早已恢复 40 m，首次标记仍为 9 m。此前残留不能归咎于未恢复 YAML。
-2. 原 helper 按终点体素去重。不同实际射线可以共享终点格但经过不同中间格；丢弃其中一条会漏掉真实清空证据。现在仅去掉完全相同端点，近距 hit 射线与远距 free 射线都保留。原生 mapper 遍历后对 hit/free keys 去重，每帧每格仍只更新一次。
-3. 原 far-hit 只能保护当前 occupied，无法恢复曾被误清的旧表面。现在独立记录真实近距命中历史：9 m 内首次建障碍；9–40 m 真实回波可以给曾建过的位置增加正常 hit 正证据，包含 free→occupied。free-only 历史不能升级为已标记历史；远处从未建过的格不新增。
-4. 后续真实 free 仍能清除这些格；不加 TTL、永久保护区或 UE 人物真值。forget 清除历史；新快照保存历史；旧快照仅以当前 occupied 保守迁移，已清空旧格必须重新近距观察才能获得历史资格。
+1. The running dual-robot clearing range had already been restored to 40 m, with first marking still at 9 m. Earlier residue cannot be blamed on unrestored YAML.
+2. The original helper deduplicated by endpoint voxel. Different actual rays can share the endpoint cell yet pass through different intermediate cells; dropping one loses real clearing evidence. Now only fully identical endpoints are removed, keeping both close-range hit rays and far-range free rays. The native mapper deduplicates hit/free keys after traversal, so each cell is still updated at most once per frame.
+3. The original far-hit could only protect current occupancy and could not recover old surfaces once wrongly cleared. Real close-range hit history is now recorded separately: first obstacle marking within 9 m; real echoes at 9–40 m can add normal positive hit evidence to previously established positions, including free→occupied. Free-only history cannot be upgraded to marked history; distant cells never established gain nothing.
+4. Later real free can still clear these cells; no TTL, permanent protection zones, or UE person ground truth are added. forget clears the history; new snapshots save the history; old snapshots migrate conservatively with current occupancy only, and old cleared cells must be re-observed close-up to regain history eligibility.
 
-## 验证与部署
+## Verification and deployment
 
-- 全套 Python 回归 417 passed；包括真实 OctoMap 子进程、近远射线遗漏复现、同帧 hit 优先、双机乱序、重复帧、恢复与 forget。
-- 已部署原生二进制 SHA256：55431a0e1b37446fa37bf1b4209edfdc3df1b8d4b7b7dff6e29b2c57dacf43f7。已读运行进程 /proc/PID/exe 核对，非仅磁盘文件。
-- 新 epoch：4eae8624f29d4bfcb7bdc8ce0f1413ad。旧地图保留 1,032,354 格，原机器人位姿/巡航进度按 stopped checkpoint 恢复。UE PID 774790、ROS view、RViz 均未重启。
-- 运行指标已报告 ray_geometry_policy=all_distinct_measured_rays、clear_range_m=40、实际 recovered_far_hit_cells。旧 profile 的 mapping_sampling 描述字符串仍为历史标签，不参与执行；实际执行以该新指标和代码为准，本轮未为改说明字符串改变 profile hash。
+- Full Python regression: 417 passed; including a real OctoMap subprocess, near/far ray-omission reproduction, same-frame hit priority, dual-robot out-of-order, duplicate frames, recovery, and forget.
+- Deployed native binary SHA256: 55431a0e1b37446fa37bf1b4209edfdc3df1b8d4b7b7dff6e29b2c57dacf43f7. Verified via the running process's /proc/PID/exe, not just the disk file.
+- New epoch: 4eae8624f29d4bfcb7bdc8ce0f1413ad. The old map retains 1,032,354 cells; original robot poses/patrol progress restored from the stopped checkpoint. UE PID 774790, ROS view, and RViz were not restarted.
+- Runtime metrics reported ray_geometry_policy=all_distinct_measured_rays, clear_range_m=40, and actual recovered_far_hit_cells. The old profile's mapping_sampling description string remains a historical label with no part in execution; actual behavior is governed by the new metrics and code, and the profile hash was not changed this round just to reword a description.
 
-45 秒非受控现场抽样：
+45-second uncontrolled field sample:
 
-| 指标 | Go2 | UAV |
+| Metric | Go2 | UAV |
 |---|---:|---:|
-| 接收 LiDAR Hz | 10.03 | 10.03 |
-| 融合 LiDAR Hz | 3.57 | 3.57 |
-| 拍摄至地图应用平均/95分位 | 0.132 / 0.302 s | 0.176 / 0.344 s |
-| 行程增量 | 41.40 m | 17.85 m |
-| 终点树节点 | 4983 | 4389 |
+| Received LiDAR Hz | 10.03 | 10.03 |
+| Fused LiDAR Hz | 3.57 | 3.57 |
+| Capture-to-map-apply mean / 95th percentile | 0.132 / 0.302 s | 0.176 / 0.344 s |
+| Distance traveled | 41.40 m | 17.85 m |
+| Tree nodes at end | 4983 | 4389 |
 
-抽样 9 处 SAM3 人物附近初始 occupied 格，全部在抽样后 0.19–3.06 s 曾清空，结束时也为 0；这是这些区域的结果，不是全场无残留保证，也不是精确的“人离开至清空”延迟。SAM3 ROI 可能不完整、关联可能变化。地图新增 586 个 revision，地图/感知/规划异常为空。双机都有正常行走，UAV 部分时间因真实几何/OHZ约束等待，不把等待时段删掉以夸大速度。
+Of 9 sampled areas near SAM3 persons with initial occupied cells, all had been cleared 0.19–3.06 s after sampling and were also 0 at the end; this is a result for these areas, not a whole-field no-residue guarantee, nor a precise "person-left-to-cleared" latency. SAM3 ROIs may be incomplete and associations may change. The map added 586 revisions; map/perception/planning anomalies were empty. Both robots walked normally, and the UAV waited at times due to real geometry/OHZ constraints; waiting periods were not removed to exaggerate speed.
 
-静态梁评分 ROI 在这段检查中占用 63–125 格，结束 100 格，仍有变化。评分 ROI 来自场景已知几何，仅用于核对；没有进入 mapper 或规划输入。
+The static-beam scoring ROI occupied 63–125 cells during this check, 100 at the end, still fluctuating. The scoring ROI comes from known scene geometry and is for checking only; it never entered the mapper or planning inputs.
 
-## 明确保留的限制
+## Explicitly retained limitations
 
-- 本次修掉遗漏射线和远距正负证据不对称，不宣称已解决所有拖影或稀疏射线的表面混叠。
-- 25 cm 格内“某处有实体”与“另一条射线穿过该格空隙”仍可能同时成立。当前一条 miss 可以翻转占用；细梁可能继续跨帧闪烁，不能靠调整40/15 m或普通概率权重根治。
-- 缺失回波不等于自由空间；没被可靠重新观测的位置不能凭空标 free。若要进一步处理，需要有明确测量足迹的细分表面/连续传感器模型，不能把真实静态障碍按时间全部删掉。
-- 远距恢复会允许“历史近距确实命中过的位置”在远处被新真实物体重新占用；这是一项明确的更新策略变化，不等于所有历史free空间都能远程新建障碍。
+- This round fixed omitted rays and the far-range positive/negative evidence asymmetry; it does not claim all trailing ghosts or sparse-ray surface aliasing are solved.
+- Within a 25 cm cell, "solid somewhere in the cell" and "another ray passes through the cell's gap" can still hold simultaneously. A single miss can currently flip occupancy; thin beams may keep flickering across frames, which cannot be cured by tuning 40/15 m or ordinary probability weights.
+- Missing echoes are not free space; positions not reliably re-observed cannot be marked free out of thin air. Going further would need subdivided-surface / continuous sensor models with an explicit measurement footprint; real static obstacles must not be deleted wholesale over time.
+- Far-range recovery allows positions "with a real historical close-range hit" to be re-occupied at distance by new real objects; this is an explicit update-policy change and does not mean all historical free space can remotely create new obstacles.
 
-备份与部署清单：/data/robotics/air_ground_smart3d/runtime/deployment_backups/2026-09-29-ray-evidence-193838。
+Backup and deployment manifest: /data/robotics/air_ground_smart3d/runtime/deployment_backups/2026-09-29-ray-evidence-193838.

@@ -1,167 +1,167 @@
-# 双机共享 OctoMap＋SAM3 稳定参数记录
+# Dual-robot shared OctoMap + SAM3 stable parameter record
 
-记录日期：2026-09-29。对应用户确认“现在参数挺好、很流畅，加入 SAM3 后也快很多”的运行版本。本轮仅只读测量、保存参数和评估提速方向，未调整参数、重启服务或重建地图/树。
+Record date: 2026-09-29. Corresponds to the running version the user confirmed as "the parameters are good now, very smooth, and much faster after adding SAM3". This round only did read-only measurement, parameter saving, and speed-up direction assessment; no parameters were adjusted, no services restarted, no map/trees rebuilt.
 
-这是**配置、源码身份与性能证据基线**，不是包含 UE 资产、权重和当前地图的整套备份。冷启动可以复用配置，不能保证随机树、瞬时障碍和性能数字完全相同。
+This is a **configuration, source-identity, and performance-evidence baseline**, not a full backup including UE assets, weights, and the current map. A cold start can reuse the configuration, but identical random trees, transient obstacles, and performance numbers are not guaranteed.
 
-## 1. 项目与运行身份
+## 1. Project and run identity
 
-| 项目 | 当前值 |
+| Item | Current value |
 |---|---|
-| 程序 | `/data/robotics/air_ground_smart3d` |
-| UE 工程 | `/data/sim/AirGroundLab_UE58/CarlaUnreal/CarlaUnreal.uproject` |
-| 关卡 | `/Game/AirGroundLab/Maps/AirGroundLab_Main` |
-| 场景身份 | `air_ground_lab_v1`；内容版本 `2026-09-29-v2-calibrated` |
-| 当前运行 epoch | `1ddaeeef8d1848909e9161e65dbba5ad` |
+| Program | `/data/robotics/air_ground_smart3d` |
+| UE project | `/data/sim/AirGroundLab_UE58/CarlaUnreal/CarlaUnreal.uproject` |
+| Level | `/Game/AirGroundLab/Maps/AirGroundLab_Main` |
+| Scene identity | `air_ground_lab_v1`; content version `2026-09-29-v2-calibrated` |
+| Current run epoch | `1ddaeeef8d1848909e9161e65dbba5ad` |
 | Profile hash | `c7bb2aef1b98c82e3db2b82fcffd1bb9af0f62e6779adb74af0462f34e38be59` |
-| CARLA / ROS | 端口 2400 / domain 45 |
-| UE 运行 | UE5.8，`-game -RenderOffScreen`，无音频，帧率上限 30，1280×800 |
-| 渲染池 | Texture streaming 1800 MiB；Nanite streaming 512 MiB |
-| 仿真时钟 | 异步世界；传感器保留采集帧和仿真时间 |
-| 人流 | 6 人；配置速度 0.5/0.7/0.9/1.0/1.2/1.4 m/s |
-| 视觉推理 | SAM3 开；本双机实验没有另开 YOLO、Qwen 或新网页控制台 |
+| CARLA / ROS | port 2400 / domain 45 |
+| UE run | UE5.8, `-game -RenderOffScreen`, no audio, frame rate cap 30, 1280×800 |
+| Render pools | Texture streaming 1800 MiB; Nanite streaming 512 MiB |
+| Simulation clock | Asynchronous world; sensors keep capture frame and simulation time |
+| Pedestrian flow | 6 people; configured speeds 0.5/0.7/0.9/1.0/1.2/1.4 m/s |
+| Visual inference | SAM3 on; this dual-robot experiment does not additionally run YOLO, Qwen, or a new web console |
 
-旧 Town10、Factory、单 Go2 空场工程保持独立。启动/停止顺序见项目根目录 `README.md`；`./lab start --rviz` 会拉起本实验，`./lab stop` 只管理本实验自有服务。默认冷启动重新观测地图；恢复指定 `.ot` 要显式使用 `--resume-map`，旧自由空间需重新观测。
+The old Town10, Factory, and single-Go2 empty-scene projects remain independent. See the project root `README.md` for start/stop order; `./lab start --rviz` brings up this experiment, and `./lab stop` manages only this experiment's own services. A default cold start re-observes the map; restoring a specific `.ot` requires an explicit `--resume-map`, and old free space must be re-observed.
 
-## 2. 共享地图、几何与执行
+## 2. Shared map, geometry, and execution
 
-| 参数 | 值 |
+| Parameter | Value |
 |---|---|
-| 体素 | 真实 OctoMap，0.25 m |
-| 地图范围 | X/Y 各 −30～30 m，Z −0.5～8 m；60×60×8.5 m |
-| UAV 规划范围 | X/Y 各 −20～20 m；高度 0.8～6 m |
-| 坐标转换 | map x=CARLA x，map y=−CARLA y，map z=CARLA z−0.22 m |
-| 测得地面 | CARLA Z≈0.20125 m；map Z≈−0.01875 m |
-| 占用概率 | hit=0.9，miss=0.1，clamp=0.12～0.88 |
-| 障碍记录/清除 | LiDAR 9 m 内标记；有效实测射线最远清除 40 m；物理量程 45 m |
-| 时间处理 | 严格按采集时间应用，旧帧不能覆盖新证据；同一时刻命中优先 |
-| 空闲保留 | 不按 TTL 自动清墙；已知空闲保留，直到新占用证据出现 |
-| 未知区域 | 可有候选树，实际近端运动必须通过已知空闲与碰撞检查 |
-| 执行检查 | 近端 0.4 m；本机已融合 LiDAR 最大年龄 1.2 s；规划结果最大年龄 3 s |
-| 合作机器人 | 本体/伙伴点从共享地图过滤，双方真实位置及机身包络作为临时避碰约束 |
+| Voxels | Real OctoMap, 0.25 m |
+| Map extent | X/Y each −30 to 30 m, Z −0.5 to 8 m; 60×60×8.5 m |
+| UAV planning extent | X/Y each −20 to 20 m; altitude 0.8–6 m |
+| Coordinate transform | map x=CARLA x, map y=−CARLA y, map z=CARLA z−0.22 m |
+| Measured ground | CARLA Z≈0.20125 m; map Z≈−0.01875 m |
+| Occupancy probabilities | hit=0.9, miss=0.1, clamp=0.12–0.88 |
+| Obstacle marking/clearing | LiDAR marks within 9 m; valid measured rays clear up to 40 m; physical range 45 m |
+| Time handling | Applied strictly by capture time; old frames cannot overwrite newer evidence; hits take priority at the same time |
+| Free retention | No TTL-based auto wall clearing; known free space is kept until new occupancy evidence appears |
+| Unknown regions | Candidate trees allowed; actual near-robot motion must pass known-free and collision checks |
+| Execution checks | Near end 0.4 m; max age of locally fused LiDAR 1.2 s; max age of planning results 3 s |
+| Cooperative robots | Self/partner points filtered from the shared map; both sides' real positions and body envelopes act as temporary collision-avoidance constraints |
 
-这里 hit/miss 的快速翻转针对当前零噪声仿真，尚不是经过真机验证的参数。远处实际命中表面不会冒充自由空间；无回波不会制造清理射线。没有被有效射线重新穿过的遮挡区域不会凭空消失。
+The fast hit/miss flipping here targets the current zero-noise simulation and is not yet a real-robot-validated parameter. Distant actually hit surfaces do not pass themselves off as free space; missing echoes do not fabricate clearing rays. Occluded regions not re-crossed by valid rays do not vanish into thin air.
 
-## 3. 两机运动与巡航路线
+## 3. Robot motion and patrol routes
 
-| 参数 | Go2 | Fighter UAV |
+| Parameter | Go2 | Fighter UAV |
 |---|---|---|
-| 身份 | `go2_01` / `go2_ground_v1` | `uav_01` / `fighter_uav_v1` |
-| 移动/规划维度 | XY＋yaw；二维 SMART | XYZ＋yaw；真正三维 SMART |
-| 外观缩放 | 1 | 0.35 |
-| 规划机身半尺寸 | (0.43,0.43,0.28) m | (0.70,0.70,0.36) m |
-| 最高平移速度 | 2 m/s | 1.5 m/s |
-| 加速度 | 2 m/s² | 1.2 m/s² |
-| 最高转速 | 1 rad/s（约57.3°/s） | 0.8 rad/s（约45.8°/s） |
-| 到达容差 | 0.55 m | 0.60 m |
-| 高度 | 固定 map Z=0.33 m，平地支撑检查关 | 0.8～6 m |
-| 起点 | (−8,−8,0.33) | (−8,−3,2) |
+| Identity | `go2_01` / `go2_ground_v1` | `uav_01` / `fighter_uav_v1` |
+| Motion/planning dimensions | XY + yaw; 2D SMART | XYZ + yaw; truly 3D SMART |
+| Appearance scale | 1 | 0.35 |
+| Planning body half-size | (0.43,0.43,0.28) m | (0.70,0.70,0.36) m |
+| Max translation speed | 2 m/s | 1.5 m/s |
+| Acceleration | 2 m/s² | 1.2 m/s² |
+| Max rotation rate | 1 rad/s (about 57.3°/s) | 0.8 rad/s (about 45.8°/s) |
+| Arrival tolerance | 0.55 m | 0.60 m |
+| Height | Fixed map Z=0.33 m, flat-ground support check off | 0.8–6 m |
+| Start point | (−8,−8,0.33) | (−8,−3,2) |
 
-规划半尺寸是保守净空包络，不应当作网格模型实测长宽。UAV UE 实体碰撞半尺寸为 (0.48,0.48,0.34) m，规划 XY 额外覆盖转向扫过范围。Go2 不提供楼梯步态，UAV 为运动学飞行。
+The planning half-sizes are conservative clearance envelopes and should not be treated as measured mesh-model dimensions. The UAV's UE entity collision half-size is (0.48,0.48,0.34) m; planning XY additionally covers the steering sweep. The Go2 provides no stair gait; the UAV flies kinematically.
 
-Go2 循环巡航：`(−8,−8,0.33) → (8,−8,0.33) → (8,8,0.33) → (−8,8,0.33)`。
+Go2 cyclic patrol: `(−8,−8,0.33) → (8,−8,0.33) → (8,8,0.33) → (−8,8,0.33)`.
 
-UAV 循环巡航：`(8,−3,2) → (8,7,3.2) → (−8,7,2) → (−8,−3,2)`。
+UAV cyclic patrol: `(8,−3,2) → (8,7,3.2) → (−8,7,2) → (−8,−3,2)`.
 
-路径跟随前视 0.7 m；朝向误差≥0.65 rad（约37°）时原地转向，其余按 cos(误差) 降速。控制随 UE tick 执行，dt 限制 1～75 ms。上述速度是上限，绕障/转弯/等待时会更慢。
+Path-following lookahead 0.7 m; rotate in place when heading error ≥0.65 rad (about 37°), otherwise slow down by cos(error). Control runs per UE tick with dt limited to 1–75 ms. The speeds above are upper bounds; obstacle avoidance/turning/waiting is slower.
 
-## 4. 传感器与融合
+## 4. Sensors and fusion
 
-| 参数 | Go2 | UAV |
+| Parameter | Go2 | UAV |
 |---|---|---|
-| LiDAR | 96 线，192000 点/秒，10 Hz，45 m，噪声0 | 相同 |
-| 垂直视场 | −75～45° | −85～75° |
-| LiDAR 安装平移 | (0,0,0.7) m | (0,0,0.4) m |
-| LiDAR 入图目标 | 各5 Hz；每个实际命中体素保留真实代表端点 | 相同 |
-| 前向 RGB-D | 640×360，FOV100°，每 UE 帧采集 | 相同 |
-| 前向相机安装平移 | (0.5,0,0.4) m | (0.5,0,0) m |
-| 前向深度入图目标 | 2 Hz，6 m，stride20 | 相同 |
-| 辅助深度 | 无 | 六向96×96，FOV150°，采集5 Hz |
-| 辅助深度入图目标 | — | 每向约0.667 Hz，3 m，stride3 |
+| LiDAR | 96 channels, 192000 points/s, 10 Hz, 45 m, zero noise | Same |
+| Vertical FOV | −75 to 45° | −85 to 75° |
+| LiDAR mount translation | (0,0,0.7) m | (0,0,0.4) m |
+| LiDAR mapping target | 5 Hz each; every actually hit voxel keeps a real representative endpoint | Same |
+| Forward RGB-D | 640×360, FOV100°, captured every UE frame | Same |
+| Forward camera mount translation | (0.5,0,0.4) m | (0.5,0,0) m |
+| Forward depth mapping target | 2 Hz, 6 m, stride20 | Same |
+| Auxiliary depth | None | Six directions 96×96, FOV150°, captured at 5 Hz |
+| Auxiliary depth mapping target | — | About 0.667 Hz per direction, 3 m, stride3 |
 
-具体六向安装姿态见同目录 `profiles/sensors/uav_rgbd_lidar.yaml`。融合采用最新帧与公平调度、有界流水线，不排队处理大量过时帧；目标频率不保证在联合负载下达到。
+See `profiles/sensors/uav_rgbd_lidar.yaml` in the same directory for the exact six-direction mount poses. Fusion uses latest-frame with fair scheduling and a bounded pipeline; it does not queue large numbers of stale frames. Target rates are not guaranteed under combined load.
 
-## 5. SAM3、人物速度与 OHZ
+## 5. SAM3, person velocity, and OHZ
 
-| 参数 | 当前值 |
+| Parameter | Current value |
 |---|---|
-| 模型 | `facebook/sam3`，revision `3c879f39826c281e95690f02c7821c4de09afae7` |
-| 推理 | Transformers Sam3VideoModel；CUDA BF16，非量化，SDPA |
-| 实例 | 一个共享权重模型，两个独立视频 session；文本查询 `person` |
-| 输入发布 | 每机最多3 Hz，完整640×360同帧配准 RGB-D，照片包最多保留8份 |
-| 服务处理上限 | **总计2 Hz**；两相机轮流，约各1 Hz |
-| 视频记忆 | 每session最多16对象；每16帧重检测；非条件历史128帧；每对象最多4个条件帧；丢失轨迹清退策略30 s |
-| 人物位置 | 每mask最多2048深度点，0.3～15 m有效深度；用拍摄位姿转换至map |
-| 估速 | 同源至少4次有效观测；最多6点、4.5 s窗口；连续间隔≤1.5 s |
-| 算法 | XY位置成对斜率的中位数；最大速度3 m/s、残差阈值0.6 m；无卡尔曼滤波 |
-| 未估计内容 | Z速度不可靠/不估；不读取 UE 行人的方向或速度作为输入 |
-| 几何有效期 | 2 s；最多外推1 s，与视频跟踪丢失保留30 s不同 |
-| OHZ | 预测时域1 s；Go2二维椭圆，UAV三维椭球；含各自机身包络 |
-| 误差先验 | 位置余量0.15 m；可见人物范围上下各补0.85 m，**尚未实验校准** |
-| 合作本体过滤 | 同帧两机器人 OBB＋0.08 m；过滤后平面残余垂直跨度<0.05 m时拒绝 |
+| Model | `facebook/sam3`, revision `3c879f39826c281e95690f02c7821c4de09afae7` |
+| Inference | Transformers Sam3VideoModel; CUDA BF16, non-quantized, SDPA |
+| Instances | One shared-weight model, two independent video sessions; text query `person` |
+| Input publishing | Up to 3 Hz per robot, full 640×360 same-frame registered RGB-D, at most 8 photo packages kept |
+| Service processing cap | **2 Hz total**; the two cameras alternate, about 1 Hz each |
+| Video memory | Up to 16 objects per session; re-detection every 16 frames; unconditional history 128 frames; up to 4 condition frames per object; lost-track retirement policy 30 s |
+| Person position | Up to 2048 depth points per mask, 0.3–15 m valid depth; transformed to map with the capture pose |
+| Velocity estimation | At least 4 valid same-source observations; up to 6 points, 4.5 s window; consecutive gap ≤1.5 s |
+| Algorithm | Median of pairwise slopes of XY positions; max speed 3 m/s, residual threshold 0.6 m; no Kalman filter |
+| Not estimated | Z velocity unreliable/not estimated; UE pedestrian heading or speed is not read as input |
+| Geometry validity | 2 s; extrapolation at most 1 s, unlike the 30 s lost-video-track retention |
+| OHZ | Prediction horizon 1 s; Go2 2D ellipse, UAV 3D ellipsoid; includes each body envelope |
+| Error priors | Position margin 0.15 m; visible-person range padded 0.85 m above and below, **not yet experimentally calibrated** |
+| Cooperative body filtering | Same-frame both-robot OBB + 0.08 m; rejected when the residual planar vertical span after filtering is <0.05 m |
 
-没有可靠速度时使用无方向扩张，不能将其解释成已经测出人物移动。OHZ 与 RViz 使用同一份实际规划约束；合作机器人避碰仍保留。
+Without a reliable velocity, directionless dilation is used and must not be interpreted as measured person motion. OHZ and RViz use the same actual planning constraints; cooperative robot collision avoidance is retained.
 
-注意：team YAML 中 `shared_model_inference:false` 是当前运行代码未读取的陈旧字段，实际状态明确为 `shared_model_instances=1`、两个 session。本轮保留原文件并记录差异，没有静默修改。
+Note: `shared_model_inference:false` in the team YAML is a stale field the currently running code does not read; the actual state is explicitly `shared_model_instances=1` with two sessions. This round keeps the original file and records the discrepancy rather than silently modifying it.
 
-## 6. SMART3D 与展示
+## 6. SMART3D and display
 
-| 参数 | 当前值 |
+| Parameter | Current value |
 |---|---|
-| 核心 | LINKS Rust `SMART<f32,2>` / `SMART<f32,3>`；来源见 `planning/CORE_PROVENANCE.json` |
-| 初始化 | Go2最多5000迭代，UAV最多7000迭代；各1500 ms预算，先到者止；迭代数不是节点数 |
-| 更新目标 | 每机0.4 s一轮 |
-| 局部修树预算 | 3000迭代或50 ms；裁树、改根、收尾检查及导出不算在50 ms内 |
-| LRZ | 两机均4 m |
-| 清障恢复 | 每轮64区域 / 512节点 / 64连接 / 10 ms限额 |
-| 空地补树 | 每轮最多64尝试、8新节点、10 ms |
-| 状态快照 | 5 Hz目标 |
-| RViz | 位姿/路径10 Hz轮询，地图5 Hz，树2 Hz，相机5 Hz，点云10 Hz |
-| 树显示 | 连通边宽0.025 m、alpha0.35；断开边0.02 m、alpha0.20 |
-| Marker寿命 | 3 s；首次DELETEALL，后续仅删除消失ID/更新现存项 |
-| 显示限额 | 点云每帧最多5000点；体素100000；树边30000；不截断底层地图输入 |
+| Core | LINKS Rust `SMART<f32,2>` / `SMART<f32,3>`; provenance in `planning/CORE_PROVENANCE.json` |
+| Initialization | Go2 up to 5000 iterations, UAV up to 7000; 1500 ms budget each, whichever comes first; iterations are not node counts |
+| Goal update | One round every 0.4 s per robot |
+| Local tree-repair budget | 3000 iterations or 50 ms; tree pruning, re-rooting, final checks, and export are not counted in the 50 ms |
+| LRZ | 4 m for both robots |
+| Clearing recovery | Per round 64 regions / 512 nodes / 64 connections / 10 ms cap |
+| Free-space tree patching | Up to 64 attempts, 8 new nodes, 10 ms per round |
+| State snapshot | 5 Hz target |
+| RViz | Pose/path polled at 10 Hz, map 5 Hz, tree 2 Hz, camera 5 Hz, point cloud 10 Hz |
+| Tree display | Connected edges width 0.025 m, alpha 0.35; disconnected edges 0.02 m, alpha 0.20 |
+| Marker lifetime | 3 s; DELETEALL on first pass, afterwards only disappeared IDs are deleted / existing items updated |
+| Display limits | Point cloud at most 5000 points per frame; voxels 100000; tree edges 30000; underlying map input not truncated |
 
-本实验直接对共享体素做机身净空检查，没有额外启动 Nav2；RViz 的二维投影不等于另一套 Nav2 costmap。树可进入未知区域，执行端独立检查近端可通行性。
+This experiment does body clearance checks directly against the shared voxels; no separate Nav2 is started. The RViz 2D projection is not another Nav2 costmap. Trees may enter unknown regions; the execution side independently checks near-robot traversability.
 
-## 7. 本轮实测
+## 7. Measurements this round
 
-测量均为既有文件/计数器的只读抽样，没有新增 CARLA 传感器监听。
+All measurements are read-only samples of existing files/counters; no new CARLA sensor listeners were added.
 
-约49.86秒样本：
+About 49.86-second sample:
 
-| 指标 | Go2 | UAV |
+| Metric | Go2 | UAV |
 |---|---:|---:|
-| LiDAR接收 | 10.03 Hz | 10.03 Hz |
-| LiDAR实际入图 | **3.07 Hz** | **3.09 Hz** |
-| 前向深度实际入图 | 1.22 Hz | 1.20 Hz |
-| 最新融合雷达的年龄均值 / P95 | 0.411 / 0.675 s | 0.477 / 0.783 s |
-| 期间移动距离 | 38.92 m | 21.59 m |
-| 期间完成巡航点 | 2 | 2 |
+| LiDAR received | 10.03 Hz | 10.03 Hz |
+| LiDAR actually mapped | **3.07 Hz** | **3.09 Hz** |
+| Forward depth actually mapped | 1.22 Hz | 1.20 Hz |
+| Latest fused LiDAR age mean / P95 | 0.411 / 0.675 s | 0.477 / 0.783 s |
+| Distance moved during period | 38.92 m | 21.59 m |
+| Patrol points completed during period | 2 | 2 |
 
-RGB回调约20.6 Hz；这不是独立测得的 UE 渲染FPS。辅助深度各约0.44 Hz实际入图。显示快照年龄平均0.062 s、P95 0.248 s；不能把这个数当成雷达入图延迟或人体清除延迟。样本地图约96.5万已观测体素。该50秒采样器未记录 `people_error`，其 `errors=[]` 不能证明整段人物管线没有异常。
+RGB callback about 20.6 Hz; this is not an independently measured UE rendering FPS. Auxiliary depth actually mapped at about 0.44 Hz each. Display snapshot age mean 0.062 s, P95 0.248 s; this number must not be taken as LiDAR mapping latency or person clearing latency. The sampled map has about 965 thousand observed voxels. The 50-second sampler did not record `people_error`; its `errors=[]` does not prove the person pipeline had no anomalies over the whole period.
 
-后续约19.67秒SAM3/规划抽样：SAM3各0.915/0.966帧每秒；模型推理均值229/256 ms，含周边处理的每轮感知均值323/338 ms。抽到的不同规划结果平均耗时Go2约379 ms、UAV约989 ms，最大554/1724 ms；这是一秒一次采样的结果子集，**不是所有规划调用的无偏分布**。清障待处理区域末次约1.38万/2.90万，需进一步区分重复区域与真实待恢复工作。
+Follow-up ~19.67-second SAM3/planning sample: SAM3 at 0.915/0.966 frames per second each; model inference mean 229/256 ms, per-round perception including surrounding processing mean 323/338 ms. Sampled distinct planning results averaged about 379 ms for Go2 and about 989 ms for UAV, max 554/1724 ms; this is a subset sampled once per second and **not an unbiased distribution of all planning calls**. Pending clearing regions at the last sample were about 13.8k/29.0k; further work is needed to separate repeated regions from genuinely pending recovery.
 
-硬件瞬时读数随场景变化：两次显存约12.4～12.9 GiB（总约24 GiB），GPU计算占用44～58%；内存可用约21.6～27.7 GiB。不是压力峰值，不能据此保证增加几台机器人。精确后次硬件时间戳及服务占用见 `live-sample.json`。
+Hardware instantaneous readings vary with the scene: two readings showed about 12.4–12.9 GiB VRAM (of about 24 GiB total), GPU compute utilization 44–58%; available memory about 21.6–27.7 GiB. These are not stress peaks and cannot guarantee adding several more robots. Precise hardware timestamps per pass and service usage are in `live-sample.json`.
 
-偶发待查：本运行历史曾出现7条人物尺寸校验错误事件 `person visible half extents outside [0,5]`；专门约29.7秒抽查与后续约19.7秒样本均未复现。未捕获坏记录，尚不能判断数值误差还是异常深度范围，不能宣布已根治。证据见 `people-bounds-check.json`。
+Sporadic item pending investigation: this run's history had 7 person-size validation error events `person visible half extents outside [0,5]`; a dedicated ~29.7-second spot check and the later ~19.7-second sample did not reproduce them. No bad record was captured, so numeric error versus abnormal depth range cannot yet be determined, and it cannot be declared cured. Evidence in `people-bounds-check.json`.
 
-## 8. 提速建议：按优先级做独立对照
+## 8. Speed-up suggestions: independent comparisons in priority order
 
-1. **先优化规划器的重复工作。** 当前delta仍会复制约96万体素，并在更新中遍历完整树做检查/导出；50 ms局部修树预算不能代表总成本。先加clone/diff/prune/export分段计时，再考虑事务式增量地图、受影响边索引与清障区域去重/合并。碰撞正确性及最终路径校验必须保持。
-2. **拆开高频状态与整树快照。** 位姿、路径保持现有更新率，完整树按变化版本缓存并按显示节奏输出，避免每次规划/每秒5次状态写入都重复搬整棵树。验证地图/路径/树的版本一致性及消失边删除后再上线。
-3. **再做传感器/模型频率的单变量实验。** 当前前向RGB-D每UE帧生成，而建图实际约1.2 Hz、SAM3每机约1 Hz，可测试同步RGB/深度10 Hz采集是否节省UE开销；若人物响应仍需加快，再单独试SAM3总2→3 Hz。当前含周边处理平均已约0.33 s，3 Hz可能接近服务预算，必须看尾延迟和其他管线，不承诺提升。
+1. **Optimize the planner's repeated work first.** The current delta still copies about 960 thousand voxels and traverses the full tree for checks/export during updates; the 50 ms local tree-repair budget does not represent total cost. Add staged clone/diff/prune/export timing first, then consider a transactional incremental map, an affected-edge index, and clearing-region dedup/merging. Collision correctness and final path validation must be kept.
+2. **Split high-frequency state from full-tree snapshots.** Poses and paths keep current update rates; the full tree is cached by changed version and output at the display cadence, avoiding moving the whole tree on every plan / every 5 Hz state write. Verify map/path/tree version consistency and disappearing-edge deletion before going live.
+3. **Then run single-variable sensor/model frequency experiments.** The forward RGB-D is currently generated every UE frame while mapping actually runs at about 1.2 Hz and SAM3 at about 1 Hz per robot; test whether synchronized RGB/depth capture at 10 Hz saves UE cost. If person response still needs to be faster, then separately try SAM3 total 2→3 Hz. The current per-round average including surrounding processing is already about 0.33 s; 3 Hz may be near the service budget — tail latency and the other pipelines must be examined; no improvement is promised.
 
-当前暂不提高机器人行驶速度，不缩9/40 m观测范围，不降低体素精度，不通过减少碰撞检查获得更高频率。阴影/体积光/后处理只有在证据显示UE渲染受限时再做质量对照；GPU没有满载并不等于没有CPU、序列化或单线程瓶颈。
+For now, robot driving speed is not raised, the 9/40 m observation range is not shrunk, voxel precision is not lowered, and higher frequencies are not obtained by reducing collision checks. Shadows/volumetric light/post-processing will get quality comparisons only if evidence shows UE rendering is the limiter; a GPU that is not saturated does not mean there is no CPU, serialization, or single-thread bottleneck.
 
-本轮没有实施这些优化。建议先保留当前用户认可的参数，以这个记录作为每次对照的基线。
+None of these optimizations were implemented this round. The recommendation is to keep the currently user-approved parameters and use this record as the baseline for every comparison.
 
-## 9. 同目录证据
+## 9. Evidence in the same directory
 
-- `resolved_profiles.json`：当前运行实际解析的完整配置。
-- `profiles/`：配置源文件副本；不包含运行状态、权重或商业资产。
-- `source-sha256.json`：程序、配置和原生二进制校验值；包含Git身份信息但不等于已提交版本。
-- `fusion-sample.json` / `fusion-summary.json`：约50秒原始抽样及汇总。
-- `live-sample.json`：约20秒SAM3/规划抽样、硬件与服务快照；整树已删去，只保留计数和指标。
-- `people-bounds-check.json`：偶发人物尺寸问题的只读抽查。
-- `manifest.json`：记录时间、运行身份和文件校验值。
+- `resolved_profiles.json`: the complete configuration actually resolved by the current run.
+- `profiles/`: copies of the configuration source files; contains no run state, weights, or commercial assets.
+- `source-sha256.json`: checksums of program, configuration, and native binaries; includes Git identity information but is not equivalent to a committed version.
+- `fusion-sample.json` / `fusion-summary.json`: ~50-second raw sampling and summary.
+- `live-sample.json`: ~20-second SAM3/planning sampling plus hardware and service snapshots; full trees removed, only counts and metrics kept.
+- `people-bounds-check.json`: read-only spot check of the sporadic person-size issue.
+- `manifest.json`: records time, run identity, and file checksums.

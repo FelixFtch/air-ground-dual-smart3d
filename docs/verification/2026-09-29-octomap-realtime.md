@@ -1,57 +1,57 @@
-# 双机 OctoMap 实时性与近记录、远清除验收
+# Dual-robot OctoMap real-time performance and near-marking / far-clearing acceptance
 
-日期：2026-09-29。当前运行 epoch：`1ddaeeef8d1848909e9161e65dbba5ad`。
+Date: 2026-09-29. Current running epoch: `1ddaeeef8d1848909e9161e65dbba5ad`.
 
-## 距离与清障规则
+## Distance and clearing rules
 
-- Go2 与 UAV 的 LiDAR 均为 **9 m 障碍记录、40 m 实测射线清除、45 m 传感器量程**。
-- 参考原单机 `configs/car1_nav2_semantic.yaml` 的 9/40 m 配置。
-- 每条清除射线排除自身真实命中端点，并且不延伸到回波后方；没有回波的空间不凭空擦除。相邻远端射线共用粗体素时仍可能互相影响，只有 9 m 内命中享有全帧 hit-wins 保护。
-- 当前零噪声仿真概率参数允许一次新的有效命中/空闲证据翻转占用；仍保留跨传感器拍摄时间排序、同时间命中优先。
-- 前向深度仍是 6 m，无人机六向近距补盲仍是 3 m。本轮没有把全部深度改成 40 m。
+- Both the Go2's and the UAV's LiDARs use **9 m obstacle marking, 40 m measured-ray clearing, 45 m sensor range**.
+- References the original single-robot 9/40 m configuration in `configs/car1_nav2_semantic.yaml`.
+- Each clearing ray excludes its own real hit endpoint and does not extend behind the echo; space without echoes is not erased out of thin air. Adjacent far-end rays sharing coarse voxels can still affect each other; only hits within 9 m enjoy full-frame hit-wins protection.
+- The current zero-noise simulation probability parameters allow a single new valid hit/free observation to flip occupancy; cross-sensor capture-time ordering and same-time hit priority are still kept.
+- Forward depth is still 6 m, and the UAV's six-direction close-range blind-spot coverage is still 3 m. This round did not change all depth to 40 m.
 
-## 实际运行结果
+## Actual run results
 
-以下按每个传感器实际 `fused` 计数计算，不把 RViz 发布频率当成地图融合频率。
-最新已融合帧年龄包含采样周期、融合及状态发布滞后；它不是特定人物离开后的清除延迟。
-基线与本轮地图大小、行驶位置不同，这些是实际运行核对，并非严格控制变量的 A/B 实验。
+The following is computed from each sensor's actual `fused` count; RViz publish frequency is not taken as map fusion frequency.
+The latest fused-frame age includes the sampling period, fusion, and state-publish lag; it is not the clearing delay after a specific person left.
+Baseline and this round differ in map size and driving positions; these are actual run checks, not a strictly controlled A/B experiment.
 
-| 雷达 | 起始实测融合 Hz | 本轮实测融合 Hz | 最新融合帧平均年龄 s：前→后 | 本轮 P95 年龄 s |
+| LiDAR | Measured fusion Hz at start | Measured fusion Hz this round | Latest fused-frame mean age s: before→after | This round P95 age s |
 |---|---:|---:|---:|---:|
 | go2_01 | 1.704 | 3.286 | 0.959 → 0.377 | 0.663 |
 | uav_01 | 1.671 | 3.286 | 1.032 → 0.455 | 0.723 |
 
-本轮采样 49.9 秒。配置目标为每台 5 Hz；是否达到必须以上表为准。
-显示数据年龄均值 0.066 秒。
-地图/主运行异常：`[]`。
-期间实际运动和到达目标计数见 `*-summary.json` 的 `progress_during_sample`。
+This round sampled 49.9 seconds. The configured target is 5 Hz per robot; whether it was met must be judged from the table above.
+Mean display data age 0.066 seconds.
+Map/main-run anomalies: `[]`.
+Actual motion and reached-goal counts during the period are in `progress_during_sample` of `*-summary.json`.
 
-## 根因与实现
+## Root causes and implementation
 
-同步 CARLA 运动 RPC 在等待 UE 时持有 Python GIL；现在由独立的受限运动子进程等待并返回实际碰撞回执。
-地图显示不再每轮扫描全图并复制全部坐标；不可变几何快照只在成员变化时更新。
-规划器只接收占用变化和当前运行首次观测，执行缓存仍接收完整观测时间戳。
-执行刷新坐标使用无损有符号 16 位 XYZ 编码，减少大量 JSON 数组和垃圾回收。
-OctoMap 内部概率只沿实际变化叶节点的祖先传播；大批变化回退原全树传播，保持固定分辨率叶节点。
-已查到的饱和叶节点与时间戳迭代器直接复用，避免重复查找；保持原 OctoMap 概率与保存数据一致。
-原生融合下一帧可与上一帧缓存应用重叠；只有一个缓存应用在途，严格顺序提交，完成缓存更新后才推进新鲜度。
-快 JSON 依赖隔离在本项目，缺失时回退标准实现，没有修改共享 Python 环境。
+The synchronous CARLA motion RPC held the Python GIL while waiting on UE; a separate restricted motion subprocess now waits and returns the actual collision receipt.
+Map display no longer scans the full map and copies all coordinates every round; the immutable geometry snapshot updates only when membership changes.
+The planner receives only occupancy changes and this run's first observations, while the execution cache still receives full observation timestamps.
+Execution refresh coordinates use lossless signed 16-bit XYZ encoding, reducing large JSON arrays and garbage collection.
+OctoMap internal probabilities propagate only along ancestors of actually changed leaves; large batches fall back to the original whole-tree propagation, keeping fixed-resolution leaves.
+Already-found saturated leaves and timestamp iterators are reused directly, avoiding repeated lookups; the original OctoMap probabilities and saved data stay consistent.
+Native fusion of the next frame can overlap the previous frame's cache application; only one cache application is in flight, commits are strictly ordered, and freshness advances only after the cache update completes.
+The fast JSON dependency is isolated inside this project, falling back to the standard implementation when absent; the shared Python environment was not modified.
 
-没有降低地图分辨率或截断近处障碍测点；每个真实命中体素保留代表测点。
-使用最新帧与有界处理，不积压无限旧帧。执行检查、地图修订校验、实体碰撞回执保留。
-停止导航时保存 `.ot`，本轮多次重载均从已有地图恢复，没有通过清空地图掩盖延迟。
+Map resolution was not lowered and close-range obstacle measurement points were not truncated; every real hit voxel keeps a representative measured point.
+Latest-frame and bounded processing are used; unbounded backlogs of old frames are not accumulated. Execution checks, map revision validation, and entity collision receipts are kept.
+The `.ot` is saved when navigation stops; this round's multiple reloads all resumed from the existing map — latency was not hidden by clearing the map.
 
-## 证据与限制
+## Evidence and limitations
 
-- 部署候选的完整 Python/原生接口测试：279 项通过；本轮没有修改或重新验证 Rust 规划算法。
+- The deployment candidate's full Python/native-interface tests: 279 passed; the Rust planning algorithm was not modified or re-verified this round.
 
-- `*-live.json`：本轮原始状态采样；`*-baseline.json`：起始样本。
-- `*-ros.json`：真实 ROS 订阅的双机点云、SAM3、人物框、OHZ、LRZ 与速度箭头计数。
-- `*-source-sha256.json`：部署源码和地图服务二进制身份。
-- 同目录 native ancestor、native leaf reuse、packed refresh、JSON codec、display snapshot、planner presence 验证记录：精确地图/时间戳一致性及离线性能。
-- 没有用定时删除替代真实空闲观测。未被新射线穿过的旧遮挡体素仍可保留；40 m 是清除上限，不是整球无条件擦除。
-- 没有新增 UE 行人真值输入到人物估计器；本轮也不声称验证了人物速度精度或持续 ID 关联质量。
+- `*-live.json`: this round's raw state samples; `*-baseline.json`: starting samples.
+- `*-ros.json`: counts from real ROS subscriptions of both robots' point clouds, SAM3, person boxes, OHZ, LRZ, and velocity arrows.
+- `*-source-sha256.json`: deployed source and map-service binary identity.
+- Same-directory native ancestor, native leaf reuse, packed refresh, JSON codec, display snapshot, planner presence verification records: exact map/timestamp consistency and offline performance.
+- Timed deletion was not substituted for real free observation. Old occluded voxels not crossed by new rays can still remain; 40 m is a clearing upper bound, not an unconditional whole-sphere erase.
+- No UE pedestrian ground truth was added as input to the person estimator; this round also does not claim to have verified person velocity accuracy or sustained ID association quality.
 
-改动范围为 `/data/robotics/air_ground_smart3d`。Town10、Factory 与原单机实验配置未替换。
+The change scope is `/data/robotics/air_ground_smart3d`. Town10, Factory, and the original single-robot experiment configurations were not replaced.
 
-附加离线实验比较 5 ms 与 1 ms Python 线程切换间隔，四轮吞吐结果存在明显重叠，没有证明足以解决当前 5 Hz 缺口，因此未将该调整上线。详见 `2026-09-29-octomap-thread-interval-experiment.json`。
+An additional offline experiment compared 5 ms vs 1 ms Python thread-switch intervals; the four throughput rounds overlap substantially and did not prove sufficient to close the current 5 Hz gap, so that adjustment was not put online. See `2026-09-29-octomap-thread-interval-experiment.json`.

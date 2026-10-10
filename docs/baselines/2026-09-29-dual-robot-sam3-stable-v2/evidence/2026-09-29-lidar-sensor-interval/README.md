@@ -1,84 +1,84 @@
-# 空场景双机雷达时序修复验证
+# Empty-scene dual-robot LiDAR timing fix verification
 
-日期：2026-09-29。状态：已在独立双机空场景部署并完成短时运行验证。扫描时序错误已修复；不能把短时采样当成所有遮挡与动态场景下无残影的保证。
+Date: 2026-09-29. Status: deployed in the isolated dual-robot empty scene and verified with a short run. The scan timing error is fixed; short samples must not be taken as a guarantee of no ghosts in all occlusion and dynamic scenarios.
 
-## 问题与已确认原因
+## Problem and confirmed cause
 
-人物离开后，部分方向的旧占用没有及时清除。雷达接收频率正常不能证明这些方向已被地图重新观测。
+After a person left, old occupancy in some directions was not cleared promptly. A normal LiDAR reception rate does not prove those directions were re-observed by the map.
 
-本机 CARLA 的 `ASensor::Tick` 收到 UE 按 `sensor_tick` 累计的实际时间，再调用 `PrePhysTick`。然而 `SensorManager` 在 `PostPhysTick` 传入的只是当前世界帧时间。原旋转雷达用后者计算发射数量和扫描角度，丢失传感器两次采样之间的时间。
+In this machine's CARLA, `ASensor::Tick` receives the actual time accumulated by UE per `sensor_tick`, then calls `PrePhysTick`. However, what `SensorManager` passes in `PostPhysTick` is only the current world frame time. The original rotating LiDAR used the latter to compute emission counts and scan angles, losing the time between two sensor samples.
 
-当前配置为 96 通道、192000 points/s、rotation_frequency=10、sensor_tick=0.1，场景上限 30 FPS。在世界帧约 1/30 s 时，原路径每包只请求 67 条/通道，扫描约 120°，而不是按约 0.1 s 请求 200 条/通道。地图又只取最新包，因此没有取到的扇区可能长时间没有新证据。这是已确认的时序错误与覆盖缺口；不是所有人物残影都已证明只由这一项造成。
+The current configuration is 96 channels, 192000 points/s, rotation_frequency=10, sensor_tick=0.1, with the scene capped at 30 FPS. At a world frame of about 1/30 s, the original path requested only 67 rays/channel per packet and scanned about 120°, instead of 200 rays/channel per ~0.1 s. Since the map takes only the latest packet, sectors that were not sampled could go a long time without new evidence. This is the confirmed timing error and coverage gap; it has not been proven that all person ghosts were caused by this one item alone.
 
-另一个已确认问题：原扫描器更新 `SemanticLidarData` 的角度，而普通雷达发送独立 `LidarData`，没有同步角度头。因此旧 ordinary `horizontal_angle` 不能直接作为完整扫描范围的可靠凭据。
+Another confirmed issue: the original scanner updated the angle in `SemanticLidarData`, while the ordinary LiDAR sends a separate `LidarData` without a synchronized angle header. Therefore the old ordinary `horizontal_angle` cannot directly serve as reliable evidence of the full scan range.
 
-## 修改前实测
+## Pre-fix measurements
 
-证据：`/tmp/lidar_sector_phase_1790725792.json`。观察 26.013 秒墙钟时间，epoch `4eae8624f29d4bfcb7bdc8ce0f1413ad`；读取既有点云预览与融合状态，没有新增传感器或读取行人真值。
+Evidence: `/tmp/lidar_sector_phase_1790725792.json`. Observed for 26.013 seconds of wall-clock time, epoch `4eae8624f29d4bfcb7bdc8ce0f1413ad`; read existing point-cloud previews and fusion state, adding no sensors and reading no pedestrian ground truth.
 
-| 指标 | Go2 | 无人机 |
+| Metric | Go2 | UAV |
 | --- | --- | --- |
-| 单包实际回波方向跨度中位数 | 118.2099° | 118.2099° |
-| 与预览成功匹配的融合包 | 57/68，83.8% | 59/68，86.8% |
-| 连续观测、成功匹配的已融合包角覆盖空档 | 2.010373 仿真秒 | 2.694560 仿真秒 |
-| 对应连续包数与地图方向 | 5 包，70–80° | 8 包，100–110° |
+| Median per-packet actual echo azimuth span | 118.2099° | 118.2099° |
+| Fused packets successfully matched to preview | 57/68, 83.8% | 59/68, 86.8% |
+| Angular coverage gap across consecutively observed, successfully matched fused packets | 2.010373 sim seconds | 2.694560 sim seconds |
+| Corresponding consecutive packets and map direction | 5 packets, 70–80° | 8 packets, 100–110° |
 
-角度跨度按点云回波计算，118.21°与“理论发射120°、离散末端不包含下一条射线”一致。上述空档使用 `conservative_missing_angular_support_run`，带10°边缘裕量，并排除已见融合时间戳没有匹配预览的情况；但旧脚本没有保存融合计数器，不能完全排除状态发布间隙存在未被观察到的中间融合包。因此这是连续观测样本的角覆盖空档，不是完整逐包真值的最大空档。该证据中的 4.798/4.074 秒仅是有限匹配子集的重观测间隔，**不能写成完整融合链路的真实空档**。所有上述方向空档均为拍摄时间差，即仿真秒，不是墙钟秒。
+Angular spans are computed from point-cloud echoes; 118.21° is consistent with "theoretical emission of 120°, discrete endpoints excluding the next ray". The gaps above use `conservative_missing_angular_support_run` with a 10° edge margin and exclude seen fusion timestamps with no preview match; however, the old script did not save fusion counters, so intermediate fused packets unobserved during status-publish gaps cannot be fully ruled out. These are therefore angular coverage gaps of continuously observed samples, not the maximum gap of full per-packet ground truth. The 4.798/4.074 seconds in that evidence are only re-observation intervals of a limited matched subset and **must not be reported as the true gap of the complete fusion chain**. All directional gaps above are capture-time differences, i.e. sim seconds, not wall-clock seconds.
 
-## 本次修改
+## This change
 
-仅修改独立工程 `/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Sensor/` 下三份文件：
+Only three files under the isolated project `/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Sensor/` were modified:
 
-- `RayCastSemanticLidar.h/.cpp`：在 `PrePhysTick` 保存真实 elapsed time，`PostPhysTick` 消费一次后清空；扫描公式及 `SimulateLidar` 签名不变。
-- `RayCastLidar.cpp`：使用同一真实 elapsed time；扫描完成后，把实际扫描角度同步到普通点云头。
+- `RayCastSemanticLidar.h/.cpp`: save the true elapsed time in `PrePhysTick`, consume it once in `PostPhysTick`, then clear it; the scan formula and `SimulateLidar` signature are unchanged.
+- `RayCastLidar.cpp`: use the same true elapsed time; after the scan completes, synchronize the actual scan angle into the ordinary point-cloud header.
 
-无 PrePhys 调用时保留原世界帧时间回退；非有限或非正时间不发布旧点云。保留附着父体忽略逻辑，其他机器人仍能形成雷达碰撞。`HSSLidar` 的独立固定扇区实现不变。
+When there is no PrePhys call, the original world-frame-time fallback is kept; non-finite or non-positive times do not publish the old point cloud. The attached-parent ignore logic is kept, so other robots can still produce LiDAR collisions. `HSSLidar`'s separate fixed-sector implementation is unchanged.
 
-不修改地图内容、巡航点、机器人 profile、雷达范围、FOV、噪声、dropoff、地图概率或清除 TTL；部署保留当前地图与位姿。Factory、Town10 和共享 Engine core 不在修改范围。
+Map content, patrol points, robot profiles, LiDAR range, FOV, noise, dropoff, map probabilities, and clearing TTL are not modified; deployment keeps the current map and poses. Factory, Town10, and the shared Engine core are out of scope.
 
-## 边界与负载
+## Boundaries and load
 
-- **不是强制每包360°。** UE 首个 interval tick 使用世界单帧时间，仍可能只有120°；调度补偿可产生0.08/0.12 s间隔，对应288/432°。修复遵循实际时间，不填造固定0.1 s。
-- `sensor_tick=0`的正常扫描几何与时间保持原行为；普通角度头仍被正确修复。
-- **无回波不等于已得到 free。** 本次不生成缺失射线。朝天空无返回、被前方物体遮挡或该方向未被实际测量时，仍没有清除旧占用的证据。也未解决25 cm体素内细表面与空隙被不同射线交替观测的问题。
-- 正常发射但全无命中会输出真正空包。原来“正但极小的时间使发射数舍入为0”会提前返回并重发旧缓冲的边界仍未改；本配置触发需要 `dt<0.00025 s`，与正常30 FPS/0.1 s间隔不符。
-- 在30 FPS、10包/s的估算下，单雷达请求射线由约64320恢复到192000条/s，双机由约128640恢复到384000条/s，射线计算量约2.99倍。回波数、地图处理和IPC也可能增加，不能据此预测整机耗时恰好翻三倍，必须测量。
+- **Not a forced 360° per packet.** UE's first interval tick uses the single world frame time and may still be only 120°; scheduler compensation can produce 0.08/0.12 s intervals, corresponding to 288/432°. The fix follows actual time and does not fabricate a fixed 0.1 s.
+- Normal scan geometry and timing at `sensor_tick=0` keep the original behavior; the ordinary angle header is still correctly fixed.
+- **No echo does not mean free evidence obtained.** No missing rays are generated this time. Directions facing the sky with no return, occluded by objects ahead, or not actually measured still have no evidence to clear old occupancy. The issue of fine surfaces and gaps inside a 25 cm voxel being alternately observed by different rays is also unresolved.
+- Normal emission with zero hits outputs a genuinely empty packet. The original boundary where "a positive but tiny time rounds the emission count to 0" would return early and resend the old buffer is still unchanged; triggering it in this configuration requires `dt<0.00025 s`, inconsistent with normal 30 FPS / 0.1 s intervals.
+- Estimated at 30 FPS and 10 packets/s, requested rays per LiDAR recover from about 64320 to 192000 per second, and for the two robots from about 128640 to 384000 per second, roughly 2.99x the ray computation. Echo counts, map processing, and IPC may also increase; this does not predict the total machine time exactly tripling — it must be measured.
 
-## 构建与地图保留
+## Build and map retention
 
-主线程已完成本次独立工程增量编译，结果成功，耗时84.98秒；项目425项测试通过。部署前备份位于 `/data/robotics/air_ground_smart3d/runtime/deployment_backups/2026-09-29-sensor-elapsed-195904`，地图快照保留1,043,664个已观测格，其中19,315个occupied。已从该快照恢复双机位置和巡航进度，地图未清空。运行实例已核对加载独立工程新模块。
+The main thread completed the incremental build of this isolated project successfully, taking 84.98 seconds; 425 project tests passed. The pre-deployment backup is at `/data/robotics/air_ground_smart3d/runtime/deployment_backups/2026-09-29-sensor-elapsed-195904`; the map snapshot retains 1,043,664 observed cells, of which 19,315 are occupied. Both robots' positions and patrol progress were restored from that snapshot; the map was not cleared. The running instance was checked to have loaded the isolated project's new module.
 
-## 上线验证
+## Post-deployment verification
 
-新 epoch：`d83ccef432d3410e8e573a93122096cb`。独立 UE 进程 PID 1573527，映射的模块来自 AirGroundLab 项目，未标为 deleted；模块 SHA256：`33d291317d125f548d4dfcd8ba7497d70480d84b8f775aed3336c63678803bf2`。
+New epoch: `d83ccef432d3410e8e573a93122096cb`. Isolated UE process PID 1573527; the mapped module comes from the AirGroundLab project, not marked deleted; module SHA256: `33d291317d125f548d4dfcd8ba7497d70480d84b8f775aed3336c63678803bf2`.
 
-| 指标 | Go2 | 无人机 |
+| Metric | Go2 | UAV |
 | --- | --- | --- |
-| 60秒单包回波方向跨度中位数 | 358.20° | 358.20° |
-| 匹配融合包超过340° | 57/75 | 58/77 |
-| 较后45秒雷达接收频率 | 9.99 Hz | 10.01 Hz |
-| 同期地图融合频率 | 1.96 Hz | 1.98 Hz |
-| 采样到地图应用平均 / P95 | 0.230 / 0.457 s | 0.340 / 0.544 s |
-| 同期运动距离增量 | 31.46 m | 14.44 m |
-| 结束树节点数 | 4997 | 4439 |
+| 60-second median per-packet echo azimuth span | 358.20° | 358.20° |
+| Matched fused packets exceeding 340° | 57/75 | 58/77 |
+| LiDAR reception rate, later 45 seconds | 9.99 Hz | 10.01 Hz |
+| Map fusion rate over the same period | 1.96 Hz | 1.98 Hz |
+| Sample-to-map-apply mean / P95 | 0.230 / 0.457 s | 0.340 / 0.544 s |
+| Motion distance over the same period | 31.46 m | 14.44 m |
+| Tree nodes at end | 4997 | 4439 |
 
-- 60秒窗口含冷启动：融合约1.35/1.37 Hz；出现短时 sensor_stale 与较大初始化耗时。另一35秒窗口仍采到约2秒UAV sensor_stale，后续45秒窗口没有。这不等于长时间不会再发生。
-- 带计数连续性检查的匹配融合包仍有约1.48/1.50秒角覆盖排除窗口，不能声称每包整圈或方向空档完全消失。首帧及UE interval调度波动会产生部分扫描包。
-- 后续45秒抽样的10个人物ROI初始占用均在窗口内清零；首次清零距采样起点0.66–7.68秒。该计时包括人在ROI中仍移动的时间，**不是确认人离开后的清除延迟**。这只是SAM3关联位置的现场抽样，不是全场逐人真值评分。
-- 细梁评估ROI占用71–133格，末尾129格；规则未改。该范围波动仍不能证明细表面的全部离散化问题已解决。
-- 45秒窗口没有fatal、map、people或planner错误。早期另有两次人物快照时间竞争警告；新人物数据时间晚于较早的规划时间时被拒绝，使用仍有效的缓存。没有将UE人物位置送入估计器。
-- 两机继续运动，SAM3服务继续使用原2Hz与640×360输入；本轮没有重新单独量化OHZ持续显示比例。
+- The 60-second window includes cold start: fusion about 1.35/1.37 Hz; brief sensor_stale and larger initialization cost appeared. Another 35-second window still caught about 2 seconds of UAV sensor_stale; the later 45-second window had none. This does not mean it will never happen over long periods.
+- Matched fused packets with counter-continuity checking still have about 1.48/1.50-second angular coverage exclusion windows; it cannot be claimed that every packet is a full circle or that directional gaps have fully disappeared. The first frame and UE interval-scheduling jitter can produce partial-scan packets.
+- The initial occupancy of 10 sampled person ROIs in the later 45 seconds all cleared to zero within the window; first clearing was 0.66–7.68 seconds after the sampling start. That timing includes time when the person was still moving within the ROI and **is not the clearing delay after confirmed departure**. This is only an on-site sample of SAM3-associated positions, not a whole-field per-person ground-truth scoring.
+- The thin-beam evaluation ROI occupied 71–133 cells, 129 at the end; rules unchanged. This range of fluctuation still does not prove all discretization issues of fine surfaces are solved.
+- The 45-second window had no fatal, map, people, or planner errors. Earlier there were two person-snapshot timestamp-race warnings; when new person data's time is later than an earlier planning time it is rejected and the still-valid cache is used. No UE person positions were fed into the estimator.
+- Both robots kept moving, and the SAM3 service continued using the original 2 Hz and 640×360 input; this round did not separately re-quantify the OHZ persistence display ratio.
 
-不同窗口位置、机器人高度和行人相对位置不同，因此不是严格受控A/B实验。接收10Hz与实际地图融合约2Hz是不同指标；本轮没有宣称10Hz地图。
+Different windows have different positions, robot heights, and pedestrian relative positions, so this is not a strictly controlled A/B experiment. 10 Hz reception and about 2 Hz actual map fusion are different metrics; this round makes no claim of a 10 Hz map.
 
-## 证据文件
+## Evidence files
 
-- `coverage_after.json`：60秒角覆盖、融合计数连续性与包含启动期的时延。
-- `map_after.json`：第一次55秒地图与双机进展。
-- `map_steady.json`：后续45秒稳态样本。
-- `coverage_before.json`：旧时序26秒角覆盖，注意缺少融合计数连续性验证。
-- 编译日志与写前模块/源码备份见部署目录。候选diff也保存在该目录。
+- `coverage_after.json`: 60-second angular coverage, fusion counter continuity, and latencies including startup.
+- `map_after.json`: first 55-second map and dual-robot progress.
+- `map_steady.json`: later 45-second steady-state sample.
+- `coverage_before.json`: 26-second angular coverage under the old timing; note it lacks fusion counter-continuity verification.
+- Build logs and pre-write module/source backups are in the deployment directory. The candidate diff is also saved there.
 
-## 未采用的性能候选
+## Rejected performance candidate
 
-另在/tmp比较将observed时间索引改为unordered_map：82项测试通过、21条请求响应与保存快照等价，但固定合成输入中请求中位耗时只改善0.41%，P95略差，属于噪声范围。因此未部署，也未再重启。候选保留在`/tmp/octomap_observed_hash_20260929_200454`。
+Also compared in /tmp: changing the observed time index to an unordered_map: 82 tests passed, 21 request responses and the saved snapshot were equivalent, but on fixed synthetic inputs the median request time improved only 0.41% with a slightly worse P95, within noise. It was therefore not deployed and nothing was restarted again. The candidate is kept at `/tmp/octomap_observed_hash_20260929_200454`.

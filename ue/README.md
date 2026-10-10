@@ -1,27 +1,34 @@
-# 空场景 UE 关卡（给 Windows）
+# Empty-scene UE levels (for Windows)
 
-这里是能打开的手工关卡，大约 400 KB。57 GB 的 CARLA 城镇、贴图和缓存没有放进来。关卡用引擎自带方块 `/Engine/BasicShapes/Cube`，颜色来自 `Content/OHZTest/Materials`，父材质是引擎的 `BasicShapeMaterial`。
+These are the handmade levels, about 400 KB total. The 57 GB of CARLA towns, textures, and caches is not included. The levels are built from the engine cube `/Engine/BasicShapes/Cube`, colored by the materials in `Content/OHZTest/Materials`, whose parent material is the engine's `BasicShapeMaterial`.
 
-| 文件 | 作用 |
+| File | Purpose |
 |---|---|
-| `Content/AirGroundLab/Maps/AirGroundLab_Main.umap` | 现场在跑的空场景。启动参数是 `/Game/AirGroundLab/Maps/AirGroundLab_Main` |
-| `Content/OHZTest/Maps/OHZTest_Main.umap` | `Config/DefaultEngine.ini` 里的编辑器默认关卡 |
-| `Content/*/Maps/OpenDrive/*.xodr` | CARLA 路网，和关卡同名 |
-| `CarlaUnreal.uproject`、`Config/`、`Source/` | 工程入口、地图与渲染配置、模块名 |
+| `Content/AirGroundLab/Maps/AirGroundLab_Main.umap` | The empty scene that runs live. Launch argument is `/Game/AirGroundLab/Maps/AirGroundLab_Main` |
+| `Content/OHZTest/Maps/OHZTest_Main.umap` | Editor default level referenced by `Config/DefaultEngine.ini` |
+| `Content/*/Maps/OpenDrive/*.xodr` | CARLA road networks, one per level |
+| `CarlaUnreal.uproject`, `Config/`, `Source/` | Project entry, map and rendering config, module names |
 
-场景原点、地面高度、范围和行人数量在 `profiles/scenes/air_ground_lab.yaml`。地图坐标是 `x=carla.x, y=-carla.y, z=carla.z-0.22`。
+Scene origin, ground height, bounds, and pedestrian count live in `profiles/scenes/air_ground_lab.yaml`. Map coordinates are `x=carla.x, y=-carla.y, z=carla.z-0.22`.
 
-## 在已有的 Windows CARLA 工程里打开
+## Opening inside an existing Windows CARLA project
 
-需要本机已经能打开 CARLA 的 UE 5.8 工程（`CarlaUnreal.uproject`）。把下面两个目录原样放进那个工程的 `Content`：
+You need a CARLA UE 5.8 project (`CarlaUnreal.uproject`) that already opens on your machine. Copy these two directories as-is into that project's `Content`:
 
 ```
 Content/AirGroundLab
 Content/OHZTest
 ```
 
-然后在编辑器里打开 `AirGroundLab/Maps/AirGroundLab_Main`。缺的只有 CARLA 自带的 `CarlaGameMode`，那份蓝图在 CARLA 工程里，不在这个包里。
+Then open `AirGroundLab/Maps/AirGroundLab_Main` in the editor. The only missing piece is CARLA's own `CarlaGameMode` blueprint, which lives in the CARLA project, not in this package.
 
-`DefaultEngine.ini` 里现在写的启动图是 `OHZTest_Main`。现场双机启动时会改成 `AirGroundLab_Main`。在 Windows 上做新场景时，直接打开 `AirGroundLab_Main`，不要整份覆盖自己的 `Config`。这份 ini 里有 Linux 平台段。
+The startup map currently written in `DefaultEngine.ini` is `OHZTest_Main`; the live dual-robot launcher overrides it with `AirGroundLab_Main`. When you build a new scene on Windows, just open `AirGroundLab_Main` directly, and do not overwrite your own `Config` directory with this one — this ini contains Linux platform sections.
 
-`CarlaUnreal.uproject` 的 `EngineAssociation` 指向上面这台 Linux 的 CARLA 引擎。Windows 上第一次打开时，把它关联到自己的 CARLA UE 5.8。
+The `EngineAssociation` in `CarlaUnreal.uproject` points at the CARLA engine on the Linux machine this repo was exported from. On first open on Windows, re-associate it with your own CARLA UE 5.8.
+
+## Making a new scene for this stack
+
+1. Build your level on top of engine basic shapes (or your own assets) inside your Windows CARLA project.
+2. Keep the ground flat and walkable where Go2 patrols; keep Bee's corridor between 1.2 m and 3.2 m flyable.
+3. Export/copy the `.umap` (plus any custom materials) back into `Content/AirGroundLab/Maps/` on the Linux machine's UE project at `/data/sim/AirGroundLab_UE58`.
+4. Add or edit a scene profile under `profiles/scenes/` (map name, origin, ground height, bounds, flight band, `human_count`) and a team profile under `profiles/teams/`, then start with `./lab start --rviz --team <team>`.

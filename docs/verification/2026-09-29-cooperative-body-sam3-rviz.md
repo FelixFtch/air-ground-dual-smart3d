@@ -1,36 +1,36 @@
-# 双机误停与 RViz 显示修复
+# Dual-robot false stops and RViz display fix
 
-日期：2026-09-29。仅独立项目 `/data/robotics/air_ground_smart3d`。
+Date: 2026-09-29. Isolated project `/data/robotics/air_ground_smart3d` only.
 
-## 实际根因
+## Actual root cause
 
-UAV 的 SAM3 local156 将白色 Go2 识别为 person。人物投影中心约 (-8.53,-2.93,0.25)，与 Go2 平面位置相差约 0.12 m。使用当前实际 OHZ 碰撞函数验证：同一条误识别同时挡住 Go2 当前位置及 UAV 目标 (-8,-3,2)。两机分别报告 current_blocked_or_out_of_bounds 和 goal_blocked_or_out_of_bounds。雷达、地图和树均仍在更新。
+The UAV's SAM3 local frame 156 recognized the white Go2 as a person. The person projection center was about (-8.53,-2.93,0.25), about 0.12 m from the Go2's planar position. Verified with the current actual OHZ collision function: the same misidentification simultaneously blocked the Go2's current position and the UAV goal (-8,-3,2). The two robots respectively reported current_blocked_or_out_of_bounds and goal_blocked_or_out_of_bounds. LiDAR, map, and trees all kept updating.
 
-## 改动
+## Changes
 
-- RGB-D 复用已有深度回调，保存各机器人同一 frame、同一 capture time 的机身姿态与尺寸；不查询当前位姿来补旧照片，不读取行人真值。
-- 本体资料纳入原照片包哈希校验，历史有界。同帧两机资料未齐时保留有界待配对帧，随后选取最新完整帧。
-- SAM3 掩码投影在拟合位置和速度前，剔除落在已知机器人机身体积内的点。包围盒仅加 0.08 m 表面余量；混合掩码中的外部人体点继续保留。
-- 若本体剔除后剩余支持点仅为垂向跨度不足 0.05 m 的平面残片，不将其扩展成人体 OHZ；这仅作用于本轮确有机器人点被剔除的掩码，不是全局人体高度门槛。
-- 剔除的原跟踪来源立即退出人物几何，并清除对应速度历史。叠图明确标为 robot surface excluded。
-- 机器人之间仍使用实时机身体积临时约束。人物过滤不取消 SMART3D、执行段检查或 UE 实体碰撞。
-- RViz 主树线宽/透明度为 0.025 m/0.35，断枝为 0.02 m/0.20；只显示真实树边。首次清理旧发布者标记，此后只删除消失的标记，心跳不再反复 DELETEALL。
+- RGB-D reuses the existing depth callback, saving each robot's body pose and dimensions from the same frame and same capture time; it does not query the current pose to patch old photos and does not read pedestrian ground truth.
+- Body data is included in the original photo-package hash verification, with bounded history. When the same frame lacks complete data for both robots, a bounded number of frames is kept for pairing, then the latest complete frame is selected.
+- Before fitting position and velocity, SAM3 mask projection removes points that fall inside known robot body volumes. The bounding box adds only a 0.08 m surface margin; external human points in mixed masks are kept.
+- If, after body removal, the remaining support points are only a planar fragment with vertical span under 0.05 m, it is not expanded into a human OHZ; this applies only to masks that actually had robot points removed this round, not a global human-height threshold.
+- Removed original tracking sources immediately exit the person geometry, and their velocity history is cleared. Overlays are explicitly labeled robot surface excluded.
+- Between robots, real-time body-volume temporary constraints are still used. Person filtering does not cancel SMART3D, execution-segment checks, or UE entity collision.
+- RViz main-tree line width/transparency is 0.025 m/0.35, broken branches 0.02 m/0.20; only real tree edges are displayed. The first pass cleans up old publisher markers, after that only disappeared markers are deleted, and the heartbeat no longer repeatedly issues DELETEALL.
 
-## 验证
+## Verification
 
-完整测试 317 项通过，含机器人本体、混合真人掩码、剩余地板、跨帧姿态拒绝、旧输入兼容、机器人实体互避、显示标记生命周期。
-专门的执行测试验证：人物列表为空、体素为空闲时，伙伴机身仍阻挡前进；伙伴移开后恢复移动。
+The full test suite passes 317 items, covering robot bodies, mixed real-person masks, leftover floor, cross-frame pose rejection, old-input compatibility, inter-robot physical avoidance, and display marker lifecycle.
+A dedicated execution test verified: with the person list empty and the voxel free, the partner's body still blocks forward motion; motion resumes once the partner moves away.
 
-仅重载 RGB-D、SAM3 和 RViz 发布器，UE、导航主程序、地图与两棵树没有重启。运行 epoch 保持 `1ddaeeef8d1848909e9161e65dbba5ad`，两树实例 ID 均为 1；核查时 Go2 巡航目标累计由 91 增至 98，无人机由 55 增至 58。地图约 96 万个已观测体素保留。SAM3 服务运行，两路新帧均带两机同帧本体资料；实际人物输出随视野变化允许为空。
+Only RGB-D, SAM3, and the RViz publisher were reloaded; UE, the navigation main program, the map, and both trees were not restarted. The running epoch remained `1ddaeeef8d1848909e9161e65dbba5ad`, both tree instance IDs were 1; at check time the Go2's cumulative patrol goals rose from 91 to 98 and the UAV's from 55 to 58. About 960 thousand observed voxels in the map were retained. The SAM3 service ran, and both new-frame streams carried same-frame body data for both robots; actual person output is allowed to be empty as the field of view changes.
 
-部署后另做 10 秒 ROS 订阅：树 20 条、地图 39 条消息，均无周期 DELETEALL；约 7187 条 Go2 树边与 7429 条无人机树边持续发布，新线宽与透明度生效。
+A further 10-second ROS subscription after deployment: 20 tree and 39 map messages, none with periodic DELETEALL; about 7187 Go2 tree edges and 7429 UAV tree edges continuously published, with the new line width and transparency in effect.
 
-用户反馈当前版本流畅。维持现有速度、树参数、SAM3 和 9 m 标记/40 m 射线清除配置。
+User feedback: the current version is smooth. Existing speed, tree parameters, SAM3, and the 9 m marking / 40 m ray clearing configuration are kept.
 
-## 已核对但未改动
+## Checked but not changed
 
-原始雷达中 UAV 实体有回波；Go2 的 BlockAllDynamic 碰撞配置没有正确覆盖默认忽略的 SensorTrace。融合前仍按现有设计排除伙伴本体点，以避免把共享地图中的机器人自身当成永久墙。若以后改用纯雷达互避，必须一起处理共享地图的各机器人自体排除视图及移动残影，不能直接删除伙伴过滤与临时体积约束。
+The UAV entity does return echoes in the raw LiDAR; the Go2's BlockAllDynamic collision configuration does not correctly cover SensorTrace, which is ignored by default. Before fusion, partner body points are still excluded per the existing design, to avoid treating the robots themselves in the shared map as permanent walls. If switching to pure-LiDAR mutual avoidance later, the per-robot self-exclusion view of the shared map and motion ghosts must be handled together; the partner filter and temporary volume constraints must not simply be deleted.
 
-地面累计自由空间没有整体清空。部分占用体素受真实射线占用/空闲证据转换而变化；本轮修复显示清空闪烁，不把动态占用伪装成永久累积。
+Accumulated ground free space was not wholesale cleared. Some occupied voxels changed due to real-ray occupied/free evidence transitions; this round's fix fixed display clearing flicker and does not disguise dynamic occupancy as permanent accumulation.
 
-证据在同目录 `2026-09-29-cooperative-body-evidence/`。冻结叠图证实误识别；旧帧原始 SAM3 mask 未保存，深度残片离线统计来自近似着色掩码和边界框上界，不能当作原始精确 mask 测量。
+Evidence is in `2026-09-29-cooperative-body-evidence/` in the same directory. Frozen overlays confirm the misidentification; original SAM3 masks of old frames were not saved, and offline depth-fragment statistics come from approximate colored masks and bounding-box upper bounds, not from original exact mask measurements.

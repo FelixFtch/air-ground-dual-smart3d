@@ -1,19 +1,19 @@
-# 使用本次配置备份
+# Using this configuration backup
 
-这是双机独立实验的配置、源码和兼容本机的原生程序归档，不是完整 UE 引擎、商业模型或 SAM3 权重备份。Town10、Factory、原单机空场配置不在本包中。
+This is an archive of the dual-robot isolated experiment's configuration, source, and native binaries compatible with this machine; it is not a backup of the full UE engine, commercial models, or SAM3 weights. Town10, Factory, and the original single-robot empty-scene configurations are not in this package.
 
-当前本机运行无需恢复或重启。本机正常启动：
+The current local run needs no restore or restart. Normal local launch:
 
 ```bash
 cd /data/robotics/air_ground_smart3d
 ./lab start --rviz
 ./lab status
-# 需要停止时才执行：
+# Only when you need to stop:
 ./lab stop
 ```
 
-启动顺序由 lab 负责：独立 UE/CARLA 2400 → 共享地图、双机规划与控制 → 雷达展示、ROS domain45/RViz → RGB-D 与 SAM3。默认从新观测开始；恢复已有地图需要显式 --resume-map；恢复位姿和巡航进度还需同一次停止保存的 --resume-state。不能将本包 live-status.json 作为停止快照。上次已验证的快照位置与哈希见 saved-map-reference.json。
+The launch order is managed by lab: isolated UE/CARLA 2400 → shared map, dual-robot planning and control → LiDAR display, ROS domain45/RViz → RGB-D and SAM3. The default starts from fresh observation; restoring an existing map requires an explicit --resume-map; restoring poses and patrol progress additionally requires --resume-state saved by the same stop. Do not use this package's live-status.json as a stopped snapshot. The last verified snapshot location and hashes are in saved-map-reference.json.
 
-源码恢复时先停止本实验，保留原目录，再将 source-config.tar.gz 解包到 /data/robotics/air_ground_smart3d，将 native-linux.tar.gz 解包到相同位置。native包包括两份原生程序及私有ujson依赖、来源和许可证。将本配置目录保留于项目 docs/baselines/ 下，供README链接与核对使用。原生文件依赖当前 Linux 环境，其他机器应按 README 重编。UE delta 仅能应用于当前兼容 AirGroundLab 工程，需停止该实例后解包到 /data/sim/AirGroundLab_UE58/CarlaUnreal；它包含九份集成源码、当前 Carla 模块、场景主地图与工程配置，依赖现有引擎、插件库与引用资产。不得解包覆盖旧 Factory 或 Town10。
+To restore the source, first stop this experiment, keep the original directory, then extract source-config.tar.gz into /data/robotics/air_ground_smart3d and native-linux.tar.gz into the same location. The native package includes both native binaries plus the private ujson dependency, provenance, and license. Keep this configuration directory under the project's docs/baselines/ for README links and cross-checking. The native files depend on the current Linux environment; other machines should rebuild per the README. The UE delta applies only to the current compatible AirGroundLab project: stop that instance, then extract it into /data/sim/AirGroundLab_UE58/CarlaUnreal; it contains nine integration source files, the current Carla module, the scene's main map, and project configuration, depending on the existing engine, plugin libraries, and referenced assets. Do not extract it over the old Factory or Town10.
 
-dependencies.json 记录外部环境；未包括虚拟环境、Cargo 缓存、SAM3 权重、完整 UE Content 或引擎。归档内均为相对路径。manifest.json 校验整个配置包，source-sha256.json、native-sha256.json、ue-delta-sha256.json 校验各归档条目。旧参数基线保留，新版通过 CURRENT.json 指向。
+dependencies.json records the external environment; virtual environments, Cargo caches, SAM3 weights, full UE Content, and the engine are not included. Paths inside the archive are all relative. manifest.json validates the whole configuration package; source-sha256.json, native-sha256.json, and ue-delta-sha256.json validate the individual archive entries. The old parameter baseline is retained, and the new version is referenced via CURRENT.json.

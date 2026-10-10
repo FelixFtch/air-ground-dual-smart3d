@@ -1,20 +1,20 @@
-# 人员 OHZ：给要改形状的人
+# People OHZ: for anyone changing the hazard shape
 
-这条链路现在是现场在用的。不要改 `planning/` 里的 RRT* 和 LRZ，除非形状接口本身不够用。
+This pipeline is what runs live today. Do not modify the RRT* and LRZ code in `planning/` unless the shape interface itself is too limiting.
 
-## 数据怎么走
+## How the data flows
 
-1. `perception/yolo26_backend.py`：YOLO26m 只检测人，MapTracker 给每台相机一个编号。
-2. `perception/people_projection.py`：掩码加深度，投成地图上的 3D 框，并在同一编号上估计水平速度。
-3. `perception/hazards.py`：`build_hazards` 把人和这台机器人的半径收成禁区。Go2 是地面椭圆，Bee 是椭球。
-4. `planning/src/people.rs`：只接受 `ellipse` / `ellipsoid`，用它剪树。人离开或到期后，同一条清除逻辑把树枝接回去。
+1. `perception/yolo26_backend.py`: YOLO26m detects people only; MapTracker assigns per-camera track IDs.
+2. `perception/people_projection.py`: masks plus depth are projected into map-frame 3D boxes, and horizontal speed is estimated on the same track ID.
+3. `perception/hazards.py`: `build_hazards` folds the person's radius and this robot's radius into a hazard zone. Go2 gets a ground ellipse; Bee gets an ellipsoid.
+4. `planning/src/people.rs`: accepts only `ellipse` / `ellipsoid` and prunes the tree with it. When the person leaves or the hazard expires, the same clearing logic reattaches the pruned branches.
 
-2D 和 3D 已经按机器人的 `dimension` 分开。Go2 读地面椭圆，Bee 读椭球。
+2D and 3D are already split by the robot's `dimension`. Go2 reads the ground ellipse; Bee reads the ellipsoid.
 
-## 要换成的形状
+## The replacement shape
 
-人不动：不要拉长。禁区是人的半径加上这台机器人的半径。Go2 是地面上的圆，Bee 是同样半径、带高度的圆柱。
+Person standing still: no elongation. The hazard zone is the person's radius plus this robot's radius. For Go2 that is a disc on the ground; for Bee a vertical cylinder of the same radius with height.
 
-人在走：脚底按速度方向在地面上拉矩形。宽是人加机器人的直径，长度由速度决定，从脚底往前伸。这整块用来剪树。人停下后矩形消失，只留圆或圆柱。
+Person walking: pull a rectangle on the ground from the feet along the velocity direction. Width equals the person's plus the robot's diameter; length follows speed, extending forward from the feet. The whole rectangle prunes the tree. When the person stops, the rectangle disappears and only the disc/cylinder remains.
 
-矩形还没接上。`people.rs` 现在拒绝椭圆以外的形状。新形状要作为第二种输出留在 `perception/hazards.py`，并让 `people.rs` 认得它。椭圆先留着，方便对照。不要把人写进占据地图。
+The rectangle is not wired in yet. `people.rs` currently rejects anything but the ellipse family. Add the new shape as a second output kind in `perception/hazards.py` and teach `people.rs` to accept it. Keep the ellipse for side-by-side comparison. Never write people into the occupancy map.

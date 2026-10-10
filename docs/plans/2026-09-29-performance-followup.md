@@ -1,27 +1,27 @@
-# 双机 SMART3D 性能优化后续计划
+# Dual-Robot SMART3D Performance Follow-Up Plan
 
-日期：2026-09-29。状态更新：用户已授权并于本日部署状态/树分离和changed-key diff；另修复OHZ显示等待旧规划结果及远距同帧射线误清。详见[部署验证](../verification/2026-09-29-performance-ohz-farhit/README.md)。下面的地图分块、清障队列及采样频率实验仍是后续计划，未部署；保持640×360、SAM3总2 Hz。
+Date: 2026-09-29. Status update: the user has authorized and, as of today, deployed the state/tree separation and changed-key diff; also fixed the OHZ display waiting on stale planning results and far-range same-frame rays wrongly clearing cells. See [deployment verification](../verification/2026-09-29-performance-ohz-farhit/README.md). The map chunking, clearing-work queue, and sampling-rate experiments below are still follow-up plans, not deployed; keep 640×360 and SAM3 total 2 Hz.
 
-## 1. 已证实的成本及统计边界
+## 1. Established Costs and Statistical Boundaries
 
-参考 `docs/baselines/2026-09-29-dual-robot-sam3-stable/`：约50秒采样，地图约96.5万已观测体素，双雷达实际入图3.07/3.09 Hz，配置目标各5 Hz；最新融合雷达年龄P95约0.675/0.783秒。另约20秒、每秒一次抽到的不同规划结果，Go2/UAV完整规划平均约379/989 ms。这不是所有规划调用的无偏分布，不能直接归因于某个阶段。
+Reference `docs/baselines/2026-09-29-dual-robot-sam3-stable/`: about 50 seconds of sampling, roughly 965k observed voxels in the map, dual LiDAR actual ingest at 3.07/3.09 Hz against a configured target of 5 Hz each; latest fused-LiDAR age P95 about 0.675/0.783 seconds. In a separate ~20-second window with one distinct planning result sampled per second, full Go2/UAV planning averaged about 379/989 ms. This is not an unbiased distribution over all planning calls and cannot be directly attributed to any single stage.
 
-源码核实：
+Source-code findings:
 
-- `planning/src/voxel.rs:167` 每次增量先复制整个 `HashMap`，随后 `diff` 遍历新表并再次遍历旧表；输入已经是增量，处理仍包含全图工作。
-- `planning/src/lib.rs` 全树裁剪、清障维护、最终路径验证和整树边验证不全部计入50 ms局部修树预算。`include_tree=false` **仍执行完整树边碰撞验证**，只省节点/边JSON构造，不能宣称已经解决规划耗时。
-- `sim_io/runtime.py` 每次规划请求 `include_tree=true`，5 Hz状态文件包含完整树；`observability/ros_view.py` 已用2 Hz树发布，但树签名含 `received_wall/path_id`，每次规划回复都会使树缓存失效。
-- 本次只读瞬时样本：Go2规划器尚在故障恢复前、只有UAV一棵7,985节点/7,880边的树，`state.json` 为889,343 B；UAV树占868,391 B。删去树数组后的等价紧凑状态约20,983 B，减少约97.6%。这证明重复搬运存在，不代表可以省掉97.6%的总体运行时间。
-- 清障区域只按中心/半径浮点完全相等去重；每个清空体素都排恢复区域。Go2二维 `clear_center` 丢弃Z后仍接收所有高度的清障事件。原生恢复队列无同样的256上限；256上限属于另一个补采样队列。不能把两者混淆或直接丢弃队列尾部。
-- RGB-D每仿真帧生成，本次回调约20.6 Hz；深度实际消费约1.2 Hz/机，SAM3约0.9–1 Hz/机。SAM3当前总上限2 Hz；单轮含周边处理平均约323/338 ms，3 Hz已经接近平均处理预算。
+- `planning/src/voxel.rs:167` copies the entire `HashMap` on every increment before `diff` walks the new map and then walks the old map again; the input is already incremental, yet processing still does whole-map work.
+- `planning/src/lib.rs` full-tree pruning, clearing maintenance, final path validation, and whole-tree edge validation are not all counted inside the 50 ms partial tree-repair budget. `include_tree=false` **still performs full tree-edge collision validation**, only skipping node/edge JSON construction — this cannot be claimed to have solved planning latency.
+- `sim_io/runtime.py` issues every planning request with `include_tree=true`, and the 5 Hz state file contains the full tree; `observability/ros_view.py` already publishes the tree at 2 Hz, but the tree signature includes `received_wall/path_id`, so every planning reply invalidates the tree cache.
+- This is a read-only instantaneous sample: the Go2 planner was still in failure recovery, leaving only the UAV tree of 7,985 nodes/7,880 edges; `state.json` was 889,343 B, of which the UAV tree occupied 868,391 B. The equivalent compact state with the tree array removed is about 20,983 B, a reduction of about 97.6%. This proves the redundant transfer exists; it does not mean 97.6% of total runtime can be saved.
+- Clearing regions are deduplicated only by exact float equality of center/radius; every cleared voxel enqueues a recovery region. The Go2 2D `clear_center` drops Z yet still receives clearing events at all heights. The native recovery queue has no such 256 cap; the 256 cap belongs to a different re-sampling queue. The two must not be conflated, nor may queue tails simply be dropped.
+- RGB-D is generated per simulation frame with callbacks at about 20.6 Hz here; depth is actually consumed at about 1.2 Hz/robot and SAM3 at about 0.9–1 Hz/robot. SAM3's current total cap is 2 Hz; one round including peripheral processing averages about 323/338 ms, so 3 Hz is already close to the average processing budget.
 
-## 2. 先实施：状态与整树分离，保留全部碰撞验证
+## 2. Do First: Separate State from Full Tree, Keep All Collision Validation
 
-这是第一项低风险优化：**不改SMART3D算法、不改地图、不改输入频率、不关树导出与碰撞检查**，先去掉5 Hz状态中的重复树字节。
+This is the first low-risk optimization: **no changes to the SMART3D algorithm, the map, or input rates; do not disable tree export or collision checks** — first remove the duplicated tree bytes from the 5 Hz state.
 
-### 2.1 数据合同
+### 2.1 Data Contract
 
-高频 `state.json` 继续提供位姿、当前路径、目标、健康、map/people/dynamic revision和规划耗时；每台机器人增加结构化引用，例如：
+The high-frequency `state.json` keeps providing pose, current path, goal, health, map/people/dynamic revisions, and planning timings; each robot gains a structured reference, for example:
 
 ```json
 {
@@ -43,76 +43,76 @@
 }
 ```
 
-独立不可变文件只存实际导出的节点、父子边及场景/机器人/session/tree-instance/geometry身份。几何版本只在节点坐标、父子关系、tree_id或实际可见边改变时推进；可以先基于规范化导出内容指纹实现，不需要猜测底层是否改过树。更新的地图版本但几何内容相同时复用同一份几何文件，新的验证收据留在高频状态引用里。
+A separate immutable file stores only the actually exported nodes, parent-child edges, and the scene/robot/session/tree-instance/geometry identity. The geometry revision advances only when node coordinates, parent-child relations, tree_id, or actually visible edges change; it can first be implemented from a fingerprint of the canonicalized export content, with no need to guess whether the underlying tree was modified. When the map revision updates but the geometry content is identical, reuse the same geometry file; new validation receipts stay in the high-frequency state reference.
 
-写入顺序：接收并检查成功的原生规划结果 → 完整树写临时文件并原子替换为不可变版本文件 → 发布指向它的状态。不能先发布引用再补文件。不可变文件有小的保留窗口；垃圾回收不删当前引用，也不删仍处于读取宽限期的版本。读到版本竞争/缺失时重新读取最新状态重试，不把半份树当有效树。
+Write order: receive and check the successful native planning result → write the full tree to a temporary file and atomically replace the immutable versioned file → publish the state pointing to it. Never publish the reference before the file exists. Immutable files have a small retention window; garbage collection must not delete the currently referenced version, nor versions still inside a read grace period. On version race/missing file, re-read the latest state and retry; never treat half a tree as a valid tree.
 
-引用不是执行权限。执行仍用当前原生路径、当前地图和实时执行检查；不得让RViz快照成为控制输入。
+A reference is not execution authority. Execution keeps using the current native path, current map, and live execution checks; an RViz snapshot must not become a control input.
 
-### 2.2 RViz兼容与不闪烁
+### 2.2 RViz Compatibility and No Flicker
 
-- `AtomicJsonCache` 分别缓存高频状态与不可变树文件。先支持旧内嵌树格式读取，再让runtime切换新引用合同，避免部署次序导致空树。
-- 校验epoch、robot_id、session_id、tree_instance_id、geometry_revision、文件hash匹配；路径只能位于该run的树目录内。
-- 树发布仍为2 Hz；相同几何版本复用已构建的MarkerArray，**保持2 Hz ADD心跳**，使3秒Marker寿命不因树几何没有变化而到期。位姿/路径保持现有10 Hz轮询，状态源仍为5 Hz，不虚构10 Hz新的定位数据。
-- 新版本只删确实消失的marker ID；禁止每轮DELETEALL。epoch/session失效或原生panic明确失去有效树时，显式标记失效并移除对应显示，不能永远保留旧树伪装已恢复。
-- 瞬时读取竞争不先发布空树：重试同一个完整版本。只有确认当前合同无效、换场景或超过健康时限才失效，健康时限与现有3秒规划新鲜度协调。
-- 地图比树更新更快是已有异步事实；显示应保留验证版本和年龄，不能声称缓存树已经对未经过规划器的地图更新完成验证。原生路径最终验证与执行碰撞检查保持不变。
+- `AtomicJsonCache` caches the high-frequency state and the immutable tree files separately. Support reading the old embedded-tree format first, then switch the runtime to the new reference contract, so deployment ordering cannot produce an empty tree.
+- Validate that epoch, robot_id, session_id, tree_instance_id, geometry_revision, and the file hash all match; paths must stay inside that run's tree directory.
+- Tree publishing stays at 2 Hz; identical geometry revisions reuse the already-built MarkerArray, **keeping the 2 Hz ADD heartbeat**, so the 3-second Marker lifetime does not expire just because the tree geometry is unchanged. Pose/path keep the existing 10 Hz polling and the state source stays 5 Hz; do not fabricate 10 Hz localization data that does not exist.
+- A new version deletes only the marker IDs that actually disappeared; per-round DELETEALL is forbidden. When epoch/session becomes invalid or a native panic definitively loses the valid tree, explicitly mark it invalid and remove the corresponding display — never keep the old tree forever pretending to have recovered.
+- A transient read race must not publish an empty tree: retry the same complete version. Only invalidate on a confirmed invalid contract, scene change, or exceeding the health deadline, with the health deadline coordinated with the existing 3-second planning freshness.
+- The map updating faster than the tree is an existing asynchronous fact; the display should keep the validated version and age, and must not claim the cached tree is validated against map updates the planner has not seen. Native final path validation and execution collision checks remain unchanged.
 
-### 2.3 验收
+### 2.3 Acceptance
 
-无几何变化连续运行至少10秒，2 Hz树心跳不断，非初始化DELETEALL为0；删边/改根/新session/epoch切换都正确删旧显示。模拟树文件尚未落盘、hash错误、旧状态引用、worker失败，不能混入另一机器人或旧session的树。对比优化前后相同原生响应，`actual_tree_edges`集合一致、路径和碰撞检查次数一致。
+Run at least 10 seconds continuously with no geometry change, with the 2 Hz tree heartbeat unbroken and zero non-initialization DELETEALLs; edge deletion/reroot/new session/epoch switches all correctly remove the old display. With the tree file not yet on disk, a wrong hash, a stale state reference, or a worker failure, no tree from another robot or an old session may leak in. Comparing identical native responses before and after the optimization, the `actual_tree_edges` set matches, and path and collision-check counts match.
 
-测量状态文件字节数、每秒写入字节数、JSON编码/解码时间、publication P95、RViz回调P95、进程CPU。收益目标是这些指标显著下降；不能仅凭文件变小宣称规划时间已改善。
+Measure state-file bytes, bytes written per second, JSON encode/decode time, publication P95, RViz callback P95, and process CPU. The benefit target is a significant drop in these metrics; smaller files alone do not establish that planning time has improved.
 
-## 3. 第二步：增量分类先去全表diff，暂时保留clone
+## 3. Second Step: Increment Classification Removes the Full-Map Diff, Keep the Clone for Now
 
-在 `Map::delta` 解析和验证完全部changed/refresh输入后，只根据本轮changed key对应的旧值、新值生成 `Changes`：free/unknown→occupied为added；occupied→free为cleared；occupied→unknown为expired；时间刷新不产生几何变化。保留排序合同、重复key拒绝、revision/identity检查、先验证再提交的事务语义。先保留完整clone，避免一开始同时改存储、事务、碰撞查询三件事。
+After `Map::delta` fully parses and validates all changed/refresh inputs, build `Changes` using only the old and new values of this round's changed keys: free/unknown→occupied is added; occupied→free is cleared; occupied→unknown is expired; time refreshes produce no geometry change. Keep the sorting contract, duplicate-key rejection, revision/identity checks, and the validate-then-commit transaction semantics. Keep the full clone for now, to avoid changing storage, transactions, and collision queries all at once.
 
-增加分段计时：JSON解析、delta解析/clone/apply/diff、prune、clear maintenance、coverage、reroot/update、最终路径验证、整树验证、JSON构造/编码。现在的 `total_wall_ms` 在原生返回对象完成前记录，外层 `dump/write` 耗时需单独记录；runtime往返延迟可作端到端指标。
+Add stage timing: JSON parsing, delta parse/clone/apply/diff, prune, clear maintenance, coverage, reroot/update, final path validation, whole-tree validation, JSON construction/encoding. The current `total_wall_ms` is recorded before the native return object is complete; the outer `dump/write` time must be recorded separately; runtime round-trip latency can serve as an end-to-end metric.
 
-验收：随机生成快照/增量，与原 `clone+full diff` oracle逐项对比最终cells和added/cleared/expired；覆盖撤回unknown、restore后的首次观测、空delta、仅refresh、重复key、过期时间、revision gap、非法refresh和失败不改变原图。百万体素、几十/几千changed key做release离线基准，记录每阶段P50/P95和分配量。相同地图/动态约束下最终路径及每条导出的可见边仍需全碰撞验证通过。
+Acceptance: with randomly generated snapshots/increments, compare final cells and added/cleared/expired item by item against the original `clone+full diff` oracle; cover unknown-withdrawal, first observation after restore, empty delta, refresh-only, duplicate keys, expired timestamps, revision gaps, illegal refresh, and failure leaving the original map unchanged. Do release offline benchmarks at a million voxels with tens/thousands of changed keys, recording per-stage P50/P95 and allocations. Under the same map/dynamic constraints, the final path and every exported visible edge must still pass full collision validation.
 
-## 4. 后续才改：地图复制、清障队列、全树复查
+## 4. Only Later: Map Copying, Clearing Queue, Whole-Tree Recheck
 
-### 4.1 如果clone确实占主要成本
+### 4.1 If the Clone Really Dominates Cost
 
-当前 `Arc<Map>` 被原生checker持有，简单 `Arc::make_mut` 仍可能触发全量复制；不要当成已经解决。可比较分块不可变存储，只复制变更块，保持旧checker看到旧快照、整批验证失败不提交。需要实测新增间接查询对高频碰撞检查的影响，不能为了省clone让每个体素查询更慢。没有测得显著收益时维持前一步。
+The current `Arc<Map>` is held by the native checker, so a plain `Arc::make_mut` can still trigger a full copy; do not treat this as solved. A chunked immutable store could be compared, copying only changed chunks, with old checkers seeing the old snapshot and failed batch validation not committed. The impact of the added indirection on high-frequency collision queries must be measured; do not make every voxel query slower just to save the clone. Without measured significant benefit, keep the previous step.
 
-### 4.2 清障工作按机器人可能受影响范围入队
+### 4.2 Enqueue Clearing Work by the Region Possibly Affecting Each Robot
 
-先做精确相关性过滤：体素AABB必须可能与该机器人合法中心范围加机身包络相交；Go2固定Z用 `planar_z + body_offset ± body_half_extent`，UAV用飞行高度范围加机身包络。使用与现有碰撞检查相同的边界容差。只省不可能影响这个planner的维护工作，**共享地图的体素不删除**。
+First do precise relevance filtering: a voxel AABB must possibly intersect that robot's legal center range plus body envelope; Go2 fixed-Z uses `planar_z + body_offset ± body_half_extent`, UAV uses the flight altitude range plus body envelope. Use the same boundary tolerance as the existing collision checks. Only skip maintenance that cannot affect this planner; **voxels of the shared map are not deleted**.
 
-第二阶段才把邻近clear regions保守合并成固定空间块：合并查询范围必须覆盖原区域并集，保留最新dirty revision；被处理期间再变化的块不能误删工作。不要仅按中心取整并沿用原半径，否则会漏掉边缘旧树。现有确定性coverage采样点依赖区域中心/半径，恢复查询与补采样不能未经验证一起改。近机器人/当前路径优先，但远处工作必须有公平轮转，不能永久饿死。
+Only in a second stage conservatively merge nearby clear regions into fixed spatial chunks: the merged query range must cover the union of the original regions, keeping the latest dirty revision; chunks that change again while being processed must not lose work. Do not just round the center to a grid and reuse the old radius, or edges of old trees will be missed. The existing deterministic coverage sampling points depend on region center/radius; recovery queries and re-sampling must not be changed together without verification. Near-robot/current-path work goes first, but far-away work must have fair rotation and never starve permanently.
 
-验收：去障碍后的历史边恢复延迟P50/P95、pending区域随时间是否有界、区域/节点扫描量、新增节点数、当前路径稳定性；原有static_forest_tests全部通过，另覆盖高空清除不影响Go2、Go2真实高度带仍恢复、合法飞行高度体素仍影响UAV、边界区域合并不漏、旧边阻塞未消失时绝不复活。不通过扩大每轮预算掩盖队列积压。
+Acceptance: historical-edge recovery latency P50/P95 after obstacle removal, whether pending regions stay bounded over time, region/node scan counts, new node counts, current-path stability; all existing static_forest_tests pass, plus coverage of high-altitude clearing not affecting Go2, Go2's real altitude band still recovering, voxels at legal flight altitudes still affecting the UAV, boundary-region merging missing nothing, and blocked old edges never reviving while the blocker persists. Do not hide queue backlog by enlarging the per-round budget.
 
-### 4.3 全树边校验缓存是更后面的优化
+### 4.3 Whole-Tree Edge Validation Cache Is an Even Later Optimization
 
-最终执行路径每轮继续用完整最新checker验证。若要减少整树扫描，必须建立边AABB/空间块依赖索引并对受影响边失效；新增/改父边、目标改根、未知→占用、动态机器人/人物几何改变均需覆盖。候选筛选只能是无漏检的宽阶段，精确碰撞检查不能取消。可见边必须有当前几何约束下的验证证据；随机地图增删、人物移动、长边跨障碍对比全扫描oracle，不能出现false negative。第一小步不做这项。
+The final execution path keeps being validated each round with the full latest checker. To reduce whole-tree scans, an edge AABB/spatial-chunk dependency index with invalidation of affected edges must be built; new/rewired edges, goal reroots, unknown→occupied, and dynamic robot/people geometry changes must all be covered. Candidate filtering can only be a miss-free broad phase; exact collision checks must not be canceled. Visible edges must carry validation evidence under current geometry constraints; against a full-scan oracle across random map insert/delete, people movement, and long edges crossing obstacles, no false negative may appear. Not doing this in the first small step.
 
-## 5. 相机和SAM3拆成两个独立实验
+## 5. Split Camera and SAM3 into Two Independent Experiments
 
-用户最新决定：继续使用640×360，不改640×480，避免增加SAM3负担。640×480分辨率对照已撤销，不实施。以下10 Hz采集和SAM3总2→3 Hz仅保留为后续可选实验方案，本轮没有批准或执行频率更改；当前先解决树消失根因。
+The user's latest decision: keep 640×360 and do not switch to 640×480, to avoid increasing SAM3 load. The 640×480 resolution comparison is withdrawn and will not be run. The 10 Hz capture and SAM3 total 2→3 Hz below remain only as optional follow-up experiment proposals; no rate change has been approved or executed this round; the current priority is the root cause of tree disappearance.
 
-实验A：只把两台前向RGB和配准深度 `sensor_tick` 同时从0改成0.1；不改分辨率、相机安装、LiDAR、辅助深度、建图消费频率、SAM3总2 Hz。同一数值不自动保证RGB/深度同帧，需要现有同frame_seq和拍摄位姿校验继续拒绝错配，实际统计配对率。传感器创建参数通常需要重建对应传感器/本实验实例，先在有地图快照和恢复点的受控窗口做，不能为实验意外抹掉当前地图。
+Experiment A: only change both robots' forward RGB and registered depth `sensor_tick` from 0 to 0.1 simultaneously; do not change resolution, camera mounting, LiDAR, auxiliary depth, mapping consumption rates, or SAM3 total 2 Hz. The same value does not automatically guarantee RGB/depth same-frame pairing — the existing same-frame_seq and capture-pose checks must keep rejecting mismatches, and the actual pairing rate must be measured. Sensor creation parameters generally require rebuilding the corresponding sensors/this experiment's instance; do it first in a controlled window with a map snapshot and restore point, and never accidentally wipe the current map for an experiment.
 
-实验B：固定实验A获胜配置或回到原配置，只把SAM3总2→3 Hz；单模型两session公平轮换仍保持。当前约0.33秒平均完整处理已接近每轮0.333秒，3 Hz可能只是取消余量并加大尾延迟。不要同时提高输入分辨率或追踪对象数。
+Experiment B: fixing experiment A's winning configuration or reverting to the original one, change only SAM3 total 2→3 Hz; the single-model two-session fair rotation stays. The current ~0.33 s average full processing is already close to the 0.333 s per round, so 3 Hz may merely remove margin and widen tail latency. Do not raise input resolution or tracked-object counts at the same time.
 
-每个候选先预热，再固定人物路线/速度/机器人路线进行A-B-A对照，每段至少60–120秒，多次重复。记录实际而非配置的：
+Pre-warm each candidate, then fix pedestrian routes/speeds/robot routes for an A-B-A comparison, each segment at least 60–120 seconds, repeated multiple times. Record actual, not configured:
 
-- UE仿真/墙钟比、RGB/深度实际回调Hz、同帧配对失败率、最新画面采集年龄P95/P99。
-- SAM3每源实际处理Hz、公平性、完整处理P95、queue等待、geometry TTL过期/拒绝占比、有效速度建立耗时和OHZ有效覆盖率。
-- 双雷达实际融合Hz与最新证据年龄P95/P99、规划完整调用分段P95/P99、控制RPC延迟、sensor_stale/planner_stale次数。
-- GPU计算/显存峰值、CPU和RSS、真实行驶进度、最近距离与碰撞/阻挡次数。UE行人真值若使用只能作离线评分，不进入估计器。
+- UE simulation/wall-clock ratio, RGB/depth actual callback Hz, same-frame pairing failure rate, latest frame capture age P95/P99.
+- SAM3 actual processing Hz per source, fairness, full-processing P95, queue wait, geometry TTL expiry/rejection share, time to establish valid velocity, and OHZ effective coverage.
+- Dual LiDAR actual fused Hz and latest-evidence age P95/P99, full planning call stage breakdown P95/P99, control RPC latency, sensor_stale/planner_stale counts.
+- GPU compute/VRAM peaks, CPU and RSS, real driving progress, closest distance, and collision/blocking counts. UE pedestrian ground truth, if used, is offline scoring only and must not enter estimators.
 
-保留条件：功能合同无退化、OHZ连续性不下降、雷达/规划尾延迟不显著变坏，且资源或端到端延迟出现可重复收益。3 Hz若持续过载，保留2 Hz；下一步可以单独试2.5 Hz，不以配置数字冒充提速。相机10 Hz没有收益则恢复0，保留当前用户认可观感。
+Retention conditions: no functional contract regression, no drop in OHZ continuity, no significant worsening of LiDAR/planning tail latency, and a reproducible gain in resources or end-to-end latency. If 3 Hz stays overloaded, keep 2 Hz; a separate 2.5 Hz trial can come next — do not pass configured numbers off as speedups. If camera 10 Hz yields no gain, revert to 0 and keep the currently user-approved visual quality.
 
-## 6. 明确实施顺序
+## 6. Explicit Implementation Order
 
-1. 独立完成当前panic正确性修复并确认两机运动/树恢复，保留地图。
-2. 状态/树文件分离与版本缓存，原生完整校验完全保留。
-3. 分段计时＋changed-key diff（保留clone），离线等价验证后部署。
-4. 根据实际耗时选择地图分块复制或清障相关性过滤/合并，不同时大改。
-5. 最后相机10 Hz、SAM3总3 Hz分别A/B。
+1. Independently finish the current panic correctness fix and confirm both robots' motion/tree recovery, preserving the map.
+2. State/tree file separation with version caching, with native full validation fully preserved.
+3. Stage timing + changed-key diff (clone kept), deployed after offline equivalence verification.
+4. Depending on measured cost, choose map chunked copying or clearing relevance filtering/merging — not both major changes at once.
+5. Finally A/B camera 10 Hz and SAM3 total 3 Hz separately.
 
-每步保存源文件校验值、独立测试和同条件性能数据。不要修改旧Town10、Factory或单机空场工程，不调高机器人行驶速度，不缩小9/40 m感知范围，不降低体素/树密度，不削弱真实机身和临时伙伴避碰。
+For each step, keep source-file checksums, independent tests, and same-condition performance data. Do not modify the old Town10, Factory, or single-robot empty-scene projects; do not raise robot driving speed; do not shrink the 9/40 m perception range; do not reduce voxel/tree density; do not weaken real body and transient peer collision avoidance.
