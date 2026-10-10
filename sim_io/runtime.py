@@ -304,7 +304,9 @@ class Runtime:
     def remove_body_hits(local,extrinsic,cfg):
         if len(local)==0:return local
         body=local@extrinsic[:3,:3].T+extrinsic[:3,3]
-        half=np.array(cfg['body_half_extents_m'])+.30;offset=np.array(cfg['body_offset_m'])
+        # Per-robot margin: large enough to swallow returns from parts that sit
+        # outside the configured body box (landing gear, sensor masts, props).
+        half=np.array(cfg['body_half_extents_m'])+float(cfg.get('self_filter_margin_m',.30));offset=np.array(cfg['body_offset_m'])
         return local[np.any(np.abs(body-offset)>half,axis=1)]
 
     def now_sim(self):

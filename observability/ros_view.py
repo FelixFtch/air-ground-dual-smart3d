@@ -299,7 +299,10 @@ def scene_specs(state, display, *, max_edges=30000, max_voxels=100000, issues=()
             except (ValueError,TypeError,KeyError):continue
             rid=robot['robot_id'];label=hazard['id'];center=hazard['center_xyz'];axes=hazard['axes_xyz'];radii=hazard['semi_axes_m']
             yaw=math.atan2(axes[0][1],axes[0][0]);dim=hazard['dimension']
-            color,alpha=(.25,.95,.48),.19 if dim==2 else (.85,.42,.08),.45
+            if dim==2:
+                color,alpha=(.25,.95,.48),.19
+            else:
+                color,alpha=(.85,.42,.08),.45
             kind='cube' if hazard.get('shape')=='box' else 'sphere'
             markers['people'].append(dict(ns=rid+'/ohz/'+label,kind=kind,position=center,
                 scale=[2*radii[0],2*radii[1],.08 if dim==2 else 2*radii[2]],yaw=yaw,color=color,alpha=alpha))

@@ -29,3 +29,4 @@ execution_guard:
     latest occupied map
 notes: Actual UE collider half-size .48/.48/.34m, planner XY envelope covers yaw;
   kinematic flight, not PX4.
+self_filter_margin_m: 0.45
