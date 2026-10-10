@@ -1,0 +1,184 @@
+{
+  "recommendation": "Keep std::map; reuse timestamp iterator and saturated leaf pointer only. Do not adopt unordered metadata index: no consistent speed advantage, extra memory and save sorting.",
+  "recommended_patch": "/tmp/octo_index/saturated.patch",
+  "production_source_changed": false,
+  "frozen_real_fixture_frames_per_variant": 80,
+  "leaf_count": 858402,
+  "exact_snapshot_changes_ot_metadata_parity_all_variants": true,
+  "candidate_existing_tests_passed": 28,
+  "randomized_models": [
+    {
+      "model": "normal",
+      "frames": 32,
+      "exact_integrate_query_snapshot_parity": true,
+      "byte_exact_saved_ot": true,
+      "restored_snapshot_parity": true,
+      "byte_exact_metadata": true
+    },
+    {
+      "model": "simulation",
+      "frames": 32,
+      "exact_integrate_query_snapshot_parity": true,
+      "byte_exact_saved_ot": true,
+      "restored_snapshot_parity": true,
+      "byte_exact_metadata": true
+    }
+  ],
+  "results": [
+    {
+      "name": "baseline",
+      "elapsed_s": 3.9106179849477485,
+      "leaf_count": 858402,
+      "rss_before": 912310272,
+      "rss_after": 912375808,
+      "snapshot_digest": "d2a7753a921ca7f21becb31f648e3f4508c44d4d8a1448fa489ca518d75d20e0",
+      "saved_ot_sha256": "fe00b1eb2fc883fd94f771689733f85e61b708b5e708b91065e900b3eb2d5d15",
+      "metadata_sha256": "c96622d60bb98ba59dba3a76b70ea765df23010634a468b02c6cffde13971e8c",
+      "steady": {
+        "native_ms": {
+          "mean": 19.367470228571428,
+          "median": 18.1497725,
+          "p95": 36.444917,
+          "max": 60.351466
+        },
+        "updates_ms": {
+          "mean": 9.003897171428571,
+          "median": 8.3009855,
+          "p95": 17.764082,
+          "max": 42.558799
+        },
+        "await_ms": {
+          "mean": 25.324290227477572,
+          "median": 24.86451150616631,
+          "p95": 45.71584996301681,
+          "max": 70.02129196189344
+        }
+      }
+    },
+    {
+      "name": "reuse",
+      "elapsed_s": 3.649988727993332,
+      "leaf_count": 858402,
+      "rss_before": 912334848,
+      "rss_after": 912400384,
+      "snapshot_digest": "d2a7753a921ca7f21becb31f648e3f4508c44d4d8a1448fa489ca518d75d20e0",
+      "saved_ot_sha256": "fe00b1eb2fc883fd94f771689733f85e61b708b5e708b91065e900b3eb2d5d15",
+      "metadata_sha256": "c96622d60bb98ba59dba3a76b70ea765df23010634a468b02c6cffde13971e8c",
+      "steady": {
+        "native_ms": {
+          "mean": 17.171882585714286,
+          "median": 17.207532999999998,
+          "p95": 32.776469,
+          "max": 66.432613
+        },
+        "updates_ms": {
+          "mean": 7.567633028571429,
+          "median": 6.993622,
+          "p95": 15.915324,
+          "max": 46.3717
+        },
+        "await_ms": {
+          "mean": 23.246465229229734,
+          "median": 25.870236509945244,
+          "p95": 40.60651804320514,
+          "max": 76.65561197791249
+        }
+      }
+    },
+    {
+      "name": "hashed",
+      "elapsed_s": 3.819383359979838,
+      "leaf_count": 858402,
+      "rss_before": 923897856,
+      "rss_after": 923963392,
+      "snapshot_digest": "d2a7753a921ca7f21becb31f648e3f4508c44d4d8a1448fa489ca518d75d20e0",
+      "saved_ot_sha256": "fe00b1eb2fc883fd94f771689733f85e61b708b5e708b91065e900b3eb2d5d15",
+      "metadata_sha256": "c96622d60bb98ba59dba3a76b70ea765df23010634a468b02c6cffde13971e8c",
+      "steady": {
+        "native_ms": {
+          "mean": 18.31076744285714,
+          "median": 17.524048999999998,
+          "p95": 35.21894,
+          "max": 57.798725
+        },
+        "updates_ms": {
+          "mean": 8.360298971428572,
+          "median": 7.792638,
+          "p95": 16.759318,
+          "max": 31.081508
+        },
+        "await_ms": {
+          "mean": 24.739420746586152,
+          "median": 24.083069467451423,
+          "p95": 44.871210935525596,
+          "max": 73.16006999462843
+        }
+      }
+    },
+    {
+      "name": "saturated",
+      "elapsed_s": 4.080582505906932,
+      "leaf_count": 858402,
+      "rss_before": 912334848,
+      "rss_after": 912400384,
+      "snapshot_digest": "d2a7753a921ca7f21becb31f648e3f4508c44d4d8a1448fa489ca518d75d20e0",
+      "saved_ot_sha256": "fe00b1eb2fc883fd94f771689733f85e61b708b5e708b91065e900b3eb2d5d15",
+      "metadata_sha256": "c96622d60bb98ba59dba3a76b70ea765df23010634a468b02c6cffde13971e8c",
+      "steady": {
+        "native_ms": {
+          "mean": 18.213879242857143,
+          "median": 16.103822,
+          "p95": 34.438049,
+          "max": 54.515872
+        },
+        "updates_ms": {
+          "mean": 7.0019575142857144,
+          "median": 6.6339500000000005,
+          "p95": 14.998338,
+          "max": 17.836881
+        },
+        "await_ms": {
+          "mean": 24.64548528161166,
+          "median": 22.295137983746827,
+          "p95": 43.84013905655593,
+          "max": 69.38228395301849
+        }
+      }
+    },
+    {
+      "name": "combined",
+      "elapsed_s": 3.6992970110150054,
+      "leaf_count": 858402,
+      "rss_before": 923873280,
+      "rss_after": 923938816,
+      "snapshot_digest": "d2a7753a921ca7f21becb31f648e3f4508c44d4d8a1448fa489ca518d75d20e0",
+      "saved_ot_sha256": "fe00b1eb2fc883fd94f771689733f85e61b708b5e708b91065e900b3eb2d5d15",
+      "metadata_sha256": "c96622d60bb98ba59dba3a76b70ea765df23010634a468b02c6cffde13971e8c",
+      "steady": {
+        "native_ms": {
+          "mean": 16.41349512857143,
+          "median": 16.684028,
+          "p95": 31.593966,
+          "max": 35.100128
+        },
+        "updates_ms": {
+          "mean": 7.1879238857142855,
+          "median": 7.049613,
+          "p95": 14.201903,
+          "max": 17.093808
+        },
+        "await_ms": {
+          "mean": 22.443924811003463,
+          "median": 24.930030514951795,
+          "p95": 39.45203707553446,
+          "max": 45.02069193404168
+        }
+      }
+    }
+  ],
+  "limits": [
+    "Timing is noisy on shared live machine; total pipeline improvement is not established for the saturated variant.",
+    "Native update-loop median improves8.30ms\u21926.63ms and native total median18.15ms\u219216.10ms; this is a bounded micro-optimization, not proof of 5Hz live throughput.",
+    "Saturation condition matches installed OctoMap early return under the already enforced hit>0.5 and miss<0.5 probability contract; timestamps and map revisions still update."
+  ]
+}

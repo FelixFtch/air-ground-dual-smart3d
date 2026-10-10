@@ -1,0 +1,13 @@
+{
+  "scope": "same captured live plan, repeated identical publication offline; not total planner speed",
+  "old_bytes": 2290889,
+  "new_bytes": 30470,
+  "first_snapshot_ms": 33.78280799370259,
+  "old_encode_p50_ms": 12.148412002716213,
+  "cached_compact_encode_p50_ms": 0.13535149628296494,
+  "nodes": [
+    11710,
+    8796
+  ],
+  "reconstructed_exact": true
+}

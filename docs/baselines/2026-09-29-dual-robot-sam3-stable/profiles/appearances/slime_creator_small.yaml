@@ -1,0 +1,11 @@
+schema: air_ground.appearance/v1
+id: slime_creator_small
+asset: /Game/Slime/Mesh/SK_Slime
+asset_type: skeletal_mesh
+visual_scale: 0.8096
+target_height_m: 0.35
+preferred_mobility: ground_xy_yaw
+root_motion_drives_actor: false
+runtime_status: preview_verified_not_actor_registered
+notes: 35 cm native-height scaling; previous gallery was110cm. Appearance has no control
+  over sensor extrinsics.

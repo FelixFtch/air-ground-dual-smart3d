@@ -1,0 +1,110 @@
+{
+  "backend_info": {
+    "backend": "ujson",
+    "version": "5.12.1",
+    "path": "/data/robotics/air_ground_smart3d/runtime/python_deps/ujson.cpython-310-x86_64-linux-gnu.so",
+    "sha256": "2967cb08d9454085e9ed947e4d4598a59d50c817d383b8dc0c2d5fa4737eae3b"
+  },
+  "gc_thresholds": [
+    7000,
+    10,
+    10
+  ],
+  "gc_enabled": true,
+  "rows": [
+    {
+      "document": "actual_state",
+      "backend": "stdlib",
+      "input_bytes": 1178543,
+      "encode_ms": {
+        "median": 14.057499472983181,
+        "min": 13.414404005743563,
+        "max": 19.259218010120094
+      },
+      "decode_ms": {
+        "median": 8.393930969759822,
+        "min": 7.964032934978604,
+        "max": 10.56132698431611
+      }
+    },
+    {
+      "document": "actual_state",
+      "backend": "isolated_ujson",
+      "input_bytes": 1178543,
+      "encode_ms": {
+        "median": 6.280940026044846,
+        "min": 5.97002194263041,
+        "max": 9.893281967379153
+      },
+      "decode_ms": {
+        "median": 4.8701640334911644,
+        "min": 4.547405987977982,
+        "max": 7.853024988435209
+      }
+    },
+    {
+      "document": "actual_display",
+      "backend": "stdlib",
+      "input_bytes": 616683,
+      "encode_ms": {
+        "median": 8.526673482265323,
+        "min": 8.313942002132535,
+        "max": 9.192539029754698
+      },
+      "decode_ms": {
+        "median": 5.139751476235688,
+        "min": 4.943539039231837,
+        "max": 5.387015989981592
+      }
+    },
+    {
+      "document": "actual_display",
+      "backend": "isolated_ujson",
+      "input_bytes": 616683,
+      "encode_ms": {
+        "median": 4.886327486019582,
+        "min": 4.800027934834361,
+        "max": 5.435430910438299
+      },
+      "decode_ms": {
+        "median": 3.2856420148164034,
+        "min": 3.24381107930094,
+        "max": 3.591128974221647
+      }
+    },
+    {
+      "document": "refresh_500k",
+      "backend": "stdlib",
+      "input_bytes": 5597908,
+      "encode_ms": {
+        "median": 77.14114448754117,
+        "min": 73.87820596341044,
+        "max": 107.78423701412976
+      },
+      "decode_ms": {
+        "median": 64.56409808015451,
+        "min": 62.18217802233994,
+        "max": 67.18174298293889
+      }
+    },
+    {
+      "document": "refresh_500k",
+      "backend": "isolated_ujson",
+      "input_bytes": 5597908,
+      "encode_ms": {
+        "median": 42.37595549784601,
+        "min": 40.25344201363623,
+        "max": 66.4182739565149
+      },
+      "decode_ms": {
+        "median": 44.57396792713553,
+        "min": 41.216477984562516,
+        "max": 92.85369701683521
+      }
+    }
+  ],
+  "exact_decoded_state_parity": true,
+  "runtime_source": "/data/robotics/air_ground_smart3d/runtime/runs/f119e434f4cb41dca8d8c33836813efd",
+  "peak_rss_bytes": 251969536,
+  "scope": "offline codec only; no live services changed; snapshots captured once; generated 500000 refreshed coordinate keys represent large native deltas; GC remains enabled, full collection before each encode excluded from timing"
+}

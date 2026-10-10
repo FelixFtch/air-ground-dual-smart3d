@@ -1,0 +1,43 @@
+{
+  "epoch": "6f3d6f387a094a3ba8e2f96dcab7957c",
+  "before": [
+    0.560603678226471,
+    0.655252993106842,
+    0.330000011920929
+  ],
+  "requested": [
+    0.560603678226471,
+    0.6952529931068421,
+    0.330000011920929
+  ],
+  "amount_m": 0.04,
+  "initial_overlap_cells": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      2
+    ]
+  ],
+  "guard": {
+    "ok": true,
+    "reason": "fresh_free_swept_volume",
+    "blocked_key": null,
+    "checked_cells": 60,
+    "initial_volume_exempt_cells": 48,
+    "method": "continuous_swept_aabb"
+  },
+  "rpc_error": "",
+  "map_edited": false,
+  "tree_reset": false,
+  "tree_instance": 1
+}

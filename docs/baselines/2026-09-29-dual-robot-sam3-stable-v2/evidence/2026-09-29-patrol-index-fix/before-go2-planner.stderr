@@ -1,0 +1,4 @@
+
+thread 'main' (1061535) panicked at /home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/kiddo-5.0.3/src/float/construction.rs:223:25:
+Too many items with the same position on one axis. Bucket size must be increased to at least 1 more than the number of items with the same position on one axis.
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

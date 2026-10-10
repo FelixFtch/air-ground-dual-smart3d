@@ -1,0 +1,37 @@
+{
+  "change": "Keep every distinct measured LiDAR ray; only identical endpoints are removed before native traversal. Near-hit and far-free geometry retained. Protected surfaces remain voxel-deduplicated. Native hit/free KeySets still update each voxel at most once per frame.",
+  "files": [
+    {
+      "path": "/data/robotics/air_ground_smart3d/sim_io/lidar_rays.py",
+      "sha256": "f6389541944082183e7435b3481d25de7888913ae734074b332706e0ef237021"
+    },
+    {
+      "path": "/data/robotics/air_ground_smart3d/tests/test_lidar_rays.py",
+      "sha256": "3f1159b605a28e150e52b793971abedec300520effa96909733dcf9cbd28af41"
+    },
+    {
+      "path": "/data/robotics/air_ground_smart3d/tests/test_lidar_ray_coverage.py",
+      "sha256": "cfb90eb816deecdf15e92fc5f73b9fd7e80d61c9c475a59dd6176b5d74f6b2ab"
+    }
+  ],
+  "tests": "56 passed, 11 subtests passed; no simulator started/restarted; production native binary used only in independent map processes.",
+  "regressions": [
+    "near and far distinct rays share endpoint voxel but cross different intermediate occupied cells",
+    "exact endpoint duplicates remain removed",
+    "same-frame real hit still wins over retained free geometry"
+  ],
+  "stats_added": [
+    "ray_geometry_policy=all_distinct_measured_rays",
+    "hit_ray_count",
+    "free_ray_count",
+    "total_ray_count"
+  ],
+  "compatibility": "Existing stats unique_hit_voxels and unique_free_endpoint_voxels still count voxels, not ray count. Structured frame and legacy 3-tuple API unchanged. No profile/runtime/native modification by this agent.",
+  "benchmark": "/tmp/air_ground_lidar_ray_coverage_benchmark_20260929.json",
+  "benchmark_limit": "Preview clouds have at most 5000 points; synthetic 24000 distinct near rays are a pressure fixture, not a full live fusion measurement. Report includes preparation, IPC integrate, and execution MapCache apply under host contention. No raw sensor frames recorded.",
+  "backup": "/tmp/air_ground_lidar_ray_coverage_before_20260929.py",
+  "backup_note": "Baseline reconstructed after initial edit by exact inverse of scoped edit; not a pre-edit file copy. Disclosure: /tmp/air_ground_lidar_ray_coverage_backup_20260929.txt",
+  "remaining": "Proven ray-coverage omission is fixed, but lack of measured free evidence, aliasing, and known-far hit asymmetry are separate concerns. This is not a claim that all live trails have been eliminated.",
+  "mixed_benchmark": "/tmp/air_ground_lidar_ray_coverage_mixed_benchmark_20260929.json",
+  "mixed_benchmark_summary": "Synthetic 12000 near +8000 far (horizontal range20-40m) distinct returns: prepare+fields+native IPC+MapCache apply total P50 328.3ms before,378.2ms after; P95 361.1ms before,407.4ms after. Not a measured live scheduler latency."
+}

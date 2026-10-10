@@ -1,0 +1,376 @@
+{
+  "binary": "/tmp/air_ground_far_hit_build/octomap_service",
+  "independent_fixture": true,
+  "not_actual_bluebeam_trace": true,
+  "cases": [
+    {
+      "miss": 0.1,
+      "clamp_max": 0.88,
+      "alternate": false,
+      "first_free": {
+        "step": 1,
+        "misses": 1
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "evidence": "miss",
+          "misses": 1,
+          "log_odds": -0.20479440689086914,
+          "state": "free"
+        }
+      ]
+    },
+    {
+      "miss": 0.25,
+      "clamp_max": 0.88,
+      "alternate": false,
+      "first_free": {
+        "step": 2,
+        "misses": 2
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "evidence": "miss",
+          "misses": 1,
+          "log_odds": 0.8938179016113281,
+          "state": "occupied"
+        },
+        {
+          "step": 2,
+          "evidence": "miss",
+          "misses": 2,
+          "log_odds": -0.20479440689086914,
+          "state": "free"
+        }
+      ]
+    },
+    {
+      "miss": 0.3,
+      "clamp_max": 0.88,
+      "alternate": false,
+      "first_free": {
+        "step": 3,
+        "misses": 3
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "evidence": "miss",
+          "misses": 1,
+          "log_odds": 1.145132303237915,
+          "state": "occupied"
+        },
+        {
+          "step": 2,
+          "evidence": "miss",
+          "misses": 2,
+          "log_odds": 0.29783445596694946,
+          "state": "occupied"
+        },
+        {
+          "step": 3,
+          "evidence": "miss",
+          "misses": 3,
+          "log_odds": -0.5494633913040161,
+          "state": "free"
+        }
+      ]
+    },
+    {
+      "miss": 0.4,
+      "clamp_max": 0.88,
+      "alternate": false,
+      "first_free": {
+        "step": 5,
+        "misses": 5
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "evidence": "miss",
+          "misses": 1,
+          "log_odds": 1.5869650840759277,
+          "state": "occupied"
+        },
+        {
+          "step": 2,
+          "evidence": "miss",
+          "misses": 2,
+          "log_odds": 1.18149995803833,
+          "state": "occupied"
+        },
+        {
+          "step": 3,
+          "evidence": "miss",
+          "misses": 3,
+          "log_odds": 0.7760348320007324,
+          "state": "occupied"
+        },
+        {
+          "step": 4,
+          "evidence": "miss",
+          "misses": 4,
+          "log_odds": 0.37056973576545715,
+          "state": "occupied"
+        },
+        {
+          "step": 5,
+          "evidence": "miss",
+          "misses": 5,
+          "log_odds": -0.034895360469818115,
+          "state": "free"
+        }
+      ]
+    },
+    {
+      "miss": 0.1,
+      "clamp_max": 0.7,
+      "alternate": false,
+      "first_free": {
+        "step": 1,
+        "misses": 1
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "evidence": "miss",
+          "misses": 1,
+          "log_odds": -1.3499267101287842,
+          "state": "free"
+        }
+      ]
+    },
+    {
+      "miss": 0.25,
+      "clamp_max": 0.7,
+      "alternate": false,
+      "first_free": {
+        "step": 1,
+        "misses": 1
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "evidence": "miss",
+          "misses": 1,
+          "log_odds": -0.2513144612312317,
+          "state": "free"
+        }
+      ]
+    },
+    {
+      "miss": 0.3,
+      "clamp_max": 0.7,
+      "alternate": false,
+      "first_free": {
+        "step": 2,
+        "misses": 2
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "evidence": "miss",
+          "misses": 1,
+          "log_odds": 0.0,
+          "state": "occupied"
+        },
+        {
+          "step": 2,
+          "evidence": "miss",
+          "misses": 2,
+          "log_odds": -0.8472978472709656,
+          "state": "free"
+        }
+      ]
+    },
+    {
+      "miss": 0.4,
+      "clamp_max": 0.7,
+      "alternate": false,
+      "first_free": {
+        "step": 3,
+        "misses": 3
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "evidence": "miss",
+          "misses": 1,
+          "log_odds": 0.4418327510356903,
+          "state": "occupied"
+        },
+        {
+          "step": 2,
+          "evidence": "miss",
+          "misses": 2,
+          "log_odds": 0.03636765480041504,
+          "state": "occupied"
+        },
+        {
+          "step": 3,
+          "evidence": "miss",
+          "misses": 3,
+          "log_odds": -0.36909744143486023,
+          "state": "free"
+        }
+      ]
+    }
+  ],
+  "far_hit_support_issue": [
+    {
+      "miss": 0.25,
+      "clamp_max": 0.88,
+      "alternate": true,
+      "first_free": {
+        "step": 3,
+        "misses": 2
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "evidence": "miss",
+          "misses": 1,
+          "log_odds": 0.8938179016113281,
+          "state": "occupied"
+        },
+        {
+          "step": 2,
+          "evidence": "real_far_hit",
+          "misses": 1,
+          "log_odds": 0.8938179016113281,
+          "state": "occupied"
+        },
+        {
+          "step": 3,
+          "evidence": "miss",
+          "misses": 2,
+          "log_odds": -0.20479440689086914,
+          "state": "free"
+        }
+      ]
+    },
+    {
+      "miss": 0.3,
+      "clamp_max": 0.88,
+      "alternate": true,
+      "first_free": {
+        "step": 5,
+        "misses": 3
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "evidence": "miss",
+          "misses": 1,
+          "log_odds": 1.145132303237915,
+          "state": "occupied"
+        },
+        {
+          "step": 2,
+          "evidence": "real_far_hit",
+          "misses": 1,
+          "log_odds": 1.145132303237915,
+          "state": "occupied"
+        },
+        {
+          "step": 3,
+          "evidence": "miss",
+          "misses": 2,
+          "log_odds": 0.29783445596694946,
+          "state": "occupied"
+        },
+        {
+          "step": 4,
+          "evidence": "real_far_hit",
+          "misses": 2,
+          "log_odds": 0.29783445596694946,
+          "state": "occupied"
+        },
+        {
+          "step": 5,
+          "evidence": "miss",
+          "misses": 3,
+          "log_odds": -0.5494633913040161,
+          "state": "free"
+        }
+      ]
+    },
+    {
+      "miss": 0.4,
+      "clamp_max": 0.88,
+      "alternate": true,
+      "first_free": {
+        "step": 9,
+        "misses": 5
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "evidence": "miss",
+          "misses": 1,
+          "log_odds": 1.5869650840759277,
+          "state": "occupied"
+        },
+        {
+          "step": 2,
+          "evidence": "real_far_hit",
+          "misses": 1,
+          "log_odds": 1.5869650840759277,
+          "state": "occupied"
+        },
+        {
+          "step": 3,
+          "evidence": "miss",
+          "misses": 2,
+          "log_odds": 1.18149995803833,
+          "state": "occupied"
+        },
+        {
+          "step": 4,
+          "evidence": "real_far_hit",
+          "misses": 2,
+          "log_odds": 1.18149995803833,
+          "state": "occupied"
+        },
+        {
+          "step": 5,
+          "evidence": "miss",
+          "misses": 3,
+          "log_odds": 0.7760348320007324,
+          "state": "occupied"
+        },
+        {
+          "step": 6,
+          "evidence": "real_far_hit",
+          "misses": 3,
+          "log_odds": 0.7760348320007324,
+          "state": "occupied"
+        },
+        {
+          "step": 7,
+          "evidence": "miss",
+          "misses": 4,
+          "log_odds": 0.37056973576545715,
+          "state": "occupied"
+        },
+        {
+          "step": 8,
+          "evidence": "real_far_hit",
+          "misses": 4,
+          "log_odds": 0.37056973576545715,
+          "state": "occupied"
+        },
+        {
+          "step": 9,
+          "evidence": "miss",
+          "misses": 5,
+          "log_odds": -0.034895360469818115,
+          "state": "free"
+        }
+      ]
+    }
+  ],
+  "timing_assumption": "At an actual 3 observed contradictory frames/s: 2 misses takes 0.33-0.67 s since disappearance, 3 takes 0.67-1.00 s, 5 takes 1.33-1.67 s. Not guaranteed when visibility sparse."
+}

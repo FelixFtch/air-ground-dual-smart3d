@@ -1,0 +1,37 @@
+{
+  "air-ground-lab-simulator": {
+    "MainPID": "1573525",
+    "ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /data/robotics/air_ground_smart3d/simulation/launch_sim.py ; ignore_errors=no ; start_time=[Tue 2026-09-29 20:01:20 EDT] ; stop_time=[n/a] ; pid=1573525 ; code=(null) ; status=0/0 }",
+    "ActiveState": "active"
+  },
+  "air-ground-lab-runtime": {
+    "MainPID": "1574131",
+    "ExecStart": "{ path=/data/robotics/ue58_ohz_test_go2/.venv/bin/python ; argv[]=/data/robotics/ue58_ohz_test_go2/.venv/bin/python -B -m sim_io.runtime --team go2_fighter --resume-map /data/robotics/air_ground_smart3d/runtime/runs/4eae8624f29d4bfcb7bdc8ce0f1413ad/shared/map.ot --resume-state /data/robotics/air_ground_smart3d/runtime/runs/4eae8624f29d4bfcb7bdc8ce0f1413ad/state.json ; ignore_errors=no ; start_time=[Tue 2026-09-29 20:01:36 EDT] ; stop_time=[n/a] ; pid=1574131 ; code=(null) ; status=0/0 }",
+    "ActiveState": "active"
+  },
+  "air-ground-lab-view": {
+    "MainPID": "1443102",
+    "ExecStart": "{ path=/bin/bash ; argv[]=/bin/bash -c source /opt/ros/humble/setup.bash && exec /usr/bin/python3 -B -m observability.ros_view ; ignore_errors=no ; start_time=[Tue 2026-09-29 18:37:33 EDT] ; stop_time=[n/a] ; pid=1443102 ; code=(null) ; status=0/0 }",
+    "ActiveState": "active"
+  },
+  "air-ground-lab-rviz": {
+    "MainPID": "907472",
+    "ExecStart": "{ path=/bin/bash ; argv[]=/bin/bash -c source /opt/ros/humble/setup.bash && exec rviz2 -d /data/robotics/air_ground_smart3d/observability/air_ground.rviz --ros-args -p use_sim_time:=false ; ignore_errors=no ; start_time=[Tue 2026-09-29 12:12:07 EDT] ; stop_time=[n/a] ; pid=907472 ; code=(null) ; status=0/0 }",
+    "ActiveState": "active"
+  },
+  "air-ground-lab-lidar-view": {
+    "MainPID": "1574134",
+    "ExecStart": "{ path=/data/robotics/ue58_ohz_test_go2/.venv/bin/python ; argv[]=/data/robotics/ue58_ohz_test_go2/.venv/bin/python -B -m sim_io.lidar_preview ; ignore_errors=no ; start_time=[Tue 2026-09-29 20:01:36 EDT] ; stop_time=[n/a] ; pid=1574134 ; code=(null) ; status=0/0 }",
+    "ActiveState": "active"
+  },
+  "air-ground-lab-rgbd-capture": {
+    "MainPID": "1574441",
+    "ExecStart": "{ path=/data/robotics/ue58_ohz_test_go2/.venv/bin/python ; argv[]=/data/robotics/ue58_ohz_test_go2/.venv/bin/python -B -m perception.capture ; ignore_errors=no ; start_time=[Tue 2026-09-29 20:01:49 EDT] ; stop_time=[n/a] ; pid=1574441 ; code=(null) ; status=0/0 }",
+    "ActiveState": "active"
+  },
+  "air-ground-lab-sam3": {
+    "MainPID": "1574444",
+    "ExecStart": "{ path=/data/robotics/sam3_video_people/.venv/bin/python ; argv[]=/data/robotics/sam3_video_people/.venv/bin/python -B -m perception.service --max-hz 2 --ttl-seconds 2.0 ; ignore_errors=no ; start_time=[Tue 2026-09-29 20:01:49 EDT] ; stop_time=[n/a] ; pid=1574444 ; code=(null) ; status=0/0 }",
+    "ActiveState": "active"
+  }
+}

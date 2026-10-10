@@ -1,0 +1,5 @@
+schema: air_ground.appearance/v1
+id: go2
+asset: /Game/Go2Official/SM_Go2_Stance
+runtime_status: existing_carla_blueprint
+visual_scale: 1.0

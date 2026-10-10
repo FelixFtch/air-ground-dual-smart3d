@@ -1,0 +1,30 @@
+schema: air_ground.robot/v1
+profile_id: fighter_uav_v1
+mobility: xyz_yaw
+dimension: 3
+blueprint: robot.uav.fighter_drone
+body_half_extents_m:
+- 0.7
+- 0.7
+- 0.36
+body_offset_m:
+- 0
+- 0
+- 0
+max_speed_mps: 1.5
+max_acceleration_mps2: 1.2
+max_yaw_rate_rps: 0.8
+goal_tolerance_m: 0.6
+appearance: fighter_drone
+sensors: uav_rgbd_lidar
+altitude_range_m:
+- 0.8
+- 6.0
+execution_guard:
+  near_path_m: 0.4
+  sensor_max_age_s: 1.2
+  free_evidence_max_age_s: null
+  known_free_policy: retain_until_observed_occupied; require fresh robot lidar and
+    latest occupied map
+notes: Actual UE collider half-size .48/.48/.34m, planner XY envelope covers yaw;
+  kinematic flight, not PX4.

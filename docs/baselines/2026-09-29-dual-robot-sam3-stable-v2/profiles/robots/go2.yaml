@@ -1,0 +1,29 @@
+schema: air_ground.robot/v1
+profile_id: go2_ground_v1
+mobility: ground_xy_yaw
+dimension: 2
+blueprint: static.prop.unitree_go2
+body_half_extents_m:
+- 0.43
+- 0.43
+- 0.28
+body_offset_m:
+- 0
+- 0
+- 0
+max_speed_mps: 2.0
+max_acceleration_mps2: 2.0
+max_yaw_rate_rps: 1.0
+goal_tolerance_m: 0.55
+appearance: go2
+sensors: go2_rgbd_lidar
+planar_z: 0.33
+require_ground_support: false
+execution_guard:
+  near_path_m: 0.4
+  sensor_max_age_s: 1.2
+  free_evidence_max_age_s: null
+  known_free_policy: retain_until_observed_occupied; require fresh robot lidar and
+    latest occupied map
+notes: Independent flat-floor lab. Old Go2/Factory configuration is unchanged. Half-XY
+  covers all yaw.

@@ -1,0 +1,12 @@
+[package]
+name = "air-ground-smart3d-worker"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+smart-3d = { path = "vendor/smart3d_observed" }
+json = "0.12.4"
+
+[workspace]
+members = ["vendor/smart3d_observed"]
+resolver = "2"

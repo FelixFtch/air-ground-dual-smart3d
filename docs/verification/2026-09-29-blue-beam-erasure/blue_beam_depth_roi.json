@@ -1,0 +1,19 @@
+{
+  "frame": 626872,
+  "blue_rgb_roi_pixels": 455,
+  "valid_registered_blue_depth_pixels": 424,
+  "distance_m_quantiles": [
+    11.298672676086426,
+    11.357519245147705,
+    12.346907615661621,
+    15.608736896514893,
+    28.299955368041992
+  ],
+  "world_z_quantiles": [
+    2.83215779542923,
+    3.042476444244385,
+    3.17994113445282
+  ],
+  "front_mapping_and_clearing_max_m": 6,
+  "notes": "Blue beam color ROI chosen from saved RGB; valid beam depths are distinct from farther ground. All valid beam samples lie outside current front-depth 6m clearing radius."
+}

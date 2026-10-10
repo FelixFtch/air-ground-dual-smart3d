@@ -1,0 +1,3229 @@
+{
+  "schema": "air_ground.live_planning_validation/v1",
+  "created_utc": "2026-09-29T14:54:16.292019+00:00",
+  "epoch": "48f1521e709f4799a9dac18ae69bf9f1",
+  "run_root": "/data/robotics/air_ground_smart3d/runtime/runs/48f1521e709f4799a9dac18ae69bf9f1",
+  "source": "/data/robotics/air_ground_smart3d/runtime/runs/48f1521e709f4799a9dac18ae69bf9f1/state.json",
+  "requested_duration_wall_s": 90,
+  "sample_interval_wall_s": 5,
+  "observed_duration_wall_s": 90.01089712395333,
+  "sample_count": 19,
+  "errors": [],
+  "method": {
+    "read_only": true,
+    "no_process_changes": true,
+    "exact_map_collision_not_recomputed_against_mismatched_display": "Display may be newer than each plan; use the worker native current-revision invalid-edge metric, plus independent exact parent/XYZ structural audit.",
+    "status_fraction": "Fraction of five-second state samples, not continuous-time duty cycle.",
+    "distance": "Differences of runtime per-tick measured cumulative distance counters.",
+    "z_range": "Range of actual measured positions at sampled instants; full-run extrema can exceed it.",
+    "recovery_counts": "Sum of per-response counters on distinct sampled path IDs; lower bound because unsampled responses are omitted. Clear is physical map evidence, not independently attributed to people versus other objects.",
+    "goal_retention": "Only observed plan goal_revision transitions count. No transition means unverified in this window."
+  },
+  "map_revision_first": 1247,
+  "map_revision_last": 1943,
+  "robots": {
+    "go2_01": {
+      "dimension": 2,
+      "samples": 19,
+      "position_first": [
+        0.5414844155311584,
+        1.9649757146835327,
+        0.330000011920929
+      ],
+      "position_last": [
+        -4.2891316413879395,
+        7.275689125061035,
+        0.330000011920929
+      ],
+      "distance_m_cumulative_first": 58.643865715822024,
+      "distance_m_cumulative_last": 66.77065297742055,
+      "distance_m_delta_in_window": 8.12678726159853,
+      "vertical_distance_m_cumulative_first": 1.1920928966180355e-08,
+      "vertical_distance_m_cumulative_last": 1.1920928966180355e-08,
+      "vertical_distance_m_delta_in_window": 0.0,
+      "sampled_actual_z_min": 0.330000011920929,
+      "sampled_actual_z_max": 0.330000011920929,
+      "completed_goals_first": 2,
+      "completed_goals_last": 2,
+      "completed_goals_delta": 0,
+      "tree_instance_ids": [
+        1
+      ],
+      "observed_goal_transitions": [],
+      "tree_retention_across_goal_observed": false,
+      "all_observed_goal_transitions_retained_tree": null,
+      "max_native_invalid_tree_edges": 0,
+      "max_structural_audit_errors": {
+        "duplicate_node_ids": 0,
+        "invalid_xyz": 0,
+        "missing_parent_references": 0,
+        "invalid_parent_tree_state": 0,
+        "invalid_exported_edges": 0,
+        "parent_edges_absent_from_export": 0,
+        "exported_edges_absent_from_parents": 0,
+        "parent_cycles": 0
+      },
+      "native_collision_check_evidence": "worker full current-map+dynamic checker invalid_tree_edges metric; independent audit checks parent topology only",
+      "max_tree_nodes": 5000,
+      "min_tree_nodes_when_present": 4994,
+      "max_actual_tree_edges_with_nonzero_dz": 0,
+      "sampled_unique_plan_recovery_sums_lower_bound": {
+        "occupied_added": 273,
+        "occupied_cleared": 111,
+        "restored_nodes": 0,
+        "historical_edges_restored": 0,
+        "coverage_added_nodes": 1
+      },
+      "samples_showing_restore": [],
+      "status_sample_counts": {
+        "guard_stale_free": 15,
+        "moving": 3,
+        "sensor_stale": 1
+      },
+      "status_sample_fraction": {
+        "guard_stale_free": 0.7894736842105263,
+        "moving": 0.15789473684210525,
+        "sensor_stale": 0.05263157894736842
+      },
+      "plan_latency_ms_min": 63.675169000000004,
+      "plan_latency_ms_max": 112.581596,
+      "same_epoch_event_verified_goal_changes": 2,
+      "same_epoch_event_tree_instance_ids": [
+        1
+      ],
+      "same_epoch_event_tree_retained_across_goal_changes": true
+    },
+    "uav_01": {
+      "dimension": 3,
+      "samples": 19,
+      "position_first": [
+        8.223234176635742,
+        4.044612884521484,
+        4.1148183631896975
+      ],
+      "position_last": [
+        7.521468162536621,
+        4.682617664337158,
+        3.9004314231872557
+      ],
+      "distance_m_cumulative_first": 25.223726418499417,
+      "distance_m_cumulative_last": 30.05731173679354,
+      "distance_m_delta_in_window": 4.833585318294123,
+      "vertical_distance_m_cumulative_first": 6.376981048583984,
+      "vertical_distance_m_cumulative_last": 8.075677661895751,
+      "vertical_distance_m_delta_in_window": 1.6986966133117676,
+      "sampled_actual_z_min": 3.3318786907196043,
+      "sampled_actual_z_max": 4.187396793365479,
+      "completed_goals_first": 1,
+      "completed_goals_last": 2,
+      "completed_goals_delta": 1,
+      "tree_instance_ids": [
+        1
+      ],
+      "observed_goal_transitions": [
+        {
+          "from_goal_revision": 2,
+          "to_goal_revision": 3,
+          "before_tree_instance_id": 1,
+          "after_tree_instance_id": 1,
+          "tree_instance_retained": true
+        }
+      ],
+      "tree_retention_across_goal_observed": true,
+      "all_observed_goal_transitions_retained_tree": true,
+      "max_native_invalid_tree_edges": 0,
+      "max_structural_audit_errors": {
+        "duplicate_node_ids": 0,
+        "invalid_xyz": 0,
+        "missing_parent_references": 0,
+        "invalid_parent_tree_state": 0,
+        "invalid_exported_edges": 0,
+        "parent_edges_absent_from_export": 0,
+        "exported_edges_absent_from_parents": 0,
+        "parent_cycles": 0
+      },
+      "native_collision_check_evidence": "worker full current-map+dynamic checker invalid_tree_edges metric; independent audit checks parent topology only",
+      "max_tree_nodes": 7046,
+      "min_tree_nodes_when_present": 7033,
+      "max_actual_tree_edges_with_nonzero_dz": 6999,
+      "sampled_unique_plan_recovery_sums_lower_bound": {
+        "occupied_added": 101,
+        "occupied_cleared": 79,
+        "restored_nodes": 0,
+        "historical_edges_restored": 0,
+        "coverage_added_nodes": 1
+      },
+      "samples_showing_restore": [],
+      "status_sample_counts": {
+        "guard_stale_free": 12,
+        "moving": 4,
+        "sensor_stale": 2,
+        "turning": 1
+      },
+      "status_sample_fraction": {
+        "guard_stale_free": 0.631578947368421,
+        "moving": 0.21052631578947367,
+        "sensor_stale": 0.10526315789473684,
+        "turning": 0.05263157894736842
+      },
+      "plan_latency_ms_min": 339.7601,
+      "plan_latency_ms_max": 460.351382,
+      "same_epoch_event_verified_goal_changes": 2,
+      "same_epoch_event_tree_instance_ids": [
+        1
+      ],
+      "same_epoch_event_tree_retained_across_goal_changes": true
+    }
+  },
+  "samples": [
+    {
+      "index": 0,
+      "sample_wall": 1790693566.2442908,
+      "elapsed_wall_s": 0.016424008063040674,
+      "state_wall_time": 1790693566.1112711,
+      "state_age_wall_s": 0.13302111625671387,
+      "sim_time": 649.9517402520869,
+      "running": true,
+      "map_summary": {
+        "revision": 1247,
+        "observed_cells": 458128,
+        "occupied_cells": 14175,
+        "watermark": 649.6517383402679,
+        "fusion_latency_mean_s": 0.08012936728919158
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            0.5414844155311584,
+            1.9649757146835327,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 58.643865715822024,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:287",
+          "path_points": 11,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1243,
+          "plan_received_wall": 1790693565.593433,
+          "metrics": {
+            "nodes_total": 4994,
+            "nodes_active": 4977,
+            "nodes_pruned": 17,
+            "occupied_added": 39,
+            "occupied_cleared": 9,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 23,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 42,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 75.89702199999999,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4994,
+            "edges": 4976,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            8.223234176635742,
+            4.044612884521484,
+            4.1148183631896975
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 25.223726418499417,
+          "vertical_distance_m_cumulative": 6.376981048583984,
+          "actual_speed": 0.0,
+          "completed_goals": 1,
+          "goal_revision": 2,
+          "goal_xyz": [
+            8,
+            7,
+            3.2
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:2:263",
+          "path_points": 4,
+          "path_z_range": [
+            3.200000047683716,
+            4.615551948547363
+          ],
+          "plan_goal_revision": 2,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1242,
+          "plan_received_wall": 1790693565.7002845,
+          "metrics": {
+            "nodes_total": 7033,
+            "nodes_active": 6986,
+            "nodes_pruned": 47,
+            "occupied_added": 33,
+            "occupied_cleared": 3,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 83,
+            "clear_pending_nodes": 629,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 255,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 339.7601,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7033,
+            "edges": 6985,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6984
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "sample_wall": 1790693571.252633,
+      "elapsed_wall_s": 5.024766045040451,
+      "state_wall_time": 1790693570.4966786,
+      "state_age_wall_s": 0.7559554576873779,
+      "sim_time": 654.3972515112255,
+      "running": true,
+      "map_summary": {
+        "revision": 1284,
+        "observed_cells": 458164,
+        "occupied_cells": 14162,
+        "watermark": 654.2305838896427,
+        "fusion_latency_mean_s": 0.07889897232234944
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            0.35512205958366394,
+            2.306626796722412,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m_cumulative": 59.033040053480505,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 1.2402825720644104,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "fresh_free_swept_volume",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:296",
+          "path_points": 11,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1283,
+          "plan_received_wall": 1790693570.47077,
+          "metrics": {
+            "nodes_total": 4994,
+            "nodes_active": 4977,
+            "nodes_pruned": 17,
+            "occupied_added": 0,
+            "occupied_cleared": 15,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 23,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 72,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 63.675169000000004,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4994,
+            "edges": 4976,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            8.223234176635742,
+            4.044612884521484,
+            4.1148183631896975
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 25.223726418499417,
+          "vertical_distance_m_cumulative": 6.376981048583984,
+          "actual_speed": 0.0,
+          "completed_goals": 1,
+          "goal_revision": 2,
+          "goal_xyz": [
+            8,
+            7,
+            3.2
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:2:271",
+          "path_points": 4,
+          "path_z_range": [
+            3.200000047683716,
+            4.615551948547363
+          ],
+          "plan_goal_revision": 2,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1282,
+          "plan_received_wall": 1790693570.40623,
+          "metrics": {
+            "nodes_total": 7033,
+            "nodes_active": 6985,
+            "nodes_pruned": 48,
+            "occupied_added": 19,
+            "occupied_cleared": 9,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 78,
+            "clear_pending_nodes": 622,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 255,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 389.41444800000005,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7033,
+            "edges": 6984,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6983
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "sample_wall": 1790693576.2451053,
+      "elapsed_wall_s": 10.017238058964722,
+      "state_wall_time": 1790693575.887729,
+      "state_age_wall_s": 0.357377290725708,
+      "sim_time": 659.6010930372868,
+      "running": true,
+      "map_summary": {
+        "revision": 1323,
+        "observed_cells": 473923,
+        "occupied_cells": 14457,
+        "watermark": 659.4344255237374,
+        "fusion_latency_mean_s": 0.07632492496777558
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -0.3820610046386719,
+            4.277987003326416,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 61.2480749221144,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 1.4666769244778302,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:305",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1321,
+          "plan_received_wall": 1790693575.4021132,
+          "metrics": {
+            "nodes_total": 4994,
+            "nodes_active": 4982,
+            "nodes_pruned": 12,
+            "occupied_added": 5,
+            "occupied_cleared": 1,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 14,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 42,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 81.15598899999999,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4994,
+            "edges": 4981,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            8.2211275100708,
+            4.047789096832275,
+            4.116031436920166
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 25.22772615816739,
+          "vertical_distance_m_cumulative": 6.3781941223144525,
+          "actual_speed": 0.0,
+          "completed_goals": 1,
+          "goal_revision": 2,
+          "goal_xyz": [
+            8,
+            7,
+            3.2
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:2:279",
+          "path_points": 4,
+          "path_z_range": [
+            3.200000047683716,
+            4.615551948547363
+          ],
+          "plan_goal_revision": 2,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1315,
+          "plan_received_wall": 1790693575.448385,
+          "metrics": {
+            "nodes_total": 7034,
+            "nodes_active": 6985,
+            "nodes_pruned": 49,
+            "occupied_added": 12,
+            "occupied_cleared": 2,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 80,
+            "clear_pending_nodes": 328,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 255,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 445.880144,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7034,
+            "edges": 6984,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6983
+          }
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "sample_wall": 1790693581.2471516,
+      "elapsed_wall_s": 15.019284512032755,
+      "state_wall_time": 1790693580.4067798,
+      "state_age_wall_s": 0.8403728008270264,
+      "sim_time": 664.341357404599,
+      "running": true,
+      "map_summary": {
+        "revision": 1355,
+        "observed_cells": 478206,
+        "occupied_cells": 14523,
+        "watermark": 663.7050104646478,
+        "fusion_latency_mean_s": 0.08849669457558776
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -0.4087245762348175,
+            4.277559280395508,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 61.27474192414678,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:314",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1354,
+          "plan_received_wall": 1790693580.2456408,
+          "metrics": {
+            "nodes_total": 4994,
+            "nodes_active": 4983,
+            "nodes_pruned": 11,
+            "occupied_added": 7,
+            "occupied_cleared": 15,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 13,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 18,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 112.581596,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4994,
+            "edges": 4982,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            8.2211275100708,
+            4.047789096832275,
+            4.116031436920166
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 25.22772615816739,
+          "vertical_distance_m_cumulative": 6.3781941223144525,
+          "actual_speed": 0.0,
+          "completed_goals": 1,
+          "goal_revision": 2,
+          "goal_xyz": [
+            8,
+            7,
+            3.2
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:2:285",
+          "path_points": 4,
+          "path_z_range": [
+            3.200000047683716,
+            4.615551948547363
+          ],
+          "plan_goal_revision": 2,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1347,
+          "plan_received_wall": 1790693579.7732933,
+          "metrics": {
+            "nodes_total": 7034,
+            "nodes_active": 6987,
+            "nodes_pruned": 47,
+            "occupied_added": 1,
+            "occupied_cleared": 6,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 78,
+            "clear_pending_nodes": 361,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 252,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 397.582059,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7034,
+            "edges": 6986,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6985
+          }
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "sample_wall": 1790693586.2434406,
+      "elapsed_wall_s": 20.015573477954604,
+      "state_wall_time": 1790693585.111944,
+      "state_age_wall_s": 1.1314973831176758,
+      "sim_time": 668.814573554555,
+      "running": true,
+      "map_summary": {
+        "revision": 1394,
+        "observed_cells": 489584,
+        "occupied_cells": 14732,
+        "watermark": 668.71457310603,
+        "fusion_latency_mean_s": 0.09242228534712922
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -1.8146768808364868,
+            4.641798973083496,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 62.789199729226894,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:323",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1390,
+          "plan_received_wall": 1790693584.5889099,
+          "metrics": {
+            "nodes_total": 4995,
+            "nodes_active": 4984,
+            "nodes_pruned": 11,
+            "occupied_added": 0,
+            "occupied_cleared": 0,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 13,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 0,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 64.71186499999999,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4995,
+            "edges": 4983,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            8.21902084350586,
+            4.050965785980225,
+            4.117244510650635
+          ],
+          "status": "moving",
+          "distance_m_cumulative": 25.231726276465,
+          "vertical_distance_m_cumulative": 6.379407196044921,
+          "actual_speed": 0.08000332858609834,
+          "completed_goals": 1,
+          "goal_revision": 2,
+          "goal_xyz": [
+            8,
+            7,
+            3.2
+          ],
+          "guard_reason": "fresh_free_swept_volume",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:2:292",
+          "path_points": 4,
+          "path_z_range": [
+            3.200000047683716,
+            4.615551948547363
+          ],
+          "plan_goal_revision": 2,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1389,
+          "plan_received_wall": 1790693585.0435846,
+          "metrics": {
+            "nodes_total": 7036,
+            "nodes_active": 6990,
+            "nodes_pruned": 46,
+            "occupied_added": 1,
+            "occupied_cleared": 0,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 77,
+            "clear_pending_nodes": 307,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 252,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 414.391937,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7036,
+            "edges": 6989,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6988
+          }
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "sample_wall": 1790693591.2496827,
+      "elapsed_wall_s": 25.021815759013407,
+      "state_wall_time": 1790693591.0000262,
+      "state_age_wall_s": 0.24965763092041016,
+      "sim_time": 674.7238914838526,
+      "running": true,
+      "map_summary": {
+        "revision": 1438,
+        "observed_cells": 491977,
+        "occupied_cells": 14800,
+        "watermark": 674.5238905607257,
+        "fusion_latency_mean_s": 0.08467630592494971
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -1.8146768808364868,
+            4.641798973083496,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 62.789199729226894,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:333",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1432,
+          "plan_received_wall": 1790693590.2660632,
+          "metrics": {
+            "nodes_total": 4996,
+            "nodes_active": 4985,
+            "nodes_pruned": 11,
+            "occupied_added": 0,
+            "occupied_cleared": 1,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 13,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 0,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 73.577056,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4996,
+            "edges": 4984,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            8.216914176940918,
+            4.054142475128174,
+            4.118457584381104
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 25.235726394692517,
+          "vertical_distance_m_cumulative": 6.38062026977539,
+          "actual_speed": 0.0,
+          "completed_goals": 1,
+          "goal_revision": 2,
+          "goal_xyz": [
+            8,
+            7,
+            3.2
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:2:300",
+          "path_points": 4,
+          "path_z_range": [
+            3.200000047683716,
+            4.615551948547363
+          ],
+          "plan_goal_revision": 2,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1429,
+          "plan_received_wall": 1790693590.2338252,
+          "metrics": {
+            "nodes_total": 7037,
+            "nodes_active": 6991,
+            "nodes_pruned": 46,
+            "occupied_added": 0,
+            "occupied_cleared": 0,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 76,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 250,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 347.017973,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7037,
+            "edges": 6990,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6989
+          }
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "sample_wall": 1790693596.2486846,
+      "elapsed_wall_s": 30.0208175299922,
+      "state_wall_time": 1790693595.6309135,
+      "state_age_wall_s": 0.6177718639373779,
+      "sim_time": 679.5274582675193,
+      "running": true,
+      "map_summary": {
+        "revision": 1473,
+        "observed_cells": 493442,
+        "occupied_cells": 14857,
+        "watermark": 679.3274571171496,
+        "fusion_latency_mean_s": 0.08409543912130175
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -1.8944138288497925,
+            4.542492866516113,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 62.92031161858975,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:342",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1468,
+          "plan_received_wall": 1790693595.15705,
+          "metrics": {
+            "nodes_total": 4996,
+            "nodes_active": 4985,
+            "nodes_pruned": 11,
+            "occupied_added": 0,
+            "occupied_cleared": 4,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 13,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 0,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 97.678196,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4996,
+            "edges": 4984,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            8.216914176940918,
+            4.054142475128174,
+            4.118457584381104
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 25.235726394692517,
+          "vertical_distance_m_cumulative": 6.38062026977539,
+          "actual_speed": 0.0,
+          "completed_goals": 1,
+          "goal_revision": 2,
+          "goal_xyz": [
+            8,
+            7,
+            3.2
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:2:307",
+          "path_points": 4,
+          "path_z_range": [
+            3.200000047683716,
+            4.615551948547363
+          ],
+          "plan_goal_revision": 2,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1467,
+          "plan_received_wall": 1790693595.359565,
+          "metrics": {
+            "nodes_total": 7040,
+            "nodes_active": 6993,
+            "nodes_pruned": 47,
+            "occupied_added": 0,
+            "occupied_cleared": 5,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 77,
+            "clear_pending_nodes": 519,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 256,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 376.824437,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7040,
+            "edges": 6992,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6991
+          }
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "sample_wall": 1790693601.2441497,
+      "elapsed_wall_s": 35.01628255296964,
+      "state_wall_time": 1790693600.161362,
+      "state_age_wall_s": 1.0827889442443848,
+      "sim_time": 684.1016911549959,
+      "running": true,
+      "map_summary": {
+        "revision": 1508,
+        "observed_cells": 494905,
+        "occupied_cells": 14942,
+        "watermark": 683.9350230379496,
+        "fusion_latency_mean_s": 0.08048960440646624
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -1.9178409576416016,
+            4.5715484619140625,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 62.95975239711995,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:350",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1504,
+          "plan_received_wall": 1790693600.0035088,
+          "metrics": {
+            "nodes_total": 4996,
+            "nodes_active": 4985,
+            "nodes_pruned": 11,
+            "occupied_added": 63,
+            "occupied_cleared": 16,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 13,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 16,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 91.723039,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4996,
+            "edges": 4984,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            8.097172737121582,
+            4.234678268432617,
+            4.187396793365479
+          ],
+          "status": "moving",
+          "distance_m_cumulative": 25.46306710743964,
+          "vertical_distance_m_cumulative": 6.449559478759765,
+          "actual_speed": 0.8200042091659614,
+          "completed_goals": 1,
+          "goal_revision": 2,
+          "goal_xyz": [
+            8,
+            7,
+            3.2
+          ],
+          "guard_reason": "fresh_free_swept_volume",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:2:313",
+          "path_points": 4,
+          "path_z_range": [
+            3.200000047683716,
+            4.615551948547363
+          ],
+          "plan_goal_revision": 2,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1497,
+          "plan_received_wall": 1790693599.3778598,
+          "metrics": {
+            "nodes_total": 7041,
+            "nodes_active": 6994,
+            "nodes_pruned": 47,
+            "occupied_added": 2,
+            "occupied_cleared": 1,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 77,
+            "clear_pending_nodes": 442,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 255,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 460.351382,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7041,
+            "edges": 6993,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6992
+          }
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "sample_wall": 1790693606.246371,
+      "elapsed_wall_s": 40.018503792001866,
+      "state_wall_time": 1790693605.5453188,
+      "state_age_wall_s": 0.7010529041290283,
+      "sim_time": 689.3119138351176,
+      "running": true,
+      "map_summary": {
+        "revision": 1552,
+        "observed_cells": 497656,
+        "occupied_cells": 15166,
+        "watermark": 689.1452463401947,
+        "fusion_latency_mean_s": 0.08253548304492142
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -1.890211582183838,
+            4.5330810546875,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 63.011558375270155,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:359",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1546,
+          "plan_received_wall": 1790693604.949974,
+          "metrics": {
+            "nodes_total": 4997,
+            "nodes_active": 4986,
+            "nodes_pruned": 11,
+            "occupied_added": 71,
+            "occupied_cleared": 0,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 13,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 1,
+            "coverage_pending_regions": 14,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 96.643703,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4997,
+            "edges": 4985,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            7.831528663635254,
+            6.106100559234619,
+            3.406352787017822
+          ],
+          "status": "sensor_stale",
+          "distance_m_cumulative": 27.666373945397982,
+          "vertical_distance_m_cumulative": 7.411255149841308,
+          "actual_speed": 0.0,
+          "completed_goals": 1,
+          "goal_revision": 2,
+          "goal_xyz": [
+            8,
+            7,
+            3.2
+          ],
+          "guard_reason": "fresh_free_swept_volume",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:2:321",
+          "path_points": 2,
+          "path_z_range": [
+            3.200000047683716,
+            3.638172149658203
+          ],
+          "plan_goal_revision": 2,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1543,
+          "plan_received_wall": 1790693604.911132,
+          "metrics": {
+            "nodes_total": 7041,
+            "nodes_active": 6995,
+            "nodes_pruned": 46,
+            "occupied_added": 7,
+            "occupied_cleared": 4,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 73,
+            "clear_pending_nodes": 398,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 255,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 401.06471500000004,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7041,
+            "edges": 6994,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6993
+          }
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "sample_wall": 1790693611.2461267,
+      "elapsed_wall_s": 45.01825957803521,
+      "state_wall_time": 1790693611.1530979,
+      "state_age_wall_s": 0.09302997589111328,
+      "sim_time": 694.923681469867,
+      "running": true,
+      "map_summary": {
+        "revision": 1601,
+        "observed_cells": 502224,
+        "occupied_cells": 15469,
+        "watermark": 694.7877489461098,
+        "fusion_latency_mean_s": 0.080377861764282
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -1.8954569101333618,
+            4.540384292602539,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m_cumulative": 63.024788004264074,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.06356856621301876,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "fresh_free_swept_volume",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:369",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1596,
+          "plan_received_wall": 1790693610.6293066,
+          "metrics": {
+            "nodes_total": 4998,
+            "nodes_active": 4987,
+            "nodes_pruned": 11,
+            "occupied_added": 32,
+            "occupied_cleared": 0,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 13,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 35,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 87.552085,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4998,
+            "edges": 4986,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            7.892526626586914,
+            6.429195880889893,
+            3.3318786907196043
+          ],
+          "status": "turning",
+          "distance_m_cumulative": 28.003505638479076,
+          "vertical_distance_m_cumulative": 7.485729246139526,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            7,
+            2.0
+          ],
+          "guard_reason": "fresh_free_swept_volume",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:3:329",
+          "path_points": 21,
+          "path_z_range": [
+            1.0532608032226562,
+            4.519705295562744
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1592,
+          "plan_received_wall": 1790693610.5360372,
+          "metrics": {
+            "nodes_total": 7042,
+            "nodes_active": 6996,
+            "nodes_pruned": 46,
+            "occupied_added": 8,
+            "occupied_cleared": 11,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 73,
+            "clear_pending_nodes": 361,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 254,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 405.212119,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7042,
+            "edges": 6995,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6994
+          }
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "sample_wall": 1790693616.2445776,
+      "elapsed_wall_s": 50.01671036297921,
+      "state_wall_time": 1790693615.8298666,
+      "state_age_wall_s": 0.41471171379089355,
+      "sim_time": 699.602035532007,
+      "running": true,
+      "map_summary": {
+        "revision": 1639,
+        "observed_cells": 503614,
+        "occupied_cells": 15526,
+        "watermark": 699.4000088779721,
+        "fusion_latency_mean_s": 0.0786261642089812
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -1.918548822402954,
+            4.572534084320068,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 63.06437140381356,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:377",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1634,
+          "plan_received_wall": 1790693615.3251293,
+          "metrics": {
+            "nodes_total": 4999,
+            "nodes_active": 4989,
+            "nodes_pruned": 10,
+            "occupied_added": 17,
+            "occupied_cleared": 3,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 12,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 19,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 96.221999,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4999,
+            "edges": 4988,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            7.585726261138916,
+            5.932398319244385,
+            3.7192366409301756
+          ],
+          "status": "moving",
+          "distance_m_cumulative": 28.786794890574217,
+          "vertical_distance_m_cumulative": 7.873087196350097,
+          "actual_speed": 0.7624422314311041,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            7,
+            2.0
+          ],
+          "guard_reason": "fresh_free_swept_volume",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:3:336",
+          "path_points": 20,
+          "path_z_range": [
+            1.0532608032226562,
+            4.002806663513184
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1629,
+          "plan_received_wall": 1790693615.1896493,
+          "metrics": {
+            "nodes_total": 7043,
+            "nodes_active": 6997,
+            "nodes_pruned": 46,
+            "occupied_added": 2,
+            "occupied_cleared": 3,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 73,
+            "clear_pending_nodes": 169,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 235,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 409.528842,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7043,
+            "edges": 6996,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6995
+          }
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "sample_wall": 1790693621.246807,
+      "elapsed_wall_s": 55.01893977506552,
+      "state_wall_time": 1790693620.279458,
+      "state_age_wall_s": 0.9673495292663574,
+      "sim_time": 704.211397661129,
+      "running": true,
+      "map_summary": {
+        "revision": 1676,
+        "observed_cells": 504181,
+        "occupied_cells": 15518,
+        "watermark": 703.9746820277069,
+        "fusion_latency_mean_s": 0.07968417295633116
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -1.8956403732299805,
+            4.540639400482178,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 63.103640576223405,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:386",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1674,
+          "plan_received_wall": 1790693620.05046,
+          "metrics": {
+            "nodes_total": 4999,
+            "nodes_active": 4989,
+            "nodes_pruned": 10,
+            "occupied_added": 2,
+            "occupied_cleared": 3,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 12,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 8,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 86.422215,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4999,
+            "edges": 4988,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            7.5377092361450195,
+            4.876582145690918,
+            3.909284858703613
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 29.862467245245305,
+          "vertical_distance_m_cumulative": 8.066824226379394,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            7,
+            2.0
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:3:343",
+          "path_points": 19,
+          "path_z_range": [
+            1.0532608032226562,
+            3.909284830093384
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1671,
+          "plan_received_wall": 1790693619.9833736,
+          "metrics": {
+            "nodes_total": 7043,
+            "nodes_active": 6997,
+            "nodes_pruned": 46,
+            "occupied_added": 5,
+            "occupied_cleared": 4,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 73,
+            "clear_pending_nodes": 537,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 255,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 441.832033,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7043,
+            "edges": 6996,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6995
+          }
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "sample_wall": 1790693626.2439482,
+      "elapsed_wall_s": 60.01608157798182,
+      "state_wall_time": 1790693626.1191509,
+      "state_age_wall_s": 0.12479877471923828,
+      "sim_time": 709.8524634039495,
+      "running": true,
+      "map_summary": {
+        "revision": 1723,
+        "observed_cells": 504233,
+        "occupied_cells": 15513,
+        "watermark": 709.7191291807685,
+        "fusion_latency_mean_s": 0.07586134449957171
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -1.8956403732299805,
+            4.540639400482178,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 63.103640576223405,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:397",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1720,
+          "plan_received_wall": 1790693625.6638973,
+          "metrics": {
+            "nodes_total": 4999,
+            "nodes_active": 4989,
+            "nodes_pruned": 10,
+            "occupied_added": 0,
+            "occupied_cleared": 2,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 12,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 0,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 79.077528,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4999,
+            "edges": 4988,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            7.537598133087158,
+            4.8752546310424805,
+            3.9092243003845213
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 29.863800776775225,
+          "vertical_distance_m_cumulative": 8.066884784698486,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            7,
+            2.0
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:3:352",
+          "path_points": 19,
+          "path_z_range": [
+            1.0532608032226562,
+            3.909224271774292
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1718,
+          "plan_received_wall": 1790693626.0765564,
+          "metrics": {
+            "nodes_total": 7044,
+            "nodes_active": 6998,
+            "nodes_pruned": 46,
+            "occupied_added": 0,
+            "occupied_cleared": 3,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 73,
+            "clear_pending_nodes": 494,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 254,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 354.81072800000004,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7044,
+            "edges": 6997,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6996
+          }
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "sample_wall": 1790693631.2449112,
+      "elapsed_wall_s": 65.0170439829817,
+      "state_wall_time": 1790693631.0677872,
+      "state_age_wall_s": 0.1771249771118164,
+      "sim_time": 714.7984229086433,
+      "running": true,
+      "map_summary": {
+        "revision": 1762,
+        "observed_cells": 504257,
+        "occupied_cells": 15438,
+        "watermark": 714.6646818018053,
+        "fusion_latency_mean_s": 0.08182005442358786
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -1.8965097665786743,
+            4.5418500900268555,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 63.10513108417989,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:406",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1758,
+          "plan_received_wall": 1790693630.600883,
+          "metrics": {
+            "nodes_total": 4999,
+            "nodes_active": 4989,
+            "nodes_pruned": 10,
+            "occupied_added": 0,
+            "occupied_cleared": 29,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 12,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 71,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 74.22653799999999,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4999,
+            "edges": 4988,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            7.537598133087158,
+            4.8752546310424805,
+            3.9092243003845213
+          ],
+          "status": "sensor_stale",
+          "distance_m_cumulative": 29.863800776775225,
+          "vertical_distance_m_cumulative": 8.066884784698486,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            7,
+            2.0
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:3:358",
+          "path_points": 19,
+          "path_z_range": [
+            1.0532608032226562,
+            3.909224271774292
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1753,
+          "plan_received_wall": 1790693630.4329238,
+          "metrics": {
+            "nodes_total": 7045,
+            "nodes_active": 6998,
+            "nodes_pruned": 47,
+            "occupied_added": 8,
+            "occupied_cleared": 17,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 74,
+            "clear_pending_nodes": 1375,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 256,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 408.944624,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7045,
+            "edges": 6997,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6996
+          }
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "sample_wall": 1790693636.2437353,
+      "elapsed_wall_s": 70.0158684089547,
+      "state_wall_time": 1790693635.8031766,
+      "state_age_wall_s": 0.44055962562561035,
+      "sim_time": 719.573946746299,
+      "running": true,
+      "map_summary": {
+        "revision": 1796,
+        "observed_cells": 504298,
+        "occupied_cells": 15430,
+        "watermark": 719.3371594718192,
+        "fusion_latency_mean_s": 0.07995093946374254
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -1.8965097665786743,
+            4.5418500900268555,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 63.10811210009285,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:414",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1793,
+          "plan_received_wall": 1790693635.2736242,
+          "metrics": {
+            "nodes_total": 4999,
+            "nodes_active": 4989,
+            "nodes_pruned": 10,
+            "occupied_added": 22,
+            "occupied_cleared": 3,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 12,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 102,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 91.028453,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4999,
+            "edges": 4988,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            7.537598133087158,
+            4.8752546310424805,
+            3.9092243003845213
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 29.863800776775225,
+          "vertical_distance_m_cumulative": 8.066884784698486,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            7,
+            2.0
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:3:365",
+          "path_points": 19,
+          "path_z_range": [
+            1.0532608032226562,
+            3.909224271774292
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1788,
+          "plan_received_wall": 1790693635.0156028,
+          "metrics": {
+            "nodes_total": 7045,
+            "nodes_active": 6998,
+            "nodes_pruned": 47,
+            "occupied_added": 0,
+            "occupied_cleared": 6,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 74,
+            "clear_pending_nodes": 717,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 256,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 346.34067899999997,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7045,
+            "edges": 6997,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6996
+          }
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "sample_wall": 1790693641.243471,
+      "elapsed_wall_s": 75.01560376596171,
+      "state_wall_time": 1790693640.5337307,
+      "state_age_wall_s": 0.7097411155700684,
+      "sim_time": 724.184902185807,
+      "running": true,
+      "map_summary": {
+        "revision": 1834,
+        "observed_cells": 504842,
+        "occupied_cells": 15465,
+        "watermark": 723.9800121805165,
+        "fusion_latency_mean_s": 0.08188512732303935
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -2.145895004272461,
+            4.889057636260986,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m_cumulative": 63.541562233448374,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 1.1578659797334454,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "fresh_free_swept_volume",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:422",
+          "path_points": 8,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1831,
+          "plan_received_wall": 1790693639.8903513,
+          "metrics": {
+            "nodes_total": 4999,
+            "nodes_active": 4989,
+            "nodes_pruned": 10,
+            "occupied_added": 4,
+            "occupied_cleared": 1,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 12,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 127,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 83.738884,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4999,
+            "edges": 4988,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            7.533162593841553,
+            4.822291851043701,
+            3.9068067359924314
+          ],
+          "status": "moving",
+          "distance_m_cumulative": 29.91700392237562,
+          "vertical_distance_m_cumulative": 8.069302349090576,
+          "actual_speed": 0.23605492605829853,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            7,
+            2.0
+          ],
+          "guard_reason": "fresh_free_swept_volume",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:3:372",
+          "path_points": 19,
+          "path_z_range": [
+            1.0532608032226562,
+            3.9078304767608643
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1827,
+          "plan_received_wall": 1790693639.9433854,
+          "metrics": {
+            "nodes_total": 7046,
+            "nodes_active": 7001,
+            "nodes_pruned": 45,
+            "occupied_added": 0,
+            "occupied_cleared": 1,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 72,
+            "clear_pending_nodes": 478,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 1,
+            "coverage_pending_regions": 256,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 354.385275,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7046,
+            "edges": 7000,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6999
+          }
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "sample_wall": 1790693646.2481213,
+      "elapsed_wall_s": 80.02025441301521,
+      "state_wall_time": 1790693645.1608143,
+      "state_age_wall_s": 1.087308406829834,
+      "sim_time": 729.0980111306999,
+      "running": true,
+      "map_summary": {
+        "revision": 1864,
+        "observed_cells": 508801,
+        "occupied_cells": 15556,
+        "watermark": 728.7956524027977,
+        "fusion_latency_mean_s": 0.08710593684081687
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -2.8417229652404785,
+            5.857826232910156,
+            0.330000011920929
+          ],
+          "status": "sensor_stale",
+          "distance_m_cumulative": 64.73432756877239,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "fresh_free_swept_volume",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:430",
+          "path_points": 7,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1862,
+          "plan_received_wall": 1790693644.7705295,
+          "metrics": {
+            "nodes_total": 4999,
+            "nodes_active": 4989,
+            "nodes_pruned": 10,
+            "occupied_added": 9,
+            "occupied_cleared": 7,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 12,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 88,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 96.788923,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4999,
+            "edges": 4988,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            7.532479763031006,
+            4.814133167266846,
+            3.906434326171875
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 29.925199596110037,
+          "vertical_distance_m_cumulative": 8.069674758911132,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            7,
+            2.0
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:3:378",
+          "path_points": 19,
+          "path_z_range": [
+            1.0532608032226562,
+            3.9064342975616455
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1857,
+          "plan_received_wall": 1790693644.4781694,
+          "metrics": {
+            "nodes_total": 7046,
+            "nodes_active": 6997,
+            "nodes_pruned": 49,
+            "occupied_added": 1,
+            "occupied_cleared": 1,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 76,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 255,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 426.036527,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7046,
+            "edges": 6996,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6995
+          }
+        }
+      ]
+    },
+    {
+      "index": 17,
+      "sample_wall": 1790693651.2438786,
+      "elapsed_wall_s": 85.0160114170285,
+      "state_wall_time": 1790693650.682078,
+      "state_age_wall_s": 0.5618014335632324,
+      "sim_time": 734.4191220498178,
+      "running": true,
+      "map_summary": {
+        "revision": 1905,
+        "observed_cells": 523536,
+        "occupied_cells": 15787,
+        "watermark": 734.119120037416,
+        "fusion_latency_mean_s": 0.08989575697778492
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -3.6714165210723877,
+            6.79890775680542,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 65.9891222694393,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:439",
+          "path_points": 6,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1901,
+          "plan_received_wall": 1790693649.9591756,
+          "metrics": {
+            "nodes_total": 4999,
+            "nodes_active": 4989,
+            "nodes_pruned": 10,
+            "occupied_added": 2,
+            "occupied_cleared": 0,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 12,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 47,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 95.21278,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 4999,
+            "edges": 4988,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            7.52976655960083,
+            4.781723976135254,
+            3.9049551773071287
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 29.957755778691553,
+          "vertical_distance_m_cumulative": 8.071153907775878,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            7,
+            2.0
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:3:385",
+          "path_points": 19,
+          "path_z_range": [
+            1.0532608032226562,
+            3.9049551486968994
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1897,
+          "plan_received_wall": 1790693650.0205886,
+          "metrics": {
+            "nodes_total": 7046,
+            "nodes_active": 7001,
+            "nodes_pruned": 45,
+            "occupied_added": 2,
+            "occupied_cleared": 2,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 72,
+            "clear_pending_nodes": 340,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 256,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 457.230111,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7046,
+            "edges": 7000,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6999
+          }
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "sample_wall": 1790693656.2551882,
+      "elapsed_wall_s": 90.02732113201637,
+      "state_wall_time": 1790693655.5417318,
+      "state_age_wall_s": 0.7134575843811035,
+      "sim_time": 739.2251973433886,
+      "running": true,
+      "map_summary": {
+        "revision": 1943,
+        "observed_cells": 530484,
+        "occupied_cells": 15936,
+        "watermark": 739.0251963494811,
+        "fusion_latency_mean_s": 0.08323490034235874
+      },
+      "robots": [
+        {
+          "robot_id": "go2_01",
+          "dimension": 2,
+          "position_xyz": [
+            -4.2891316413879395,
+            7.275689125061035,
+            0.330000011920929
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 66.77065297742055,
+          "vertical_distance_m_cumulative": 1.1920928966180355e-08,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            8,
+            0.33
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-go2_01:3:447",
+          "path_points": 6,
+          "path_z_range": [
+            0.33000001311302185,
+            0.33000001311302185
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1937,
+          "plan_received_wall": 1790693654.8997293,
+          "metrics": {
+            "nodes_total": 5000,
+            "nodes_active": 4990,
+            "nodes_pruned": 10,
+            "occupied_added": 0,
+            "occupied_cleared": 2,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 12,
+            "clear_pending_nodes": 0,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 52,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 81.069525,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 5000,
+            "edges": 4989,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.33000001311302185,
+              0.33000001311302185
+            ],
+            "edges_with_nonzero_dz": 0
+          }
+        },
+        {
+          "robot_id": "uav_01",
+          "dimension": 3,
+          "position_xyz": [
+            7.521468162536621,
+            4.682617664337158,
+            3.9004314231872557
+          ],
+          "status": "guard_stale_free",
+          "distance_m_cumulative": 30.05731173679354,
+          "vertical_distance_m_cumulative": 8.075677661895751,
+          "actual_speed": 0.0,
+          "completed_goals": 2,
+          "goal_revision": 3,
+          "goal_xyz": [
+            -8,
+            7,
+            2.0
+          ],
+          "guard_reason": "stale_free",
+          "path_status": "candidate_path",
+          "path_id": "48f1521e709f4799a9dac18ae69bf9f1-uav_01:3:393",
+          "path_points": 19,
+          "path_z_range": [
+            1.0532608032226562,
+            3.9004313945770264
+          ],
+          "plan_goal_revision": 3,
+          "tree_instance_id": 1,
+          "plan_map_revision": 1935,
+          "plan_received_wall": 1790693654.9653654,
+          "metrics": {
+            "nodes_total": 7046,
+            "nodes_active": 7000,
+            "nodes_pruned": 46,
+            "occupied_added": 0,
+            "occupied_cleared": 1,
+            "occupied_expired_to_unknown": 0,
+            "restored_nodes": 0,
+            "historical_edges_restored": 0,
+            "retained_cut_edges": 73,
+            "clear_pending_nodes": 595,
+            "clear_pending_regions": 0,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 253,
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "total_wall_ms": 359.658633,
+            "invalid_tree_edges": 0,
+            "reroot": null
+          },
+          "tree_audit": {
+            "nodes": 7046,
+            "edges": 6999,
+            "duplicate_node_ids": 0,
+            "invalid_xyz": 0,
+            "missing_parent_references": 0,
+            "invalid_parent_tree_state": 0,
+            "invalid_exported_edges": 0,
+            "parent_edges_absent_from_export": 0,
+            "exported_edges_absent_from_parents": 0,
+            "parent_cycles": 0,
+            "z_range": [
+              0.8023295998573303,
+              5.995340824127197
+            ],
+            "edges_with_nonzero_dz": 6998
+          }
+        }
+      ]
+    }
+  ],
+  "supplemental_run_event_evidence": {
+    "source": "/data/robotics/air_ground_smart3d/runtime/runs/48f1521e709f4799a9dac18ae69bf9f1/events.jsonl",
+    "scope": "Existing same-epoch init/set_goal events up to the end of the 90-second window; may predate the sampled window.",
+    "events": [
+      {
+        "wall_time": 1790693414.4930398,
+        "sim_time": 498.47567791328765,
+        "kind": "planner_result",
+        "robot_id": "go2_01",
+        "op": "init",
+        "map_revision": 13,
+        "status": "candidate_path",
+        "path_points": 14,
+        "tree_instance_id": 1,
+        "latency_s": 0.37065120704937726,
+        "source_line": 4
+      },
+      {
+        "wall_time": 1790693415.3175447,
+        "sim_time": 499.27568204537965,
+        "kind": "planner_result",
+        "robot_id": "uav_01",
+        "op": "init",
+        "map_revision": 13,
+        "status": "candidate_path",
+        "path_points": 13,
+        "tree_instance_id": 1,
+        "latency_s": 1.4806887089507654,
+        "source_line": 5
+      },
+      {
+        "wall_time": 1790693448.1512194,
+        "sim_time": 532.0736529252026,
+        "kind": "planner_result",
+        "robot_id": "go2_01",
+        "op": "set_goal",
+        "map_revision": 310,
+        "status": "candidate_path",
+        "path_points": 16,
+        "tree_instance_id": 1,
+        "latency_s": 0.12675500102341175,
+        "source_line": 19
+      },
+      {
+        "wall_time": 1790693469.815225,
+        "sim_time": 553.7425175441895,
+        "kind": "planner_result",
+        "robot_id": "uav_01",
+        "op": "set_goal",
+        "map_revision": 474,
+        "status": "candidate_path",
+        "path_points": 9,
+        "tree_instance_id": 1,
+        "latency_s": 0.6725747270975262,
+        "source_line": 29
+      },
+      {
+        "wall_time": 1790693479.6314194,
+        "sim_time": 563.5897519385908,
+        "kind": "planner_result",
+        "robot_id": "go2_01",
+        "op": "set_goal",
+        "map_revision": 560,
+        "status": "candidate_path",
+        "path_points": 32,
+        "tree_instance_id": 1,
+        "latency_s": 0.15929270500782877,
+        "source_line": 34
+      },
+      {
+        "wall_time": 1790693607.826923,
+        "sim_time": 691.5848161636386,
+        "kind": "planner_result",
+        "robot_id": "uav_01",
+        "op": "set_goal",
+        "map_revision": 1563,
+        "status": "candidate_path",
+        "path_points": 21,
+        "tree_instance_id": 1,
+        "latency_s": 0.9678376209922135,
+        "source_line": 81
+      }
+    ],
+    "restoration_event_limit": "planner_result events do not contain per-update restored_nodes/historical_edges_restored; no retrospective total or human-specific attribution is possible."
+  }
+}

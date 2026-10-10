@@ -1,0 +1,211 @@
+{
+  "runs": [
+    {
+      "switch_interval_s": 0.005,
+      "frames": 80,
+      "elapsed_s": 4.035861866082996,
+      "fps": 19.82228397664263,
+      "process_cpu_s": 2.071798523,
+      "prepare": {
+        "mean_ms": 18.082683959801216,
+        "p95_ms": 48.66039706394076,
+        "max_ms": 80.83419397007674
+      },
+      "depth_576px": {
+        "mean_ms": 17.516051429265644,
+        "p95_ms": 48.427561996504664,
+        "max_ms": 80.55105502717197
+      },
+      "rays": {
+        "mean_ms": 2.319126232760027,
+        "p95_ms": 2.7374631026759744,
+        "max_ms": 19.991518929600716
+      },
+      "rpc": {
+        "mean_ms": 29.227648381493054,
+        "p95_ms": 52.26841801777482,
+        "max_ms": 157.71553700324148
+      },
+      "cache_apply": {
+        "mean_ms": 16.30191522272071,
+        "p95_ms": 40.77231092378497,
+        "max_ms": 80.28042502701283
+      },
+      "native_await": {
+        "mean_ms": 24.874133850971702,
+        "p95_ms": 48.42869797721505,
+        "max_ms": 81.72698097769171
+      },
+      "gc": {
+        "count": 49,
+        "total_s": 0.13223203481175005,
+        "max_s": 0.027287345961667597
+      },
+      "background_counts": {
+        "publisher": 20,
+        "planner0": 10,
+        "planner1": 10
+      },
+      "cache_hash": "bec93ea929a3d5a523747acdd23722bbf0c915f6269cd70e37e22c1826072cc1",
+      "errors": []
+    },
+    {
+      "switch_interval_s": 0.001,
+      "frames": 80,
+      "elapsed_s": 3.8684312619734555,
+      "fps": 20.680217530655696,
+      "process_cpu_s": 2.111776764,
+      "prepare": {
+        "mean_ms": 15.097059408435598,
+        "p95_ms": 39.90220697596669,
+        "max_ms": 56.59138399641961
+      },
+      "depth_576px": {
+        "mean_ms": 12.18145661696326,
+        "p95_ms": 31.854197033680975,
+        "max_ms": 44.675074983388186
+      },
+      "rays": {
+        "mean_ms": 4.541701993730385,
+        "p95_ms": 17.09295902401209,
+        "max_ms": 44.2924170056358
+      },
+      "rpc": {
+        "mean_ms": 28.34342223359272,
+        "p95_ms": 43.396883062087,
+        "max_ms": 98.45593897625804
+      },
+      "cache_apply": {
+        "mean_ms": 16.496871221170295,
+        "p95_ms": 39.454819983802736,
+        "max_ms": 100.45217897277325
+      },
+      "native_await": {
+        "mean_ms": 24.193358725460712,
+        "p95_ms": 38.39007602073252,
+        "max_ms": 62.28070997167379
+      },
+      "gc": {
+        "count": 55,
+        "total_s": 0.10683873551897705,
+        "max_s": 0.01932447392027825
+      },
+      "background_counts": {
+        "publisher": 20,
+        "planner0": 10,
+        "planner1": 10
+      },
+      "cache_hash": "bec93ea929a3d5a523747acdd23722bbf0c915f6269cd70e37e22c1826072cc1",
+      "errors": []
+    },
+    {
+      "switch_interval_s": 0.001,
+      "frames": 80,
+      "elapsed_s": 4.135147500084713,
+      "fps": 19.346347378989773,
+      "process_cpu_s": 2.2757215560000006,
+      "prepare": {
+        "mean_ms": 18.11992774164537,
+        "p95_ms": 57.87825910374522,
+        "max_ms": 70.1466619502753
+      },
+      "depth_576px": {
+        "mean_ms": 14.230061318085063,
+        "p95_ms": 50.04690901841968,
+        "max_ms": 65.04345696885139
+      },
+      "rays": {
+        "mean_ms": 4.554072582686786,
+        "p95_ms": 13.9876400353387,
+        "max_ms": 67.12141807656735
+      },
+      "rpc": {
+        "mean_ms": 28.04439126048237,
+        "p95_ms": 48.048189957626164,
+        "max_ms": 135.19270601682365
+      },
+      "cache_apply": {
+        "mean_ms": 20.260849413170945,
+        "p95_ms": 60.06567599251866,
+        "max_ms": 96.21968399733305
+      },
+      "native_await": {
+        "mean_ms": 23.53384260495659,
+        "p95_ms": 44.52532692812383,
+        "max_ms": 64.72736306022853
+      },
+      "gc": {
+        "count": 57,
+        "total_s": 0.22235012718010694,
+        "max_s": 0.03157622995786369
+      },
+      "background_counts": {
+        "publisher": 21,
+        "planner0": 11,
+        "planner1": 11
+      },
+      "cache_hash": "bec93ea929a3d5a523747acdd23722bbf0c915f6269cd70e37e22c1826072cc1",
+      "errors": []
+    },
+    {
+      "switch_interval_s": 0.005,
+      "frames": 80,
+      "elapsed_s": 4.140326963039115,
+      "fps": 19.32214550062437,
+      "process_cpu_s": 2.098308478,
+      "prepare": {
+        "mean_ms": 17.747975973179564,
+        "p95_ms": 38.04233099799603,
+        "max_ms": 89.35365697834641
+      },
+      "depth_576px": {
+        "mean_ms": 16.34292723319959,
+        "p95_ms": 36.08095890376717,
+        "max_ms": 89.12364102434367
+      },
+      "rays": {
+        "mean_ms": 2.1176290450966917,
+        "p95_ms": 2.601881045848131,
+        "max_ms": 8.84582195430994
+      },
+      "rpc": {
+        "mean_ms": 31.57071779569378,
+        "p95_ms": 55.1349560264498,
+        "max_ms": 138.89921095687896
+      },
+      "cache_apply": {
+        "mean_ms": 16.46673332725186,
+        "p95_ms": 33.1352410139516,
+        "max_ms": 89.01213004719466
+      },
+      "native_await": {
+        "mean_ms": 26.841949819936417,
+        "p95_ms": 51.40398198273033,
+        "max_ms": 78.24803492985666
+      },
+      "gc": {
+        "count": 54,
+        "total_s": 0.13996453990694135,
+        "max_s": 0.02454227302223444
+      },
+      "background_counts": {
+        "publisher": 21,
+        "planner0": 11,
+        "planner1": 11
+      },
+      "cache_hash": "bec93ea929a3d5a523747acdd23722bbf0c915f6269cd70e37e22c1826072cc1",
+      "errors": []
+    }
+  ],
+  "exact_cache_equal": true,
+  "same_inputs": true,
+  "runtime_modified": false,
+  "workload": "80sameactualLiDARfixtures/restoredmap plus same576pxdepthpreparation; orderednative/cachepipeline; actualstate/display JSONpublisher5Hz; twoactualplannerJSONdecoders2.5Hz; isolatedprocess switch interval ABBA",
+  "source_epoch": "1ddaeeef8d1848909e9161e65dbba5ad",
+  "codec": {
+    "backend": "ujson",
+    "version": "5.12.1",
+    "path": "/data/robotics/air_ground_smart3d/runtime/python_deps/ujson.cpython-310-x86_64-linux-gnu.so",
+    "sha256": "2967cb08d9454085e9ed947e4d4598a59d50c817d383b8dc0c2d5fa4737eae3b"
+  }
+}

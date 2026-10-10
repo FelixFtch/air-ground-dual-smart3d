@@ -1,0 +1,8 @@
+schema: air_ground.appearance/v1
+id: fighter_drone
+asset: /Game/Fighter_Drone/mesh/fighter_drone_mesh
+asset_type: skeletal_mesh
+visual_scale: 0.35
+center_from_mesh_bounds: true
+preferred_mobility: xyz_yaw
+runtime_status: registered_live_xyz_verified

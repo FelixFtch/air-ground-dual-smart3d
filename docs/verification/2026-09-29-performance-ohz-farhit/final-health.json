@@ -1,0 +1,31 @@
+{
+  "run_root": "/data/robotics/air_ground_smart3d/runtime/runs/d8abf6971bf446178d00718be716308c",
+  "state_age_s": 0.1573190689086914,
+  "running": true,
+  "map_cells": 1018429,
+  "errors": {
+    "fatal": null,
+    "map_error": null,
+    "people_error": null
+  },
+  "robots": [
+    {
+      "id": "go2_01",
+      "status": "moving",
+      "distance_m": 10543.512229525046,
+      "goals": 551,
+      "tree_nodes": 5075,
+      "planner_error": null,
+      "tree_snapshot_error": null
+    },
+    {
+      "id": "uav_01",
+      "status": "current_blocked_no_clear_exit",
+      "distance_m": 5115.21118189084,
+      "goals": 298,
+      "tree_nodes": 4571,
+      "planner_error": null,
+      "tree_snapshot_error": null
+    }
+  ]
+}

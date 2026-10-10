@@ -1,0 +1,104 @@
+{
+  "wall_seconds": 59.69193148612976,
+  "samples": 171,
+  "read_errors": [],
+  "fresh_global_samples": 94,
+  "future_document_headers": 7,
+  "people_error_counts": {
+    "None": 171
+  },
+  "robots": {
+    "go2_01": {
+      "samples": 171,
+      "live_nonempty": 96,
+      "planner_nonempty": 86,
+      "live_nonempty_when_global_fresh": 93,
+      "global_fresh_denominator": 94,
+      "reliable_velocity_live_samples": 56,
+      "live_expired_entries": 0,
+      "live_shape_counts": {
+        "ellipse": 275
+      },
+      "live_elongated_entries": 117,
+      "planner_age_mean_s": 0.48311398829720176,
+      "planner_age_max_s": 1.1207771562039852,
+      "largest_no_live_interval_while_shared_fresh_s": 0.351043701171875,
+      "statuses": {
+        "moving": 145,
+        "turning": 23,
+        "waiting_path": 2,
+        "goal_reached": 1
+      }
+    },
+    "uav_01": {
+      "samples": 171,
+      "live_nonempty": 96,
+      "planner_nonempty": 55,
+      "live_nonempty_when_global_fresh": 93,
+      "global_fresh_denominator": 94,
+      "reliable_velocity_live_samples": 56,
+      "live_expired_entries": 0,
+      "live_shape_counts": {
+        "ellipsoid": 275
+      },
+      "live_elongated_entries": 117,
+      "planner_age_mean_s": 0.7925789037514324,
+      "planner_age_max_s": 1.8022288754582405,
+      "largest_no_live_interval_while_shared_fresh_s": 0.351043701171875,
+      "statuses": {
+        "turning": 21,
+        "moving": 126,
+        "waiting_path": 18,
+        "guard_person_ohz": 2,
+        "current_blocked_no_clear_exit": 4
+      }
+    }
+  },
+  "sources": {
+    "go2_01": {
+      "unique_frames": 61,
+      "states": {
+        "ready_no_people": 36,
+        "partial_depth": 20,
+        "ready": 5
+      },
+      "valid_velocity_observations": 3,
+      "projected_observations": 37,
+      "velocity_reason_counts": {
+        "insufficient_history": 29,
+        "robust_same_source_capture_displacement": 3,
+        "limited_projection_quality": 5
+      },
+      "rejection_counts": {
+        "insufficient_mask_depth": 47,
+        "cooperative_robot_surface": 9,
+        "ambiguous_mask_depth": 1,
+        "person_extent_too_large": 1
+      },
+      "capture_age_mean_s": 0.513443685335214,
+      "source_hz": 1.0044449284573178
+    },
+    "uav_01": {
+      "unique_frames": 61,
+      "states": {
+        "ready": 16,
+        "ready_no_people": 26,
+        "partial_depth": 19
+      },
+      "valid_velocity_observations": 38,
+      "projected_observations": 68,
+      "velocity_reason_counts": {
+        "insufficient_history": 29,
+        "robust_same_source_capture_displacement": 38,
+        "inconsistent_measured_motion": 1
+      },
+      "rejection_counts": {
+        "insufficient_mask_depth": 30,
+        "cooperative_robot_surface": 15,
+        "ambiguous_mask_depth": 1
+      },
+      "capture_age_mean_s": 0.4559967441514867,
+      "source_hz": 0.9961070860867107
+    }
+  }
+}

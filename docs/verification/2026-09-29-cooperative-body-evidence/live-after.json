@@ -1,0 +1,59 @@
+{
+  "epoch": "1ddaeeef8d1848909e9161e65dbba5ad",
+  "wall_time": 1790709766.9389076,
+  "map_summary": {
+    "revision": 60874,
+    "observed_cells": 964652,
+    "occupied_cells": 8293,
+    "watermark": 15656.562375393696,
+    "fusion_latency_mean_s": 0.0959731483075302
+  },
+  "errors": [
+    null,
+    null,
+    null
+  ],
+  "sam3_state": "running",
+  "robots": [
+    {
+      "robot_id": "go2_01",
+      "status": "turning",
+      "completed_goals": 98,
+      "distance_m": 1878.1585159228687,
+      "path_points": 14,
+      "tree_nodes": 7219,
+      "tree_instance_id": 1,
+      "dynamic_boxes": 1,
+      "sam3_state": "ready_no_people",
+      "sam3_age_s": 0.6133928298950195,
+      "people_tracks": 0,
+      "cooperative_filter": {
+        "available": true,
+        "body_count": 2,
+        "padding_m": 0.08,
+        "removed_samples": 0
+      },
+      "rejected": []
+    },
+    {
+      "robot_id": "uav_01",
+      "status": "moving",
+      "completed_goals": 58,
+      "distance_m": 1009.8949455527597,
+      "path_points": 8,
+      "tree_nodes": 7734,
+      "tree_instance_id": 1,
+      "dynamic_boxes": 1,
+      "sam3_state": "ready_no_people",
+      "sam3_age_s": 0.21552586555480957,
+      "people_tracks": 0,
+      "cooperative_filter": {
+        "available": true,
+        "body_count": 2,
+        "padding_m": 0.08,
+        "removed_samples": 0
+      },
+      "rejected": []
+    }
+  ]
+}

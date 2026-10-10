@@ -1,0 +1,14 @@
+{
+  "schema": "air_ground.model_provenance/v1",
+  "model": "yolo26m-seg",
+  "source_url": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26m-seg.pt",
+  "path": "runtime/models/yolo26/yolo26m-seg.pt",
+  "bytes": 54750385,
+  "sha256": "16b636f04e8fb6a325b3370f22dc5e5535ff473e384f4d041fd28d788f6ee9f5",
+  "framework": "ultralytics 8.4.14, torch 2.14.0+cu126",
+  "python": "/data/robotics/ue58_ohz_test_go2/.venv/bin/python",
+  "classes": {"0": "person"},
+  "pretrained_on": "COCO-Seg (80 classes); only class 0 is requested",
+  "identity": "map_frame_association/v1 (perception/map_tracker.py), not an image-box tracker",
+  "selection_evidence": "2026-10-04 offline run on 100 s of empty-scene RGB-D with CARLA walker ground truth: detector recall 95.3%, precision 98.4%, median 5-7 ms per frame on RTX 4090"
+}

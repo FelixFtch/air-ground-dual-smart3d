@@ -1,0 +1,14 @@
+{
+  "schema": "air_ground.local_python_dependency/v1",
+  "name": "ujson",
+  "version": "5.12.1",
+  "source": "existing local user-site install; binary SHA256 verified against original dist-info/RECORD",
+  "source_path": "/home/felix/.local/lib/python3.10/site-packages/ujson.cpython-310-x86_64-linux-gnu.so",
+  "binary": "ujson.cpython-310-x86_64-linux-gnu.so",
+  "sha256": "2967cb08d9454085e9ed947e4d4598a59d50c817d383b8dc0c2d5fa4737eae3b",
+  "python_abi": "cpython-310-x86_64-linux-gnu",
+  "license": "BSD-3-Clause AND TCL",
+  "license_path": "ujson-5.12.1.dist-info/licenses/LICENSE.txt",
+  "official_source": "https://github.com/ultrajson/ultrajson",
+  "project_scope": "air_ground_smart3d only; explicit file load, no site-packages or PYTHONPATH modifications"
+}

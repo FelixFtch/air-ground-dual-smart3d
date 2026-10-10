@@ -1,0 +1,221 @@
+{
+  "epoch": "4eae8624f29d4bfcb7bdc8ce0f1413ad",
+  "seconds": 44.87958288192749,
+  "revision_gain": 586,
+  "state_age": {
+    "mean": 0.137972379260593,
+    "p95": 0.2529585361480713,
+    "max": 0.4156372547149658
+  },
+  "errors": [],
+  "lidar": {
+    "go2_01": {
+      "receive_hz": 10.02683115803222,
+      "fused_hz": 3.5650955228559003,
+      "apply_age_s": {
+        "mean": 0.13236155811893313,
+        "p95": 0.3015350438654423,
+        "max": 0.41297996044158936
+      },
+      "request_s": {
+        "mean": 0.05323354380762842,
+        "p95": 0.12802023708354682,
+        "max": 0.16585188801400363
+      },
+      "clear_ranges": [
+        40.0
+      ],
+      "policies": [
+        "all_distinct_measured_rays"
+      ],
+      "recovered_far": 6430,
+      "cleared_occupied": 32237
+    },
+    "uav_01": {
+      "receive_hz": 10.02683115803222,
+      "fused_hz": 3.5650955228559003,
+      "apply_age_s": {
+        "mean": 0.17553800002556957,
+        "p95": 0.34359678626060486,
+        "max": 0.4809400178492069
+      },
+      "request_s": {
+        "mean": 0.0714775968114973,
+        "p95": 0.17594000801909715,
+        "max": 0.28851561702322215
+      },
+      "clear_ranges": [
+        40.0
+      ],
+      "policies": [
+        "all_distinct_measured_rays"
+      ],
+      "recovered_far": 10275,
+      "cleared_occupied": 20033
+    }
+  },
+  "robots": {
+    "go2_01": {
+      "distance_gain": 41.39902233384964,
+      "goal_gain": 2,
+      "states": [
+        "goal_reached",
+        "moving",
+        "turning",
+        "waiting_path"
+      ],
+      "tree_nodes": 4983,
+      "planner_error": null
+    },
+    "uav_01": {
+      "distance_gain": 17.848687175844134,
+      "goal_gain": 1,
+      "states": [
+        "current_blocked_no_clear_exit",
+        "exiting_newly_observed_overlap",
+        "goal_reached",
+        "guard_occupied",
+        "moving",
+        "overlap_exit_blocked",
+        "turning",
+        "waiting_path"
+      ],
+      "tree_nodes": 4389,
+      "planner_error": null
+    }
+  },
+  "person_samples": [
+    {
+      "id": "person-000013",
+      "center": [
+        10.96386471068704,
+        6.481124371435811,
+        0.9245186957716942
+      ],
+      "initial": 6,
+      "final": 0,
+      "seconds": 44.646070927381516,
+      "first_empty_s": 3.0629798360168934,
+      "minimum_remaining": 0,
+      "nearest_live_person_at_end": 22.464984943184437
+    },
+    {
+      "id": "person-000017",
+      "center": [
+        10.857945621430481,
+        8.945884419553948,
+        0.8495789068937302
+      ],
+      "initial": 4,
+      "final": 0,
+      "seconds": 38.25798784196377,
+      "first_empty_s": 0.2920067459344864,
+      "minimum_remaining": 0,
+      "nearest_live_person_at_end": 24.063758939087382
+    },
+    {
+      "id": "person-000019",
+      "center": [
+        -7.000398139625721,
+        -5.849862156730461,
+        1.2250993835926054
+      ],
+      "initial": 5,
+      "final": 0,
+      "seconds": 31.664403930306435,
+      "first_empty_s": 0.8026683479547501,
+      "minimum_remaining": 0,
+      "nearest_live_person_at_end": 2.4249745481210083
+    },
+    {
+      "id": "person-000024",
+      "center": [
+        -5.926059305567444,
+        11.45102367211916,
+        0.9166621583700181
+      ],
+      "initial": 10,
+      "final": 0,
+      "seconds": 26.967147406190634,
+      "first_empty_s": 2.924819655716419,
+      "minimum_remaining": 0,
+      "nearest_live_person_at_end": 19.560784960310418
+    },
+    {
+      "id": "person-000024",
+      "center": [
+        -5.882829562398195,
+        7.662021882855704,
+        0.9056355941295624
+      ],
+      "initial": 5,
+      "final": 0,
+      "seconds": 22.991514831781387,
+      "first_empty_s": 0.5751803144812584,
+      "minimum_remaining": 0,
+      "nearest_live_person_at_end": 15.772597596425236
+    },
+    {
+      "id": "person-000029",
+      "center": [
+        3.3303087917345575,
+        1.9107557213053212,
+        1.0732021319866178
+      ],
+      "initial": 4,
+      "final": 0,
+      "seconds": 18.757870066910982,
+      "first_empty_s": 0.1864411123096943,
+      "minimum_remaining": 0,
+      "nearest_live_person_at_end": 13.772178699074095
+    },
+    {
+      "id": "person-000036",
+      "center": [
+        -6.014221652024315,
+        -3.1594218331999344,
+        0.8626834157109261
+      ],
+      "initial": 4,
+      "final": 0,
+      "seconds": 12.265189338475466,
+      "first_empty_s": 1.505167156457901,
+      "minimum_remaining": 0,
+      "nearest_live_person_at_end": 4.950491879756248
+    },
+    {
+      "id": "person-000039",
+      "center": [
+        4.982354000568502,
+        0.9957805325860212,
+        0.9625709491968155
+      ],
+      "initial": 12,
+      "final": 0,
+      "seconds": 6.762608252465725,
+      "first_empty_s": 0.7190738096833229,
+      "minimum_remaining": 0,
+      "nearest_live_person_at_end": 14.357017153480923
+    },
+    {
+      "id": "person-000044",
+      "center": [
+        -6.030345112400779,
+        -9.138976727617301,
+        0.9327337744832039
+      ],
+      "initial": 4,
+      "final": 0,
+      "seconds": 1.7539162822067738,
+      "first_empty_s": 0.766122829169035,
+      "minimum_remaining": 0,
+      "nearest_live_person_at_end": 1.0339328184029912
+    }
+  ],
+  "beam_roi_occupied": {
+    "min": 63,
+    "max": 125,
+    "final": 100
+  },
+  "limitations": "Uncontrolled live sample; SAM3 measured ROIs may be partial/misassociated or revisit same region. Beam ROI is evaluation geometry only; no truth enters mapper."
+}

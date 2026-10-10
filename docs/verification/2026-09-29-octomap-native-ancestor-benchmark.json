@@ -1,0 +1,71 @@
+{
+  "saved_input": "/data/robotics/air_ground_smart3d/runtime/runs/f119e434f4cb41dca8d8c33836813efd/shared/map.ot",
+  "frames": 120,
+  "exact_snapshot_parity": true,
+  "exact_changes_parity": true,
+  "byte_exact_saved_ot_parity": true,
+  "results": [
+    {
+      "name": "dirty",
+      "elapsed_s": 13.085933757014573,
+      "leaf_count": 858402,
+      "snapshot_digest": "895f108f0fbed5f3bf75e1ab4a83529ea2999c0284467ce2e841ea8116a7080c",
+      "saved_ot_sha256": "fe00b1eb2fc883fd94f771689733f85e61b708b5e708b91065e900b3eb2d5d15",
+      "steady": {
+        "native_total_ms": {
+          "mean": 19.509401236363637,
+          "median": 18.233856,
+          "p95": 39.299091,
+          "max": 71.741045
+        },
+        "inner_ms": {
+          "mean": 0.010560545454545454,
+          "median": 0.0104355,
+          "p95": 0.018025,
+          "max": 0.020205
+        },
+        "dirty_leaves": {
+          "mean": 21,
+          "median": 21.0,
+          "p95": 21,
+          "max": 21
+        },
+        "request_ms": {
+          "mean": 36.28810270139101,
+          "median": 36.65486251702532,
+          "p95": 74.34957392979413,
+          "max": 104.91039406042546
+        }
+      },
+      "source_sha256": "b71271f4471bf05cb1ac7a1124642246645d33bbedeecdc86c8237d8e2e0fda6"
+    },
+    {
+      "name": "baseline",
+      "elapsed_s": 12.462794348946773,
+      "leaf_count": 858402,
+      "snapshot_digest": "895f108f0fbed5f3bf75e1ab4a83529ea2999c0284467ce2e841ea8116a7080c",
+      "saved_ot_sha256": "fe00b1eb2fc883fd94f771689733f85e61b708b5e708b91065e900b3eb2d5d15",
+      "steady": {
+        "native_total_ms": {
+          "mean": 22.20037362727273,
+          "median": 23.766877,
+          "p95": 41.953084,
+          "max": 49.490188
+        },
+        "inner_ms": {
+          "mean": 3.396784581818182,
+          "median": 3.053407,
+          "p95": 5.678124,
+          "max": 7.838411
+        },
+        "request_ms": {
+          "mean": 38.02803259723905,
+          "median": 37.178330530878156,
+          "p95": 70.89003000874072,
+          "max": 109.30011700838804
+        }
+      },
+      "source_sha256": "cb209980ba77310b71df5dc972db3b66e3aa65e1c603f86eac1ad9e178653985"
+    }
+  ]
+}

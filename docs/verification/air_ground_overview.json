@@ -1,0 +1,192 @@
+{
+  "purpose": "read-only visual verification; UE actor truth was not sent to mapper or planner",
+  "map": "AirGroundLab/Maps/AirGroundLab_Main",
+  "camera_id": 75,
+  "image_frame": 21524,
+  "capture_sim_time_s": 720.5072855821345,
+  "capture_wall_time_unix": 1790693636.7448292,
+  "camera_world_xyz_m": [
+    -7.0,
+    1.5,
+    22.0
+  ],
+  "camera_world_rotation_deg": [
+    -70.0,
+    0.0,
+    -0.0
+  ],
+  "image_size": [
+    960,
+    720
+  ],
+  "fov_degrees": 80,
+  "post_process_profile": "OHZTest_Daylight",
+  "ray_tracing": false,
+  "capture_snapshot": {
+    "frame": 21524,
+    "sim_time_s": 720.5072855821345,
+    "actors": [
+      {
+        "actor_id": 68,
+        "type_id": "walker.pedestrian.0015",
+        "role": "ag_person_0",
+        "world_xyz_m": [
+          -1.8948509693145752,
+          5.94408655166626,
+          1.1427500247955322
+        ],
+        "world_rotation_deg": [
+          0.0,
+          0.23041442036628723,
+          -0.0
+        ]
+      },
+      {
+        "actor_id": 69,
+        "type_id": "walker.pedestrian.0016",
+        "role": "ag_person_1",
+        "world_xyz_m": [
+          -5.53313684463501,
+          -2.0003294944763184,
+          1.147749900817871
+        ],
+        "world_rotation_deg": [
+          0.0,
+          179.99705505371094,
+          -0.0
+        ]
+      },
+      {
+        "actor_id": 71,
+        "type_id": "walker.pedestrian.0018",
+        "role": "ag_person_3",
+        "world_xyz_m": [
+          -6.0,
+          -0.8956072926521301,
+          1.1427500247955322
+        ],
+        "world_rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      },
+      {
+        "actor_id": 72,
+        "type_id": "walker.pedestrian.0019",
+        "role": "ag_person_4",
+        "world_xyz_m": [
+          4.999886989593506,
+          -2.7779290676116943,
+          1.1427499055862427
+        ],
+        "world_rotation_deg": [
+          0.0,
+          89.99956512451172,
+          -0.0
+        ]
+      },
+      {
+        "actor_id": 73,
+        "type_id": "walker.pedestrian.0020",
+        "role": "ag_person_5",
+        "world_xyz_m": [
+          11.0,
+          6.772439956665039,
+          1.1427500247955322
+        ],
+        "world_rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      },
+      {
+        "actor_id": 58,
+        "type_id": "robot.uav.fighter_drone",
+        "role": "ag_uav_01",
+        "world_xyz_m": [
+          7.536375522613525,
+          -4.860653877258301,
+          4.1285576820373535
+        ],
+        "world_rotation_deg": [
+          0.0,
+          94.78555297851562,
+          -0.0
+        ]
+      },
+      {
+        "actor_id": 54,
+        "type_id": "static.prop.unitree_go2",
+        "role": "ag_go2_01",
+        "world_xyz_m": [
+          -1.8965097665786743,
+          -4.5418500900268555,
+          0.550000011920929
+        ],
+        "world_rotation_deg": [
+          0.0,
+          -135.24534606933594,
+          0.0
+        ]
+      },
+      {
+        "actor_id": 70,
+        "type_id": "walker.pedestrian.0017",
+        "role": "ag_person_2",
+        "world_xyz_m": [
+          3.095268964767456,
+          -6.0,
+          1.1427500247955322
+        ],
+        "world_rotation_deg": [
+          0.0,
+          0.0,
+          -0.0
+        ]
+      }
+    ]
+  },
+  "expected_static_obstacles": [
+    {
+      "name": "AG_LowWall",
+      "carla_center_m": [
+        0.0,
+        3.0,
+        1.5
+      ],
+      "size_m": [
+        0.45,
+        6.0,
+        2.6
+      ]
+    },
+    {
+      "name": "AG_OverheadBeam",
+      "carla_center_m": [
+        8.0,
+        -4.0,
+        3.2
+      ],
+      "size_m": [
+        6.0,
+        0.65,
+        0.4
+      ]
+    },
+    {
+      "name": "AG_Box",
+      "carla_center_m": [
+        -2.0,
+        -3.0,
+        0.7
+      ],
+      "size_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ]
+}

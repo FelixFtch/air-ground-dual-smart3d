@@ -1,0 +1,27 @@
+{
+  "source_files": {
+    "carla_depth_sensor": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Sensor/DepthCamera.cpp",
+    "ue_linear_depth": "/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Shaders/Private/SceneTexturesCommon.ush:281",
+    "ue_pinhole_projection": "/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Source/Runtime/Renderer/Private/SceneCaptureRendering.cpp:641",
+    "carla_depth_reference_test": "/data/sim/CARLA_UE58_Research/Carla-ue58/PythonAPI/examples/nvidia/nurec/hybrid/tests/rt_lens_distance_test.py:109"
+  },
+  "conclusion": "axial depth + pixel-center 0.5 + horizontal FOV is correct; auxiliary raw frames are not persisted so no direct auxiliary image audit was possible",
+  "max_free_ray_m": {
+    "front_depth": 6,
+    "auxiliary_depth": 3
+  },
+  "sampling_pitch_at_optical_axis": {
+    "front": {
+      "focal_pixels": 268.51188197672957,
+      "stride_px": 20,
+      "approx_angular_gap_degrees": 4.2656817700203895,
+      "lateral_spacing_at_range_m": 0.4469075972228288
+    },
+    "aux": {
+      "focal_pixels": 12.86156123669389,
+      "stride_px": 3,
+      "approx_angular_gap_degrees": 13.304319036441022,
+      "lateral_spacing_at_range_m": 0.6997595264191645
+    }
+  }
+}

@@ -1,0 +1,8 @@
+schema: air_ground.appearance/v1
+id: cute_robot_3
+asset: /Game/Cute_Robot_3/Meshes/SK_Robot_3
+asset_type: skeletal_mesh
+visual_scale: 0.5
+target_height_m: 0.741
+preferred_mobility: ground_xy_yaw
+runtime_status: preview_verified_not_actor_registered

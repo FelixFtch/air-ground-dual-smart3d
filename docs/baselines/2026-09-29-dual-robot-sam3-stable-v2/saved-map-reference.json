@@ -1,0 +1,8 @@
+{
+  "scope": "Reference only to the last validated stopped map/pose pair; map bytes are not in this configuration bundle and are not a new live snapshot",
+  "map": "/data/robotics/air_ground_smart3d/runtime/runs/4eae8624f29d4bfcb7bdc8ce0f1413ad/shared/map.ot",
+  "map_sha256": "7e4d35729d9b1a884866234890f932fc0de9dcbda707c97daf951b846558412b",
+  "metadata": "/data/robotics/air_ground_smart3d/runtime/runs/4eae8624f29d4bfcb7bdc8ce0f1413ad/shared/map.ot.metadata.json",
+  "state": "/data/robotics/air_ground_smart3d/runtime/runs/4eae8624f29d4bfcb7bdc8ce0f1413ad/state.json",
+  "source_deployment": "/data/robotics/air_ground_smart3d/runtime/deployment_backups/2026-09-29-sensor-elapsed-195904/deployment.json"
+}

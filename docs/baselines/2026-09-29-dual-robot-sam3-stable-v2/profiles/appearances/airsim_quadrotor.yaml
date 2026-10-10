@@ -1,0 +1,7 @@
+schema: air_ground.appearance/v1
+id: airsim_quadrotor
+source: /data/sim/assets/airsim/quadrotor1/1ca93f6f77e4
+preferred_mobility: xyz_yaw
+runtime_status: export_verified_needs_assembly
+priority: fallback
+notes: MIT model only; no AirSim simulator plugin.

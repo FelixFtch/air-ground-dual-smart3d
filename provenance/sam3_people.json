@@ -1,0 +1,134 @@
+{
+  "schema": "air_ground.sam3_people_provenance/v1",
+  "source_root": "/data/robotics/ue58_ohz_test_go2",
+  "target_root": "/data/robotics/air_ground_smart3d",
+  "copied_or_adapted": [
+    {
+      "source": "/data/robotics/ue58_ohz_test_go2/scripts/car1_sam3_video_people.py",
+      "source_sha256": "2f36fc0325f8b7ed0bc77bf2547be464902f63f850393ffe8bb4d3a9e9ef6bdf",
+      "mode": "extract_model_loading_and_overlay_rewrite_multisource_service",
+      "destinations": [
+        {
+          "path": "perception/sam3_backend.py",
+          "sha256": "737516c1405587df01f6041445b5fe4b9f1fe27611fa91a29a2be6409944240c"
+        },
+        {
+          "path": "perception/service.py",
+          "sha256": "ca0af770139f20a447ff82f2c1f6054d88ebb37301f9999165666ede33018576"
+        }
+      ]
+    },
+    {
+      "source": "/data/robotics/ue58_ohz_test_go2/scripts/car1_sam3_video_memory.py",
+      "source_sha256": "f7c01bd5179e3c70de2b205388e9033bd20ba68875add27eb85fb1cad4b6c3ac",
+      "mode": "exact_copy",
+      "destinations": [
+        {
+          "path": "perception/vendor/sam3_video_memory.py",
+          "sha256": "f7c01bd5179e3c70de2b205388e9033bd20ba68875add27eb85fb1cad4b6c3ac"
+        }
+      ]
+    },
+    {
+      "source": "/data/robotics/ue58_ohz_test_go2/scripts/car1_sam3_people_projection.py",
+      "source_sha256": "f6d5cc51857ac67f280c40b4ffa06f602e94ee1bbb1279100000d12fc3a6ffbe",
+      "mode": "extract_projection_and_speed_parameterize_multisource",
+      "destinations": [
+        {
+          "path": "perception/people_projection.py",
+          "sha256": "ac241623b6ec34c2b9b4fd315e4c2d99dd0af26a4736de76c695c29e30c0ffc2"
+        }
+      ]
+    },
+    {
+      "source": "/data/robotics/ue58_ohz_test_go2/scripts/car1_person_observations.py",
+      "source_sha256": "b0c1cf07f10d4f3469686d41d6d191072ae427fb6d45e3b6095ef74ea03e54f2",
+      "mode": "review_reference_new_registry_implementation",
+      "destinations": [
+        {
+          "path": "perception/person_registry.py",
+          "sha256": "9d6f7d14f8e6e46eb11765013aa4a344e6a6bf35246b04213348709fa7308db4"
+        }
+      ]
+    },
+    {
+      "source": "/data/robotics/ue58_ohz_test_go2/tests/test_car1_sam3_video_lifecycle.py",
+      "source_sha256": "54fd824d55914476965ba104ac070f04f4c20e9666b5f5cb95dd8736a8bc6a6f",
+      "mode": "adapt_import_path_only",
+      "destinations": [
+        {
+          "path": "tests/test_sam3_video_lifecycle.py",
+          "sha256": "5ff48131fdab9044c94d06b245ce2e073d83b40559d3da17c4d7ec30857c0b24"
+        }
+      ]
+    },
+    {
+      "source": "/data/robotics/ue58_ohz_test_go2/tests/test_car1_sam3_reconditioning_memory.py",
+      "source_sha256": "4bf7ee57a9d7dad1aad37d5d9af8befb48f13b7df0a80b87efc94dc9e7b145ca",
+      "mode": "adapt_import_path_only",
+      "destinations": [
+        {
+          "path": "tests/test_sam3_reconditioning_memory.py",
+          "sha256": "303c06f9b3d0eb75a5385a5e0e35270326499dde5d3d1706380ebb513c2f16f4"
+        }
+      ]
+    }
+  ],
+  "new_files": [
+    {
+      "path": "tests/test_people_perception.py",
+      "sha256": "0c9831be8f28486a418dcae3085e841345ca215102b62d6093425050d1579ccb"
+    },
+    {
+      "path": "perception/PEOPLE_SERVICE.md",
+      "sha256": "bd738c6c51b4c923b6d7175fa038f0096e864f8a36563aa665b30264d5602bb6"
+    }
+  ],
+  "weights": {
+    "model_id": "facebook/sam3",
+    "revision": "3c879f39826c281e95690f02c7821c4de09afae7",
+    "path": "/data/robotics/sam3_video_people/model",
+    "copy_performed": false,
+    "download_performed": false,
+    "receipt": "/data/robotics/sam3_video_people/receipts/download.json",
+    "receipt_sha256": "a61b62389ea530d1c5c6ade9d0fe94412464e76081f9617c40f2d4a4b425580d",
+    "weight_sha256": "6d06f0a5f84e435071fe6603e61d0b4cc7b40e0d39d487cfd4d67d8cc11cc14a"
+  },
+  "runtime": "/data/robotics/sam3_video_people/.venv",
+  "reviewed_transformers": "5.17.0",
+  "validation": {
+    "cpu_tests": 41,
+    "new_projection_registry_service_tests": 25,
+    "pinned_memory_lifecycle_tests": 16,
+    "checkpoint_and_kernel_full_hashes_verified": true,
+    "model_loaded_by_this_subtask": false,
+    "gpu_started_by_this_subtask": false
+  },
+  "limitations": [
+    "new camera prediction calibration uncalibrated",
+    "visible surface bounds not full body bounds",
+    "no appearance ReID",
+    "no measured vertical velocity",
+    "ambiguous crosscamera matching remains separate IDs",
+    "two independent sessions increase state memory; throughput and peak GPU usage require live evidence",
+    "bounded conditioning history is not numerically equivalent to unlimited upstream history"
+  ],
+  "old_project_modified": false,
+  "velocity_fitting_update": {
+    "reason": "Four samples cannot fit in former 2s window at observed 1Hz per camera",
+    "window_seconds": 4.5,
+    "max_retained_samples": 6,
+    "minimum_observations": 4,
+    "max_consecutive_capture_gap_seconds": 1.5,
+    "geometry_ttl_changed": false,
+    "extrapolation_changed": false,
+    "noise_gates_changed": false,
+    "source_only_deployment": true,
+    "service_restarted_by_subtask": false,
+    "regression_tests": [
+      "one_hz_measured_speed_accuracy_and_bounded_fit_history",
+      "one_hz_gap_reset_keeps_existing_threshold_and_requires_four_again",
+      "one_hz_stale_capture_cannot_publish_or_seed_velocity"
+    ]
+  }
+}

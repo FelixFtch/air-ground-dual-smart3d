@@ -1,0 +1,2066 @@
+{
+  "recorded_wall": 1790727369.454081,
+  "run_pointer": {
+    "run_root": "/data/robotics/air_ground_smart3d/runtime/runs/d83ccef432d3410e8e573a93122096cb",
+    "epoch": "d83ccef432d3410e8e573a93122096cb",
+    "pid": 1574131,
+    "started_wall": 1790726506.7426424
+  },
+  "state": {
+    "schema": "air_ground.state/v1",
+    "scene_id": "air_ground_lab_v1",
+    "epoch": "d83ccef432d3410e8e573a93122096cb",
+    "wall_time": 1790727369.2861202,
+    "sim_time": 873.5729073121911,
+    "people_hazard_reference_sim_time": 873.5729073121911,
+    "world_id": 14869610284784759302,
+    "running": true,
+    "robots": [
+      {
+        "robot_id": "go2_01",
+        "actor_id": 2,
+        "kind": "ground_xy_yaw",
+        "dimension": 2,
+        "position_xyz": [
+          5.570484638214111,
+          -7.751489162445068,
+          0.330000011920929
+        ],
+        "yaw": -2.927574104172191,
+        "body_half_extents_m": [
+          0.43,
+          0.43,
+          0.28
+        ],
+        "body_offset_m": [
+          0,
+          0,
+          0
+        ],
+        "goal_xyz": [
+          8,
+          8,
+          0.33
+        ],
+        "people_hazards": [
+          {
+            "schema": "air_ground.people_hazard/v1",
+            "id": "person-000450",
+            "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+            "scene_id": "air_ground_lab_v1",
+            "profile_id": "go2_ground_v1",
+            "dimension": 2,
+            "shape": "ellipse",
+            "center_xyz": [
+              5.8821437980928835,
+              1.8863254062176225,
+              0.33
+            ],
+            "axes_xyz": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "semi_axes_m": [
+              0.9129492192096803,
+              0.9129492192096803,
+              0.0
+            ],
+            "footprint_included": true,
+            "capture_sim_time": 872.1050605237251,
+            "position_reference_sim_time": 873.5729073121911,
+            "valid_until_sim_time": 874.1050605237251,
+            "horizon_s": 1.0,
+            "velocity_xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "velocity_xy_valid": false,
+            "velocity_z_valid": false,
+            "source_keys": [
+              "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",47]"
+            ],
+            "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+            "measurement": {
+              "center_xyz": [
+                5.8821437980928835,
+                1.8863254062176225,
+                0.6785969722270966
+              ],
+              "half_extents_xyz": [
+                0.11769906195230817,
+                0.10060590116427193,
+                0.3930504024028778
+              ],
+              "position_reference_sim_time": 873.1050605237251,
+              "extent_kind": "visible_surface_quantiles"
+            },
+            "prior": {
+              "vertical_padding_each_side_m": 0.85,
+              "human_height_prior_applied": true,
+              "position_uncertainty_m": 0.15,
+              "calibration_status": "uncalibrated"
+            },
+            "robot_envelope": {
+              "half_extents_xyz": [
+                0.43,
+                0.43,
+                0.28
+              ],
+              "body_offset_m": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          },
+          {
+            "schema": "air_ground.people_hazard/v1",
+            "id": "person-000451",
+            "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+            "scene_id": "air_ground_lab_v1",
+            "profile_id": "go2_ground_v1",
+            "dimension": 2,
+            "shape": "ellipse",
+            "center_xyz": [
+              5.052869666584445,
+              1.5087328550734924,
+              0.33
+            ],
+            "axes_xyz": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "semi_axes_m": [
+              0.9310354390584498,
+              0.9310354390584498,
+              0.0
+            ],
+            "footprint_included": true,
+            "capture_sim_time": 872.1050605237251,
+            "position_reference_sim_time": 873.5729073121911,
+            "valid_until_sim_time": 874.1050605237251,
+            "horizon_s": 1.0,
+            "velocity_xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "velocity_xy_valid": false,
+            "velocity_z_valid": false,
+            "source_keys": [
+              "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",41]"
+            ],
+            "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+            "measurement": {
+              "center_xyz": [
+                5.052869666584445,
+                1.5087328550734924,
+                0.9843521404266358
+              ],
+              "half_extents_xyz": [
+                0.12927040842271253,
+                0.11485528044645443,
+                0.40307434797287
+              ],
+              "position_reference_sim_time": 873.1050605237251,
+              "extent_kind": "visible_surface_quantiles"
+            },
+            "prior": {
+              "vertical_padding_each_side_m": 0.85,
+              "human_height_prior_applied": true,
+              "position_uncertainty_m": 0.15,
+              "calibration_status": "uncalibrated"
+            },
+            "robot_envelope": {
+              "half_extents_xyz": [
+                0.43,
+                0.43,
+                0.28
+              ],
+              "body_offset_m": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          }
+        ],
+        "people_hazard_reference_sim_time": 873.5729073121911,
+        "status": "moving",
+        "planner": {
+          "ok": true,
+          "protocol": "air_ground_smart3d.v1",
+          "robot_id": "go2_01",
+          "session_id": "d83ccef432d3410e8e573a93122096cb-go2_01",
+          "tree_instance_id": 1,
+          "dimension": 2,
+          "profile_id": "go2_ground_v1",
+          "map": {
+            "scene_id": "air_ground_lab_v1",
+            "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+            "content_version": "2026-09-29-v2-calibrated",
+            "frame_id": "map",
+            "resolution": 0.25,
+            "revision": 5207,
+            "capture_sim_time_watermark": 872.7153412014013
+          },
+          "goal_revision": 758,
+          "goal_xyz": [
+            8,
+            8,
+            0.33000001311302185
+          ],
+          "current_xyz": [
+            6.899153709411621,
+            -7.720860481262207,
+            0.33000001311302185
+          ],
+          "local_reaction_radius_m": 4,
+          "local_reaction_center_xyz": [
+            6.899153709411621,
+            -7.720860481262207,
+            0.33000001311302185
+          ],
+          "sim_time": 872.7153412014013,
+          "dynamic_revision": 1553,
+          "dynamic_active_boxes": 1,
+          "people_revision": 1187,
+          "people_active_hazards": 4,
+          "people_hazards": [
+            {
+              "schema": "air_ground.people_hazard/v1",
+              "id": "person-000446",
+              "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+              "scene_id": "air_ground_lab_v1",
+              "profile_id": "go2_ground_v1",
+              "dimension": 2,
+              "shape": "ellipse",
+              "center_xyz": [
+                11.000271908374849,
+                -1.0566022210909254,
+                0.33
+              ],
+              "axes_xyz": [
+                [
+                  1.0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1.0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1.0
+                ]
+              ],
+              "semi_axes_m": [
+                0.9499875750284569,
+                0.9499875750284569,
+                0
+              ],
+              "footprint_included": true,
+              "capture_sim_time": 871.0597667753464,
+              "position_reference_sim_time": 872.7153412014013,
+              "valid_until_sim_time": 873.0597667753464,
+              "horizon_s": 1.0,
+              "velocity_xyz": [
+                0,
+                0,
+                0
+              ],
+              "velocity_xy_valid": false,
+              "velocity_z_valid": false,
+              "source_keys": [
+                "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",44]"
+              ],
+              "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+              "measurement": {
+                "center_xyz": [
+                  11.000271908374849,
+                  -1.0566022210909254,
+                  0.9340054634213448
+                ],
+                "half_extents_xyz": [
+                  0.16145215719911477,
+                  0.10367980404777338,
+                  0.5382444486021996
+                ],
+                "position_reference_sim_time": 872.0597667753464,
+                "extent_kind": "visible_surface_quantiles"
+              },
+              "prior": {
+                "vertical_padding_each_side_m": 0.85,
+                "human_height_prior_applied": true,
+                "position_uncertainty_m": 0.15,
+                "calibration_status": "uncalibrated"
+              },
+              "robot_envelope": {
+                "half_extents_xyz": [
+                  0.43,
+                  0.43,
+                  0.28
+                ],
+                "body_offset_m": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            {
+              "schema": "air_ground.people_hazard/v1",
+              "id": "person-000447",
+              "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+              "scene_id": "air_ground_lab_v1",
+              "profile_id": "go2_ground_v1",
+              "dimension": 2,
+              "shape": "ellipse",
+              "center_xyz": [
+                10.846552364482992,
+                5.89652813719494,
+                0.33
+              ],
+              "axes_xyz": [
+                [
+                  1.0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1.0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1.0
+                ]
+              ],
+              "semi_axes_m": [
+                0.9654814988893096,
+                0.9654814988893096,
+                0
+              ],
+              "footprint_included": true,
+              "capture_sim_time": 871.0597667753464,
+              "position_reference_sim_time": 872.7153412014013,
+              "valid_until_sim_time": 873.0597667753464,
+              "horizon_s": 1.0,
+              "velocity_xyz": [
+                0,
+                0,
+                0
+              ],
+              "velocity_xy_valid": false,
+              "velocity_z_valid": false,
+              "source_keys": [
+                "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",48]"
+              ],
+              "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+              "measurement": {
+                "center_xyz": [
+                  10.846552364482992,
+                  5.89652813719494,
+                  0.8394122141599656
+                ],
+                "half_extents_xyz": [
+                  0.18467688227476486,
+                  0.0943219379228939,
+                  0.6150663524866105
+                ],
+                "position_reference_sim_time": 872.0597667753464,
+                "extent_kind": "visible_surface_quantiles"
+              },
+              "prior": {
+                "vertical_padding_each_side_m": 0.85,
+                "human_height_prior_applied": true,
+                "position_uncertainty_m": 0.15,
+                "calibration_status": "uncalibrated"
+              },
+              "robot_envelope": {
+                "half_extents_xyz": [
+                  0.43,
+                  0.43,
+                  0.28
+                ],
+                "body_offset_m": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            {
+              "schema": "air_ground.people_hazard/v1",
+              "id": "person-000449",
+              "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+              "scene_id": "air_ground_lab_v1",
+              "profile_id": "go2_ground_v1",
+              "dimension": 2,
+              "shape": "ellipse",
+              "center_xyz": [
+                5.14286837027516,
+                2.8966323491562296,
+                0.33
+              ],
+              "axes_xyz": [
+                [
+                  1.0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1.0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1.0
+                ]
+              ],
+              "semi_axes_m": [
+                0.809502277153663,
+                0.809502277153663,
+                0
+              ],
+              "footprint_included": true,
+              "capture_sim_time": 871.0597667753464,
+              "position_reference_sim_time": 872.7153412014013,
+              "valid_until_sim_time": 873.0597667753464,
+              "horizon_s": 1.0,
+              "velocity_xyz": [
+                0,
+                0,
+                0
+              ],
+              "velocity_xy_valid": false,
+              "velocity_z_valid": false,
+              "source_keys": [
+                "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",45]"
+              ],
+              "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+              "measurement": {
+                "center_xyz": [
+                  5.14286837027516,
+                  2.8966323491562296,
+                  1.163468422293663
+                ],
+                "half_extents_xyz": [
+                  0.03752557542172319,
+                  0.03511138078766596,
+                  0.17558841407299042
+                ],
+                "position_reference_sim_time": 872.0597667753464,
+                "extent_kind": "visible_surface_quantiles"
+              },
+              "prior": {
+                "vertical_padding_each_side_m": 0.85,
+                "human_height_prior_applied": true,
+                "position_uncertainty_m": 0.15,
+                "calibration_status": "uncalibrated"
+              },
+              "robot_envelope": {
+                "half_extents_xyz": [
+                  0.43,
+                  0.43,
+                  0.28
+                ],
+                "body_offset_m": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            {
+              "schema": "air_ground.people_hazard/v1",
+              "id": "person-000450",
+              "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+              "scene_id": "air_ground_lab_v1",
+              "profile_id": "go2_ground_v1",
+              "dimension": 2,
+              "shape": "ellipse",
+              "center_xyz": [
+                5.139414385773145,
+                1.8876014933033276,
+                0.33
+              ],
+              "axes_xyz": [
+                [
+                  1.0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1.0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1.0
+                ]
+              ],
+              "semi_axes_m": [
+                0.9105382835338367,
+                0.9105382835338367,
+                0
+              ],
+              "footprint_included": true,
+              "capture_sim_time": 871.0597667753464,
+              "position_reference_sim_time": 872.7153412014013,
+              "valid_until_sim_time": 873.0597667753464,
+              "horizon_s": 1.0,
+              "velocity_xyz": [
+                0,
+                0,
+                0
+              ],
+              "velocity_xy_valid": false,
+              "velocity_z_valid": false,
+              "source_keys": [
+                "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",47]"
+              ],
+              "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+              "measurement": {
+                "center_xyz": [
+                  5.139414385773145,
+                  1.8876014933033276,
+                  0.8696830260753632
+                ],
+                "half_extents_xyz": [
+                  0.1120400572103204,
+                  0.10334819186733446,
+                  0.6711443841457367
+                ],
+                "position_reference_sim_time": 872.0597667753464,
+                "extent_kind": "visible_surface_quantiles"
+              },
+              "prior": {
+                "vertical_padding_each_side_m": 0.85,
+                "human_height_prior_applied": true,
+                "position_uncertainty_m": 0.15,
+                "calibration_status": "uncalibrated"
+              },
+              "robot_envelope": {
+                "half_extents_xyz": [
+                  0.43,
+                  0.43,
+                  0.28
+                ],
+                "body_offset_m": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            }
+          ],
+          "path_id": "d83ccef432d3410e8e573a93122096cb-go2_01:758:1554",
+          "path_xyz": [
+            [
+              6.899153709411621,
+              -7.720860481262207,
+              0.33000001311302185
+            ],
+            [
+              6.4599609375,
+              -7.439414978027344,
+              0.33000001311302185
+            ],
+            [
+              5.025646209716797,
+              -7.874258518218994,
+              0.33000001311302185
+            ],
+            [
+              3.3509421348571777,
+              -8.304658889770508,
+              0.33000001311302185
+            ],
+            [
+              1.728087067604065,
+              -8.491018295288086,
+              0.33000001311302185
+            ],
+            [
+              0.3955078125,
+              -8.317329406738281,
+              0.33000001311302185
+            ],
+            [
+              -0.9410446882247925,
+              -8.222390174865723,
+              0.33000001311302185
+            ],
+            [
+              -1.636244297027588,
+              -7.503573417663574,
+              0.33000001311302185
+            ],
+            [
+              -3.36181640625,
+              -7.155920028686523,
+              0.33000001311302185
+            ],
+            [
+              -3.331172466278076,
+              -5.422645568847656,
+              0.33000001311302185
+            ],
+            [
+              -3.1433491706848145,
+              -4.264055252075195,
+              0.33000001311302185
+            ],
+            [
+              -3.942237138748169,
+              -3.1557629108428955,
+              0.33000001311302185
+            ],
+            [
+              -4.50439453125,
+              -1.6689529418945312,
+              0.33000001311302185
+            ],
+            [
+              -5.003719329833984,
+              0.45998889207839966,
+              0.33000001311302185
+            ],
+            [
+              -4.933249473571777,
+              3.710416555404663,
+              0.33000001311302185
+            ],
+            [
+              -4.361752510070801,
+              4.953803062438965,
+              0.33000001311302185
+            ],
+            [
+              -2.94040846824646,
+              8.076290130615234,
+              0.33000001311302185
+            ],
+            [
+              -2.5927734375,
+              9.817100524902344,
+              0.33000001311302185
+            ],
+            [
+              -1.4208984375,
+              11.133975982666016,
+              0.33000001311302185
+            ],
+            [
+              -0.78369140625,
+              12.59716796875,
+              0.33000001311302185
+            ],
+            [
+              0.205078125,
+              12.606311798095703,
+              0.33000001311302185
+            ],
+            [
+              1.402571678161621,
+              13.077296257019043,
+              0.33000001311302185
+            ],
+            [
+              2.4462890625,
+              14.50845718383789,
+              0.33000001311302185
+            ],
+            [
+              2.841796875,
+              14.801097869873047,
+              0.33000001311302185
+            ],
+            [
+              3.896484375,
+              16.117969512939453,
+              0.33000001311302185
+            ],
+            [
+              5.071651935577393,
+              14.877602577209473,
+              0.33000001311302185
+            ],
+            [
+              5.4345703125,
+              14.069503784179688,
+              0.33000001311302185
+            ],
+            [
+              5.9619140625,
+              12.533149719238281,
+              0.33000001311302185
+            ],
+            [
+              5.56640625,
+              10.850479125976562,
+              0.33000001311302185
+            ],
+            [
+              6.1376953125,
+              10.118885040283203,
+              0.33000001311302185
+            ],
+            [
+              7.27294921875,
+              9.240966796875,
+              0.33000001311302185
+            ],
+            [
+              8,
+              8,
+              0.33000001311302185
+            ]
+          ],
+          "path_status": "candidate_path",
+          "candidate_unknown_allowed": true,
+          "path_all_known_free": true,
+          "execution_authorized": false,
+          "tree_exported": true,
+          "metrics": {
+            "operation": "update",
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "nodes_before": 6091,
+            "edges_before": 6055,
+            "occupied_added": 1398,
+            "occupied_cleared": 1210,
+            "occupied_expired_to_unknown": 0,
+            "dynamic_changed": true,
+            "dynamic_metadata_changed": true,
+            "dynamic_ttl_only_refresh": false,
+            "dynamic_added_or_moved_boxes": 1,
+            "dynamic_removed_or_moved_boxes": 1,
+            "prune_scan_triggered": true,
+            "map_clear_regions_queued": 1210,
+            "dynamic_clear_regions_queued": 1,
+            "clear_regions_examined": 64,
+            "clear_nodes_examined": 512,
+            "restored_nodes": 3,
+            "historical_edges_restored": 3,
+            "retained_cut_edges": 83,
+            "clear_pending_regions": 29419,
+            "clear_pending_nodes": 3080,
+            "coverage_attempts": 64,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 256,
+            "reroot": null,
+            "people_changed": false,
+            "people_metadata_only_refresh": true,
+            "people_added_or_moved": 0,
+            "people_removed_or_moved": 0,
+            "people_clear_regions_queued": 0,
+            "nodes_total": 6091,
+            "nodes_active": 6053,
+            "nodes_pruned": 38,
+            "invalid_tree_edges": 0,
+            "collision_checks_cumulative": {
+              "state_checks": 9769998,
+              "edge_checks": 18235258,
+              "voxel_tests": 598140,
+              "oversize_sweeps": 0
+            },
+            "total_wall_ms": 192.07953799999999,
+            "repair_budget_ms": 50,
+            "prune_reroot_finalize_export_outside_repair_budget": true
+          },
+          "latency_s": 0.20927669992670417,
+          "received_wall": 1790727369.063977,
+          "tree_nodes_count": 6091,
+          "tree_edges_count": 6052,
+          "tree_ref": {
+            "schema": "air_ground.tree_snapshot/v1",
+            "epoch": "d83ccef432d3410e8e573a93122096cb",
+            "robot_id": "go2_01",
+            "session_id": "d83ccef432d3410e8e573a93122096cb-go2_01",
+            "tree_instance_id": 1,
+            "geometry_sha256": "2ef5c28d9e313dbc1ed38006860cc0d397d8f33635d09f062854b3777ce17606",
+            "sha256": "49de24739dc2ba44238ff92c7aac90b708c10e776008ee3e2e10ee074406c7f4",
+            "path": "shared/tree_snapshots/go2_01/tree-49de24739dc2ba44238ff92c7aac90b708c10e776008ee3e2e10ee074406c7f4.json"
+          }
+        },
+        "planner_error": null,
+        "planner_recoveries": null,
+        "distance_m": 14657.165003800214,
+        "vertical_distance_m": 1.1920928966180355e-08,
+        "actual_speed": 1.9980162838620985,
+        "completed_goals": 757,
+        "goal_revision": 758,
+        "guard": {
+          "ok": true,
+          "reason": "fresh_free_swept_volume",
+          "blocked_key": null,
+          "checked_cells": 84,
+          "initial_volume_exempt_cells": 36,
+          "method": "continuous_swept_aabb"
+        },
+        "last_control_error": null,
+        "motion_block_count": 0,
+        "control_latency_s": 0.0022374000400304794,
+        "sensor_fresh": {
+          "depth": {
+            "sim_time": 872.5322820268339,
+            "wall": 1030356.774567245,
+            "frame": 17868
+          },
+          "lidar": {
+            "sim_time": 873.0247740879422,
+            "wall": 1030357.521643226,
+            "frame": 17877
+          }
+        }
+      },
+      {
+        "robot_id": "uav_01",
+        "actor_id": 6,
+        "kind": "xyz_yaw",
+        "dimension": 3,
+        "position_xyz": [
+          -8.06081771850586,
+          2.934293746948242,
+          3.869592933654785
+        ],
+        "yaw": -2.1763907697214817,
+        "body_half_extents_m": [
+          0.7,
+          0.7,
+          0.36
+        ],
+        "body_offset_m": [
+          0,
+          0,
+          0
+        ],
+        "goal_xyz": [
+          -8,
+          -3,
+          2.0
+        ],
+        "people_hazards": [
+          {
+            "schema": "air_ground.people_hazard/v1",
+            "id": "person-000450",
+            "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+            "scene_id": "air_ground_lab_v1",
+            "profile_id": "fighter_uav_v1",
+            "dimension": 3,
+            "shape": "ellipsoid",
+            "center_xyz": [
+              5.8821437980928835,
+              1.8863254062176225,
+              0.6785969722270966
+            ],
+            "axes_xyz": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "semi_axes_m": [
+              1.8311051675642578,
+              1.8311051675642578,
+              2.2670556202457974
+            ],
+            "footprint_included": true,
+            "capture_sim_time": 872.1050605237251,
+            "position_reference_sim_time": 873.5729073121911,
+            "valid_until_sim_time": 874.1050605237251,
+            "horizon_s": 1.0,
+            "velocity_xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "velocity_xy_valid": false,
+            "velocity_z_valid": false,
+            "source_keys": [
+              "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",47]"
+            ],
+            "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+            "measurement": {
+              "center_xyz": [
+                5.8821437980928835,
+                1.8863254062176225,
+                0.6785969722270966
+              ],
+              "half_extents_xyz": [
+                0.11769906195230817,
+                0.10060590116427193,
+                0.3930504024028778
+              ],
+              "position_reference_sim_time": 873.1050605237251,
+              "extent_kind": "visible_surface_quantiles"
+            },
+            "prior": {
+              "vertical_padding_each_side_m": 0.85,
+              "human_height_prior_applied": true,
+              "position_uncertainty_m": 0.15,
+              "calibration_status": "uncalibrated"
+            },
+            "robot_envelope": {
+              "half_extents_xyz": [
+                0.7,
+                0.7,
+                0.36
+              ],
+              "body_offset_m": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          },
+          {
+            "schema": "air_ground.people_hazard/v1",
+            "id": "person-000451",
+            "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+            "scene_id": "air_ground_lab_v1",
+            "profile_id": "fighter_uav_v1",
+            "dimension": 3,
+            "shape": "ellipsoid",
+            "center_xyz": [
+              5.052869666584445,
+              1.5087328550734924,
+              0.9843521404266358
+            ],
+            "axes_xyz": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "semi_axes_m": [
+              1.8566829449664486,
+              1.8566829449664486,
+              2.2812316200193696
+            ],
+            "footprint_included": true,
+            "capture_sim_time": 872.1050605237251,
+            "position_reference_sim_time": 873.5729073121911,
+            "valid_until_sim_time": 874.1050605237251,
+            "horizon_s": 1.0,
+            "velocity_xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "velocity_xy_valid": false,
+            "velocity_z_valid": false,
+            "source_keys": [
+              "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",41]"
+            ],
+            "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+            "measurement": {
+              "center_xyz": [
+                5.052869666584445,
+                1.5087328550734924,
+                0.9843521404266358
+              ],
+              "half_extents_xyz": [
+                0.12927040842271253,
+                0.11485528044645443,
+                0.40307434797287
+              ],
+              "position_reference_sim_time": 873.1050605237251,
+              "extent_kind": "visible_surface_quantiles"
+            },
+            "prior": {
+              "vertical_padding_each_side_m": 0.85,
+              "human_height_prior_applied": true,
+              "position_uncertainty_m": 0.15,
+              "calibration_status": "uncalibrated"
+            },
+            "robot_envelope": {
+              "half_extents_xyz": [
+                0.7,
+                0.7,
+                0.36
+              ],
+              "body_offset_m": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          }
+        ],
+        "people_hazard_reference_sim_time": 873.5729073121911,
+        "status": "moving",
+        "planner": {
+          "ok": true,
+          "protocol": "air_ground_smart3d.v1",
+          "robot_id": "uav_01",
+          "session_id": "d83ccef432d3410e8e573a93122096cb-uav_01",
+          "tree_instance_id": 1,
+          "dimension": 3,
+          "profile_id": "fighter_uav_v1",
+          "map": {
+            "scene_id": "air_ground_lab_v1",
+            "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+            "content_version": "2026-09-29-v2-calibrated",
+            "frame_id": "map",
+            "resolution": 0.25,
+            "revision": 5204,
+            "capture_sim_time_watermark": 872.07172701729
+          },
+          "goal_revision": 404,
+          "goal_xyz": [
+            -8,
+            -3,
+            2
+          ],
+          "current_xyz": [
+            -7.543703079223633,
+            3.699551820755005,
+            3.8647682666778564
+          ],
+          "local_reaction_radius_m": 4,
+          "local_reaction_center_xyz": [
+            -7.543703079223633,
+            3.699551820755005,
+            3.8647682666778564
+          ],
+          "sim_time": 872.3322807758814,
+          "dynamic_revision": 1302,
+          "dynamic_active_boxes": 1,
+          "people_revision": 1043,
+          "people_active_hazards": 4,
+          "people_hazards": [
+            {
+              "schema": "air_ground.people_hazard/v1",
+              "id": "person-000446",
+              "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+              "scene_id": "air_ground_lab_v1",
+              "profile_id": "fighter_uav_v1",
+              "dimension": 3,
+              "shape": "ellipsoid",
+              "center_xyz": [
+                11.000271908374849,
+                -1.0566022210909254,
+                0.9340054634213448
+              ],
+              "axes_xyz": [
+                [
+                  1.0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1.0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1.0
+                ]
+              ],
+              "semi_axes_m": [
+                1.883485312691172,
+                1.883485312691172,
+                2.472391009556704
+              ],
+              "footprint_included": true,
+              "capture_sim_time": 871.0597667753464,
+              "position_reference_sim_time": 872.3322807758814,
+              "valid_until_sim_time": 873.0597667753464,
+              "horizon_s": 1.0,
+              "velocity_xyz": [
+                0,
+                0,
+                0
+              ],
+              "velocity_xy_valid": false,
+              "velocity_z_valid": false,
+              "source_keys": [
+                "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",44]"
+              ],
+              "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+              "measurement": {
+                "center_xyz": [
+                  11.000271908374849,
+                  -1.0566022210909254,
+                  0.9340054634213448
+                ],
+                "half_extents_xyz": [
+                  0.16145215719911477,
+                  0.10367980404777338,
+                  0.5382444486021996
+                ],
+                "position_reference_sim_time": 872.0597667753464,
+                "extent_kind": "visible_surface_quantiles"
+              },
+              "prior": {
+                "vertical_padding_each_side_m": 0.85,
+                "human_height_prior_applied": true,
+                "position_uncertainty_m": 0.15,
+                "calibration_status": "uncalibrated"
+              },
+              "robot_envelope": {
+                "half_extents_xyz": [
+                  0.7,
+                  0.7,
+                  0.36
+                ],
+                "body_offset_m": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            {
+              "schema": "air_ground.people_hazard/v1",
+              "id": "person-000447",
+              "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+              "scene_id": "air_ground_lab_v1",
+              "profile_id": "fighter_uav_v1",
+              "dimension": 3,
+              "shape": "ellipsoid",
+              "center_xyz": [
+                10.846552364482992,
+                5.89652813719494,
+                0.8394122141599656
+              ],
+              "axes_xyz": [
+                [
+                  1.0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1.0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1.0
+                ]
+              ],
+              "semi_axes_m": [
+                1.905397029949566,
+                1.905397029949566,
+                2.58103358791736
+              ],
+              "footprint_included": true,
+              "capture_sim_time": 871.0597667753464,
+              "position_reference_sim_time": 872.3322807758814,
+              "valid_until_sim_time": 873.0597667753464,
+              "horizon_s": 1.0,
+              "velocity_xyz": [
+                0,
+                0,
+                0
+              ],
+              "velocity_xy_valid": false,
+              "velocity_z_valid": false,
+              "source_keys": [
+                "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",48]"
+              ],
+              "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+              "measurement": {
+                "center_xyz": [
+                  10.846552364482992,
+                  5.89652813719494,
+                  0.8394122141599656
+                ],
+                "half_extents_xyz": [
+                  0.18467688227476486,
+                  0.0943219379228939,
+                  0.6150663524866105
+                ],
+                "position_reference_sim_time": 872.0597667753464,
+                "extent_kind": "visible_surface_quantiles"
+              },
+              "prior": {
+                "vertical_padding_each_side_m": 0.85,
+                "human_height_prior_applied": true,
+                "position_uncertainty_m": 0.15,
+                "calibration_status": "uncalibrated"
+              },
+              "robot_envelope": {
+                "half_extents_xyz": [
+                  0.7,
+                  0.7,
+                  0.36
+                ],
+                "body_offset_m": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            {
+              "schema": "air_ground.people_hazard/v1",
+              "id": "person-000449",
+              "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+              "scene_id": "air_ground_lab_v1",
+              "profile_id": "fighter_uav_v1",
+              "dimension": 3,
+              "shape": "ellipsoid",
+              "center_xyz": [
+                5.14286837027516,
+                2.8966323491562296,
+                1.163468422293663
+              ],
+              "axes_xyz": [
+                [
+                  1.0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1.0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1.0
+                ]
+              ],
+              "semi_axes_m": [
+                1.684809099122614,
+                1.684809099122614,
+                1.959517927049051
+              ],
+              "footprint_included": true,
+              "capture_sim_time": 871.0597667753464,
+              "position_reference_sim_time": 872.3322807758814,
+              "valid_until_sim_time": 873.0597667753464,
+              "horizon_s": 1.0,
+              "velocity_xyz": [
+                0,
+                0,
+                0
+              ],
+              "velocity_xy_valid": false,
+              "velocity_z_valid": false,
+              "source_keys": [
+                "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",45]"
+              ],
+              "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+              "measurement": {
+                "center_xyz": [
+                  5.14286837027516,
+                  2.8966323491562296,
+                  1.163468422293663
+                ],
+                "half_extents_xyz": [
+                  0.03752557542172319,
+                  0.03511138078766596,
+                  0.17558841407299042
+                ],
+                "position_reference_sim_time": 872.0597667753464,
+                "extent_kind": "visible_surface_quantiles"
+              },
+              "prior": {
+                "vertical_padding_each_side_m": 0.85,
+                "human_height_prior_applied": true,
+                "position_uncertainty_m": 0.15,
+                "calibration_status": "uncalibrated"
+              },
+              "robot_envelope": {
+                "half_extents_xyz": [
+                  0.7,
+                  0.7,
+                  0.36
+                ],
+                "body_offset_m": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            {
+              "schema": "air_ground.people_hazard/v1",
+              "id": "person-000450",
+              "scene_epoch": "d83ccef432d3410e8e573a93122096cb",
+              "scene_id": "air_ground_lab_v1",
+              "profile_id": "fighter_uav_v1",
+              "dimension": 3,
+              "shape": "ellipsoid",
+              "center_xyz": [
+                5.139414385773145,
+                1.8876014933033276,
+                0.8696830260753632
+              ],
+              "axes_xyz": [
+                [
+                  1.0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1.0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1.0
+                ]
+              ],
+              "semi_axes_m": [
+                1.8276955896334703,
+                1.8276955896334703,
+                2.660339900840884
+              ],
+              "footprint_included": true,
+              "capture_sim_time": 871.0597667753464,
+              "position_reference_sim_time": 872.3322807758814,
+              "valid_until_sim_time": 873.0597667753464,
+              "horizon_s": 1.0,
+              "velocity_xyz": [
+                0,
+                0,
+                0
+              ],
+              "velocity_xy_valid": false,
+              "velocity_z_valid": false,
+              "source_keys": [
+                "[\"d83ccef432d3410e8e573a93122096cb\",\"go2_01\",\"front_rgbd\",\"a8710306f9c54122b408b229c01c773b\",47]"
+              ],
+              "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+              "measurement": {
+                "center_xyz": [
+                  5.139414385773145,
+                  1.8876014933033276,
+                  0.8696830260753632
+                ],
+                "half_extents_xyz": [
+                  0.1120400572103204,
+                  0.10334819186733446,
+                  0.6711443841457367
+                ],
+                "position_reference_sim_time": 872.0597667753464,
+                "extent_kind": "visible_surface_quantiles"
+              },
+              "prior": {
+                "vertical_padding_each_side_m": 0.85,
+                "human_height_prior_applied": true,
+                "position_uncertainty_m": 0.15,
+                "calibration_status": "uncalibrated"
+              },
+              "robot_envelope": {
+                "half_extents_xyz": [
+                  0.7,
+                  0.7,
+                  0.36
+                ],
+                "body_offset_m": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            }
+          ],
+          "path_id": "d83ccef432d3410e8e573a93122096cb-uav_01:404:1303",
+          "path_xyz": [
+            [
+              -7.543703079223633,
+              3.699551820755005,
+              3.8647682666778564
+            ],
+            [
+              -7.177734375,
+              4.179241180419922,
+              3.891711950302124
+            ],
+            [
+              -9.169921875,
+              1.35040283203125,
+              3.851775884628296
+            ],
+            [
+              -8.765732765197754,
+              0.46800339221954346,
+              4.068858623504639
+            ],
+            [
+              -8.973573684692383,
+              -1.2783489227294922,
+              4.051223278045654
+            ],
+            [
+              -9.433426856994629,
+              -2.016541004180908,
+              3.0444533824920654
+            ],
+            [
+              -9.2578125,
+              -2.6977596282958984,
+              2.9731838703155518
+            ],
+            [
+              -9.919634819030762,
+              -4.230493545532227,
+              2.407139301300049
+            ],
+            [
+              -9.66796875,
+              -4.453590393066406,
+              1.5754239559173584
+            ],
+            [
+              -8.259950637817383,
+              -5.240049839019775,
+              1.0099501609802246
+            ],
+            [
+              -8.349609375,
+              -4.356042861938477,
+              2.294271945953369
+            ],
+            [
+              -8,
+              -3,
+              2
+            ],
+            [
+              -8,
+              -3,
+              2
+            ],
+            [
+              -8,
+              -3,
+              2
+            ]
+          ],
+          "path_status": "candidate_path",
+          "candidate_unknown_allowed": true,
+          "path_all_known_free": true,
+          "execution_authorized": false,
+          "tree_exported": true,
+          "metrics": {
+            "operation": "update",
+            "native_map_result": "NoReplanningNeeded",
+            "native_plan_result": "NoReplanningNeeded",
+            "nodes_before": 4923,
+            "edges_before": 4845,
+            "occupied_added": 1097,
+            "occupied_cleared": 863,
+            "occupied_expired_to_unknown": 0,
+            "dynamic_changed": true,
+            "dynamic_metadata_changed": true,
+            "dynamic_ttl_only_refresh": false,
+            "dynamic_added_or_moved_boxes": 1,
+            "dynamic_removed_or_moved_boxes": 1,
+            "prune_scan_triggered": true,
+            "map_clear_regions_queued": 863,
+            "dynamic_clear_regions_queued": 1,
+            "clear_regions_examined": 64,
+            "clear_nodes_examined": 263,
+            "restored_nodes": 27,
+            "historical_edges_restored": 25,
+            "retained_cut_edges": 90,
+            "clear_pending_regions": 40379,
+            "clear_pending_nodes": 2940,
+            "coverage_attempts": 64,
+            "coverage_added_nodes": 0,
+            "coverage_pending_regions": 256,
+            "reroot": null,
+            "people_changed": true,
+            "people_metadata_only_refresh": false,
+            "people_added_or_moved": 4,
+            "people_removed_or_moved": 4,
+            "people_clear_regions_queued": 4,
+            "nodes_total": 4923,
+            "nodes_active": 4861,
+            "nodes_pruned": 62,
+            "invalid_tree_edges": 0,
+            "collision_checks_cumulative": {
+              "state_checks": 6570979,
+              "edge_checks": 12274449,
+              "voxel_tests": 776887,
+              "oversize_sweeps": 0
+            },
+            "total_wall_ms": 433.777434,
+            "repair_budget_ms": 50,
+            "prune_reroot_finalize_export_outside_repair_budget": true
+          },
+          "latency_s": 0.4527902430854738,
+          "received_wall": 1790727368.6130557,
+          "tree_nodes_count": 4923,
+          "tree_edges_count": 4860,
+          "tree_ref": {
+            "schema": "air_ground.tree_snapshot/v1",
+            "epoch": "d83ccef432d3410e8e573a93122096cb",
+            "robot_id": "uav_01",
+            "session_id": "d83ccef432d3410e8e573a93122096cb-uav_01",
+            "tree_instance_id": 1,
+            "geometry_sha256": "41941e20bde929185926a95f488c7b08cf2b2bc9cbd9a24dbfa9acd98ffb8cd7",
+            "sha256": "ec90d09e802808a4014cb498390264682a8e270dfc96388a7b80edc2673c7de7",
+            "path": "shared/tree_snapshots/uav_01/tree-ec90d09e802808a4014cb498390264682a8e270dfc96388a7b80edc2673c7de7.json"
+          }
+        },
+        "planner_error": null,
+        "planner_recoveries": null,
+        "distance_m": 6983.007619902886,
+        "vertical_distance_m": 2086.9598067092893,
+        "actual_speed": 1.500006878827902,
+        "completed_goals": 403,
+        "goal_revision": 404,
+        "guard": {
+          "ok": true,
+          "reason": "fresh_free_swept_volume",
+          "blocked_key": null,
+          "checked_cells": 165,
+          "initial_volume_exempt_cells": 72,
+          "method": "continuous_swept_aabb"
+        },
+        "last_control_error": null,
+        "motion_block_count": 0,
+        "control_latency_s": 0.002577363047748804,
+        "sensor_fresh": {
+          "depth": {
+            "sim_time": 872.0383935369318,
+            "wall": 1030356.174238954,
+            "frame": 17858
+          },
+          "depth_aux_0": {
+            "sim_time": 867.98620946554,
+            "wall": 1030352.355705449,
+            "frame": 17786
+          },
+          "depth_aux_1": {
+            "sim_time": 869.057637608028,
+            "wall": 1030353.20068392,
+            "frame": 17807
+          },
+          "depth_aux_2": {
+            "sim_time": 869.3021269090241,
+            "wall": 1030353.691516222,
+            "frame": 17810
+          },
+          "depth_aux_3": {
+            "sim_time": 869.36911955697,
+            "wall": 1030353.70305474,
+            "frame": 17812
+          },
+          "depth_aux_4": {
+            "sim_time": 870.4401161096757,
+            "wall": 1030354.668416324,
+            "frame": 17827
+          },
+          "depth_aux_5": {
+            "sim_time": 870.5067831597989,
+            "wall": 1030354.685711797,
+            "frame": 17829
+          },
+          "lidar": {
+            "sim_time": 872.7153412014013,
+            "wall": 1030357.288391281,
+            "frame": 17871
+          }
+        }
+      }
+    ],
+    "human_count": 6,
+    "map_summary": {
+      "revision": 5208,
+      "observed_cells": 1045668,
+      "occupied_cells": 21894,
+      "watermark": 873.0247740879422,
+      "fusion_latency_mean_s": 0.14769183222815627
+    },
+    "sensor_stats": {
+      "go2_01/lidar": {
+        "received": 8623,
+        "fused": 1440,
+        "replaced": 8622
+      },
+      "go2_01/rgb": {
+        "received": 17551,
+        "fused": 0,
+        "replaced": 17550
+      },
+      "go2_01/depth": {
+        "received": 17549,
+        "fused": 556,
+        "replaced": 17548
+      },
+      "uav_01/lidar": {
+        "received": 8618,
+        "fused": 1439,
+        "replaced": 8617
+      },
+      "uav_01/rgb": {
+        "received": 17544,
+        "fused": 0,
+        "replaced": 17543
+      },
+      "uav_01/depth": {
+        "received": 17542,
+        "fused": 555,
+        "replaced": 17541
+      },
+      "uav_01/depth_aux_0": {
+        "received": 4307,
+        "fused": 204,
+        "replaced": 4306
+      },
+      "uav_01/depth_aux_1": {
+        "received": 4307,
+        "fused": 204,
+        "replaced": 4306
+      },
+      "uav_01/depth_aux_2": {
+        "received": 4307,
+        "fused": 204,
+        "replaced": 4306
+      },
+      "uav_01/depth_aux_3": {
+        "received": 4306,
+        "fused": 204,
+        "replaced": 4305
+      },
+      "uav_01/depth_aux_4": {
+        "received": 4306,
+        "fused": 204,
+        "replaced": 4305
+      },
+      "uav_01/depth_aux_5": {
+        "received": 4306,
+        "fused": 204,
+        "replaced": 4305
+      }
+    },
+    "fusion_metrics": {
+      "go2_01/depth": {
+        "capture_sim_time": 872.5322820268339,
+        "completed_sim_time": 872.7153412014013,
+        "capture_to_apply_sim_s": 0.183059174567461,
+        "arrival_to_apply_wall_s": 0.17934871604666114,
+        "map_request_s": 0.01964146096725017,
+        "apply_queue_s": 0.00017007102724164724,
+        "cache_apply_s": 0.002875189995393157,
+        "points": 222,
+        "free_rays": 354,
+        "ray_coverage": {},
+        "occupancy_transitions": {
+          "new_occupied": 16,
+          "cleared_occupied": 27
+        },
+        "transport": {
+          "wait_lock_s": 2.461019903421402e-06,
+          "encode_s": 0.0022700870176777244,
+          "write_s": 0.0024363709380850196,
+          "await_s": 0.01428629201836884,
+          "decode_s": 0.000131112989038229,
+          "response_bytes": 49861,
+          "request_bytes": 52701
+        },
+        "prepare_s": 0.03931550600100309,
+        "pose_lock_s": 7.965951226651669e-06,
+        "rays_s": 0.002642599050886929,
+        "total_work_s": 0.06465279299300164
+      },
+      "uav_01/depth": {
+        "capture_sim_time": 872.0383935369318,
+        "completed_sim_time": 872.1050605237251,
+        "capture_to_apply_sim_s": 0.06666698679327965,
+        "arrival_to_apply_wall_s": 0.08028212795034051,
+        "map_request_s": 0.014917754917405546,
+        "apply_queue_s": 0.00020477804355323315,
+        "cache_apply_s": 0.006586977979168296,
+        "points": 0,
+        "free_rays": 576,
+        "ray_coverage": {},
+        "occupancy_transitions": {
+          "new_occupied": 0,
+          "cleared_occupied": 0
+        },
+        "transport": {
+          "wait_lock_s": 7.749767974019051e-07,
+          "encode_s": 0.00043021305464208126,
+          "write_s": 1.53309665620327e-05,
+          "await_s": 0.014153628959320486,
+          "decode_s": 7.512501906603575e-05,
+          "response_bytes": 65276,
+          "request_bytes": 65163
+        },
+        "prepare_s": 0.043259356054477394,
+        "pose_lock_s": 0.002619533916004002,
+        "rays_s": 0.0014246010687202215,
+        "total_work_s": 0.06901300197932869
+      },
+      "uav_01/depth_aux_0": {
+        "capture_sim_time": 867.98620946554,
+        "completed_sim_time": 868.1195433869725,
+        "capture_to_apply_sim_s": 0.13333392143249512,
+        "arrival_to_apply_wall_s": 0.2936425319639966,
+        "map_request_s": 0.03120574599597603,
+        "apply_queue_s": 0.000408712076023221,
+        "cache_apply_s": 0.0020955329528078437,
+        "points": 0,
+        "free_rays": 1024,
+        "ray_coverage": {},
+        "occupancy_transitions": {
+          "new_occupied": 0,
+          "cleared_occupied": 0
+        },
+        "transport": {
+          "wait_lock_s": 5.890964530408382e-06,
+          "encode_s": 0.0006707649445161223,
+          "write_s": 0.0015177370514720678,
+          "await_s": 0.028910230961628258,
+          "decode_s": 4.561000969260931e-05,
+          "response_bytes": 23236,
+          "request_bytes": 114877
+        },
+        "prepare_s": 0.004296574043110013,
+        "pose_lock_s": 4.261033609509468e-06,
+        "rays_s": 0.0008920659311115742,
+        "total_work_s": 0.03890289203263819
+      },
+      "uav_01/depth_aux_1": {
+        "capture_sim_time": 869.057637608028,
+        "completed_sim_time": 869.1243045426672,
+        "capture_to_apply_sim_s": 0.06666693463921547,
+        "arrival_to_apply_wall_s": 0.0892709179315716,
+        "map_request_s": 0.010620843968354166,
+        "apply_queue_s": 0.00019370205700397491,
+        "cache_apply_s": 0.0022122429218143225,
+        "points": 0,
+        "free_rays": 1024,
+        "ray_coverage": {},
+        "occupancy_transitions": {
+          "new_occupied": 0,
+          "cleared_occupied": 21
+        },
+        "transport": {
+          "wait_lock_s": 7.59027898311615e-07,
+          "encode_s": 0.0006421450525522232,
+          "write_s": 0.000398007920011878,
+          "await_s": 0.009472054080106318,
+          "decode_s": 5.731696728616953e-05,
+          "response_bytes": 25162,
+          "request_bytes": 114535
+        },
+        "prepare_s": 0.024886099039576948,
+        "pose_lock_s": 3.7190038710832596e-06,
+        "rays_s": 0.001093270955607295,
+        "total_work_s": 0.03900987794622779
+      },
+      "uav_01/depth_aux_2": {
+        "capture_sim_time": 869.3021269090241,
+        "completed_sim_time": 869.6041496902471,
+        "capture_to_apply_sim_s": 0.3020227812230587,
+        "arrival_to_apply_wall_s": 0.2995824519312009,
+        "map_request_s": 0.02122593205422163,
+        "apply_queue_s": 0.0005142180016264319,
+        "cache_apply_s": 0.0021724769612774253,
+        "points": 0,
+        "free_rays": 1024,
+        "ray_coverage": {},
+        "occupancy_transitions": {
+          "new_occupied": 0,
+          "cleared_occupied": 0
+        },
+        "transport": {
+          "wait_lock_s": 1.8370337784290314e-06,
+          "encode_s": 0.0006762889679521322,
+          "write_s": 0.0004920070059597492,
+          "await_s": 0.01973293407354504,
+          "decode_s": 2.83470144495368e-05,
+          "response_bytes": 23052,
+          "request_bytes": 114550
+        },
+        "prepare_s": 0.10916295798961073,
+        "pose_lock_s": 0.09236372006125748,
+        "rays_s": 0.022765561938285828,
+        "total_work_s": 0.24820486700627953
+      },
+      "uav_01/depth_aux_3": {
+        "capture_sim_time": 869.36911955697,
+        "completed_sim_time": 869.6041496902471,
+        "capture_to_apply_sim_s": 0.2350301332771778,
+        "arrival_to_apply_wall_s": 0.264680880936794,
+        "map_request_s": 0.007956638000905514,
+        "apply_queue_s": 0.00014175602700561285,
+        "cache_apply_s": 0.00238508393522352,
+        "points": 3,
+        "free_rays": 1021,
+        "ray_coverage": {},
+        "occupancy_transitions": {
+          "new_occupied": 1,
+          "cleared_occupied": 4
+        },
+        "transport": {
+          "wait_lock_s": 5.790498107671738e-07,
+          "encode_s": 0.0006756659131497145,
+          "write_s": 0.00042786402627825737,
+          "await_s": 0.006800019065849483,
+          "decode_s": 3.792392089962959e-05,
+          "response_bytes": 23453,
+          "request_bytes": 114736
+        },
+        "prepare_s": 0.0029003050876781344,
+        "pose_lock_s": 2.3390166461467743e-06,
+        "rays_s": 0.0007570369634777308,
+        "total_work_s": 0.014143159030936658
+      },
+      "uav_01/depth_aux_4": {
+        "capture_sim_time": 870.4401161096757,
+        "completed_sim_time": 870.6067836567527,
+        "capture_to_apply_sim_s": 0.16666754707694054,
+        "arrival_to_apply_wall_s": 0.17471410799771547,
+        "map_request_s": 0.011160729918628931,
+        "apply_queue_s": 0.0002457420341670513,
+        "cache_apply_s": 0.003232029965147376,
+        "points": 0,
+        "free_rays": 1024,
+        "ray_coverage": {},
+        "occupancy_transitions": {
+          "new_occupied": 0,
+          "cleared_occupied": 0
+        },
+        "transport": {
+          "wait_lock_s": 1.091044396162033e-06,
+          "encode_s": 0.0008914779173210263,
+          "write_s": 0.0003422209993004799,
+          "await_s": 0.009675765060819685,
+          "decode_s": 5.074602086097002e-05,
+          "response_bytes": 23492,
+          "request_bytes": 106146
+        },
+        "prepare_s": 0.09140179504174739,
+        "pose_lock_s": 0.015751190949231386,
+        "rays_s": 0.0017065440770238638,
+        "total_work_s": 0.123498031985946
+      },
+      "uav_01/depth_aux_5": {
+        "capture_sim_time": 870.5067831597989,
+        "completed_sim_time": 870.6067836567527,
+        "capture_to_apply_sim_s": 0.10000049695372581,
+        "arrival_to_apply_wall_s": 0.11797332600690424,
+        "map_request_s": 0.013546502916142344,
+        "apply_queue_s": 0.0001796680735424161,
+        "cache_apply_s": 0.0022287429310381413,
+        "points": 1,
+        "free_rays": 1023,
+        "ray_coverage": {},
+        "occupancy_transitions": {
+          "new_occupied": 1,
+          "cleared_occupied": 11
+        },
+        "transport": {
+          "wait_lock_s": 0.003620233037509024,
+          "encode_s": 0.0014301510527729988,
+          "write_s": 0.0005263469647616148,
+          "await_s": 0.007871547946706414,
+          "decode_s": 7.214199285954237e-05,
+          "response_bytes": 24161,
+          "request_bytes": 124026
+        },
+        "prepare_s": 0.0038159199757501483,
+        "pose_lock_s": 5.61797060072422e-06,
+        "rays_s": 0.0008949451148509979,
+        "total_work_s": 0.020671396981924772
+      },
+      "go2_01/lidar": {
+        "capture_sim_time": 873.0247740879422,
+        "completed_sim_time": 873.4729067183798,
+        "capture_to_apply_sim_s": 0.44813263043761253,
+        "arrival_to_apply_wall_s": 0.4607724290108308,
+        "map_request_s": 0.1449560250621289,
+        "apply_queue_s": 0.00019130401778966188,
+        "cache_apply_s": 0.045813773991540074,
+        "points": 9094,
+        "free_rays": 756,
+        "ray_coverage": {
+          "ray_geometry_policy": "all_distinct_measured_rays",
+          "input_points": 9850,
+          "zero_distance_points": 0,
+          "in_range_hit_points": 9094,
+          "unique_hit_voxels": 2012,
+          "measured_free_rays": 756,
+          "unique_free_endpoint_voxels": 750,
+          "hit_ray_count": 9094,
+          "free_ray_count": 756,
+          "total_ray_count": 9850,
+          "boundary_clipped_rays": 54,
+          "range_clipped_rays": 0,
+          "discarded_zero_length_rays": 0,
+          "mark_range_m": 9.0,
+          "clear_range_m": 40.0,
+          "real_far_hit_points": 702,
+          "unique_protected_hit_voxels": 696,
+          "free_include_endpoint": false,
+          "return_azimuth_span_deg": 358.20004641454193,
+          "raw_return_count": 12090,
+          "scan_end_angle_rad": 1.3568198680877686,
+          "protected_hit_cells": 696,
+          "refreshed_protected_hits": 528,
+          "recovered_far_hit_cells": 192,
+          "skipped_stale_cells": 0
+        },
+        "occupancy_transitions": {
+          "new_occupied": 571,
+          "cleared_occupied": 664
+        },
+        "transport": {
+          "wait_lock_s": 1.391046680510044e-06,
+          "encode_s": 0.003918334026820958,
+          "write_s": 0.005664844997227192,
+          "await_s": 0.13317977101542056,
+          "decode_s": 0.0017899739323183894,
+          "response_bytes": 543811,
+          "request_bytes": 693151
+        },
+        "prepare_s": 0.13958690408617258,
+        "pose_lock_s": 8.348957635462284e-06,
+        "rays_s": 0.06745156296528876,
+        "total_work_s": 0.39800791908055544
+      },
+      "uav_01/lidar": {
+        "capture_sim_time": 872.7153412014013,
+        "completed_sim_time": 873.2438635773724,
+        "capture_to_apply_sim_s": 0.5285223759710789,
+        "arrival_to_apply_wall_s": 0.5288560800254345,
+        "map_request_s": 0.3073172130389139,
+        "apply_queue_s": 0.00028283498249948025,
+        "cache_apply_s": 0.16465301206335425,
+        "points": 10192,
+        "free_rays": 4044,
+        "ray_coverage": {
+          "ray_geometry_policy": "all_distinct_measured_rays",
+          "input_points": 14236,
+          "zero_distance_points": 0,
+          "in_range_hit_points": 10192,
+          "unique_hit_voxels": 2486,
+          "measured_free_rays": 4044,
+          "unique_free_endpoint_voxels": 3474,
+          "hit_ray_count": 10192,
+          "free_ray_count": 4044,
+          "total_ray_count": 14236,
+          "boundary_clipped_rays": 318,
+          "range_clipped_rays": 165,
+          "discarded_zero_length_rays": 0,
+          "mark_range_m": 9.0,
+          "clear_range_m": 40.0,
+          "real_far_hit_points": 3678,
+          "unique_protected_hit_voxels": 3110,
+          "free_include_endpoint": false,
+          "return_azimuth_span_deg": 358.19728356468374,
+          "raw_return_count": 14236,
+          "scan_end_angle_rad": 1.0562810897827148,
+          "protected_hit_cells": 3110,
+          "refreshed_protected_hits": 2523,
+          "recovered_far_hit_cells": 718,
+          "skipped_stale_cells": 0
+        },
+        "occupancy_transitions": {
+          "new_occupied": 896,
+          "cleared_occupied": 712
+        },
+        "transport": {
+          "wait_lock_s": 1.72504223883152e-06,
+          "encode_s": 0.007462769979611039,
+          "write_s": 0.017436259076930583,
+          "await_s": 0.2772905809106305,
+          "decode_s": 0.005063788034021854,
+          "response_bytes": 1797281,
+          "request_bytes": 1363923
+        },
+        "prepare_s": 0.005518061108887196,
+        "pose_lock_s": 1.3403943739831448e-05,
+        "rays_s": 0.038988105952739716,
+        "total_work_s": 0.5167726310901344
+      }
+    },
+    "publish_latency_mean_s": 0.06638628137588967,
+    "map_error": null,
+    "fatal": null,
+    "motion_rpc_latency_s": 0.02703129395376891,
+    "gc_metrics": {
+      "count": 11272,
+      "total_s": 69.53868140594568,
+      "max_s": 0.6457802000222728
+    },
+    "json_codec": {
+      "backend": "ujson",
+      "version": "5.12.1",
+      "path": "/data/robotics/air_ground_smart3d/runtime/python_deps/ujson.cpython-310-x86_64-linux-gnu.so",
+      "sha256": "2967cb08d9454085e9ed947e4d4598a59d50c817d383b8dc0c2d5fa4737eae3b"
+    },
+    "person_prediction_enabled": true,
+    "people_error": null,
+    "planner_core": "LINKS Lab SMART<f32,2> / SMART<f32,3>"
+  },
+  "note": "Read-only live status. running=true: not a stopped checkpoint; do not pass to --resume-state."
+}

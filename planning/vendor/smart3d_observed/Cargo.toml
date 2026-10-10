@@ -1,0 +1,12 @@
+[package]
+name = "smart-3d"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rand = "0.8"        # For random sampling
+num-traits="0.2"    # For Float trait
+kiddo = "5.0"       # For kd-trees
+special = "0.11"    # For gamma function
+serde = {version = "1.0", features = ["derive"]}    # For serialization and derserialization
+json = "0.12.4"                                     # For json serialization and derserialization

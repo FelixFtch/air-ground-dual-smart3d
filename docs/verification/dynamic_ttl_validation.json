@@ -1,0 +1,19 @@
+{
+  "schema": "air_ground.worker_ttl_fix/v1",
+  "created_utc": "2026-09-29T15:01:34.072854+00:00",
+  "tests": {
+    "rust_locked_workspace_passed": 94,
+    "python_guard_passed": 12
+  },
+  "candidate_binary": "/tmp/air_ground_planning/target/release/air-ground-smart3d-worker",
+  "candidate_sha256": "d79ddd6ec3afdc5bb4770a9f0463a0aa61042afac600b3706a63a59a4957de7a",
+  "deployment": "Root owns cold-stop binary replacement; this change installed source/tests/guard only.",
+  "verified_behaviors": [
+    "TTL renewal updates deadline and revision without new geometric prune/clear or tree changes in 2D and 3D",
+    "box movement and resize still prune and queue old-region recovery",
+    "true expiration restores previously blocked retained nodes, map revision unchanged",
+    "max_free_age=None preserves observed free evidence but still rejects unknown, missing/nonfinite/future timestamp, and occupied",
+    "default guard free age remains 3 seconds"
+  ],
+  "metrics_note": "dynamic_changed is geometry-only; dynamic_metadata_changed includes TTL; queued clear metrics separate new events from draining existing maintenance."
+}

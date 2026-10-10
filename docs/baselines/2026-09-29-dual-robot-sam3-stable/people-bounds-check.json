@@ -1,0 +1,355 @@
+{
+  "duration_s": 29.705016862018965,
+  "rows": [
+    {
+      "sample_wall": 1790710112.9572084,
+      "state_sim": 16002.912769329734,
+      "people_error": null,
+      "people_ref": 16002.769368183799,
+      "people_count": 2,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710113.9814503,
+      "state_sim": 16003.959749919362,
+      "people_error": null,
+      "people_ref": 16003.959749919362,
+      "people_count": 1,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710115.008957,
+      "state_sim": 16004.99015107099,
+      "people_error": null,
+      "people_ref": 16004.7515311623,
+      "people_count": 1,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 1,
+        "uav_01": 1
+      }
+    },
+    {
+      "sample_wall": 1790710116.0437884,
+      "state_sim": 16005.907888104208,
+      "people_error": null,
+      "people_ref": 16005.907888104208,
+      "people_count": 3,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 1,
+        "uav_01": 1
+      }
+    },
+    {
+      "sample_wall": 1790710117.0637913,
+      "state_sim": 16006.88750993181,
+      "people_error": null,
+      "people_ref": 16006.88750993181,
+      "people_count": 3,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 3,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710118.08465,
+      "state_sim": 16008.01405274216,
+      "people_error": null,
+      "people_ref": 16008.01405274216,
+      "people_count": 2,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 3,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710119.100877,
+      "state_sim": 16008.923993998207,
+      "people_error": null,
+      "people_ref": 16008.923993998207,
+      "people_count": 2,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 3
+      }
+    },
+    {
+      "sample_wall": 1790710120.1253762,
+      "state_sim": 16009.999304984696,
+      "people_error": null,
+      "people_ref": 16009.999304984696,
+      "people_count": 2,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710121.142608,
+      "state_sim": 16011.041408014484,
+      "people_error": null,
+      "people_ref": 16011.041408014484,
+      "people_count": 3,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 3,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710122.178489,
+      "state_sim": 16012.075357832946,
+      "people_error": null,
+      "people_ref": 16012.042024292983,
+      "people_count": 3,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 3,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710123.2261715,
+      "state_sim": 16013.276844636537,
+      "people_error": null,
+      "people_ref": 16012.949607112445,
+      "people_count": 3,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 3,
+        "uav_01": 3
+      }
+    },
+    {
+      "sample_wall": 1790710124.245757,
+      "state_sim": 16014.331174706109,
+      "people_error": null,
+      "people_ref": 16013.90763109643,
+      "people_count": 3,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 3,
+        "uav_01": 3
+      }
+    },
+    {
+      "sample_wall": 1790710125.2664297,
+      "state_sim": 16015.331458234228,
+      "people_error": null,
+      "people_ref": 16014.95287577901,
+      "people_count": 5,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 3,
+        "uav_01": 3
+      }
+    },
+    {
+      "sample_wall": 1790710126.2846754,
+      "state_sim": 16016.328009122051,
+      "people_error": null,
+      "people_ref": 16015.43145865295,
+      "people_count": 5,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 5,
+        "uav_01": 3
+      }
+    },
+    {
+      "sample_wall": 1790710127.3025866,
+      "state_sim": 16017.273394384421,
+      "people_error": null,
+      "people_ref": 16016.722640042193,
+      "people_count": 5,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710128.318901,
+      "state_sim": 16018.347553809173,
+      "people_error": null,
+      "people_ref": 16017.779658378102,
+      "people_count": 2,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 5
+      }
+    },
+    {
+      "sample_wall": 1790710129.3476799,
+      "state_sim": 16019.358572625555,
+      "people_error": null,
+      "people_ref": 16018.920497932471,
+      "people_count": 2,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710130.363678,
+      "state_sim": 16020.398152184673,
+      "people_error": null,
+      "people_ref": 16020.025926579721,
+      "people_count": 1,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710131.3976884,
+      "state_sim": 16021.37727887649,
+      "people_error": null,
+      "people_ref": 16021.034293138422,
+      "people_count": 2,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710132.4178562,
+      "state_sim": 16022.417431787588,
+      "people_error": null,
+      "people_ref": 16022.317431204952,
+      "people_count": 2,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 1
+      }
+    },
+    {
+      "sample_wall": 1790710133.4358215,
+      "state_sim": 16023.410230555572,
+      "people_error": null,
+      "people_ref": 16023.132948526181,
+      "people_count": 2,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710134.4505599,
+      "state_sim": 16024.425982725807,
+      "people_error": null,
+      "people_ref": 16024.18285571877,
+      "people_count": 2,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710135.4701076,
+      "state_sim": 16025.326651581563,
+      "people_error": null,
+      "people_ref": 16025.565858175047,
+      "people_count": 1,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 2,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710136.492969,
+      "state_sim": 16026.397538402118,
+      "people_error": null,
+      "people_ref": 16026.397538402118,
+      "people_count": 1,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 1,
+        "uav_01": 2
+      }
+    },
+    {
+      "sample_wall": 1790710137.5269947,
+      "state_sim": 16027.306945604272,
+      "people_error": null,
+      "people_ref": 16027.306945604272,
+      "people_count": 1,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 1,
+        "uav_01": 1
+      }
+    },
+    {
+      "sample_wall": 1790710138.5779774,
+      "state_sim": 16028.68314780388,
+      "people_error": null,
+      "people_ref": 16028.005183768459,
+      "people_count": 1,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 1,
+        "uav_01": 1
+      }
+    },
+    {
+      "sample_wall": 1790710139.5993826,
+      "state_sim": 16029.517073643394,
+      "people_error": null,
+      "people_ref": 16029.706560146995,
+      "people_count": 0,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 0,
+        "uav_01": 1
+      }
+    },
+    {
+      "sample_wall": 1790710140.6233695,
+      "state_sim": 16030.616469004191,
+      "people_error": null,
+      "people_ref": 16030.101190411486,
+      "people_count": 1,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 1,
+        "uav_01": 0
+      }
+    },
+    {
+      "sample_wall": 1790710141.6444094,
+      "state_sim": 16031.563042507507,
+      "people_error": null,
+      "people_ref": 16031.563042507507,
+      "people_count": 1,
+      "bad": [],
+      "robot_hazards": {
+        "go2_01": 1,
+        "uav_01": 0
+      }
+    }
+  ],
+  "bad_unique_observations": 0,
+  "new_person_events": []
+}

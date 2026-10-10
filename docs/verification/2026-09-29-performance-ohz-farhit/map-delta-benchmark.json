@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-29",
+  "scope": "offline release Rust Map::delta microbenchmark; live services unchanged",
+  "command": "cargo test --release --manifest-path planning/Cargo.toml --test voxel_delta benchmark_million_cells -- --ignored --nocapture --test-threads=1",
+  "method": "1000000 resident cells, 12 samples per implementation/case, order alternated, prior warmup; immutable clone retained; allocation calls and total allocated bytes counted, not peak RSS",
+  "cases": [
+    {"changed_keys":0,"refresh_keys":8192,"oracle_p50_ms":61.6334,"oracle_p95_ms":92.3019,"new_p50_ms":28.1485,"new_p95_ms":71.7378,"allocation_calls_both_p50":18,"allocated_bytes_both_p50":102761000},
+    {"changed_keys":32,"refresh_keys":0,"oracle_p50_ms":59.8408,"oracle_p95_ms":84.1442,"new_p50_ms":26.8126,"new_p95_ms":54.6328,"allocation_calls_both_p50":73,"allocated_bytes_both_p50":102767728},
+    {"changed_keys":4096,"refresh_keys":0,"oracle_p50_ms":59.4314,"oracle_p95_ms":92.2112,"new_p50_ms":28.2551,"new_p95_ms":29.2823,"allocation_calls_both_p50":5513,"allocated_bytes_both_p50":103639096}
+  ],
+  "components": {"clone_p50_ms":26.1590,"clone_p95_ms":27.2116,"unchanged_full_diff_p50_ms":31.6657,"unchanged_full_diff_p95_ms":36.1416},
+  "limitations": "Microbenchmark on active simulation host, tail latency includes concurrent workload. Only map delta stage improves; planner/robot speed improvement not measured here. Clone allocation remains unchanged."
+}

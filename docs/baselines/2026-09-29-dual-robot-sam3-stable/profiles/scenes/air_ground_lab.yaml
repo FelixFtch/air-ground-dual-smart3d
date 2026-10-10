@@ -1,0 +1,48 @@
+schema: air_ground.scene/v1
+scene_id: air_ground_lab_v1
+content_version: 2026-09-29-v2-calibrated
+map: /Game/AirGroundLab/Maps/AirGroundLab_Main
+carla_host: 127.0.0.1
+carla_port: 2400
+ros_domain_id: 45
+frame_id: map
+carla_world_origin_m:
+- 0
+- 0
+- 0.22
+map_axes: x=carla.x, y=-carla.y, z=carla.z-.22
+ground_z_m: -0.018750043
+resolution: 0.25
+bounds:
+- - -30
+  - 30
+- - -30
+  - 30
+- - -0.5
+  - 8
+flight_bounds:
+- - -20
+  - 20
+- - -20
+  - 20
+- - 0.8
+  - 6
+human_count: 6
+human_speed_mps:
+- 0.5
+- 0.7
+- 0.9
+- 1.0
+- 1.2
+- 1.4
+person_prediction_enabled: true
+notes: 'Dual-camera SAM3: measured partial 3D extent and per-source XY speed; temporary
+  profile-specific OHZ. Vertical speed unknown; uncertainty uncalibrated.'
+measured_floor_world_z_m: 0.201249957
+occupancy_sensor_model:
+  prob_hit: 0.9
+  prob_miss: 0.1
+  clamp_min: 0.12
+  clamp_max: 0.88
+occupancy_update_policy: measured ray evidence, per-cell capture-time ordering; single
+  hit/free flips saturated state in this zero-noise simulation

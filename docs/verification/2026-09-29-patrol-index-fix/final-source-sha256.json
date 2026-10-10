@@ -1,0 +1,20 @@
+{
+  "epoch": "b9487babdb21404eae45177d61426a32",
+  "profile_hash": "c7bb2aef1b98c82e3db2b82fcffd1bb9af0f62e6779adb74af0462f34e38be59",
+  "profiles_identical_to_baseline": true,
+  "ue_pid_unchanged": "774790",
+  "python_tests_passed": 330,
+  "rust_tests_passed": 104,
+  "files": {
+    "sim_io/runtime.py": "4af3732c8d56b3c75ddf6dfa00cc219088fc9441b77cfddb7c9a26e8d2d79d0e",
+    "sim_io/restart_state.py": "63b0105f9abe88b72224398e6781523c24fd026bdc6c3972624dd0d6a193fbf2",
+    "simulation/lifecycle.py": "9d8fd22a14930db4a2adf1f28c2998f14563d18ed71da99393535f7d88196ee5",
+    "planning/vendor/smart3d_observed/src/rrt/neighbors.rs": "e1920932a7013c237a2072c621bc8b163323adce0d8247909411efaddb6401af",
+    "planning/tests/repeated_patrol.rs": "43224db38a8330793503b48a4ab755cc843067f51cade1ad3a284cb25d33fdca",
+    "planning/CORE_PROVENANCE.json": "0d457f9c641f321987532900b94945306ed732cb384b4bb0f0f705c2216bf2f6",
+    "tests/test_runtime_goal_retry.py": "905c54097214698b3703237d93f697a2a5584676e692915d33de90adc3f6a7a6",
+    "tests/test_restart_state.py": "c919fa26527e30e535cc0029e6083306c2dc984795a4e2b19ab702d5ba0afe05",
+    "tests/test_runtime_recovery_integration.py": "28e7092a710f60c76938126b35ab4b02209411034d10451c37a12ae2c6d9b6db",
+    "planning/target/release/air-ground-smart3d-worker": "344a5d5667405438ba132f8b1692fb9232be1a4fdbb38c3d9d3f72ccb46eed9b"
+  }
+}

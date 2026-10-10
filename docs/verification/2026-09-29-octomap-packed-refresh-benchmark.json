@@ -1,0 +1,52 @@
+{
+  "refreshes_and_runs_mean": [
+    24293.5,
+    1
+  ],
+  "gc_thresholds": [
+    7000,
+    10,
+    10
+  ],
+  "codec": {
+    "backend": "ujson",
+    "version": "5.12.1",
+    "path": "/data/robotics/air_ground_smart3d/runtime/python_deps/ujson.cpython-310-x86_64-linux-gnu.so",
+    "sha256": "2967cb08d9454085e9ed947e4d4598a59d50c817d383b8dc0c2d5fa4737eae3b"
+  },
+  "results": {
+    "keys": [
+      {
+        "total_mean_ms": 16.59579374245368,
+        "decode_mean_ms": 5.984764688441323,
+        "apply_mean_ms": 10.611029054012356,
+        "p95_ms": 55.14783994294703,
+        "payload_mean_bytes": 256578.66666666666
+      },
+      {
+        "total_mean_ms": 25.789233526059736,
+        "decode_mean_ms": 8.770729848442393,
+        "apply_mean_ms": 17.018503677617346,
+        "p95_ms": 63.97284101694822,
+        "payload_mean_bytes": 256578.66666666666
+      }
+    ],
+    "runs": [
+      {
+        "total_mean_ms": 12.47067797036531,
+        "decode_mean_ms": 0.15404905813435713,
+        "apply_mean_ms": 12.316628912230954,
+        "p95_ms": 22.797145997174084,
+        "payload_mean_bytes": 196946.66666666666
+      },
+      {
+        "total_mean_ms": 14.192480613322308,
+        "decode_mean_ms": 0.15223364203443956,
+        "apply_mean_ms": 14.040246971287868,
+        "p95_ms": 20.88904194533825,
+        "payload_mean_bytes": 196946.66666666666
+      }
+    ]
+  },
+  "exact_snapshot_equal": true
+}

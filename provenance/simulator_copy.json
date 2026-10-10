@@ -1,0 +1,8 @@
+{
+  "source": "/data/sim/CARLA_UE58_Research/Carla-ue58/Unreal/CarlaUnreal",
+  "destination": "/data/sim/AirGroundLab_UE58/CarlaUnreal",
+  "started_wall": 1790691294.9658813,
+  "method": "rsync independent files; exclude .git, Saved, Intermediate, DerivedDataCache",
+  "state": "copied",
+  "finished_wall": 1790691359.149319
+}

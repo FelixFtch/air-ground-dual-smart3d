@@ -1,0 +1,474 @@
+{
+  "schema": "air_ground.published_map_transition_evaluation/v1",
+  "run_root": "/data/robotics/air_ground_smart3d/runtime/runs/0a9b6227648c4ba99812bcdd14e8e8f5",
+  "duration_wall_s": 32.02616339805536,
+  "filesystem_only": true,
+  "carla_connections_created": 0,
+  "sensor_subscriptions_created": 0,
+  "actor_truth_used_by_this_probe": false,
+  "method": "Read existing latest_lidar.npz into bytes, retain bounded frame history, read state and display only at matching map revisions. Follow elevated observed-return cells (0.35<z<2.1m) absent before their capture watermark, occupied after, then no longer occupied in later map revisions. These current probe points are not person-labelled.",
+  "limitation": "This validates measured-return occupancy turnover, not person-specific causal mapping or an exact human marking rate. Live display is asynchronous; sidecar point subsampling may differ from mapper subsampling; disappearance does not distinguish free from unknown in this display schema.",
+  "prior_person_labelled_evaluation": {
+    "eval_only": true,
+    "person_truth_not_used_for_mapping": true,
+    "run": "/data/robotics/air_ground_smart3d/runtime/runs/0a9b6227648c4ba99812bcdd14e8e8f5",
+    "samples": 859,
+    "raw_person_hits": 25722,
+    "mapper_sample_hits": 7824,
+    "rows_with_mapping_hits": 466,
+    "rows_with_visible_occupied": 334,
+    "display_time_lag_mean": 0.9386323236961165
+  },
+  "prior_person_eval_interpretation": "The already-completed prior probe used same-frame actor boxes to label physical person LiDAR returns and found occupied cells at those keys, but compared an approximately 0.94s-lagged display. It cannot provide a precise capture-aligned mark rate or a later-clear trajectory for individual cells.",
+  "map_revisions_sampled": 16,
+  "published_lidar_frames_retained": 433,
+  "mapper_consumed_frame_matches": 4,
+  "newly_occupied_observed_return_events": 27,
+  "subsequently_not_occupied_events": 22,
+  "mean_capture_to_display_s": 2.7469795467332006,
+  "errors": [],
+  "transition_examples": [
+    {
+      "key": [
+        -43,
+        -25,
+        1
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110243,
+      "capture_sim_time": 3686.515756660141,
+      "previous_revision": 245,
+      "previous_watermark": 3684.45860618446,
+      "occupied_revision": 246,
+      "occupied_watermark": 3687.3293370688334,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 249,
+      "no_longer_occupied_watermark": 3693.297938664444,
+      "interval_s": 6.78218200430274
+    },
+    {
+      "key": [
+        -43,
+        -23,
+        3
+      ],
+      "robot_id": "uav_01",
+      "frame_seq": 110246,
+      "capture_sim_time": 3686.735942502506,
+      "previous_revision": 245,
+      "previous_watermark": 3684.45860618446,
+      "occupied_revision": 246,
+      "occupied_watermark": 3687.3293370688334,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 250,
+      "no_longer_occupied_watermark": 3694.8491278821602,
+      "interval_s": 8.113185379654169
+    },
+    {
+      "key": [
+        -42,
+        -24,
+        2
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110251,
+      "capture_sim_time": 3687.075155884959,
+      "previous_revision": 245,
+      "previous_watermark": 3684.45860618446,
+      "occupied_revision": 246,
+      "occupied_watermark": 3687.3293370688334,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 250,
+      "no_longer_occupied_watermark": 3694.8491278821602,
+      "interval_s": 7.773971997201443
+    },
+    {
+      "key": [
+        -42,
+        -25,
+        4
+      ],
+      "robot_id": "uav_01",
+      "frame_seq": 110254,
+      "capture_sim_time": 3687.3293370688334,
+      "previous_revision": 245,
+      "previous_watermark": 3684.45860618446,
+      "occupied_revision": 246,
+      "occupied_watermark": 3687.3293370688334,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 250,
+      "no_longer_occupied_watermark": 3694.8491278821602,
+      "interval_s": 7.519790813326836
+    },
+    {
+      "key": [
+        -28,
+        -25,
+        4
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110344,
+      "capture_sim_time": 3694.497860168107,
+      "previous_revision": 249,
+      "previous_watermark": 3693.297938664444,
+      "occupied_revision": 250,
+      "occupied_watermark": 3694.8491278821602,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 253,
+      "no_longer_occupied_watermark": 3701.4885141896084,
+      "interval_s": 6.990654021501541
+    },
+    {
+      "key": [
+        -28,
+        -24,
+        2
+      ],
+      "robot_id": "uav_01",
+      "frame_seq": 110344,
+      "capture_sim_time": 3694.497860168107,
+      "previous_revision": 249,
+      "previous_watermark": 3693.297938664444,
+      "occupied_revision": 250,
+      "occupied_watermark": 3694.8491278821602,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 253,
+      "no_longer_occupied_watermark": 3701.4885141896084,
+      "interval_s": 6.990654021501541
+    },
+    {
+      "key": [
+        -27,
+        -24,
+        2
+      ],
+      "robot_id": "uav_01",
+      "frame_seq": 110345,
+      "capture_sim_time": 3694.6145628886297,
+      "previous_revision": 249,
+      "previous_watermark": 3693.297938664444,
+      "occupied_revision": 250,
+      "occupied_watermark": 3694.8491278821602,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 253,
+      "no_longer_occupied_watermark": 3701.4885141896084,
+      "interval_s": 6.873951300978661
+    },
+    {
+      "key": [
+        -20,
+        -25,
+        4
+      ],
+      "robot_id": "uav_01",
+      "frame_seq": 110391,
+      "capture_sim_time": 3698.6909311646596,
+      "previous_revision": 251,
+      "previous_watermark": 3697.494881809689,
+      "occupied_revision": 252,
+      "occupied_watermark": 3699.2088587367907,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 253,
+      "no_longer_occupied_watermark": 3701.4885141896084,
+      "interval_s": 2.7975830249488354
+    },
+    {
+      "key": [
+        -19,
+        -24,
+        3
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110393,
+      "capture_sim_time": 3698.800736681558,
+      "previous_revision": 251,
+      "previous_watermark": 3697.494881809689,
+      "occupied_revision": 252,
+      "occupied_watermark": 3699.2088587367907,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 253,
+      "no_longer_occupied_watermark": 3701.4885141896084,
+      "interval_s": 2.6877775080502033
+    },
+    {
+      "key": [
+        -20,
+        -25,
+        3
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110393,
+      "capture_sim_time": 3698.800736681558,
+      "previous_revision": 251,
+      "previous_watermark": 3697.494881809689,
+      "occupied_revision": 252,
+      "occupied_watermark": 3699.2088587367907,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 253,
+      "no_longer_occupied_watermark": 3701.4885141896084,
+      "interval_s": 2.6877775080502033
+    },
+    {
+      "key": [
+        -20,
+        -25,
+        1
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110393,
+      "capture_sim_time": 3698.800736681558,
+      "previous_revision": 251,
+      "previous_watermark": 3697.494881809689,
+      "occupied_revision": 252,
+      "occupied_watermark": 3699.2088587367907,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 253,
+      "no_longer_occupied_watermark": 3701.4885141896084,
+      "interval_s": 2.6877775080502033
+    },
+    {
+      "key": [
+        -43,
+        -26,
+        5
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110251,
+      "capture_sim_time": 3687.075155884959,
+      "previous_revision": 245,
+      "previous_watermark": 3684.45860618446,
+      "occupied_revision": 246,
+      "occupied_watermark": 3687.3293370688334,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 254,
+      "no_longer_occupied_watermark": 3703.400132161565,
+      "interval_s": 16.32497627660632
+    },
+    {
+      "key": [
+        -28,
+        -24,
+        6
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110344,
+      "capture_sim_time": 3694.497860168107,
+      "previous_revision": 249,
+      "previous_watermark": 3693.297938664444,
+      "occupied_revision": 250,
+      "occupied_watermark": 3694.8491278821602,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 254,
+      "no_longer_occupied_watermark": 3703.400132161565,
+      "interval_s": 8.902271993458271
+    },
+    {
+      "key": [
+        -28,
+        -24,
+        5
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110345,
+      "capture_sim_time": 3694.6145628886297,
+      "previous_revision": 249,
+      "previous_watermark": 3693.297938664444,
+      "occupied_revision": 250,
+      "occupied_watermark": 3694.8491278821602,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 254,
+      "no_longer_occupied_watermark": 3703.400132161565,
+      "interval_s": 8.78556927293539
+    },
+    {
+      "key": [
+        -20,
+        -24,
+        4
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110388,
+      "capture_sim_time": 3698.450139475055,
+      "previous_revision": 251,
+      "previous_watermark": 3697.494881809689,
+      "occupied_revision": 252,
+      "occupied_watermark": 3699.2088587367907,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 256,
+      "no_longer_occupied_watermark": 3706.9394722888246,
+      "interval_s": 8.489332813769579
+    },
+    {
+      "key": [
+        -19,
+        -25,
+        2
+      ],
+      "robot_id": "uav_01",
+      "frame_seq": 110395,
+      "capture_sim_time": 3698.980766848661,
+      "previous_revision": 251,
+      "previous_watermark": 3697.494881809689,
+      "occupied_revision": 252,
+      "occupied_watermark": 3699.2088587367907,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 256,
+      "no_longer_occupied_watermark": 3706.9394722888246,
+      "interval_s": 7.958705440163612
+    },
+    {
+      "key": [
+        -15,
+        -25,
+        3
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110420,
+      "capture_sim_time": 3701.126554784365,
+      "previous_revision": 252,
+      "previous_watermark": 3699.2088587367907,
+      "occupied_revision": 253,
+      "occupied_watermark": 3701.4885141896084,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 256,
+      "no_longer_occupied_watermark": 3706.9394722888246,
+      "interval_s": 5.8129175044596195
+    },
+    {
+      "key": [
+        -15,
+        -23,
+        5
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110420,
+      "capture_sim_time": 3701.126554784365,
+      "previous_revision": 252,
+      "previous_watermark": 3699.2088587367907,
+      "occupied_revision": 253,
+      "occupied_watermark": 3701.4885141896084,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 256,
+      "no_longer_occupied_watermark": 3706.9394722888246,
+      "interval_s": 5.8129175044596195
+    },
+    {
+      "key": [
+        -15,
+        -26,
+        6
+      ],
+      "robot_id": "uav_01",
+      "frame_seq": 110420,
+      "capture_sim_time": 3701.126554784365,
+      "previous_revision": 252,
+      "previous_watermark": 3699.2088587367907,
+      "occupied_revision": 253,
+      "occupied_watermark": 3701.4885141896084,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 256,
+      "no_longer_occupied_watermark": 3706.9394722888246,
+      "interval_s": 5.8129175044596195
+    },
+    {
+      "key": [
+        -14,
+        -25,
+        1
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110423,
+      "capture_sim_time": 3701.351767380722,
+      "previous_revision": 252,
+      "previous_watermark": 3699.2088587367907,
+      "occupied_revision": 253,
+      "occupied_watermark": 3701.4885141896084,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 256,
+      "no_longer_occupied_watermark": 3706.9394722888246,
+      "interval_s": 5.587704908102751
+    },
+    {
+      "key": [
+        -11,
+        -24,
+        1
+      ],
+      "robot_id": "go2_01",
+      "frame_seq": 110439,
+      "capture_sim_time": 3702.9048910262063,
+      "previous_revision": 253,
+      "previous_watermark": 3701.4885141896084,
+      "occupied_revision": 254,
+      "occupied_watermark": 3703.400132161565,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 256,
+      "no_longer_occupied_watermark": 3706.9394722888246,
+      "interval_s": 4.034581262618303
+    },
+    {
+      "key": [
+        -11,
+        -24,
+        4
+      ],
+      "robot_id": "uav_01",
+      "frame_seq": 110444,
+      "capture_sim_time": 3703.400132161565,
+      "previous_revision": 253,
+      "previous_watermark": 3701.4885141896084,
+      "occupied_revision": 254,
+      "occupied_watermark": 3703.400132161565,
+      "semantic_label": "unclassified_elevated_lidar_return",
+      "no_longer_occupied_revision": 256,
+      "no_longer_occupied_watermark": 3706.9394722888246,
+      "interval_s": 3.539340127259493
+    }
+  ],
+  "observation_examples": [
+    {
+      "robot_id": "uav_01",
+      "frame_seq": 110254,
+      "capture_sim_time": 3687.3293370688334,
+      "map_revision": 246,
+      "map_watermark": 3687.3293370688334,
+      "display_sim_time": 3690.02098921407,
+      "elevated_sample_cells": 24,
+      "occupied_sample_cells": 11,
+      "source_frame_proven_consumed": true
+    },
+    {
+      "robot_id": "go2_01",
+      "frame_seq": 110332,
+      "capture_sim_time": 3693.297938664444,
+      "map_revision": 249,
+      "map_watermark": 3693.297938664444,
+      "display_sim_time": 3695.9085073405877,
+      "elevated_sample_cells": 8,
+      "occupied_sample_cells": 8,
+      "source_frame_proven_consumed": true
+    },
+    {
+      "robot_id": "go2_01",
+      "frame_seq": 110424,
+      "capture_sim_time": 3701.4885141896084,
+      "map_revision": 253,
+      "map_watermark": 3701.4885141896084,
+      "display_sim_time": 3704.341567383148,
+      "elevated_sample_cells": 113,
+      "occupied_sample_cells": 85,
+      "source_frame_proven_consumed": true
+    },
+    {
+      "robot_id": "uav_01",
+      "frame_seq": 110444,
+      "capture_sim_time": 3703.400132161565,
+      "map_revision": 254,
+      "map_watermark": 3703.400132161565,
+      "display_sim_time": 3706.232776333578,
+      "elevated_sample_cells": 127,
+      "occupied_sample_cells": 112,
+      "source_frame_proven_consumed": true
+    }
+  ]
+}

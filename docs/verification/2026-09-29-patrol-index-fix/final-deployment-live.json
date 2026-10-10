@@ -1,0 +1,3718 @@
+{
+  "epoch": "b9487babdb21404eae45177d61426a32",
+  "rows": [
+    {
+      "wall": 1790711728.8785605,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711729.3794212,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711729.8802958,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711730.3811693,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711730.8816276,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711731.38626,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711731.8871732,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711732.3876703,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711732.8885489,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711733.3893633,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711733.8902538,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711734.3911119,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711734.8915973,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "loading",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711735.39272,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711735.902143,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        "FileNotFoundError: [Errno 2] No such file or directory: '/data/robotics/air_ground_smart3d/runtime/runs/b9487babdb21404eae45177d61426a32/shared/people.json'"
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "sensor_stale",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711736.4082873,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "sensor_stale",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711736.9182749,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "sensor_stale",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711737.4267569,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "sensor_stale",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711737.9319649,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "sensor_stale",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711738.4598975,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "sensor_stale",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711738.965224,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "sensor_stale",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711739.47059,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "planner_stale",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711739.976394,
+      "running": true,
+      "map_summary": {
+        "revision": 11,
+        "observed_cells": 983289,
+        "occupied_cells": 7485,
+        "watermark": 17617.77419545967,
+        "fusion_latency_mean_s": 0.0519380324985832
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "planner_stale",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711740.4840813,
+      "running": true,
+      "map_summary": {
+        "revision": 12,
+        "observed_cells": 983289,
+        "occupied_cells": 7529,
+        "watermark": 17617.940863032825,
+        "fusion_latency_mean_s": 1.14836593108802
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "planner_stale",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711740.9898455,
+      "running": true,
+      "map_summary": {
+        "revision": 13,
+        "observed_cells": 983289,
+        "occupied_cells": 7534,
+        "watermark": 17630.178713318892,
+        "fusion_latency_mean_s": 1.0689126121675752
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.5528615713119507,
+            -8.045894622802734,
+            0.330000011920929
+          ],
+          "status": "planner_stale",
+          "distance_m": 2774.3125175661835,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711741.499003,
+      "running": true,
+      "map_summary": {
+        "revision": 23,
+        "observed_cells": 983289,
+        "occupied_cells": 7673,
+        "watermark": 17631.383356899954,
+        "fusion_latency_mean_s": 0.6281727702695538
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            -0.4584570527076721,
+            -8.07291316986084,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2774.41071234722,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711742.0088887,
+      "running": true,
+      "map_summary": {
+        "revision": 26,
+        "observed_cells": 983289,
+        "occupied_cells": 7793,
+        "watermark": 17631.616691765375,
+        "fusion_latency_mean_s": 0.5718309166794643
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            0.1327459067106247,
+            -8.20319652557373,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2775.0173832743953,
+          "completed_goals": 140,
+          "tree_nodes": 4971,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711742.5176709,
+      "running": true,
+      "map_summary": {
+        "revision": 27,
+        "observed_cells": 983289,
+        "occupied_cells": 7792,
+        "watermark": 17631.97061954532,
+        "fusion_latency_mean_s": 0.561455825692974
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            0.5892502665519714,
+            -8.213361740112305,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2775.474280352174,
+          "completed_goals": 140,
+          "tree_nodes": 4973,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.293166160583496,
+            -1.0487079620361328,
+            2.938877611160278
+          ],
+          "status": "waiting_path",
+          "distance_m": 1762.1964060814455,
+          "completed_goals": 103,
+          "tree_nodes": 0,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711743.037976,
+      "running": true,
+      "map_summary": {
+        "revision": 31,
+        "observed_cells": 983289,
+        "occupied_cells": 7869,
+        "watermark": 17632.607787621208,
+        "fusion_latency_mean_s": 0.4982450982982603
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            1.352439522743225,
+            -8.144429206848145,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2776.240844814437,
+          "completed_goals": 140,
+          "tree_nodes": 4974,
+          "path_points": 6,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.310359001159668,
+            -1.0606789588928223,
+            2.94346001625061
+          ],
+          "status": "moving",
+          "distance_m": 1762.2178512899934,
+          "completed_goals": 103,
+          "tree_nodes": 4304,
+          "path_points": 3,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711743.5543404,
+      "running": true,
+      "map_summary": {
+        "revision": 33,
+        "observed_cells": 983289,
+        "occupied_cells": 7987,
+        "watermark": 17633.26826613862,
+        "fusion_latency_mean_s": 0.4874855368725548
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            1.8484820127487183,
+            -8.068779945373535,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2776.7426400071804,
+          "completed_goals": 140,
+          "tree_nodes": 4974,
+          "path_points": 6,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.470076560974121,
+            -1.1718899011611938,
+            2.9860308456420896
+          ],
+          "status": "moving",
+          "distance_m": 1762.4170744013823,
+          "completed_goals": 103,
+          "tree_nodes": 4304,
+          "path_points": 3,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711744.0669224,
+      "running": true,
+      "map_summary": {
+        "revision": 44,
+        "observed_cells": 983289,
+        "occupied_cells": 8009,
+        "watermark": 17633.809987784363,
+        "fusion_latency_mean_s": 0.3698988119952467
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            2.0466854572296143,
+            -8.034695625305176,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2776.943753031297,
+          "completed_goals": 140,
+          "tree_nodes": 4974,
+          "path_points": 6,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.72312593460083,
+            -1.3480873107910156,
+            3.053478031158447
+          ],
+          "status": "moving",
+          "distance_m": 1762.7327144423957,
+          "completed_goals": 103,
+          "tree_nodes": 4305,
+          "path_points": 3,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711744.576326,
+      "running": true,
+      "map_summary": {
+        "revision": 50,
+        "observed_cells": 983289,
+        "occupied_cells": 8134,
+        "watermark": 17634.45725266356,
+        "fusion_latency_mean_s": 0.33701134982937
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            2.700268268585205,
+            -7.915126800537109,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2777.608187330019,
+          "completed_goals": 140,
+          "tree_nodes": 4975,
+          "path_points": 5,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.864704608917236,
+            -1.5729573965072632,
+            2.8154444980621336
+          ],
+          "status": "moving",
+          "distance_m": 1763.0898361270613,
+          "completed_goals": 103,
+          "tree_nodes": 4305,
+          "path_points": 3,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711745.0889978,
+      "running": true,
+      "map_summary": {
+        "revision": 53,
+        "observed_cells": 983289,
+        "occupied_cells": 8351,
+        "watermark": 17634.791576937772,
+        "fusion_latency_mean_s": 0.32444040397352253
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            3.237363815307617,
+            -7.815927505493164,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2778.1543669044836,
+          "completed_goals": 140,
+          "tree_nodes": 4976,
+          "path_points": 5,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -7.016978740692139,
+            -1.7747801542282104,
+            2.662618188858032
+          ],
+          "status": "moving",
+          "distance_m": 1763.38699821912,
+          "completed_goals": 103,
+          "tree_nodes": 4306,
+          "path_points": 3,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711745.5980408,
+      "running": true,
+      "map_summary": {
+        "revision": 60,
+        "observed_cells": 983289,
+        "occupied_cells": 8355,
+        "watermark": 17635.533086826093,
+        "fusion_latency_mean_s": 0.2944746755706778
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            4.272914886474609,
+            -7.646003723144531,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2779.2042192480058,
+          "completed_goals": 140,
+          "tree_nodes": 4976,
+          "path_points": 5,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -7.311695098876953,
+            -2.1262848377227783,
+            2.5209307956695555
+          ],
+          "status": "moving",
+          "distance_m": 1763.8830075634187,
+          "completed_goals": 103,
+          "tree_nodes": 4307,
+          "path_points": 3,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711746.1094635,
+      "running": true,
+      "map_summary": {
+        "revision": 63,
+        "observed_cells": 983289,
+        "occupied_cells": 8364,
+        "watermark": 17635.769643870182,
+        "fusion_latency_mean_s": 0.2823806176893413
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            4.961728572845459,
+            -7.612070560455322,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2779.8939882788204,
+          "completed_goals": 140,
+          "tree_nodes": 4976,
+          "path_points": 4,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -7.508406639099121,
+            -2.440727949142456,
+            2.291277437210083
+          ],
+          "status": "moving",
+          "distance_m": 1764.3230785983244,
+          "completed_goals": 103,
+          "tree_nodes": 4307,
+          "path_points": 2,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711746.622014,
+      "running": true,
+      "map_summary": {
+        "revision": 73,
+        "observed_cells": 983289,
+        "occupied_cells": 8448,
+        "watermark": 17636.56992848683,
+        "fusion_latency_mean_s": 0.25233500732995
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            5.994175434112549,
+            -7.624654769897461,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2780.9271245041123,
+          "completed_goals": 140,
+          "tree_nodes": 4976,
+          "path_points": 3,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -7.640627384185791,
+            -2.5940377712249756,
+            2.208689956665039
+          ],
+          "status": "waiting_path",
+          "distance_m": 1764.5417364905954,
+          "completed_goals": 104,
+          "tree_nodes": 4307,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711747.134134,
+      "running": true,
+      "map_summary": {
+        "revision": 79,
+        "observed_cells": 983289,
+        "occupied_cells": 8630,
+        "watermark": 17636.96883975435,
+        "fusion_latency_mean_s": 0.2375379926107155
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            6.489262580871582,
+            -7.693301677703857,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2781.4270441802164,
+          "completed_goals": 140,
+          "tree_nodes": 4976,
+          "path_points": 3,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -7.640627384185791,
+            -2.5940377712249756,
+            2.208689956665039
+          ],
+          "status": "waiting_path",
+          "distance_m": 1764.5417364905954,
+          "completed_goals": 104,
+          "tree_nodes": 4307,
+          "path_points": 0,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711747.6434972,
+      "running": true,
+      "map_summary": {
+        "revision": 88,
+        "observed_cells": 983289,
+        "occupied_cells": 8560,
+        "watermark": 17637.68303499464,
+        "fusion_latency_mean_s": 0.23498441468545933
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            7.372400283813477,
+            -7.8663010597229,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2782.327029342571,
+          "completed_goals": 140,
+          "tree_nodes": 4977,
+          "path_points": 2,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -7.640627384185791,
+            -2.5940377712249756,
+            2.208689956665039
+          ],
+          "status": "turning",
+          "distance_m": 1764.5417364905954,
+          "completed_goals": 104,
+          "tree_nodes": 4308,
+          "path_points": 16,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711748.153117,
+      "running": true,
+      "map_summary": {
+        "revision": 92,
+        "observed_cells": 983289,
+        "occupied_cells": 8788,
+        "watermark": 17637.933799267747,
+        "fusion_latency_mean_s": 0.08292733217385831
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            7.519107341766357,
+            -7.89755392074585,
+            0.330000011920929
+          ],
+          "status": "waiting_path",
+          "distance_m": 2782.477028349819,
+          "completed_goals": 141,
+          "tree_nodes": 4977,
+          "path_points": 0,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -7.640627384185791,
+            -2.5940377712249756,
+            2.208689956665039
+          ],
+          "status": "turning",
+          "distance_m": 1764.5417364905954,
+          "completed_goals": 104,
+          "tree_nodes": 4308,
+          "path_points": 16,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711748.664716,
+      "running": true,
+      "map_summary": {
+        "revision": 102,
+        "observed_cells": 983289,
+        "occupied_cells": 8608,
+        "watermark": 17638.639220294543,
+        "fusion_latency_mean_s": 0.0746905449879705
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            7.519107341766357,
+            -7.89755392074585,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2782.477028349819,
+          "completed_goals": 141,
+          "tree_nodes": 4978,
+          "path_points": 16,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -7.637978553771973,
+            -2.5985329151153564,
+            2.2097952651977537
+          ],
+          "status": "moving",
+          "distance_m": 1764.5470698130223,
+          "completed_goals": 104,
+          "tree_nodes": 4308,
+          "path_points": 16,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711749.174803,
+      "running": true,
+      "map_summary": {
+        "revision": 110,
+        "observed_cells": 983289,
+        "occupied_cells": 8533,
+        "watermark": 17639.025726363994,
+        "fusion_latency_mean_s": 0.06393700202461332
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            7.519107341766357,
+            -7.89755392074585,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2782.477028349819,
+          "completed_goals": 141,
+          "tree_nodes": 4978,
+          "path_points": 16,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -7.555454730987549,
+            -2.738588809967041,
+            2.2442324447631834
+          ],
+          "status": "moving",
+          "distance_m": 1764.7132376629525,
+          "completed_goals": 104,
+          "tree_nodes": 4308,
+          "path_points": 16,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711749.684634,
+      "running": true,
+      "map_summary": {
+        "revision": 118,
+        "observed_cells": 983289,
+        "occupied_cells": 8542,
+        "watermark": 17639.73163731862,
+        "fusion_latency_mean_s": 0.059320334999938495
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            7.574513912200928,
+            -7.7443461418151855,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2782.6399470767196,
+          "completed_goals": 141,
+          "tree_nodes": 4978,
+          "path_points": 16,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -7.433609962463379,
+            -2.9389774799346924,
+            2.292677431106567
+          ],
+          "status": "moving",
+          "distance_m": 1764.952756297646,
+          "completed_goals": 104,
+          "tree_nodes": 4308,
+          "path_points": 16,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711750.197907,
+      "running": true,
+      "map_summary": {
+        "revision": 127,
+        "observed_cells": 983289,
+        "occupied_cells": 8602,
+        "watermark": 17640.120537863113,
+        "fusion_latency_mean_s": 0.05711338944820454
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            7.725576400756836,
+            -7.3266520500183105,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2783.084118473569,
+          "completed_goals": 141,
+          "tree_nodes": 4979,
+          "path_points": 16,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -7.165121555328369,
+            -3.219069242477417,
+            2.3388576793670652
+          ],
+          "status": "moving",
+          "distance_m": 1765.3458990158633,
+          "completed_goals": 104,
+          "tree_nodes": 4308,
+          "path_points": 16,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711750.707655,
+      "running": true,
+      "map_summary": {
+        "revision": 130,
+        "observed_cells": 983289,
+        "occupied_cells": 8747,
+        "watermark": 17640.366627474315,
+        "fusion_latency_mean_s": 0.05916507551301038
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            7.87957763671875,
+            -6.8992438316345215,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2783.5384253759803,
+          "completed_goals": 141,
+          "tree_nodes": 4979,
+          "path_points": 16,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.871644020080566,
+            -3.364764928817749,
+            2.3291440296173094
+          ],
+          "status": "moving",
+          "distance_m": 1765.6760446105684,
+          "completed_goals": 104,
+          "tree_nodes": 4308,
+          "path_points": 16,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711751.2176757,
+      "running": true,
+      "map_summary": {
+        "revision": 138,
+        "observed_cells": 983289,
+        "occupied_cells": 8857,
+        "watermark": 17641.024207920767,
+        "fusion_latency_mean_s": 0.05632435801089741
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.22616195678711,
+            -5.838084697723389,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2784.655027672654,
+          "completed_goals": 141,
+          "tree_nodes": 4979,
+          "path_points": 15,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.589498996734619,
+            -3.4464051723480225,
+            2.2978878307342527
+          ],
+          "status": "moving",
+          "distance_m": 1765.9716194250689,
+          "completed_goals": 104,
+          "tree_nodes": 4308,
+          "path_points": 15,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711751.7309191,
+      "running": true,
+      "map_summary": {
+        "revision": 146,
+        "observed_cells": 983289,
+        "occupied_cells": 8796,
+        "watermark": 17641.65439203102,
+        "fusion_latency_mean_s": 0.05311880857043434
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.405051231384277,
+            -4.934259414672852,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2785.576715730431,
+          "completed_goals": 141,
+          "tree_nodes": 4979,
+          "path_points": 15,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -6.030811786651611,
+            -3.5604100227355957,
+            2.218119888305664
+          ],
+          "status": "moving",
+          "distance_m": 1766.5473998620141,
+          "completed_goals": 104,
+          "tree_nodes": 4308,
+          "path_points": 15,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711752.24065,
+      "running": true,
+      "map_summary": {
+        "revision": 153,
+        "observed_cells": 983289,
+        "occupied_cells": 8687,
+        "watermark": 17642.177711212076,
+        "fusion_latency_mean_s": 0.054639271745691075
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.49805736541748,
+            -4.291087627410889,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2786.226653945416,
+          "completed_goals": 141,
+          "tree_nodes": 4979,
+          "path_points": 15,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -5.6274261474609375,
+            -3.606747627258301,
+            2.1688840675354
+          ],
+          "status": "moving",
+          "distance_m": 1766.9574683823732,
+          "completed_goals": 104,
+          "tree_nodes": 4308,
+          "path_points": 15,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711752.7506194,
+      "running": true,
+      "map_summary": {
+        "revision": 158,
+        "observed_cells": 983289,
+        "occupied_cells": 8951,
+        "watermark": 17642.52271640394,
+        "fusion_latency_mean_s": 0.05719884909776738
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.522802352905273,
+            -3.258824348449707,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2787.2598346263044,
+          "completed_goals": 141,
+          "tree_nodes": 4979,
+          "path_points": 14,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -5.054149150848389,
+            -3.3949575424194336,
+            2.1452317523956297
+          ],
+          "status": "moving",
+          "distance_m": 1767.5753099200483,
+          "completed_goals": 104,
+          "tree_nodes": 4309,
+          "path_points": 14,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711753.2604375,
+      "running": true,
+      "map_summary": {
+        "revision": 161,
+        "observed_cells": 983289,
+        "occupied_cells": 9017,
+        "watermark": 17643.062649634667,
+        "fusion_latency_mean_s": 0.059223390169790946
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.509549140930176,
+            -2.4873013496398926,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2788.031687777477,
+          "completed_goals": 141,
+          "tree_nodes": 4979,
+          "path_points": 14,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -4.659407138824463,
+            -3.2495429515838623,
+            2.1534903335571287
+          ],
+          "status": "moving",
+          "distance_m": 1767.9963890662086,
+          "completed_goals": 104,
+          "tree_nodes": 4309,
+          "path_points": 14,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711753.776408,
+      "running": true,
+      "map_summary": {
+        "revision": 174,
+        "observed_cells": 983289,
+        "occupied_cells": 9165,
+        "watermark": 17643.76861126814,
+        "fusion_latency_mean_s": 0.05743127858149819
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.52109432220459,
+            -2.354679822921753,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2788.164810880505,
+          "completed_goals": 141,
+          "tree_nodes": 5012,
+          "path_points": 16,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -4.044767379760742,
+            -3.09662127494812,
+            2.234914569854736
+          ],
+          "status": "moving",
+          "distance_m": 1768.6353055394643,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 13,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711754.2869442,
+      "running": true,
+      "map_summary": {
+        "revision": 178,
+        "observed_cells": 983289,
+        "occupied_cells": 9059,
+        "watermark": 17644.1714963736,
+        "fusion_latency_mean_s": 0.06054817843105411
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.52109432220459,
+            -2.354679822921753,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2788.164810880505,
+          "completed_goals": 141,
+          "tree_nodes": 5012,
+          "path_points": 16,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -3.5978918075561523,
+            -3.042389392852783,
+            2.311175374984741
+          ],
+          "status": "moving",
+          "distance_m": 1769.0925548998189,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 13,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711754.796612,
+      "running": true,
+      "map_summary": {
+        "revision": 186,
+        "observed_cells": 983289,
+        "occupied_cells": 8921,
+        "watermark": 17644.749993790872,
+        "fusion_latency_mean_s": 0.061479486466851085
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.359417915344238,
+            -2.342236280441284,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2788.326965443454,
+          "completed_goals": 141,
+          "tree_nodes": 5012,
+          "path_points": 16,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -3.014524459838867,
+            -3.0697715282440186,
+            2.43889835357666
+          ],
+          "status": "moving",
+          "distance_m": 1769.6906342604932,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 13,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711755.3111682,
+      "running": true,
+      "map_summary": {
+        "revision": 187,
+        "observed_cells": 983289,
+        "occupied_cells": 8876,
+        "watermark": 17644.886899796315,
+        "fusion_latency_mean_s": 0.06459576502966229
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.224374771118164,
+            -2.3318421840667725,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2788.462408007081,
+          "completed_goals": 141,
+          "tree_nodes": 5012,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -2.54529070854187,
+            -3.124077320098877,
+            2.5510282802581785
+          ],
+          "status": "moving",
+          "distance_m": 1770.1761482431932,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 12,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711755.8209531,
+      "running": true,
+      "map_summary": {
+        "revision": 196,
+        "observed_cells": 983289,
+        "occupied_cells": 8727,
+        "watermark": 17645.76729994733,
+        "fusion_latency_mean_s": 0.06413284913287498
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.224374771118164,
+            -2.3318421840667725,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2788.462408007081,
+          "completed_goals": 141,
+          "tree_nodes": 5012,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -2.211249351501465,
+            -3.151925563812256,
+            2.6514022636413572
+          ],
+          "status": "moving",
+          "distance_m": 1770.5268636077737,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 12,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711756.3311205,
+      "running": true,
+      "map_summary": {
+        "revision": 201,
+        "observed_cells": 983289,
+        "occupied_cells": 8725,
+        "watermark": 17646.067898445763,
+        "fusion_latency_mean_s": 0.06550348118616967
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.224374771118164,
+            -2.3318421840667725,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2788.462408007081,
+          "completed_goals": 141,
+          "tree_nodes": 5012,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -1.9624643325805664,
+            -3.149595022201538,
+            2.7550597476959227
+          ],
+          "status": "moving",
+          "distance_m": 1770.7964537263263,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 12,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711756.841166,
+      "running": true,
+      "map_summary": {
+        "revision": 208,
+        "observed_cells": 983289,
+        "occupied_cells": 8636,
+        "watermark": 17646.810207297094,
+        "fusion_latency_mean_s": 0.06717205945024034
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.236814498901367,
+            -2.304389715194702,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2788.4925474310057,
+          "completed_goals": 141,
+          "tree_nodes": 5012,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -1.774999737739563,
+            -3.132413148880005,
+            2.8528359222412107
+          ],
+          "status": "moving",
+          "distance_m": 1771.00863876462,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 12,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711757.3529892,
+      "running": true,
+      "map_summary": {
+        "revision": 212,
+        "observed_cells": 983289,
+        "occupied_cells": 8547,
+        "watermark": 17647.06258433778,
+        "fusion_latency_mean_s": 0.06497452802432235
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.307092666625977,
+            -2.149289608001709,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2788.6628268017807,
+          "completed_goals": 141,
+          "tree_nodes": 5012,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -1.5206356048583984,
+            -3.097306728363037,
+            3.0005410003662107
+          ],
+          "status": "moving",
+          "distance_m": 1771.3049368645072,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 11,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711757.8672476,
+      "running": true,
+      "map_summary": {
+        "revision": 221,
+        "observed_cells": 983289,
+        "occupied_cells": 8544,
+        "watermark": 17647.841340200044,
+        "fusion_latency_mean_s": 0.0659002017986495
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.635008811950684,
+            -1.4255928993225098,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2789.4573492523914,
+          "completed_goals": 141,
+          "tree_nodes": 5012,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -0.9009863138198853,
+            -2.98241925239563,
+            3.3844979095458982
+          ],
+          "status": "moving",
+          "distance_m": 1772.0433354956772,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 11,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711758.3824081,
+      "running": true,
+      "map_summary": {
+        "revision": 222,
+        "observed_cells": 983289,
+        "occupied_cells": 8362,
+        "watermark": 17647.94351897482,
+        "fusion_latency_mean_s": 0.07052684967347886
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.594494819641113,
+            -0.9798089265823364,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2789.919564309548,
+          "completed_goals": 141,
+          "tree_nodes": 5013,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            -0.5285418629646301,
+            -2.9134931564331055,
+            3.5097830581665037
+          ],
+          "status": "moving",
+          "distance_m": 1772.4433829613904,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 11,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711758.9012942,
+      "running": true,
+      "map_summary": {
+        "revision": 230,
+        "observed_cells": 983289,
+        "occupied_cells": 8421,
+        "watermark": 17648.761222851463,
+        "fusion_latency_mean_s": 0.0688413027630304
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.592854499816895,
+            -0.9783094525337219,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2789.9217867117504,
+          "completed_goals": 141,
+          "tree_nodes": 5013,
+          "path_points": 6,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            0.07897816598415375,
+            -2.795947551727295,
+            3.548796682357788
+          ],
+          "status": "moving",
+          "distance_m": 1773.064051676066,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 11,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711759.411495,
+      "running": true,
+      "map_summary": {
+        "revision": 231,
+        "observed_cells": 983289,
+        "occupied_cells": 8404,
+        "watermark": 17648.908023093827,
+        "fusion_latency_mean_s": 0.07166788626200286
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.495366096496582,
+            -0.9114806056022644,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2790.0399818197975,
+          "completed_goals": 141,
+          "tree_nodes": 5013,
+          "path_points": 6,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            0.5091012120246887,
+            -2.7116620540618896,
+            3.543629674911499
+          ],
+          "status": "moving",
+          "distance_m": 1773.5024003591482,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 11,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711759.9222136,
+      "running": true,
+      "map_summary": {
+        "revision": 236,
+        "observed_cells": 983289,
+        "occupied_cells": 8385,
+        "watermark": 17649.761338801123,
+        "fusion_latency_mean_s": 0.07523426333791576
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.351603507995605,
+            -0.8129153251647949,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2790.2142884357677,
+          "completed_goals": 141,
+          "tree_nodes": 5013,
+          "path_points": 12,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            0.9617394804954529,
+            -2.6546435356140137,
+            3.5066035079956053
+          ],
+          "status": "moving",
+          "distance_m": 1773.9615917228118,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 10,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711760.4354925,
+      "running": true,
+      "map_summary": {
+        "revision": 244,
+        "observed_cells": 983289,
+        "occupied_cells": 8435,
+        "watermark": 17650.21441641543,
+        "fusion_latency_mean_s": 0.06912559080374195
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.351603507995605,
+            -0.8129153251647949,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2790.2142884357677,
+          "completed_goals": 141,
+          "tree_nodes": 5014,
+          "path_points": 10,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            1.2817156314849854,
+            -2.67230224609375,
+            3.441773681640625
+          ],
+          "status": "moving",
+          "distance_m": 1774.288650814062,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 10,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711760.9460247,
+      "running": true,
+      "map_summary": {
+        "revision": 253,
+        "observed_cells": 983289,
+        "occupied_cells": 8201,
+        "watermark": 17650.879884251393,
+        "fusion_latency_mean_s": 0.07170517666381784
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.351603507995605,
+            -0.8129153251647949,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2790.2142884357677,
+          "completed_goals": 141,
+          "tree_nodes": 5014,
+          "path_points": 10,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            2.016989231109619,
+            -2.814055919647217,
+            3.241266756057739
+          ],
+          "status": "moving",
+          "distance_m": 1775.064776698412,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 9,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711761.4559662,
+      "running": true,
+      "map_summary": {
+        "revision": 261,
+        "observed_cells": 983289,
+        "occupied_cells": 8248,
+        "watermark": 17651.520642546006,
+        "fusion_latency_mean_s": 0.07125621903978754
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.351603507995605,
+            -0.8129153251647949,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2790.2142884357677,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 10,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            2.5367634296417236,
+            -2.945540428161621,
+            3.2739782619476316
+          ],
+          "status": "moving",
+          "distance_m": 1775.607106603863,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 9,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711761.9964666,
+      "running": true,
+      "map_summary": {
+        "revision": 267,
+        "observed_cells": 983289,
+        "occupied_cells": 8220,
+        "watermark": 17651.78731102962,
+        "fusion_latency_mean_s": 0.06614742263918742
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.422478675842285,
+            -0.8013876080513,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2790.28609496527,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 10,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            2.8108410835266113,
+            -2.9557576179504395,
+            3.3358297634124754
+          ],
+          "status": "moving",
+          "distance_m": 1775.894153164764,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 6,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711762.5099754,
+      "running": true,
+      "map_summary": {
+        "revision": 277,
+        "observed_cells": 983289,
+        "occupied_cells": 8030,
+        "watermark": 17652.338517081924,
+        "fusion_latency_mean_s": 0.06420545434666565
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            8.885506629943848,
+            -0.6672468185424805,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2790.7814283362163,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 10,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            3.2482175827026367,
+            -2.810211658477783,
+            3.429717569351196
+          ],
+          "status": "moving",
+          "distance_m": 1776.3673817858767,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 6,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711763.0207052,
+      "running": true,
+      "map_summary": {
+        "revision": 282,
+        "observed_cells": 983289,
+        "occupied_cells": 7917,
+        "watermark": 17652.763819937594,
+        "fusion_latency_mean_s": 0.06564256189594744
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            9.275468826293945,
+            -0.36062124371528625,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2791.2776191116955,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 10,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            3.524930953979492,
+            -2.629842519760132,
+            3.5448334503173826
+          ],
+          "status": "moving",
+          "distance_m": 1776.7177309539584,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 5,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711763.5318747,
+      "running": true,
+      "map_summary": {
+        "revision": 286,
+        "observed_cells": 983289,
+        "occupied_cells": 8158,
+        "watermark": 17653.454012931325,
+        "fusion_latency_mean_s": 0.06891624313138892
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            9.999217987060547,
+            0.03847487270832062,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2792.108489466123,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 9,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            3.8103954792022705,
+            -2.4024462699890137,
+            3.6896672534942625
+          ],
+          "status": "moving",
+          "distance_m": 1777.1103902963305,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 5,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711764.0461655,
+      "running": true,
+      "map_summary": {
+        "revision": 287,
+        "observed_cells": 983289,
+        "occupied_cells": 8247,
+        "watermark": 17653.562041514553,
+        "fusion_latency_mean_s": 0.07226942177076126
+      },
+      "errors": [
+        null,
+        null,
+        "ValueError: people reference time in future"
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            10.329325675964355,
+            0.15435107052326202,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2792.4583529833326,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            3.896390199661255,
+            -2.3343703746795654,
+            3.7325701999664305
+          ],
+          "status": "moving",
+          "distance_m": 1777.2281626451215,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 5,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711764.5562313,
+      "running": true,
+      "map_summary": {
+        "revision": 291,
+        "observed_cells": 983289,
+        "occupied_cells": 8320,
+        "watermark": 17654.275973626412,
+        "fusion_latency_mean_s": 0.07645656590902945
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            10.329325675964355,
+            0.15435107052326202,
+            0.330000011920929
+          ],
+          "status": "turning",
+          "distance_m": 2792.4583529833326,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            3.913882255554199,
+            -2.319390058517456,
+            3.740764408111572
+          ],
+          "status": "turning",
+          "distance_m": 1777.2526070092738,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 5,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711765.0662835,
+      "running": true,
+      "map_summary": {
+        "revision": 301,
+        "observed_cells": 983289,
+        "occupied_cells": 8199,
+        "watermark": 17655.081050404347,
+        "fusion_latency_mean_s": 0.07732281216012779
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            10.422648429870605,
+            0.4074147045612335,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2792.7280756917626,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            3.9212465286254883,
+            -2.3203318119049072,
+            3.743742971420288
+          ],
+          "status": "moving",
+          "distance_m": 1777.260606462851,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 5,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711765.5769324,
+      "running": true,
+      "map_summary": {
+        "revision": 307,
+        "observed_cells": 983289,
+        "occupied_cells": 8207,
+        "watermark": 17655.526224230416,
+        "fusion_latency_mean_s": 0.07246825421170797
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            10.548173904418945,
+            0.747787356376648,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2793.0908568749396,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            3.987151622772217,
+            -2.328373432159424,
+            3.7704260635375975
+          ],
+          "status": "moving",
+          "distance_m": 1777.3321627830444,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 5,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711766.0957062,
+      "running": true,
+      "map_summary": {
+        "revision": 312,
+        "observed_cells": 983289,
+        "occupied_cells": 8066,
+        "watermark": 17656.12756497506,
+        "fusion_latency_mean_s": 0.07311300813889829
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            10.621237754821777,
+            1.67674720287323,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2794.0324483474933,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 7,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            4.2492356300354,
+            -2.3584182262420654,
+            3.8766629981994627
+          ],
+          "status": "moving",
+          "distance_m": 1777.6165516086521,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 5,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711766.6125307,
+      "running": true,
+      "map_summary": {
+        "revision": 316,
+        "observed_cells": 983289,
+        "occupied_cells": 8274,
+        "watermark": 17656.227565583773,
+        "fusion_latency_mean_s": 0.07116007735021412
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            10.50150203704834,
+            2.281078577041626,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2794.648823006748,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 6,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            4.565032482147217,
+            -2.3946855068206787,
+            4.004669456481934
+          ],
+          "status": "moving",
+          "distance_m": 1777.9592302058234,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 5,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711767.1285038,
+      "running": true,
+      "map_summary": {
+        "revision": 317,
+        "observed_cells": 983289,
+        "occupied_cells": 8241,
+        "watermark": 17656.473792509176,
+        "fusion_latency_mean_s": 0.07581996176159009
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            10.411234855651855,
+            2.6000936031341553,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2794.9811734508216,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 6,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            4.768014430999756,
+            -2.4005918502807617,
+            4.083696632385254
+          ],
+          "status": "moving",
+          "distance_m": 1778.1773732021313,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 5,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711767.6492276,
+      "running": true,
+      "map_summary": {
+        "revision": 324,
+        "observed_cells": 983289,
+        "occupied_cells": 8152,
+        "watermark": 17657.564574287273,
+        "fusion_latency_mean_s": 0.07932616384641733
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            9.71204662322998,
+            3.23810076713562,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2795.9611901608687,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 6,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            5.174296855926514,
+            -2.2015905380249023,
+            4.202519683837891
+          ],
+          "status": "moving",
+          "distance_m": 1778.648898379673,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 5,
+          "planner_error": null
+        }
+      ]
+    },
+    {
+      "wall": 1790711768.1653473,
+      "running": true,
+      "map_summary": {
+        "revision": 331,
+        "observed_cells": 983289,
+        "occupied_cells": 8318,
+        "watermark": 17657.764575482346,
+        "fusion_latency_mean_s": 0.07784839352098061
+      },
+      "errors": [
+        null,
+        null,
+        null
+      ],
+      "sam3": "running",
+      "robots": [
+        {
+          "id": "go2_01",
+          "position": [
+            9.348688125610352,
+            3.557642698287964,
+            0.330000011920929
+          ],
+          "status": "moving",
+          "distance_m": 2796.4457086046095,
+          "completed_goals": 141,
+          "tree_nodes": 5015,
+          "path_points": 5,
+          "planner_error": null
+        },
+        {
+          "id": "uav_01",
+          "position": [
+            5.301421642303467,
+            -2.0696399211883545,
+            4.2266910362243655
+          ],
+          "status": "moving",
+          "distance_m": 1778.8350488914707,
+          "completed_goals": 104,
+          "tree_nodes": 4310,
+          "path_points": 4,
+          "planner_error": null
+        }
+      ]
+    }
+  ],
+  "final": {
+    "wall": 1790711768.1653473,
+    "running": true,
+    "map_summary": {
+      "revision": 331,
+      "observed_cells": 983289,
+      "occupied_cells": 8318,
+      "watermark": 17657.764575482346,
+      "fusion_latency_mean_s": 0.07784839352098061
+    },
+    "errors": [
+      null,
+      null,
+      null
+    ],
+    "sam3": "running",
+    "robots": [
+      {
+        "id": "go2_01",
+        "position": [
+          9.348688125610352,
+          3.557642698287964,
+          0.330000011920929
+        ],
+        "status": "moving",
+        "distance_m": 2796.4457086046095,
+        "completed_goals": 141,
+        "tree_nodes": 5015,
+        "path_points": 5,
+        "planner_error": null
+      },
+      {
+        "id": "uav_01",
+        "position": [
+          5.301421642303467,
+          -2.0696399211883545,
+          4.2266910362243655
+        ],
+        "status": "moving",
+        "distance_m": 1778.8350488914707,
+        "completed_goals": 104,
+        "tree_nodes": 4310,
+        "path_points": 4,
+        "planner_error": null
+      }
+    ]
+  }
+}

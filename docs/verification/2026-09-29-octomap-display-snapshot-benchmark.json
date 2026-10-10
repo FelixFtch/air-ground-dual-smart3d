@@ -1,0 +1,24 @@
+{
+  "run_epoch": "f119e434f4cb41dca8d8c33836813efd",
+  "geometry_points": {
+    "free_xy": 57522,
+    "blocked_xy": 68,
+    "occupied": 7921
+  },
+  "exact_wire_json_equal": true,
+  "old_snapshot": {
+    "median_ms": 9.95860353577882,
+    "p95_ms": 14.518246054649353,
+    "max_ms": 31.903416966088116
+  },
+  "new_unchanged_snapshot": {
+    "median_ms": 0.00017299316823482513,
+    "p95_ms": 0.0001989537850022316,
+    "max_ms": 0.0016440171748399734
+  },
+  "new_all_memberships_changed_snapshot": {
+    "median_ms": 0.5036124493926764,
+    "p95_ms": 0.5594710819423199,
+    "max_ms": 0.7064040983095765
+  }
+}

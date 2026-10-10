@@ -1,0 +1,8 @@
+{
+  "baseline": "2026-09-29-dual-robot-sam3-stable-v2",
+  "path": "/data/robotics/air_ground_smart3d/docs/baselines/2026-09-29-dual-robot-sam3-stable-v2",
+  "manifest_sha256": "ede8d9888bfbc77b7c831d1987991940d304e1f390467d1408fab650a2a1b77d",
+  "updated_utc": "2026-09-30T00:16:10.400287+00:00",
+  "ssd_archive": "/media/felix/MoFang2T1/AirGround_SMART3D_SAM3_Config_Backups/2026-09-29-dual-robot-sam3-stable-v2/configuration-baseline.tar.gz",
+  "ssd_archive_sha256": "c5e96c8cb1729339f67fe5a485a63b54f06c3921c9b2cd1c8545519a43f65859"
+}

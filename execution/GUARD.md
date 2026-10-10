@@ -1,0 +1,15 @@
+# Near-segment execution check
+
+`check_path_segment(cells,resolution,start_xyz,end_xyz,body_half_extents,body_offset,sim_time,max_free_age=3.0,bounds=None)` is a pure function. It uses the same map-frame signed floor voxel keys as the shared mapper. `bounds` is `{min:[x,y,z],max:[x,y,z]}` and applies to the complete offset body.
+
+The complete axis-aligned body sweep is checked continuously by an exact segment/AABB Minkowski test. This catches corner/diagonal/overhead collisions between arbitrarily spaced endpoints and is stronger than a resolution/2 sampled check. Tangent occupied contact blocks. Occupied cells inside the starting body also block.
+
+Only physical space already inside the initial body can omit fresh-free evidence. The check subtracts that body geometrically: if the same initially overlapping unknown voxel has a newly entered portion, that portion still blocks. Missing/unknown cells, missing observation time, future free time and expired free observations have distinct reasons. A stationary request can pass with unknown surrounding evidence; it does not authorize travel. The envelope must conservatively include every allowed orientation.
+
+Explicit `max_free_age=None` selects retained-known-free policy: age alone never invalidates a free cell; actual occupied/unknown changes still do. Newly entered volume must still have state `free` and a finite, non-future observation timestamp. This is not inferred from a large timeout. The default remains 3 seconds. The runtime must independently require fresh live sensor observations, current map/revision checks, live partner separation, and UE collision checks. The initial-volume exception remains geometric and does not permit travel through unknown.
+
+The result contains `ok`, `reason`, `blocked_key` (array or null), `checked_cells`, `initial_volume_exempt_cells`, and `method`. Input errors and overly large sweeps fail closed. This result is not a durable motion token: the runtime owner must separately verify robot/session/goal/map revision identity, live current pose and current partner separation immediately before each bounded step.
+
+`bounded_path_target(path_xyz,current_xyz,max_distance_m=.25)` projects onto the closest polyline segment and uses the remaining distance to advance along the route. If the path is farther away, it moves at most the bound toward that projection. The returned chord must itself pass `check_path_segment` and live partner checks. This helper does not perform collision checking.
+
+Twelve focused tests in `tests/test_execution_guard.py` cover occupied/unknown/freshness, current-body exceptions, same-cell newly entered unknown, offset, overhead, diagonal narrowphase, Go2 floor/low obstacles, whole-body bounds, non-finite inputs and bounded XYZ target selection. `test_planning_mapping_integration.py` separately exercises the real OcTree executable's hit/compact-refresh/miss transitions through the native SMART worker without rebuilding the tree. Its rays are test fixtures, not simulator observations.

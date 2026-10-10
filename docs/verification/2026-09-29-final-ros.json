@@ -1,0 +1,34 @@
+{
+  "duration": 18,
+  "counts": {
+    "go2_01/sam3": 19,
+    "uav_01/sam3": 18,
+    "people": 37,
+    "go2_01/lidar": 99,
+    "uav_01/lidar": 97
+  },
+  "latest": {
+    "go2_01/sam3": {
+      "width": 640,
+      "height": 360
+    },
+    "uav_01/sam3": {
+      "width": 640,
+      "height": 360
+    },
+    "people": {
+      "surface_boxes": 0,
+      "ohz": 0,
+      "lrz": 2,
+      "velocity_arrows": 0
+    },
+    "go2_01/lidar": {
+      "width": 3893,
+      "height": 1
+    },
+    "uav_01/lidar": {
+      "width": 3273,
+      "height": 1
+    }
+  }
+}

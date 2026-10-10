@@ -1,0 +1,32 @@
+{
+  "run": "/data/robotics/air_ground_smart3d/runtime/runs/e69a5ef612ca4ebea9164a7b47e5b22f",
+  "map_bytes": 5712891,
+  "restored": {
+    "go2_01": {
+      "position": [
+        -0.5528615713119507,
+        -8.045894622802734,
+        0.330000011920929
+      ],
+      "yaw": 0.3359262130545785,
+      "route_index": 1,
+      "goal_revision": 141,
+      "distance_m": 2774.3125175661835,
+      "vertical_distance_m": 1.1920928966180355e-08,
+      "completed_goals": 140
+    },
+    "uav_01": {
+      "position": [
+        -6.293166637420654,
+        -1.0487079620361328,
+        2.938877611160278
+      ],
+      "yaw": -2.3448835124105605,
+      "route_index": 3,
+      "goal_revision": 104,
+      "distance_m": 1762.1964056046083,
+      "vertical_distance_m": 522.7345030593872,
+      "completed_goals": 103
+    }
+  }
+}

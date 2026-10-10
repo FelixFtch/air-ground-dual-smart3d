@@ -1,0 +1,48 @@
+{
+  "recorded_wall_time": 1790695121.033656,
+  "epoch": "6f3d6f387a094a3ba8e2f96dcab7957c",
+  "state_age_s": 0.6831791400909424,
+  "tests": {
+    "python": {
+      "passed": 59,
+      "failed": 0
+    }
+  },
+  "runtime_restarted_this_followup": false,
+  "startup_lidar_observer_registered": true,
+  "recovery_helper_unit_tested": true,
+  "automatic_recovery_controller_deployed": false,
+  "sam3_integrated_into_new_multi_robot_project": false,
+  "robots": [
+    {
+      "robot_id": "go2_01",
+      "position_xyz": [
+        5.558070659637451,
+        -5.048687934875488,
+        0.330000011920929
+      ],
+      "status": "turning",
+      "completed_goals": 20,
+      "distance_m": 441.05137011643785,
+      "vertical_distance_m": 1.1920928966180355e-08,
+      "last_control_error": null,
+      "planner_error": null,
+      "tree_instance_id": 1
+    },
+    {
+      "robot_id": "uav_01",
+      "position_xyz": [
+        6.019622325897217,
+        -1.5395104885101318,
+        2.2359674263000486
+      ],
+      "status": "moving",
+      "completed_goals": 29,
+      "distance_m": 502.15880164924255,
+      "vertical_distance_m": 133.68557551383972,
+      "last_control_error": null,
+      "planner_error": null,
+      "tree_instance_id": 1
+    }
+  ]
+}

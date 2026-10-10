@@ -1,0 +1,66 @@
+Setting up bundled DotNet SDK
+Running command : dotnet Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.dll CarlaUnrealEditor Linux Development -Project=/data/sim/AirGroundLab_UE58/CarlaUnreal/CarlaUnreal.uproject -NoEngineChanges -NoHotReloadFromIDE -MaxParallelActions=6
+Log file: /data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Programs/UnrealBuildTool/Log.txt
+Executing up to 6 actions based on MaxProcessorCount override
+Using 'git status' to determine working set for adaptive non-unity build (/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58).
+UbaServer - Listening on 0.0.0.0:1345
+Unity build is enabled.
+Invalidating makefile for CarlaUnrealEditor (DefaultEngine.ini modified)
+Slate UI is disabled.
+Online Subsystem is disabled.
+CarSim support is disabled.
+Chrono support is disabled.
+PyTorch support is disabled.
+OSM2ODR support is disabled.
+Ros2 support is enabled.
+Ros2 demo is disabled.
+Dynamic Library Added: /data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/../../Binaries/Linux/libcarla-ros2-native.so
+Unknown option "ROS2".
+OSM2ODR support is disabled.
+Warning: Plugin 'Carla' does not list plugin 'PCG' as a dependency, but module 'Carla' depends on module 'PCG'.
+Building CarlaUnrealEditor...
+===== Toolchain Information =====
+Using ISPC compiler (/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Source/ThirdParty/Intel/ISPC/bin/Linux/ispc)
+  Intel(r) Implicit SPMD Program Compiler (Intel(r) ISPC), 1.24.0 (build commit  @ 20240919, LLVM 18.1.6)
+Using Clang compiler 20.1.8 (/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v26_clang-20.1.8-rockylinux8/x86_64-unknown-linux-gnu/bin/clang++)
+  clang version 20.1.8 (github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261) Target: x86_64-unknown-linux-gnu Thread model: posix InstalledDir: /data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v26_clang-20.1.8-rockylinux8/x86_64-unknown-linux-gnu/bin
+Using Clang archiver (/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v26_clang-20.1.8-rockylinux8/x86_64-unknown-linux-gnu/bin/llvm-ar)
+  LLVM (http://llvm.org/):   LLVM version 20.1.8   Optimized build.
+Using toolchain located at '/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v26_clang-20.1.8-rockylinux8/x86_64-unknown-linux-gnu'
+Using bundled libc++ standard C++ library.
+Compressing debug files
+=================================
+Using Unreal Build Accelerator local executor to run 2 action(s)
+  CPU 24 physical cores, 32 logical cores
+  Memory 62.51 GB physical, 36.95 GB/31.25 GB committed
+  UBA Storage capacity 40 GB
+[1/2] Compile Module.Carla.5.cpp
+In file included from /data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Intermediate/Build/Linux/x64/UnrealEditor/Development/Carla/Module.Carla.5.cpp:60:
+/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Sensor/SceneCaptureSensor_WideAngleLens.cpp:120:26: warning: 'ERHIZBuffer' is deprecated: ERHIZBuffer is being removed as the assumption of using an Inverted Z buffer is so ingrained that it could not reasonably be changed. - Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile. [-Wdeprecated-declarations]
+  120 |         (bool)ERHIZBuffer::IsInverted,
+      |                          ^
+/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Source/Runtime/RHI/Public/RHIDefinitions.h:285:12: note: 'ERHIZBuffer' has been explicitly marked deprecated here
+  285 | enum class UE_DEPRECATED(5.8, "ERHIZBuffer is being removed as the assumption of using an Inverted Z buffer is so ingrained that it could not reasonably be changed.") ERHIZBuffer
+      |            ^
+/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Source/Runtime/Core/Public/Misc/CoreMiscDefines.h:297:44: note: expanded from macro 'UE_DEPRECATED'
+  297 |     #define UE_DEPRECATED(Version, Message) [[deprecated(Message " - Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.")]]
+      |                                               ^
+In file included from /data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Intermediate/Build/Linux/x64/UnrealEditor/Development/Carla/Module.Carla.5.cpp:60:
+/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Sensor/SceneCaptureSensor_WideAngleLens.cpp:120:28: warning: 'IsInverted' is deprecated: ERHIZBuffer is being removed as the assumption of using an Inverted Z buffer is so ingrained that it could not reasonably be changed. - Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile. [-Wdeprecated-declarations]
+  120 |         (bool)ERHIZBuffer::IsInverted,
+      |                            ^
+/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Source/Runtime/RHI/Public/RHIDefinitions.h:285:12: note: 'ERHIZBuffer' has been explicitly marked deprecated here
+  285 | enum class UE_DEPRECATED(5.8, "ERHIZBuffer is being removed as the assumption of using an Inverted Z buffer is so ingrained that it could not reasonably be changed.") ERHIZBuffer
+      |            ^
+/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Source/Runtime/Core/Public/Misc/CoreMiscDefines.h:297:44: note: expanded from macro 'UE_DEPRECATED'
+  297 |     #define UE_DEPRECATED(Version, Message) [[deprecated(Message " - Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.")]]
+      |                                               ^
+2 warnings generated.
+[2/2] Link libUnrealEditor-Carla.so
+
+Total time in Unreal Build Accelerator local executor: 24.69 seconds
+Output binary: /data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Binaries/Linux/UnrealEditor
+
+Result: Succeeded
+Total execution time: 27.14 seconds
+Trace written to file /data/sim/CARLA_UE58_Research/UnrealEngine5_carla58/Engine/Programs/UnrealBuildTool/Trace.uba with size 5.4kb

@@ -1,0 +1,192 @@
+{
+  "purpose": "read-only visual verification; UE actor truth was not sent to mapper or planner",
+  "map": "AirGroundLab/Maps/AirGroundLab_Main",
+  "camera_id": 76,
+  "image_frame": 22933,
+  "capture_sim_time_s": 767.58751327754,
+  "capture_wall_time_unix": 1790693683.9224408,
+  "camera_world_xyz_m": [
+    -7.0,
+    1.5,
+    22.0
+  ],
+  "camera_world_rotation_deg": [
+    -70.0,
+    0.0,
+    -0.0
+  ],
+  "image_size": [
+    960,
+    720
+  ],
+  "fov_degrees": 80,
+  "post_process_profile": "OHZTest_Daylight",
+  "ray_tracing": true,
+  "capture_snapshot": {
+    "frame": 22933,
+    "sim_time_s": 767.58751327754,
+    "actors": [
+      {
+        "actor_id": 68,
+        "type_id": "walker.pedestrian.0015",
+        "role": "ag_person_0",
+        "world_xyz_m": [
+          -3.811654567718506,
+          5.999111652374268,
+          1.1427500247955322
+        ],
+        "world_rotation_deg": [
+          0.0,
+          0.0032196044921875,
+          -0.0
+        ]
+      },
+      {
+        "actor_id": 69,
+        "type_id": "walker.pedestrian.0016",
+        "role": "ag_person_1",
+        "world_xyz_m": [
+          8.247027397155762,
+          -1.9995756149291992,
+          1.1496223211288452
+        ],
+        "world_rotation_deg": [
+          0.0,
+          -179.99879455566406,
+          0.0
+        ]
+      },
+      {
+        "actor_id": 71,
+        "type_id": "walker.pedestrian.0018",
+        "role": "ag_person_3",
+        "world_xyz_m": [
+          -6.0,
+          0.004616968333721161,
+          1.1427499055862427
+        ],
+        "world_rotation_deg": [
+          0.0,
+          -90.0,
+          0.0
+        ]
+      },
+      {
+        "actor_id": 72,
+        "type_id": "walker.pedestrian.0019",
+        "role": "ag_person_4",
+        "world_xyz_m": [
+          5.0,
+          7.030758380889893,
+          1.1427499055862427
+        ],
+        "world_rotation_deg": [
+          0.0,
+          90.0,
+          -0.0
+        ]
+      },
+      {
+        "actor_id": 73,
+        "type_id": "walker.pedestrian.0020",
+        "role": "ag_person_5",
+        "world_xyz_m": [
+          11.004592895507812,
+          -11.596979141235352,
+          1.1436868906021118
+        ],
+        "world_rotation_deg": [
+          0.0,
+          -90.65298461914062,
+          0.0
+        ]
+      },
+      {
+        "actor_id": 58,
+        "type_id": "robot.uav.fighter_drone",
+        "role": "ag_uav_01",
+        "world_xyz_m": [
+          7.6038384437561035,
+          -2.0777878761291504,
+          3.8664016723632812
+        ],
+        "world_rotation_deg": [
+          0.0,
+          89.94346618652344,
+          -0.0
+        ]
+      },
+      {
+        "actor_id": 54,
+        "type_id": "static.prop.unitree_go2",
+        "role": "ag_go2_01",
+        "world_xyz_m": [
+          -7.024530410766602,
+          -8.232409477233887,
+          0.550000011920929
+        ],
+        "world_rotation_deg": [
+          0.0,
+          166.59890747070312,
+          -0.0
+        ]
+      },
+      {
+        "actor_id": 70,
+        "type_id": "walker.pedestrian.0017",
+        "role": "ag_person_2",
+        "world_xyz_m": [
+          -0.9146849513053894,
+          -6.0022735595703125,
+          1.144281029701233
+        ],
+        "world_rotation_deg": [
+          0.0,
+          0.010087966918945312,
+          -0.0
+        ]
+      }
+    ]
+  },
+  "expected_static_obstacles": [
+    {
+      "name": "AG_LowWall",
+      "carla_center_m": [
+        0.0,
+        3.0,
+        1.5
+      ],
+      "size_m": [
+        0.45,
+        6.0,
+        2.6
+      ]
+    },
+    {
+      "name": "AG_OverheadBeam",
+      "carla_center_m": [
+        8.0,
+        -4.0,
+        3.2
+      ],
+      "size_m": [
+        6.0,
+        0.65,
+        0.4
+      ]
+    },
+    {
+      "name": "AG_Box",
+      "carla_center_m": [
+        -2.0,
+        -3.0,
+        0.7
+      ],
+      "size_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ]
+}

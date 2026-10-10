@@ -1,0 +1,116 @@
+schema: air_ground.sensors/v1
+id: uav_rgbd_lidar
+lidar:
+  mount_m:
+  - 0
+  - 0
+  - 0.4
+  channels: 96
+  points_per_second: 192000
+  rotation_frequency: 10
+  sensor_tick: 0.1
+  range_m: 45
+  effective_mapping_range_m: 9
+  upper_fov: 75
+  lower_fov: -85
+  noise_stddev: 0
+  fusion_period_s: 0.2
+  clearing_range_m: 40
+  mapping_sampling: representative_of_every_hit_voxel
+camera:
+  mount_m:
+  - 0.5
+  - 0
+  - 0
+  fov: 100
+  width: 640
+  height: 360
+  sensor_tick: 0
+  pitch_degrees: 0
+  mapping_stride: 20
+  post_process_profile: OHZTest_Daylight
+  enable_postprocess_effects: true
+  effective_mapping_range_m: 6
+  fusion_period_s: 0.5
+clearance_depth:
+- mount_m:
+  - 0.52
+  - 0
+  - 0
+  yaw_degrees: 0
+  pitch_degrees: 0
+  width: 96
+  height: 96
+  fov: 150
+  sensor_tick: 0.2
+  mapping_stride: 3
+  effective_mapping_range_m: 3
+  fusion_period_s: 1.5
+- mount_m:
+  - -0.52
+  - 0
+  - 0
+  yaw_degrees: 180
+  pitch_degrees: 0
+  width: 96
+  height: 96
+  fov: 150
+  sensor_tick: 0.2
+  mapping_stride: 3
+  effective_mapping_range_m: 3
+  fusion_period_s: 1.5
+- mount_m:
+  - 0
+  - 0.52
+  - 0
+  yaw_degrees: 90
+  pitch_degrees: 0
+  width: 96
+  height: 96
+  fov: 150
+  sensor_tick: 0.2
+  mapping_stride: 3
+  effective_mapping_range_m: 3
+  fusion_period_s: 1.5
+- mount_m:
+  - 0
+  - -0.52
+  - 0
+  yaw_degrees: -90
+  pitch_degrees: 0
+  width: 96
+  height: 96
+  fov: 150
+  sensor_tick: 0.2
+  mapping_stride: 3
+  effective_mapping_range_m: 3
+  fusion_period_s: 1.5
+- mount_m:
+  - 0
+  - 0
+  - 0.38
+  yaw_degrees: 0
+  pitch_degrees: 90
+  width: 96
+  height: 96
+  fov: 150
+  sensor_tick: 0.2
+  mapping_stride: 3
+  effective_mapping_range_m: 3
+  fusion_period_s: 1.5
+- mount_m:
+  - 0
+  - 0
+  - -0.38
+  yaw_degrees: 0
+  pitch_degrees: -90
+  width: 96
+  height: 96
+  fov: 150
+  sensor_tick: 0.2
+  mapping_stride: 3
+  effective_mapping_range_m: 3
+  fusion_period_s: 1.5
+notes: Six small depth views supply explicit free-space evidence in all flight directions;
+  RGB-D front pair samples each sim frame to guarantee matching frame IDs. Bounded
+  latest queues control fusion rate.

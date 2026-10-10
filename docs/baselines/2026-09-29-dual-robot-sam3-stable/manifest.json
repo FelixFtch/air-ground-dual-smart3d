@@ -1,0 +1,27 @@
+{
+  "recorded_utc": "2026-09-29T19:37:34.277919+00:00",
+  "epoch": "1ddaeeef8d1848909e9161e65dbba5ad",
+  "project_root": "/data/robotics/air_ground_smart3d",
+  "scope": "parameter and measurement record only; no runtime changes or service restart",
+  "files": {
+    "fusion-sample.json": "f784dd4209bb0a90631a94e3dc1f24ce14b8855fd95fe3d880c4df401ff92cd1",
+    "fusion-summary.json": "d7bc647344905ed81a68b3f2b866c6f7a4c0994a27090b46e7e329eeaa9803fe",
+    "live-sample.json": "632e7058796cfb10e888c2bb1b6b1b6823f0f77cef85d8d794ef5279e497545a",
+    "parameters.md": "1fca167f0f374186004d90b844ea80706c4a360bf4373c5bf2babd8c373979e7",
+    "people-bounds-check.json": "a9c2b7e6418afd254c8d3cd93bc54c558e7963fcb26e15103a2c64757f87bb88",
+    "profiles/appearances/airsim_quadrotor.yaml": "609c5116f23aac63311c2e9214b2953e90b6c67dd526acce7c7c779adc277b31",
+    "profiles/appearances/cute_robot_3.yaml": "24db66d833913cbc1886ba4c017e2540faa9cbd4f633af2655040682b80dd82f",
+    "profiles/appearances/fighter_drone.yaml": "85b7b2fddbc9c7f18982812b3e7b177d1a4a5710493772e16c0eb7cba6dd75da",
+    "profiles/appearances/go2.yaml": "f99a0eaf24dca50f5af038cd5b78ff25c8bdbaec4b697ba79cc375dfa878027d",
+    "profiles/appearances/robot_bee.yaml": "788a949d1789882b1050f9b74a2f763b5140ab503b974919e50e793411063fea",
+    "profiles/appearances/slime_creator_small.yaml": "8fd6acf91a90ae4d9fd5aaded3d61d9a81366cdf67d1cff8a8e2b16af6d7517b",
+    "profiles/robots/fighter_uav.yaml": "d54f207251a34a27d74c6882bbc5b549d0e783f9a2671f0f732bf00814a9819a",
+    "profiles/robots/go2.yaml": "134655e8e1dbcb4dd3a167fcf2636b4b2b2563af93f4f7103eb7d710ef290d1d",
+    "profiles/scenes/air_ground_lab.yaml": "3d2de5898cbc3b5780c03cb0898d96c5ca6210c499782e505cbd2cdc7af0d5fd",
+    "profiles/sensors/go2_rgbd_lidar.yaml": "b88b0046c1fb0a7447799accf5ddff60e4b2698453d71c2d4c75356c45db7976",
+    "profiles/sensors/uav_rgbd_lidar.yaml": "928195e583e0ec2151b23757418be082c451eaa4a6de9cd6a39ebe3936932224",
+    "profiles/teams/go2_fighter.yaml": "11a46f340eb1c9c4c18ebdecf080b7c3f6d93dc9a9f5fad9250b665d34648227",
+    "resolved_profiles.json": "434a73ebb683d3c8838e6b83d1650f09aa90d7780b191a8d44aa2ce964200df1",
+    "source-sha256.json": "3cff1623b4845e50329f11755f6e655e840cc97dd628e4aca1c1cad04fda3e8e"
+  }
+}

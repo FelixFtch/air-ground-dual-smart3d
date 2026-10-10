@@ -1,0 +1,64 @@
+[
+  {
+    "robot": "go2_01",
+    "frame": 626866,
+    "capture_sim_time": 28005.379440152086,
+    "neutral_lower_pixels": 69720,
+    "camera_position": [
+      -8.973995208740234,
+      -2.1732704639434814,
+      0.7299999880790711
+    ],
+    "stats": {
+      "current_axial_halfpixel": {
+        "median_z": -0.018995196819305393,
+        "median_absolute_deviation_z": 4.082918167114258e-05,
+        "p95_absolute_deviation_z": 7.575750350952148e-05,
+        "error_to_measured_floor_median": 0.0002451538193053923
+      },
+      "if_depth_were_radial": {
+        "median_z": 0.12290108514809639,
+        "median_absolute_deviation_z": 0.053896121502961525,
+        "p95_absolute_deviation_z": 0.11533542842111877,
+        "error_to_measured_floor_median": 0.14165112814809638
+      },
+      "axial_without_halfpixel": {
+        "median_z": -0.015867019421111794,
+        "median_absolute_deviation_z": 0.0007072247644654972,
+        "p95_absolute_deviation_z": 0.002446873322188741,
+        "error_to_measured_floor_median": 0.0028830235788882067
+      }
+    }
+  },
+  {
+    "robot": "uav_01",
+    "frame": 626872,
+    "capture_sim_time": 28005.772709407844,
+    "neutral_lower_pixels": 59176,
+    "camera_position": [
+      -5.911807537078857,
+      7.108669757843018,
+      4.078620223999024
+    ],
+    "stats": {
+      "current_axial_halfpixel": {
+        "median_z": -0.01896688461303686,
+        "median_absolute_deviation_z": 2.193450927734375e-05,
+        "p95_absolute_deviation_z": 0.00010585784912109375,
+        "error_to_measured_floor_median": 0.00021684161303685973
+      },
+      "if_depth_were_radial": {
+        "median_z": 0.6983191389573016,
+        "median_absolute_deviation_z": 0.25754897185906733,
+        "p95_absolute_deviation_z": 0.6609967220958055,
+        "error_to_measured_floor_median": 0.7170691819573016
+      },
+      "axial_without_halfpixel": {
+        "median_z": -0.002244850552685307,
+        "median_absolute_deviation_z": 0.003847690706670903,
+        "p95_absolute_deviation_z": 0.014074047270671741,
+        "error_to_measured_floor_median": 0.016505192447314694
+      }
+    }
+  }
+]

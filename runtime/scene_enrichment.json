@@ -1,0 +1,457 @@
+{
+  "target": "/Game/AirGroundLab/Maps/AirGroundLab_Main",
+  "added": [
+    {
+      "name": "ring_N_a",
+      "map_xyz_m": [
+        -8,
+        14,
+        1.3
+      ],
+      "size_m": [
+        12,
+        0.4,
+        2.6
+      ],
+      "material": "red"
+    },
+    {
+      "name": "ring_N_b",
+      "map_xyz_m": [
+        8,
+        14,
+        1.3
+      ],
+      "size_m": [
+        12,
+        0.4,
+        2.6
+      ],
+      "material": "red"
+    },
+    {
+      "name": "ring_S_a",
+      "map_xyz_m": [
+        -8,
+        -14,
+        1.3
+      ],
+      "size_m": [
+        12,
+        0.4,
+        2.6
+      ],
+      "material": "red"
+    },
+    {
+      "name": "ring_S_b",
+      "map_xyz_m": [
+        8,
+        -14,
+        1.3
+      ],
+      "size_m": [
+        12,
+        0.4,
+        2.6
+      ],
+      "material": "red"
+    },
+    {
+      "name": "ring_E_a",
+      "map_xyz_m": [
+        14,
+        -8,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        12,
+        2.6
+      ],
+      "material": "blue"
+    },
+    {
+      "name": "ring_E_b",
+      "map_xyz_m": [
+        14,
+        8,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        12,
+        2.6
+      ],
+      "material": "blue"
+    },
+    {
+      "name": "ring_W_a",
+      "map_xyz_m": [
+        -14,
+        -8,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        12,
+        2.6
+      ],
+      "material": "blue"
+    },
+    {
+      "name": "ring_W_b",
+      "map_xyz_m": [
+        -14,
+        8,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        12,
+        2.6
+      ],
+      "material": "blue"
+    },
+    {
+      "name": "room-20_NL",
+      "map_xyz_m": [
+        -26,
+        -10,
+        1.3
+      ],
+      "size_m": [
+        8,
+        0.4,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room-20_NR",
+      "map_xyz_m": [
+        -14,
+        -10,
+        1.3
+      ],
+      "size_m": [
+        8,
+        0.4,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room-20_SL",
+      "map_xyz_m": [
+        -26,
+        -30,
+        1.3
+      ],
+      "size_m": [
+        8,
+        0.4,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room-20_SR",
+      "map_xyz_m": [
+        -14,
+        -30,
+        1.3
+      ],
+      "size_m": [
+        8,
+        0.4,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room-20_EL",
+      "map_xyz_m": [
+        -10,
+        -26,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        8,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room-20_ER",
+      "map_xyz_m": [
+        -10,
+        -14,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        8,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room-20_WL",
+      "map_xyz_m": [
+        -30,
+        -26,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        8,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room-20_WR",
+      "map_xyz_m": [
+        -30,
+        -14,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        8,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room20_NL",
+      "map_xyz_m": [
+        14,
+        30,
+        1.3
+      ],
+      "size_m": [
+        8,
+        0.4,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room20_NR",
+      "map_xyz_m": [
+        26,
+        30,
+        1.3
+      ],
+      "size_m": [
+        8,
+        0.4,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room20_SL",
+      "map_xyz_m": [
+        14,
+        10,
+        1.3
+      ],
+      "size_m": [
+        8,
+        0.4,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room20_SR",
+      "map_xyz_m": [
+        26,
+        10,
+        1.3
+      ],
+      "size_m": [
+        8,
+        0.4,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room20_EL",
+      "map_xyz_m": [
+        30,
+        14,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        8,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room20_ER",
+      "map_xyz_m": [
+        30,
+        26,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        8,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room20_WL",
+      "map_xyz_m": [
+        10,
+        14,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        8,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "room20_WR",
+      "map_xyz_m": [
+        10,
+        26,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        8,
+        2.6
+      ],
+      "material": "yellow"
+    },
+    {
+      "name": "roomNW_div",
+      "map_xyz_m": [
+        -20,
+        -20,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        12,
+        2.6
+      ],
+      "material": "red"
+    },
+    {
+      "name": "roomSE_div",
+      "map_xyz_m": [
+        20,
+        20,
+        1.3
+      ],
+      "size_m": [
+        0.4,
+        12,
+        2.6
+      ],
+      "material": "blue"
+    },
+    {
+      "name": "pillar_12_12",
+      "map_xyz_m": [
+        12,
+        12,
+        1.3
+      ],
+      "size_m": [
+        1.2,
+        1.2,
+        2.6
+      ],
+      "material": "red"
+    },
+    {
+      "name": "pillar_-12_12",
+      "map_xyz_m": [
+        -12,
+        12,
+        1.3
+      ],
+      "size_m": [
+        1.2,
+        1.2,
+        2.6
+      ],
+      "material": "blue"
+    },
+    {
+      "name": "pillar_12_-12",
+      "map_xyz_m": [
+        12,
+        -12,
+        1.3
+      ],
+      "size_m": [
+        1.2,
+        1.2,
+        2.6
+      ],
+      "material": "blue"
+    },
+    {
+      "name": "pillar_-12_-12",
+      "map_xyz_m": [
+        -12,
+        -12,
+        1.3
+      ],
+      "size_m": [
+        1.2,
+        1.2,
+        2.6
+      ],
+      "material": "red"
+    },
+    {
+      "name": "beam_NS",
+      "map_xyz_m": [
+        0,
+        0,
+        5.0
+      ],
+      "size_m": [
+        0.6,
+        16,
+        0.4
+      ],
+      "material": "blue"
+    },
+    {
+      "name": "beam_EW",
+      "map_xyz_m": [
+        -6,
+        6,
+        5.0
+      ],
+      "size_m": [
+        16,
+        0.6,
+        0.4
+      ],
+      "material": "red"
+    }
+  ],
+  "errors": [
+    "Traceback (most recent call last):\n  File \"/data/robotics/air_ground_smart3d/simulation/rich_scene.py\", line 91, in <module>\n    assert labels == expected, f'persisted set differs: {len(labels)} vs {len(expected)}'\n           ^^^^^^^^^^^^^^^^^^\nAssertionError: persisted set differs: 32 vs 32\n"
+  ],
+  "saved": true
+}

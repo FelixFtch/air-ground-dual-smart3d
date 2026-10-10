@@ -1,0 +1,1227 @@
+{
+  "schema": "air_ground.lidar_coverage_readonly_audit/v1",
+  "epoch": "d83ccef432d3410e8e573a93122096cb",
+  "run_root": "/data/robotics/air_ground_smart3d/runtime/runs/d83ccef432d3410e8e573a93122096cb",
+  "started_wall": 1790726525.855014,
+  "duration_wall_s": 60.02015563903842,
+  "stop_reason": "duration_completed",
+  "samples": 2983,
+  "read_errors": [],
+  "robots": {
+    "go2_01": {
+      "preview": {
+        "frames": 489,
+        "return_span_deg": {
+          "count": 489,
+          "min": 118.20918129538501,
+          "p50": 358.1999843805503,
+          "p95": 358.202130400874,
+          "max": 358.564737931501
+        },
+        "partial_under_200deg": 90,
+        "near_full_over_340deg": 342,
+        "preview_points": {
+          "count": 489,
+          "min": 3939.0,
+          "p50": 5000.0,
+          "p95": 5000.0,
+          "max": 5000.0
+        },
+        "capture_gap_sim_s": {
+          "count": 488,
+          "min": 0.03333345055580139,
+          "p50": 0.10000069998204708,
+          "p95": 0.23145301640033722,
+          "max": 0.33076534047722816
+        },
+        "world_frame_step_histogram": {
+          "3": 327,
+          "2": 91,
+          "1": 47,
+          "5": 9,
+          "4": 10,
+          "6": 4
+        }
+      },
+      "fusion_capture_count_observed": 82,
+      "matched_fused": {
+        "frames": 75,
+        "return_span_deg": {
+          "count": 75,
+          "min": 118.20922659848388,
+          "p50": 358.19998688585196,
+          "p95": 358.2000217236303,
+          "max": 358.2024519898844
+        },
+        "partial_under_200deg": 12,
+        "near_full_over_340deg": 57,
+        "preview_points": {
+          "count": 75,
+          "min": 3950.0,
+          "p50": 5000.0,
+          "p95": 5000.0,
+          "max": 5000.0
+        },
+        "capture_gap_sim_s": {
+          "count": 74,
+          "min": 0.20000098273158073,
+          "p50": 0.7044377494603395,
+          "p95": 1.476891279220581,
+          "max": 2.4879684895277023
+        },
+        "world_frame_step_histogram": {
+          "34": 1,
+          "15": 5,
+          "54": 1,
+          "18": 4,
+          "17": 7,
+          "23": 2,
+          "11": 7,
+          "12": 2,
+          "56": 1,
+          "20": 3,
+          "28": 2,
+          "24": 2,
+          "44": 1,
+          "8": 4,
+          "14": 9,
+          "26": 2,
+          "19": 5,
+          "13": 6,
+          "10": 2,
+          "25": 1,
+          "16": 5,
+          "6": 1,
+          "21": 1
+        }
+      },
+      "matched_fraction": 0.9146341463414634,
+      "fused_captures_without_preview": 7,
+      "fused_counter_discontinuities": 0,
+      "worst_confirmed_fused_arc_exclusion": {
+        "bearing_center_deg": 25.0,
+        "preview_return_frames": 422,
+        "preview_observed_return_gap_max_s": 0.4875613749027252,
+        "matched_fused_return_frames": 63,
+        "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+        "confirmed_fused_arc_exclusion_run": {
+          "duration_sim_s": 1.476891279220581,
+          "consecutive_packets": 2,
+          "start_capture_sim_time": 30.33285528270062,
+          "end_capture_sim_time": 31.8097465619212
+        }
+      },
+      "bearings": [
+        {
+          "bearing_center_deg": 5.0,
+          "preview_return_frames": 417,
+          "preview_observed_return_gap_max_s": 0.4875613749027252,
+          "matched_fused_return_frames": 63,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 15.0,
+          "preview_return_frames": 421,
+          "preview_observed_return_gap_max_s": 0.4875613749027252,
+          "matched_fused_return_frames": 64,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 25.0,
+          "preview_return_frames": 422,
+          "preview_observed_return_gap_max_s": 0.4875613749027252,
+          "matched_fused_return_frames": 63,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.476891279220581,
+            "consecutive_packets": 2,
+            "start_capture_sim_time": 30.33285528270062,
+            "end_capture_sim_time": 31.8097465619212
+          }
+        },
+        {
+          "bearing_center_deg": 35.0,
+          "preview_return_frames": 424,
+          "preview_observed_return_gap_max_s": 0.4875613749027252,
+          "matched_fused_return_frames": 63,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.476891279220581,
+            "consecutive_packets": 2,
+            "start_capture_sim_time": 30.33285528270062,
+            "end_capture_sim_time": 31.8097465619212
+          }
+        },
+        {
+          "bearing_center_deg": 45.0,
+          "preview_return_frames": 426,
+          "preview_observed_return_gap_max_s": 0.4875613749027252,
+          "matched_fused_return_frames": 64,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.476891279220581,
+            "consecutive_packets": 2,
+            "start_capture_sim_time": 30.33285528270062,
+            "end_capture_sim_time": 31.8097465619212
+          }
+        },
+        {
+          "bearing_center_deg": 55.0,
+          "preview_return_frames": 428,
+          "preview_observed_return_gap_max_s": 0.4875613749027252,
+          "matched_fused_return_frames": 65,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.476891279220581,
+            "consecutive_packets": 2,
+            "start_capture_sim_time": 30.33285528270062,
+            "end_capture_sim_time": 31.8097465619212
+          }
+        },
+        {
+          "bearing_center_deg": 65.0,
+          "preview_return_frames": 430,
+          "preview_observed_return_gap_max_s": 0.4875613749027252,
+          "matched_fused_return_frames": 67,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 75.0,
+          "preview_return_frames": 437,
+          "preview_observed_return_gap_max_s": 0.4875613749027252,
+          "matched_fused_return_frames": 69,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 85.0,
+          "preview_return_frames": 439,
+          "preview_observed_return_gap_max_s": 0.4875613749027252,
+          "matched_fused_return_frames": 69,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 95.0,
+          "preview_return_frames": 438,
+          "preview_observed_return_gap_max_s": 0.4875613749027252,
+          "matched_fused_return_frames": 68,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 105.0,
+          "preview_return_frames": 436,
+          "preview_observed_return_gap_max_s": 0.4875613749027252,
+          "matched_fused_return_frames": 69,
+          "matched_fused_observed_return_gap_max_s": 2.4879684895277023,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 115.0,
+          "preview_return_frames": 438,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 69,
+          "matched_fused_observed_return_gap_max_s": 2.4879684895277023,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 125.0,
+          "preview_return_frames": 440,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 2.4879684895277023,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 135.0,
+          "preview_return_frames": 437,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 2.4879684895277023,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 145.0,
+          "preview_return_frames": 434,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 2.4879684895277023,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 155.0,
+          "preview_return_frames": 428,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 71,
+          "matched_fused_observed_return_gap_max_s": 2.4879684895277023,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 165.0,
+          "preview_return_frames": 434,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 71,
+          "matched_fused_observed_return_gap_max_s": 2.4879684895277023,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 175.0,
+          "preview_return_frames": 429,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 70,
+          "matched_fused_observed_return_gap_max_s": 2.4879684895277023,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 185.0,
+          "preview_return_frames": 423,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 68,
+          "matched_fused_observed_return_gap_max_s": 2.4879684895277023,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 195.0,
+          "preview_return_frames": 422,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 67,
+          "matched_fused_observed_return_gap_max_s": 2.4879684895277023,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 205.0,
+          "preview_return_frames": 413,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 65,
+          "matched_fused_observed_return_gap_max_s": 2.68442053347826,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 215.0,
+          "preview_return_frames": 410,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 64,
+          "matched_fused_observed_return_gap_max_s": 2.68442053347826,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 225.0,
+          "preview_return_frames": 406,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 63,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 235.0,
+          "preview_return_frames": 401,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 64,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 245.0,
+          "preview_return_frames": 396,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 64,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 255.0,
+          "preview_return_frames": 388,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 62,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 265.0,
+          "preview_return_frames": 390,
+          "preview_observed_return_gap_max_s": 0.40956804901361465,
+          "matched_fused_return_frames": 62,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 275.0,
+          "preview_return_frames": 390,
+          "preview_observed_return_gap_max_s": 0.4776419997215271,
+          "matched_fused_return_frames": 62,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 285.0,
+          "preview_return_frames": 390,
+          "preview_observed_return_gap_max_s": 0.4776419997215271,
+          "matched_fused_return_frames": 61,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 295.0,
+          "preview_return_frames": 388,
+          "preview_observed_return_gap_max_s": 0.4776419997215271,
+          "matched_fused_return_frames": 61,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 305.0,
+          "preview_return_frames": 390,
+          "preview_observed_return_gap_max_s": 0.4776419997215271,
+          "matched_fused_return_frames": 61,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 315.0,
+          "preview_return_frames": 392,
+          "preview_observed_return_gap_max_s": 0.4776419997215271,
+          "matched_fused_return_frames": 61,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 325.0,
+          "preview_return_frames": 395,
+          "preview_observed_return_gap_max_s": 0.4776419997215271,
+          "matched_fused_return_frames": 63,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 335.0,
+          "preview_return_frames": 400,
+          "preview_observed_return_gap_max_s": 0.4776419997215271,
+          "matched_fused_return_frames": 63,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 345.0,
+          "preview_return_frames": 409,
+          "preview_observed_return_gap_max_s": 0.3911616615951061,
+          "matched_fused_return_frames": 64,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        },
+        {
+          "bearing_center_deg": 355.0,
+          "preview_return_frames": 415,
+          "preview_observed_return_gap_max_s": 0.3911616615951061,
+          "matched_fused_return_frames": 64,
+          "matched_fused_observed_return_gap_max_s": 3.1016803942620754,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.0012540854513645,
+            "consecutive_packets": 3,
+            "start_capture_sim_time": 75.33696831611451,
+            "end_capture_sim_time": 76.33822240156587
+          }
+        }
+      ],
+      "received_hz": 10.05001701238651,
+      "fused_hz": 1.350002285245949,
+      "fused_counter_advance": 81,
+      "last_ray_coverage": {
+        "ray_geometry_policy": "all_distinct_measured_rays",
+        "input_points": 10554,
+        "zero_distance_points": 0,
+        "in_range_hit_points": 9920,
+        "unique_hit_voxels": 1884,
+        "measured_free_rays": 634,
+        "unique_free_endpoint_voxels": 634,
+        "hit_ray_count": 9920,
+        "free_ray_count": 634,
+        "total_ray_count": 10554,
+        "boundary_clipped_rays": 68,
+        "range_clipped_rays": 0,
+        "discarded_zero_length_rays": 0,
+        "mark_range_m": 9.0,
+        "clear_range_m": 40.0,
+        "real_far_hit_points": 566,
+        "unique_protected_hit_voxels": 566,
+        "free_include_endpoint": false,
+        "return_azimuth_span_deg": 358.2000415804232,
+        "raw_return_count": 12812,
+        "scan_end_angle_rad": 0.9310464262962341,
+        "protected_hit_cells": 566,
+        "refreshed_protected_hits": 386,
+        "recovered_far_hit_cells": 85,
+        "skipped_stale_cells": 3
+      },
+      "preview_age_wall_s": {
+        "count": 2983,
+        "min": 0.0010905265808105469,
+        "p50": 0.062445640563964844,
+        "p95": 0.17940473556518555,
+        "max": 0.30001139640808105
+      },
+      "fusion_age_sim_s": {
+        "count": 2983,
+        "min": 0.0,
+        "p50": 0.5163038484752178,
+        "p95": 1.5702280029654503,
+        "max": 8.985459297895432
+      },
+      "map_request_s": {
+        "count": 2983,
+        "min": 0.03354064398445189,
+        "p50": 0.09873127599712461,
+        "p95": 0.3081255790311843,
+        "max": 0.9318134309723973
+      },
+      "cache_apply_s": {
+        "count": 2983,
+        "min": 0.010177014977671206,
+        "p50": 0.04211127501912415,
+        "p95": 0.09029237600043416,
+        "max": 0.11371430405415595
+      },
+      "total_work_s": {
+        "count": 2983,
+        "min": 0.05853019095957279,
+        "p50": 0.22020038892515004,
+        "p95": 0.8106240950291976,
+        "max": 1.8268233900889754
+      }
+    },
+    "uav_01": {
+      "preview": {
+        "frames": 487,
+        "return_span_deg": {
+          "count": 487,
+          "min": 118.20914104641439,
+          "p50": 358.1999547365947,
+          "p95": 358.20212809211347,
+          "max": 358.617617511879
+        },
+        "partial_under_200deg": 75,
+        "near_full_over_340deg": 327,
+        "preview_points": {
+          "count": 487,
+          "min": 3102.0,
+          "p50": 5000.0,
+          "p95": 5000.0,
+          "max": 5000.0
+        },
+        "capture_gap_sim_s": {
+          "count": 486,
+          "min": 0.03333337977528572,
+          "p50": 0.1000006701797247,
+          "p95": 0.2437800131738186,
+          "max": 0.36537083238363266
+        },
+        "world_frame_step_histogram": {
+          "5": 5,
+          "3": 319,
+          "2": 89,
+          "1": 52,
+          "4": 11,
+          "6": 10
+        }
+      },
+      "fusion_capture_count_observed": 83,
+      "matched_fused": {
+        "frames": 77,
+        "return_span_deg": {
+          "count": 77,
+          "min": 118.20921636964323,
+          "p50": 358.19995544131876,
+          "p95": 358.20190899624146,
+          "max": 358.47584284491893
+        },
+        "partial_under_200deg": 7,
+        "near_full_over_340deg": 58,
+        "preview_points": {
+          "count": 77,
+          "min": 3116.0,
+          "p50": 5000.0,
+          "p95": 5000.0,
+          "max": 5000.0
+        },
+        "capture_gap_sim_s": {
+          "count": 76,
+          "min": 0.30000151693820953,
+          "p50": 0.7017491888254881,
+          "p95": 1.3102233223617077,
+          "max": 3.206521064043045
+        },
+        "world_frame_step_histogram": {
+          "29": 1,
+          "75": 1,
+          "17": 5,
+          "18": 6,
+          "9": 2,
+          "24": 2,
+          "32": 1,
+          "23": 2,
+          "22": 4,
+          "19": 4,
+          "13": 10,
+          "14": 11,
+          "34": 1,
+          "15": 6,
+          "11": 7,
+          "20": 2,
+          "21": 1,
+          "16": 5,
+          "27": 1,
+          "10": 2,
+          "8": 1,
+          "12": 1
+        }
+      },
+      "matched_fraction": 0.927710843373494,
+      "fused_captures_without_preview": 6,
+      "fused_counter_discontinuities": 2,
+      "worst_confirmed_fused_arc_exclusion": {
+        "bearing_center_deg": 5.0,
+        "preview_return_frames": 390,
+        "preview_observed_return_gap_max_s": 0.48902833089232445,
+        "matched_fused_return_frames": 61,
+        "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+        "confirmed_fused_arc_exclusion_run": {
+          "duration_sim_s": 1.4993756003677845,
+          "consecutive_packets": 4,
+          "start_capture_sim_time": 75.37030201999005,
+          "end_capture_sim_time": 76.86967762035783
+        }
+      },
+      "bearings": [
+        {
+          "bearing_center_deg": 5.0,
+          "preview_return_frames": 390,
+          "preview_observed_return_gap_max_s": 0.48902833089232445,
+          "matched_fused_return_frames": 61,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.4993756003677845,
+            "consecutive_packets": 4,
+            "start_capture_sim_time": 75.37030201999005,
+            "end_capture_sim_time": 76.86967762035783
+          }
+        },
+        {
+          "bearing_center_deg": 15.0,
+          "preview_return_frames": 391,
+          "preview_observed_return_gap_max_s": 0.48902833089232445,
+          "matched_fused_return_frames": 60,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.4993756003677845,
+            "consecutive_packets": 4,
+            "start_capture_sim_time": 75.37030201999005,
+            "end_capture_sim_time": 76.86967762035783
+          }
+        },
+        {
+          "bearing_center_deg": 25.0,
+          "preview_return_frames": 386,
+          "preview_observed_return_gap_max_s": 0.48902833089232445,
+          "matched_fused_return_frames": 60,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.4993756003677845,
+            "consecutive_packets": 4,
+            "start_capture_sim_time": 75.37030201999005,
+            "end_capture_sim_time": 76.86967762035783
+          }
+        },
+        {
+          "bearing_center_deg": 35.0,
+          "preview_return_frames": 392,
+          "preview_observed_return_gap_max_s": 0.48902833089232445,
+          "matched_fused_return_frames": 65,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.493838582187891,
+            "consecutive_packets": 2,
+            "start_capture_sim_time": 75.37030201999005,
+            "end_capture_sim_time": 75.86414060217794
+          }
+        },
+        {
+          "bearing_center_deg": 45.0,
+          "preview_return_frames": 396,
+          "preview_observed_return_gap_max_s": 0.49870504811406136,
+          "matched_fused_return_frames": 69,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 55.0,
+          "preview_return_frames": 402,
+          "preview_observed_return_gap_max_s": 0.48902833089232445,
+          "matched_fused_return_frames": 69,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 65.0,
+          "preview_return_frames": 411,
+          "preview_observed_return_gap_max_s": 0.48767710849642754,
+          "matched_fused_return_frames": 70,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 75.0,
+          "preview_return_frames": 421,
+          "preview_observed_return_gap_max_s": 0.4848037362098694,
+          "matched_fused_return_frames": 70,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 85.0,
+          "preview_return_frames": 427,
+          "preview_observed_return_gap_max_s": 0.4848037362098694,
+          "matched_fused_return_frames": 70,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 95.0,
+          "preview_return_frames": 431,
+          "preview_observed_return_gap_max_s": 0.4848037362098694,
+          "matched_fused_return_frames": 71,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 105.0,
+          "preview_return_frames": 435,
+          "preview_observed_return_gap_max_s": 0.4848037362098694,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 115.0,
+          "preview_return_frames": 439,
+          "preview_observed_return_gap_max_s": 0.4848037362098694,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 125.0,
+          "preview_return_frames": 440,
+          "preview_observed_return_gap_max_s": 0.4848037362098694,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 135.0,
+          "preview_return_frames": 445,
+          "preview_observed_return_gap_max_s": 0.39870432391762733,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 145.0,
+          "preview_return_frames": 447,
+          "preview_observed_return_gap_max_s": 0.39870432391762733,
+          "matched_fused_return_frames": 73,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 155.0,
+          "preview_return_frames": 447,
+          "preview_observed_return_gap_max_s": 0.39870432391762733,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 165.0,
+          "preview_return_frames": 445,
+          "preview_observed_return_gap_max_s": 0.39870432391762733,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 175.0,
+          "preview_return_frames": 443,
+          "preview_observed_return_gap_max_s": 0.39207328855991364,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 185.0,
+          "preview_return_frames": 441,
+          "preview_observed_return_gap_max_s": 0.39207328855991364,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 195.0,
+          "preview_return_frames": 439,
+          "preview_observed_return_gap_max_s": 0.39207328855991364,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 205.0,
+          "preview_return_frames": 438,
+          "preview_observed_return_gap_max_s": 0.39207328855991364,
+          "matched_fused_return_frames": 73,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 215.0,
+          "preview_return_frames": 433,
+          "preview_observed_return_gap_max_s": 0.4082956276834011,
+          "matched_fused_return_frames": 73,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 225.0,
+          "preview_return_frames": 429,
+          "preview_observed_return_gap_max_s": 0.4082956276834011,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 235.0,
+          "preview_return_frames": 425,
+          "preview_observed_return_gap_max_s": 0.4082956276834011,
+          "matched_fused_return_frames": 72,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 245.0,
+          "preview_return_frames": 422,
+          "preview_observed_return_gap_max_s": 0.4082956276834011,
+          "matched_fused_return_frames": 74,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 255.0,
+          "preview_return_frames": 416,
+          "preview_observed_return_gap_max_s": 0.4082956276834011,
+          "matched_fused_return_frames": 74,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 265.0,
+          "preview_return_frames": 417,
+          "preview_observed_return_gap_max_s": 0.4082956276834011,
+          "matched_fused_return_frames": 74,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 275.0,
+          "preview_return_frames": 416,
+          "preview_observed_return_gap_max_s": 0.4082956276834011,
+          "matched_fused_return_frames": 74,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 285.0,
+          "preview_return_frames": 406,
+          "preview_observed_return_gap_max_s": 0.42369889467954636,
+          "matched_fused_return_frames": 67,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.0,
+            "consecutive_packets": 0
+          }
+        },
+        {
+          "bearing_center_deg": 295.0,
+          "preview_return_frames": 404,
+          "preview_observed_return_gap_max_s": 0.42369889467954636,
+          "matched_fused_return_frames": 65,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.48421985656023026,
+            "consecutive_packets": 2,
+            "start_capture_sim_time": 80.8807649150258,
+            "end_capture_sim_time": 81.36498477158602
+          }
+        },
+        {
+          "bearing_center_deg": 305.0,
+          "preview_return_frames": 400,
+          "preview_observed_return_gap_max_s": 0.48902833089232445,
+          "matched_fused_return_frames": 65,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.4981217347085476,
+            "consecutive_packets": 2,
+            "start_capture_sim_time": 76.37155588564929,
+            "end_capture_sim_time": 76.86967762035783
+          }
+        },
+        {
+          "bearing_center_deg": 315.0,
+          "preview_return_frames": 394,
+          "preview_observed_return_gap_max_s": 0.48902833089232445,
+          "matched_fused_return_frames": 64,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 0.4981217347085476,
+            "consecutive_packets": 2,
+            "start_capture_sim_time": 76.37155588564929,
+            "end_capture_sim_time": 76.86967762035783
+          }
+        },
+        {
+          "bearing_center_deg": 325.0,
+          "preview_return_frames": 387,
+          "preview_observed_return_gap_max_s": 0.48902833089232445,
+          "matched_fused_return_frames": 64,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.4993756003677845,
+            "consecutive_packets": 4,
+            "start_capture_sim_time": 75.37030201999005,
+            "end_capture_sim_time": 76.86967762035783
+          }
+        },
+        {
+          "bearing_center_deg": 335.0,
+          "preview_return_frames": 382,
+          "preview_observed_return_gap_max_s": 0.48902833089232445,
+          "matched_fused_return_frames": 63,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.4993756003677845,
+            "consecutive_packets": 4,
+            "start_capture_sim_time": 75.37030201999005,
+            "end_capture_sim_time": 76.86967762035783
+          }
+        },
+        {
+          "bearing_center_deg": 345.0,
+          "preview_return_frames": 387,
+          "preview_observed_return_gap_max_s": 0.48902833089232445,
+          "matched_fused_return_frames": 63,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.4993756003677845,
+            "consecutive_packets": 4,
+            "start_capture_sim_time": 75.37030201999005,
+            "end_capture_sim_time": 76.86967762035783
+          }
+        },
+        {
+          "bearing_center_deg": 355.0,
+          "preview_return_frames": 391,
+          "preview_observed_return_gap_max_s": 0.48902833089232445,
+          "matched_fused_return_frames": 62,
+          "matched_fused_observed_return_gap_max_s": 3.206521064043045,
+          "confirmed_fused_arc_exclusion_run": {
+            "duration_sim_s": 1.4993756003677845,
+            "consecutive_packets": 4,
+            "start_capture_sim_time": 75.37030201999005,
+            "end_capture_sim_time": 76.86967762035783
+          }
+        }
+      ],
+      "received_hz": 10.066683707266089,
+      "fused_hz": 1.3666689801255287,
+      "fused_counter_advance": 82,
+      "last_ray_coverage": {
+        "ray_geometry_policy": "all_distinct_measured_rays",
+        "input_points": 9729,
+        "zero_distance_points": 0,
+        "in_range_hit_points": 7800,
+        "unique_hit_voxels": 2437,
+        "measured_free_rays": 1929,
+        "unique_free_endpoint_voxels": 1925,
+        "hit_ray_count": 7800,
+        "free_ray_count": 1929,
+        "total_ray_count": 9729,
+        "boundary_clipped_rays": 183,
+        "range_clipped_rays": 98,
+        "discarded_zero_length_rays": 0,
+        "mark_range_m": 9.0,
+        "clear_range_m": 40.0,
+        "real_far_hit_points": 1718,
+        "unique_protected_hit_voxels": 1714,
+        "free_include_endpoint": false,
+        "return_azimuth_span_deg": 358.1999934382063,
+        "raw_return_count": 9729,
+        "scan_end_angle_rad": 5.412992000579834,
+        "protected_hit_cells": 1714,
+        "refreshed_protected_hits": 1331,
+        "recovered_far_hit_cells": 381,
+        "skipped_stale_cells": 0
+      },
+      "preview_age_wall_s": {
+        "count": 2983,
+        "min": 0.0017316341400146484,
+        "p50": 0.06253218650817871,
+        "p95": 0.18194365501403809,
+        "max": 0.31001782417297363
+      },
+      "fusion_age_sim_s": {
+        "count": 2983,
+        "min": 0.13337229192256927,
+        "p50": 0.8339654617011547,
+        "p95": 1.7245067730545998,
+        "max": 16.39261657744646
+      },
+      "map_request_s": {
+        "count": 2983,
+        "min": 0.07493189501110464,
+        "p50": 0.2659146429505199,
+        "p95": 0.5044904050882906,
+        "max": 8.408654005033895
+      },
+      "cache_apply_s": {
+        "count": 2983,
+        "min": 0.04215708200354129,
+        "p50": 0.1854808140778914,
+        "p95": 0.32549093395937234,
+        "max": 1.103928322903812
+      },
+      "total_work_s": {
+        "count": 2983,
+        "min": 0.15682812395971268,
+        "p50": 0.5084706419147551,
+        "p95": 0.8500601699342951,
+        "max": 9.10375699494034
+      }
+    }
+  },
+  "limitations": [
+    "Existing latest_lidar.npz is a preview with at most 5000 sampled actual returns; no new subscription was opened.",
+    "Return span is measured from returned points, not emitted rays; occlusion and no-return directions cannot be reconstructed.",
+    "Only exact capture-time matches link previews to published fusion captures.",
+    "Observed return gaps may include unseen packets. Confirmed exclusion runs reset at missing preview matches or fused-counter discontinuities.",
+    "Confirmed exclusion is for the measured arc at each capture origin in map XY; it does not prove the same old voxel lacked a clearing ray.",
+    "First/last incomplete runs are censored. No raw images or point clouds are written."
+  ],
+  "state_age_wall_s": {
+    "count": 2983,
+    "min": 0.0010366439819335938,
+    "p50": 0.1154472827911377,
+    "p95": 0.3371744155883789,
+    "max": 1.3837218284606934
+  },
+  "runtime_errors": [
+    "people_error: ValueError: people reference time in future"
+  ]
+}

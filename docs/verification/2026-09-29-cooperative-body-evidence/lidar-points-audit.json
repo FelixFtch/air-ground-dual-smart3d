@@ -1,0 +1,107 @@
+{
+  "state_sim_time": 15460.991231673397,
+  "world_id": 2413022179582752564,
+  "counts": [
+    {
+      "source": "go2_01",
+      "target": "go2_01",
+      "position": [
+        -8.537359237670898,
+        -2.8091933727264404,
+        0.330000011920929
+      ],
+      "target_speed": 0.0,
+      "frame": 364683,
+      "capture_sim_time": 15461.170003154315,
+      "state_age_s": -0.1787714809179306,
+      "total_points": 5000,
+      "padded_obb_points": 939,
+      "min_xy_distance_within_target_height_m": 0.28101094572738444,
+      "inside_minmax": [
+        [
+          -9.097643852233887,
+          -3.363095283508301,
+          -0.01874992437660694
+        ],
+        [
+          -8.000617980957031,
+          -2.2463347911834717,
+          -0.01874992437660694
+        ]
+      ]
+    },
+    {
+      "source": "go2_01",
+      "target": "uav_01",
+      "position": [
+        -8.174283981323242,
+        3.791262149810791,
+        2.497015743255615
+      ],
+      "target_speed": 0.0,
+      "frame": 364683,
+      "capture_sim_time": 15461.170003154315,
+      "state_age_s": -0.1787714809179306,
+      "total_points": 5000,
+      "padded_obb_points": 16,
+      "min_xy_distance_within_target_height_m": 0.1272381148356162,
+      "inside_minmax": [
+        [
+          -8.735344886779785,
+          3.2372286319732666,
+          2.157015800476074
+        ],
+        [
+          -7.6848554611206055,
+          4.121826171875,
+          2.822244167327881
+        ]
+      ]
+    },
+    {
+      "source": "uav_01",
+      "target": "go2_01",
+      "position": [
+        -8.537359237670898,
+        -2.8091933727264404,
+        0.330000011920929
+      ],
+      "target_speed": 0.0,
+      "frame": 364683,
+      "capture_sim_time": 15461.170003154315,
+      "state_age_s": -0.1787714809179306,
+      "total_points": 5000,
+      "padded_obb_points": 6,
+      "min_xy_distance_within_target_height_m": 0.1736459757486032,
+      "inside_minmax": [
+        [
+          -8.86722469329834,
+          -3.1841750144958496,
+          -0.01874992437660694
+        ],
+        [
+          -8.107135772705078,
+          -2.608530282974243,
+          -0.01874992437660694
+        ]
+      ]
+    },
+    {
+      "source": "uav_01",
+      "target": "uav_01",
+      "position": [
+        -8.174283981323242,
+        3.791262149810791,
+        2.497015743255615
+      ],
+      "target_speed": 0.0,
+      "frame": 364683,
+      "capture_sim_time": 15461.170003154315,
+      "state_age_s": -0.1787714809179306,
+      "total_points": 5000,
+      "padded_obb_points": 0,
+      "min_xy_distance_within_target_height_m": 9.19057508256308
+    }
+  ],
+  "source": "Existing lidar_preview latest_lidar.npz; map-frame raw returns, max5000 subsample, no body filtering"
+}

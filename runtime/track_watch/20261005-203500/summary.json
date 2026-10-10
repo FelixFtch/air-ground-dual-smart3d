@@ -1,0 +1,107 @@
+{
+  "frames": 4782,
+  "mean_people_per_frame": 0.628,
+  "frames_with_a_person": 2173,
+  "id_hold": [
+    2140,
+    2192
+  ],
+  "projected": 2857,
+  "with_speed": 1395,
+  "strict": {
+    "n": 722,
+    "p50": 2.0,
+    "max": 58,
+    "histogram": {
+      "1": 282,
+      "2": 124,
+      "3-4": 134,
+      "5-9": 108,
+      "10-19": 52,
+      "20+": 22
+    },
+    "detections_on_tracks_at_least_4": [
+      2253,
+      3002
+    ],
+    "detections_on_tracks_at_least_10": [
+      1304,
+      3002
+    ]
+  },
+  "loose": {
+    "n": 666,
+    "p50": 2.0,
+    "max": 58,
+    "histogram": {
+      "1": 242,
+      "2": 120,
+      "3-4": 115,
+      "5-9": 114,
+      "10-19": 51,
+      "20+": 24
+    },
+    "detections_on_tracks_at_least_4": [
+      2334,
+      3002
+    ],
+    "detections_on_tracks_at_least_10": [
+      1394,
+      3002
+    ],
+    "with_speed": 218,
+    "longest": [
+      {
+        "id": 5619,
+        "frames": 58,
+        "seconds": 21.41,
+        "speed": true
+      },
+      {
+        "id": 6001,
+        "frames": 57,
+        "seconds": 21.83,
+        "speed": true
+      },
+      {
+        "id": 4559,
+        "frames": 43,
+        "seconds": 16.53,
+        "speed": true
+      },
+      {
+        "id": 5399,
+        "frames": 41,
+        "seconds": 15.39,
+        "speed": true
+      },
+      {
+        "id": 4156,
+        "frames": 37,
+        "seconds": 13.62,
+        "speed": true
+      },
+      {
+        "id": 4215,
+        "frames": 36,
+        "seconds": 13.13,
+        "speed": true
+      },
+      {
+        "id": 5337,
+        "frames": 35,
+        "seconds": 12.86,
+        "speed": true
+      },
+      {
+        "id": 6134,
+        "frames": 35,
+        "seconds": 13.62,
+        "speed": true
+      }
+    ]
+  },
+  "elapsed_s": 900.0,
+  "tracking_ids": "ultralytics_botsort",
+  "run": "/data/robotics/air_ground_smart3d/runtime/runs/431da0850b52409faa6ffa3e2431454a"
+}

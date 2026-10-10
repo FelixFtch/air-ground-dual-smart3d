@@ -1,0 +1,70 @@
+{
+  "source": "/tmp/ohz_continuity_20260929.json",
+  "seconds": 41.95655417442322,
+  "samples": 98,
+  "fresh_global_frames": 73,
+  "people_error_counts": {
+    "None": 98
+  },
+  "sources": {
+    "go2_01": {
+      "unique_frames": 40,
+      "sampling_hz": 0.9189328678860219,
+      "gap_max": 1.6847985163331032,
+      "gap_mean": 1.0882187752196422,
+      "gap_over_1p5": 2,
+      "masks": 52,
+      "projected": 22,
+      "good_projected": 21,
+      "valid_velocity": 3,
+      "velocity_reason_counts": {
+        "insufficient_history": 18,
+        "robust_same_source_capture_displacement": 3,
+        "limited_projection_quality": 1
+      },
+      "rejection_counts": {
+        "insufficient_mask_depth": 30
+      },
+      "inference_ms_mean": 246.2185916636372,
+      "capture_age_mean": 0.6920839841477573
+    },
+    "uav_01": {
+      "unique_frames": 41,
+      "sampling_hz": 0.9386064732477198,
+      "gap_max": 1.7134395502507687,
+      "gap_mean": 1.065409230068326,
+      "gap_over_1p5": 3,
+      "masks": 92,
+      "projected": 40,
+      "good_projected": 40,
+      "valid_velocity": 30,
+      "velocity_reason_counts": {
+        "robust_same_source_capture_displacement": 30,
+        "insufficient_history": 10
+      },
+      "rejection_counts": {
+        "insufficient_mask_depth": 16,
+        "cooperative_robot_surface": 35,
+        "ambiguous_mask_depth": 1
+      },
+      "inference_ms_mean": 284.5802397109432,
+      "capture_age_mean": 0.694537363219552
+    }
+  },
+  "robots": {
+    "go2_01": {
+      "visible_nonempty_samples": 13,
+      "planner_snapshot_age_mean": 0.923092335500769,
+      "planner_snapshot_age_max": 2.028280183672905,
+      "hazard_validity_remaining_now_mean": -0.40800902316659954,
+      "hazard_validity_remaining_at_request_mean": 0.5576831027206066
+    },
+    "uav_01": {
+      "visible_nonempty_samples": 1,
+      "planner_snapshot_age_mean": 1.649053403233387,
+      "planner_snapshot_age_max": 2.298310536891222,
+      "hazard_validity_remaining_now_mean": -1.1477625806218208,
+      "hazard_validity_remaining_at_request_mean": 0.5296339523326301
+    }
+  }
+}

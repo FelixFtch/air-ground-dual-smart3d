@@ -1,0 +1,68 @@
+{
+  "isolated_project": "/data/sim/AirGroundLab_UE58/CarlaUnreal",
+  "files": [
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Actor/UavKinematicActor.h",
+      "modified_sha256": "ddac46afd33f14d916652f22556f03cc8de1da38cc77fbce902965a8d2a86b83",
+      "new": true
+    },
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Actor/UavKinematicActor.cpp",
+      "modified_sha256": "0f7d56ea88a39dcebac1e62543ca806767c3dfd7fc74ea5cf6fc13103d20014a",
+      "new": true,
+      "mesh": "robot_bee"
+    },
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Actor/StaticMeshFactory.cpp",
+      "source_sha256": "f2f74b8c239ff1448861a8144d63251413090c13568fd100ea50bdd89f81b166",
+      "modified_sha256": "9835bcd07a19aa04185a7b47bd542bb3d83d2d0386a3066e177f1ba1d09028d1"
+    },
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Actor/CarlaActor.cpp",
+      "source_sha256": "1142d355a5079f265f954dc2359464d0b705e5b04f923783d0ebddabb85faf91",
+      "modified_sha256": "d761416a6dbcb43bc542ce0353cfdcae9c0b48f98d15c6e115fe26cfe7d9bedb"
+    },
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Util/BoundingBoxCalculator.cpp",
+      "source_sha256": "dcd21b5e8e23550e101e9ec99c2dd21e207363cd8ebe3ba83ff7eed911cf8536",
+      "modified_sha256": "046c922a0dfbab13c0771fdc453435e43f0efb37793e0c3e819e083407ad053f"
+    },
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Server/CarlaServer.cpp",
+      "source_sha256": "efb56d7881afb2fbf5e91c858efbcc69b0b2874c937d73f82f6caf709415c810",
+      "modified_sha256": "3f778f04718574f159f99971ab78700b1b1bc3208a2036bac5beb2c62cf16846"
+    },
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Sensor/RayCastSemanticLidar.cpp",
+      "source_sha256": "aa55d2fb3e87c289e52161f6dd86863b581a29e0d1bf1be7607003ed423fab54",
+      "modified_sha256": "1e4bebdca51106a26a270f99128ad0297e9081eb885296802e4f7057006403be"
+    },
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Sensor/RayCastSemanticLidar.h",
+      "source_sha256": "b097526aa80b2f7afaf24a5bce679492033bdbe9f5248f087e738eb6714301c1",
+      "modified_sha256": "83f384e43085a30306963309756d5e4d044da508ee5337593556edcf1128f0fa"
+    },
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Sensor/RayCastLidar.cpp",
+      "source_sha256": "90940873ac6256e82ca16f8d2c948b96aa93f6a5ade42b65b967d75980f2c7fc",
+      "modified_sha256": "5267d0976f1635b5d2752e0a3760ab15388972e9cfa2772a4bb1bca84bead17f"
+    }
+  ],
+  "built_at_utc": "2026-09-29T14:35:42.149571+00:00",
+  "build_result": "Succeeded",
+  "build_elapsed_seconds": 114.29,
+  "live_acceptance": {
+    "report": "/data/robotics/air_ground_smart3d/runtime/uav_actor_smoke.json",
+    "sha256": "266efe02cf0b3fdfe3431b6b9782c173394f8ce0b6247e86275347710bf0800c",
+    "all_passed": true,
+    "tests": 11,
+    "elapsed_seconds": 21.074676036834717
+  },
+  "lidar_parent_incremental_build_seconds": 27.14,
+  "lidar_sensor_elapsed_fix": {
+    "build_result": "Succeeded",
+    "log": "/data/robotics/air_ground_smart3d/runtime/build/lidar_sensor_elapsed_build.log",
+    "audit": "/data/robotics/air_ground_smart3d/runtime/deployment_backups/2026-09-29-sensor-elapsed-195904",
+    "timestamp": 1790726480.6893687
+  }
+}

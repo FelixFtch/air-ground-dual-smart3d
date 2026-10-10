@@ -1,0 +1,20 @@
+[
+  {
+    "model": "normal",
+    "frames": 32,
+    "exact_integrate_query_snapshot_parity": true,
+    "byte_exact_saved_ot": true,
+    "restored_snapshot_parity": true,
+    "full_fallback_frames": 8,
+    "incremental_frames": 21
+  },
+  {
+    "model": "simulation",
+    "frames": 32,
+    "exact_integrate_query_snapshot_parity": true,
+    "byte_exact_saved_ot": true,
+    "restored_snapshot_parity": true,
+    "full_fallback_frames": 3,
+    "incremental_frames": 24
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "a": [
+    12.02,
+    0.26,
+    3.02
+  ],
+  "voxel_center": [
+    12.125,
+    0.375,
+    3.125
+  ],
+  "ray_endpoint": [
+    13.125,
+    0.3958333333333333,
+    3.2916666666666665
+  ],
+  "origin": [
+    0.125,
+    0.125,
+    1.125
+  ],
+  "ray_to_observed_surface_m": 0.14178868515085646,
+  "ray_to_voxel_center_m": 0.0,
+  "before": {
+    "key": [
+      48,
+      1,
+      12
+    ],
+    "last_observed_sim_time": 1.0,
+    "log_odds": 1.9924302101135254,
+    "state": "occupied"
+  },
+  "after": {
+    "key": [
+      48,
+      1,
+      12
+    ],
+    "last_observed_sim_time": 2.0,
+    "log_odds": -0.20479440689086914,
+    "state": "free"
+  },
+  "implication": "Ray passes exactly through voxel center yet misses recorded subvoxel surface by >10cm. Requiring strict interior traversal alone cannot eliminate this class."
+}

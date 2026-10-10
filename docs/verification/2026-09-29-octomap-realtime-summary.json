@@ -1,0 +1,361 @@
+{
+  "baseline": {
+    "epoch": "7e7ba4a073174464bc0e182b3ab278c3",
+    "duration_wall_s": 29.9236102104187,
+    "duration_sim_s": 29.929460402578115,
+    "samples": 173,
+    "rates_per_wall_second": {
+      "go2_01/lidar": {
+        "received": 10.126,
+        "fused": 1.704
+      },
+      "go2_01/rgb": {
+        "received": 21.956,
+        "fused": 0.0
+      },
+      "go2_01/depth": {
+        "received": 21.956,
+        "fused": 0.902
+      },
+      "uav_01/lidar": {
+        "received": 10.092,
+        "fused": 1.671
+      },
+      "uav_01/rgb": {
+        "received": 21.956,
+        "fused": 0.0
+      },
+      "uav_01/depth": {
+        "received": 21.956,
+        "fused": 0.902
+      },
+      "uav_01/depth_aux_0": {
+        "received": 5.046,
+        "fused": 0.468
+      },
+      "uav_01/depth_aux_1": {
+        "received": 5.013,
+        "fused": 0.468
+      },
+      "uav_01/depth_aux_2": {
+        "received": 5.046,
+        "fused": 0.468
+      },
+      "uav_01/depth_aux_3": {
+        "received": 5.046,
+        "fused": 0.468
+      },
+      "uav_01/depth_aux_4": {
+        "received": 5.013,
+        "fused": 0.468
+      },
+      "uav_01/depth_aux_5": {
+        "received": 5.046,
+        "fused": 0.501
+      }
+    },
+    "sensor_age": {
+      "go2_01": {
+        "lidar": {
+          "mean": 0.9585896022187147,
+          "p95": 1.53727650269866,
+          "max": 1.9812597185373306
+        },
+        "depth": {
+          "mean": 1.247699712160867,
+          "p95": 2.134746864438057,
+          "max": 2.845979508012533
+        }
+      },
+      "uav_01": {
+        "lidar": {
+          "mean": 1.0323097394897758,
+          "p95": 1.5996224917471409,
+          "max": 2.3028305880725384
+        },
+        "depth": {
+          "mean": 1.248535149789959,
+          "p95": 2.04669576510787,
+          "max": 2.4317444935441017
+        }
+      }
+    },
+    "display_age": {
+      "mean": 0.3408090031000576,
+      "p95": 0.7920873425900936,
+      "max": 1.0547054298222065
+    },
+    "state_age": {
+      "mean": 0.4483738166059373,
+      "p95": 0.9062154293060303,
+      "max": 1.1928255558013916
+    },
+    "robot_progress": [
+      {
+        "id": "go2_01",
+        "status": "moving",
+        "distance": 210.5061687198287,
+        "goals": 9,
+        "planner_error": null
+      },
+      {
+        "id": "uav_01",
+        "status": "moving",
+        "distance": 88.92014417829552,
+        "goals": 5,
+        "planner_error": null
+      }
+    ],
+    "processing_ms": {},
+    "sampled_occupancy_transitions": {
+      "new_occupied": 0,
+      "cleared_occupied": 0
+    },
+    "progress_during_sample": [
+      {
+        "robot": "go2_01",
+        "distance_m": 22.566125163128135,
+        "completed_goals": 1
+      },
+      {
+        "robot": "uav_01",
+        "distance_m": 5.5833185689583615,
+        "completed_goals": 1
+      }
+    ],
+    "errors": [],
+    "initial_map_cells": 513116,
+    "final_map_cells": 513164
+  },
+  "deployed": {
+    "epoch": "1ddaeeef8d1848909e9161e65dbba5ad",
+    "duration_wall_s": 49.91052269935608,
+    "duration_sim_s": 49.97779942303896,
+    "samples": 276,
+    "rates_per_wall_second": {
+      "go2_01/lidar": {
+        "received": 9.998,
+        "fused": 3.286
+      },
+      "go2_01/rgb": {
+        "received": 22.46,
+        "fused": 0.0
+      },
+      "go2_01/depth": {
+        "received": 22.46,
+        "fused": 1.342
+      },
+      "uav_01/lidar": {
+        "received": 10.018,
+        "fused": 3.286
+      },
+      "uav_01/rgb": {
+        "received": 22.46,
+        "fused": 0.0
+      },
+      "uav_01/depth": {
+        "received": 22.46,
+        "fused": 1.342
+      },
+      "uav_01/depth_aux_0": {
+        "received": 5.009,
+        "fused": 0.461
+      },
+      "uav_01/depth_aux_1": {
+        "received": 4.989,
+        "fused": 0.461
+      },
+      "uav_01/depth_aux_2": {
+        "received": 5.009,
+        "fused": 0.481
+      },
+      "uav_01/depth_aux_3": {
+        "received": 5.009,
+        "fused": 0.481
+      },
+      "uav_01/depth_aux_4": {
+        "received": 4.989,
+        "fused": 0.481
+      },
+      "uav_01/depth_aux_5": {
+        "received": 5.009,
+        "fused": 0.461
+      }
+    },
+    "sensor_age": {
+      "go2_01": {
+        "lidar": {
+          "mean": 0.37744445461725845,
+          "p95": 0.6633105650544167,
+          "max": 0.8801351264119148
+        },
+        "depth": {
+          "mean": 0.5892628548612845,
+          "p95": 1.0422910563647747,
+          "max": 1.4016505517065525
+        }
+      },
+      "uav_01": {
+        "lidar": {
+          "mean": 0.45501950770562544,
+          "p95": 0.7227740436792374,
+          "max": 0.9205442667007446
+        },
+        "depth": {
+          "mean": 0.6110864828435191,
+          "p95": 1.106000930070877,
+          "max": 1.3293183855712414
+        }
+      }
+    },
+    "display_age": {
+      "mean": 0.06603059914988885,
+      "p95": 0.229902446269989,
+      "max": 0.3392266221344471
+    },
+    "state_age": {
+      "mean": 0.1526014891223631,
+      "p95": 0.26082491874694824,
+      "max": 0.34790921211242676
+    },
+    "robot_progress": [
+      {
+        "id": "go2_01",
+        "status": "moving",
+        "distance": 71.88969301668715,
+        "goals": 4,
+        "planner_error": null
+      },
+      {
+        "id": "uav_01",
+        "status": "moving",
+        "distance": 41.270803476497996,
+        "goals": 2,
+        "planner_error": null
+      }
+    ],
+    "processing_ms": {
+      "go2_01/depth": {
+        "arrival_to_apply_wall_s": 128.787,
+        "total_work_s": 73.22,
+        "map_request_s": 19.932,
+        "apply_queue_s": 1.417,
+        "cache_apply_s": 4.89,
+        "prepare_s": 40.97,
+        "pose_lock_s": 3.345,
+        "rays_s": 2.667
+      },
+      "go2_01/lidar": {
+        "arrival_to_apply_wall_s": 167.882,
+        "total_work_s": 107.044,
+        "map_request_s": 42.64,
+        "apply_queue_s": 0.238,
+        "cache_apply_s": 22.692,
+        "prepare_s": 20.713,
+        "pose_lock_s": 5.707,
+        "rays_s": 15.054
+      },
+      "uav_01/depth": {
+        "arrival_to_apply_wall_s": 139.634,
+        "total_work_s": 83.015,
+        "map_request_s": 25.067,
+        "apply_queue_s": 1.163,
+        "cache_apply_s": 8.44,
+        "prepare_s": 36.125,
+        "pose_lock_s": 8.367,
+        "rays_s": 3.853
+      },
+      "uav_01/depth_aux_0": {
+        "arrival_to_apply_wall_s": 190.918,
+        "total_work_s": 58.912,
+        "map_request_s": 15.516,
+        "apply_queue_s": 1.69,
+        "cache_apply_s": 2.6,
+        "prepare_s": 30.594,
+        "pose_lock_s": 0.005,
+        "rays_s": 8.506
+      },
+      "uav_01/depth_aux_1": {
+        "arrival_to_apply_wall_s": 198.669,
+        "total_work_s": 50.942,
+        "map_request_s": 15.944,
+        "apply_queue_s": 0.288,
+        "cache_apply_s": 2.429,
+        "prepare_s": 29.555,
+        "pose_lock_s": 0.282,
+        "rays_s": 2.444
+      },
+      "uav_01/depth_aux_2": {
+        "arrival_to_apply_wall_s": 197.036,
+        "total_work_s": 43.103,
+        "map_request_s": 12.765,
+        "apply_queue_s": 0.262,
+        "cache_apply_s": 2.485,
+        "prepare_s": 25.184,
+        "pose_lock_s": 0.409,
+        "rays_s": 2.0
+      },
+      "uav_01/depth_aux_3": {
+        "arrival_to_apply_wall_s": 223.53,
+        "total_work_s": 64.07,
+        "map_request_s": 15.914,
+        "apply_queue_s": 2.185,
+        "cache_apply_s": 2.363,
+        "prepare_s": 37.246,
+        "pose_lock_s": 1.942,
+        "rays_s": 4.419
+      },
+      "uav_01/depth_aux_4": {
+        "arrival_to_apply_wall_s": 231.382,
+        "total_work_s": 49.627,
+        "map_request_s": 19.749,
+        "apply_queue_s": 0.216,
+        "cache_apply_s": 2.478,
+        "prepare_s": 23.895,
+        "pose_lock_s": 0.228,
+        "rays_s": 3.061
+      },
+      "uav_01/depth_aux_5": {
+        "arrival_to_apply_wall_s": 223.152,
+        "total_work_s": 49.064,
+        "map_request_s": 17.854,
+        "apply_queue_s": 0.28,
+        "cache_apply_s": 2.226,
+        "prepare_s": 26.53,
+        "pose_lock_s": 0.372,
+        "rays_s": 1.803
+      },
+      "uav_01/lidar": {
+        "arrival_to_apply_wall_s": 243.119,
+        "total_work_s": 176.695,
+        "map_request_s": 82.443,
+        "apply_queue_s": 0.236,
+        "cache_apply_s": 66.35,
+        "prepare_s": 19.34,
+        "pose_lock_s": 0.837,
+        "rays_s": 7.489
+      }
+    },
+    "sampled_occupancy_transitions": {
+      "new_occupied": 47284,
+      "cleared_occupied": 46304
+    },
+    "progress_during_sample": [
+      {
+        "robot": "go2_01",
+        "distance_m": 43.83226583165902,
+        "completed_goals": 3
+      },
+      {
+        "robot": "uav_01",
+        "distance_m": 28.25578286138055,
+        "completed_goals": 2
+      }
+    ],
+    "errors": [],
+    "initial_map_cells": 935140,
+    "final_map_cells": 935210,
+    "gc_seconds": 2.994096838636324
+  },
+  "interpretation": "Per-source fusion counts; displayed age is not human clearance latency. Different explored-map sizes and route positions mean these live samples are operational checks, not controlled A/B trials."
+}

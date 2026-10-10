@@ -1,0 +1,17 @@
+/runtime/runs/
+/runtime/ddc/
+/runtime/xdg-cache/
+/runtime/xdg-config/
+/runtime/deployment_backups/
+/runtime/*.log
+/runtime/latest_run.json
+/runtime/simulator.log
+/planning/target/
+/mapping/build/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+.env
+secrets/
+*.uasset
+*.umap

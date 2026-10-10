@@ -1,0 +1,154 @@
+   Compiling air-ground-smart3d-worker v0.1.0 (/data/robotics/air_ground_smart3d/planning)
+    Finished `release` profile [optimized] target(s) in 0.28s
+     Running unittests src/lib.rs (planning/target/release/deps/air_ground_smart3d_worker-d640081ddee028a9)
+
+running 2 tests
+test budget_tests::wholly_rejected_sampling_returns_to_iteration_budget ... ok
+test tests::clear_coverage_samples_true_z ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (planning/target/release/deps/air_ground_smart3d_worker-343b27e6c15d2253)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/contract.rs (planning/target/release/deps/contract-71bd3d876265e6d7)
+
+running 12 tests
+test duplicate_keys_and_i32_min_rejected_without_panic ... ok
+test compact_refresh_and_unknown_delete_apply ... ok
+test go2_floor_below_body_is_kept_and_low_positive_obstacle_blocks ... ok
+test exact_swept_volume_catches_thin_between_endpoints_and_body_sides ... ok
+test unknown_is_candidate_only_and_negative_keys_are_not_shifted ... ok
+test three_d_and_two_d_actual_current ... ok
+test ttl_only_renewal_updates_lease_without_prune_clear_or_tree_change ... ok
+test dynamic_boxes_expire_without_polluting_map ... ok
+test blocked_goal_and_revision_errors_are_transactional ... ok
+test moved_resized_and_expired_boxes_keep_real_prune_and_recovery ... ok
+test restored_null_times_keep_occupancy_without_certifying_free_and_refresh_normally ... ok
+test reroot_preserves_ids_and_edges_then_obstacles_clear ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/people_hazards.rs (planning/target/release/deps/people_hazards-a7c9b5ee5e662dd8)
+
+running 4 tests
+test native_rejects_heading_that_disagrees_with_valid_speed ... ok
+test common_python_fixture_matches_native_2d_and_3d_narrowphase ... ok
+test native_rejects_identity_malformed_expired_and_unknown_vertical_velocity_transactionally ... ok
+test temporary_people_prune_and_expire_recovering_the_same_smart_tree ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.29s
+
+     Running tests/repeated_patrol.rs (planning/target/release/deps/repeated_patrol-e65bb06bc7b26b7f)
+
+running 1 test
+test repeated_four_corner_patrol_keeps_tree_and_path_after_160_goal_changes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running unittests src/lib.rs (planning/target/release/deps/smart_3d-895a431cc568d5c7)
+
+running 85 tests
+test rrt::neighbors::exact_kd_regressions::empty_index_and_closed_radius_boundary ... ok
+test smart::obstacle::hazard_zone::tests::crossing_tangent_parallel_and_degenerate_edges_are_exact ... ok
+test smart::obstacle::hazard_zone::tests::ellipse_matches_shared_python_fixture_and_uses_exact_narrowphase ... ok
+test smart::obstacle::hazard_zone::tests::ellipse_rotates_with_diagonal_motion_and_rotated_paths ... ok
+test smart::obstacle::hazard_zone::tests::reversed_and_diagonal_axes_do_not_change_distance ... ok
+test smart::obstacle::hazard_zone::tests::stationary_ellipse_is_a_circle_and_robot_inside_never_shrinks_it ... ok
+test smart::obstacle::hazard_zone::tests::robot_inside_directional_hazard_never_erases_future_occupancy ... ok
+test smart::obstacle::hazard_zone::tests::directed_sweep_contains_current_disk_and_forward_cap_but_not_backward_dilation ... ok
+test smart::smart::paper_hotnode_tests::informed_repair_connects_one_nearest_then_recomputes_eligibility ... ok
+test smart::smart::paper_hotnode_tests::expansion_searches_final_partial_shell_but_not_beyond_maximum ... ok
+test smart::smart::paper_hotnode_tests::nearest_eligible_excludes_blocked_and_pruned_neighbors ... ok
+test smart::smart::paper_hotnode_tests::lsr_shell_uses_geometry_not_cumulative_cost_and_includes_first_center ... ok
+test smart::smart::paper_hotnode_tests::standard_sampling_still_connects_all_nearby_reachable_subtrees ... ok
+test smart::smart::paper_hotnode_tests::two_existing_routes_pick_lower_total_length_not_nearest_first_node ... ok
+test smart::smart::path_safety_tests::absent_empty_or_out_of_range_cursor_is_unsafe_without_panicking ... ok
+test smart::smart::path_safety_tests::already_traversed_edges_are_not_checked_again ... ok
+test smart::smart::path_safety_tests::capsule_broadphase_never_prunes_nodes_outside_exact_sweep ... ok
+test rrt::neighbors::exact_kd_regressions::repeated_route_goals_retain_every_id_and_exact_queries ... ok
+test smart::obstacle::hazard_zone::tests::ellipse_capsule_containment_including_diagonal_endpoint_disks ... ok
+test smart::smart::paper_hotnode_tests::utility_uses_nearest_neighbors_membership_and_connection_length ... ok
+test smart::smart::paper_hotnode_tests::two_hot_nodes_rank_larger_inverse_of_full_route_cost_first ... ok
+test smart::smart::path_safety_tests::capsule_crossing_triggers_native_prune_and_repair ... ok
+test rrt::neighbors::exact_kd_regressions::collinear_and_coplanar_points_are_valid_in_three_dimensions ... ok
+test smart::smart::path_safety_tests::capsule_selection_includes_lrz_overlap_and_checks_long_crossing_edges ... ok
+test smart::smart::path_safety_tests::cpr_obstacle_intersection_only_outside_lrz_does_not_trigger ... ok
+test smart::smart::path_safety_tests::ellipse_broadphase_does_not_replace_narrowphase_in_native_pruning ... ok
+test smart::smart::path_safety_tests::ellipse_lrz_overlap_long_crossing_and_robot_inside_use_same_hazard ... ok
+test smart::smart::path_safety_tests::ellipse_moving_away_preserves_path_but_crossing_triggers_native_repair ... ok
+test smart::smart::path_safety_tests::far_obstacle_does_not_change_tree_or_path ... ok
+test smart::smart::path_safety_tests::lrz_tangent_contact_with_an_occupied_point_is_not_discarded ... ok
+test smart::smart::path_safety_tests::measured_position_to_next_node_is_checked ... ok
+test smart::smart::path_safety_tests::moving_away_capsule_avoids_spherical_false_path_cut ... ok
+test smart::smart::path_safety_tests::outgoing_next_edge_interior_triggers_native_repair ... ok
+test smart::smart::path_safety_tests::robot_in_directional_prediction_stays_blocked_without_shrinking ... ok
+test smart::smart::path_safety_tests::segment_with_both_endpoints_outside_lrz_is_checked_inside ... ok
+test smart::smart::path_safety_tests::valid_final_cursor_and_zero_length_segments_are_supported ... ok
+test smart::smart::static_forest_tests::builder_tries_next_existing_candidate_when_cheapest_parent_chain_is_dirty ... ok
+test smart::smart::static_forest_tests::clear_maintenance_keeps_remaining_walls_and_existing_main_path ... ok
+test smart::smart::static_forest_tests::clear_priority_repairs_detached_samples_before_dense_main_backlog ... ok
+test smart::smart::static_forest_tests::clear_queue_keeps_main_endpoint_to_restore_component_outside_query_radius ... ok
+test smart::smart::static_forest_tests::clearing_other_known_cells_cannot_restore_a_permanently_forbidden_goal ... ok
+test smart::smart::static_forest_tests::clear_coverage_bridges_initially_unsampled_gap_while_current_path_is_safe ... ok
+test smart::smart::static_forest_tests::confirmed_static_removal_reactivates_only_isolated_now_valid_sample_ids ... ok
+test smart::smart::path_safety_tests::lrz_boundary_crossing_edge_triggers_native_repair ... ok
+test smart::smart::static_forest_tests::clearing_temporary_goal_block_restores_only_goal_then_repairs_same_tree ... ok
+test smart::smart::static_forest_tests::coverage_checks_free_tile_edges_even_when_center_stays_blocked ... ok
+test smart::smart::static_forest_tests::coverage_waits_for_real_clear_and_never_crosses_remaining_wall ... ok
+test smart::smart::static_forest_tests::dynamic_static_check_respects_actual_connector_and_traversed_cursor ... ok
+test smart::smart::static_forest_tests::dynamic_pruning_of_permanent_forest_root_does_not_panic_or_resurrect_wall ... ok
+test smart::smart::static_forest_tests::empty_delta_failed_path_retries_instead_of_false_no_replan ... ok
+test smart::smart::static_forest_tests::far_static_path_edge_blocks_no_replan_even_outside_dynamic_lrz ... ok
+test smart::smart::static_forest_tests::goal_root_clear_uses_special_main_restore_not_generic_sample_restore ... ok
+test smart::smart::static_forest_tests::historical_blocked_parent_later_activation_wakes_parked_child_without_spin ... ok
+test rrt::neighbors::exact_kd_regressions::mixed_incremental_index_matches_brute_force ... ok
+test smart::smart::static_forest_tests::historical_direction_cycle_is_discarded_without_active_cycle ... ok
+test smart::smart::static_forest_tests::coverage_respects_zero_time_attempt_node_and_arena_caps ... ok
+test smart::smart::static_forest_tests::finalizer_reconnection_updates_path_and_result_on_same_tree ... ok
+test smart::smart::static_forest_tests::full_static_entrypoint_has_same_failure_and_forest_contract ... ok
+test smart::smart::static_forest_tests::historical_edge_with_endpoints_outside_old_radius_recovers_on_interior_clear ... ok
+test smart::smart::static_forest_tests::historical_edge_reuse_rejects_simultaneous_new_wall_between_free_endpoints ... ok
+test smart::smart::static_forest_tests::coverage_event_queue_is_bounded_and_prior_existing_bridge_needs_no_sample ... ok
+test smart::smart::static_forest_tests::historical_cache_overwrite_removes_reverse_and_repeated_clear_is_bounded ... ok
+test smart::smart::static_forest_tests::coverage_retries_initially_unreachable_center_after_real_edge_progress ... ok
+test smart::smart::static_forest_tests::historical_long_edge_does_not_permanently_expand_later_clear_queries ... ok
+test smart::smart::static_forest_tests::historical_main_child_absorbs_old_parent_in_reverse_without_main_rewire ... ok
+test smart::smart::static_forest_tests::historical_parent_chain_restores_exact_sample_ids_and_original_edges ... ok
+test smart::smart::static_forest_tests::map_clear_restores_same_samples_outside_lrz_while_actual_still_in_collision ... ok
+test smart::smart::static_forest_tests::new_static_connector_collision_repairs_before_any_raw_grid_or_dynamic_update ... ok
+test smart::smart::static_forest_tests::historical_recovery_never_rewires_existing_main_path_or_nodes ... ok
+test smart::smart::static_forest_tests::mixed_known_removal_and_new_delta_restores_goal_without_old_edges ... ok
+test smart::smart::static_forest_tests::newly_occupied_current_or_goal_commits_all_static_cuts_before_failure ... ok
+test smart::smart::static_forest_tests::offpath_known_delta_cuts_tree_without_rebuilding_path_or_cursor ... ok
+test smart::smart::static_forest_tests::reset_repair_budget_still_returns_no_route_when_native_budget_expires ... ok
+test smart::smart::static_forest_tests::rrt_conversion_reconciles_stale_descendant_costs_without_rewiring ... ok
+test smart::smart::static_forest_tests::repeated_safe_dynamic_updates_check_only_remaining_path_not_static_tree ... ok
+test smart::smart::static_forest_tests::offpath_no_replan_does_not_reset_or_spend_repair_budget ... ok
+test smart::smart::static_forest_tests::newly_sampled_bridge_is_reused_after_obstacle_cut_and_clear_without_growth ... ok
+test smart::smart::static_forest_tests::static_edge_interior_stays_cut_after_dynamic_restore ... ok
+test smart::smart::static_forest_tests::static_scan_expiry_does_not_starve_same_forest_hot_node_repair ... ok
+test smart::smart::static_forest_tests::queued_clear_checks_latest_obstacles_before_restoring ... ok
+test smart::smart::static_forest_tests::successive_static_components_keep_unique_ids_then_survive_dynamic_cycles ... ok
+test smart::smart::static_forest_tests::successful_static_forest_reuses_tree_after_dynamic_block_and_clear ... ok
+test smart::smart::static_forest_tests::with_cursor_does_not_recheck_a_blocked_already_traversed_connector ... ok
+test smart::smart::static_forest_tests::repeated_clear_coverage_is_idempotent_and_keeps_original_ids ... ok
+test smart::smart::static_forest_tests::coverage_above_100k_arena_samples_without_rewiring_existing_main ... ok
+
+test result: ok. 85 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+   Doc-tests air_ground_smart3d_worker
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests smart_3d
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

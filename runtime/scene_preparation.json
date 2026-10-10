@@ -1,0 +1,50 @@
+{
+  "target": "/Game/AirGroundLab/Maps/AirGroundLab_Main",
+  "obstacles": [
+    {
+      "name": "AG_LowWall",
+      "carla_center_m": [
+        0.0,
+        3.0,
+        1.5
+      ],
+      "size_m": [
+        0.45,
+        6.0,
+        2.6
+      ]
+    },
+    {
+      "name": "AG_OverheadBeam",
+      "carla_center_m": [
+        8.0,
+        -4.0,
+        3.2
+      ],
+      "size_m": [
+        6.0,
+        0.65,
+        0.4
+      ]
+    },
+    {
+      "name": "AG_Box",
+      "carla_center_m": [
+        -2.0,
+        -3.0,
+        0.7
+      ],
+      "size_m": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "errors": [],
+  "saved": true,
+  "reload_verified": true,
+  "edited_world": "/Game/AirGroundLab/Maps/AirGroundLab_Main.AirGroundLab_Main",
+  "file_bytes": 75512,
+  "sha256": "df6265ba0ca0dc478b4ad2c6a594356c324cfb85006ed327d99b5293730adcc5"
+}

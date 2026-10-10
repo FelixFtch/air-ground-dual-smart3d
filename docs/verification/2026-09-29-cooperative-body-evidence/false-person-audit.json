@@ -1,0 +1,37 @@
+{
+  "evidence_epoch": "1ddaeeef8d1848909e9161e65dbba5ad",
+  "state_sim_time": 15038.161564194597,
+  "sam3_capture_sim_time": 15037.445353758521,
+  "sam3_frame_seq": 354652,
+  "sam3_frame_token": "4d0b27dd9ed951dc27c84fce71341bf96563212c82319507f94b042d8d28875c",
+  "overlay_sha_matches": true,
+  "go2_position": [
+    -8.537359237670898,
+    -2.8091933727264404,
+    0.330000011920929
+  ],
+  "track_id": 156,
+  "global_id": "person-002075",
+  "detection_score": 0.703125,
+  "measured_center": [
+    -8.52876485209742,
+    -2.932316378264484,
+    0.24937475204467757
+  ],
+  "distance_xy_from_go2_m": 0.12342259904939078,
+  "matched_rgbd_bundle_still_exists": false,
+  "collision_levels": {
+    "go2_current": 0.011754997797376059,
+    "uav_goal": 0.7615086147686868
+  },
+  "facts": [
+    "Matched overlay visibly places person-002075/local156 mask on Go2; plain RGB also shows Go2 at same pixel location.",
+    "Same false person hazard contains Go2 start and UAV destination under actual hazard intersection predicate.",
+    "Removing only false person hazard in read-only counterfactual removes all person OHZ overlap at those endpoints."
+  ],
+  "limitations": [
+    "No full OctoMap/dynamic-box planner counterfactual; other collision sources cannot be excluded.",
+    "Source RGB frame matched via saved overlay sha; independently saved raw RGB is later live frame, not exact matched source RGB.",
+    "Published guard person id is older than planner hazards, so guard field alone must not be treated as current blocker identity."
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "source_references": [
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Actor/StaticMeshFactory.cpp",
+      "lines": [
+        181,
+        182
+      ],
+      "sha256": "9835bcd07a19aa04185a7b47bd542bb3d83d2d0386a3066e177f1ba1d09028d1",
+      "finding": "Go2 uses BlockAllDynamic; no explicit SensorTrace response"
+    },
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Actor/UavKinematicActor.cpp",
+      "lines": [
+        34,
+        36,
+        42
+      ],
+      "sha256": "ae361ab9f62f7010aeedcca3ab44dd015de4ab00e94db2d278d034ad76a53b9b",
+      "finding": "UAV body blocks every channel; appearance collision disabled"
+    },
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Config/DefaultEngine.ini",
+      "lines": [
+        387,
+        389
+      ],
+      "sha256": "cd6cf615ca94a7b171989d8fb7c63a81416d7528c4dba422d5d0c50cf35fb59f",
+      "finding": "SensorTrace defaults Ignore; only BlockAll profile overrides"
+    },
+    {
+      "path": "/data/sim/AirGroundLab_UE58/CarlaUnreal/Plugins/Carla/Source/Carla/Sensor/RayCastSemanticLidar.cpp",
+      "lines": [
+        134,
+        150,
+        280
+      ],
+      "sha256": "7e22de5d77d5f5b05192d38cbd9c840e9833d2065f20436e3fc2e013f493ddf8",
+      "finding": "Only own attachment chain excluded; trace uses SensorTrace channel"
+    },
+    {
+      "path": "/data/robotics/air_ground_smart3d/sim_io/runtime.py",
+      "lines": [
+        184,
+        186,
+        198,
+        280,
+        287,
+        465
+      ],
+      "sha256": "7f91497cb399967c3116e4d2e2fb28afa858896027bd8cb7d1758260c7a5411f",
+      "finding": "Own and partner points filtered before shared fusion; distinct live partner boxes remain"
+    },
+    {
+      "path": "/data/robotics/air_ground_smart3d/sim_io/lidar_preview.py",
+      "lines": [
+        48,
+        50,
+        52,
+        54
+      ],
+      "sha256": "21683f91ee0c64caa673085ffb0725752c3f71d82f047111bf0366c8a274d897",
+      "finding": "Existing preview is unfiltered raw returns transformed to map; at most5000 points"
+    }
+  ],
+  "captured_evidence": "points_audit.json",
+  "conclusion": "UAV has actual LiDAR box-surface returns, excluded at mapper. Go2 source channel resolves Ignore and captured partner rays show only floor in Go2 footprint. No new listeners or live property RPC used.",
+  "limitations": [
+    "Point clouds subsampled to5000; absence of returns alone is not proof, combined with config/source it supports channel diagnosis.",
+    "State and LiDAR differ0.179s; both robots stationary in savedstate.",
+    "No live UE property introspection, binary/source identity not independently established in this bounded audit."
+  ],
+  "shared_map_note": "Ingress ego-only filtering cannot prevent other robots writing ego body into shared unlabelled occupancy. Per-consumer ego exclusion plus dynamic removal semantics required before replacing current partner boxes."
+}

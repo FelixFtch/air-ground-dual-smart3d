@@ -1,0 +1,8 @@
+{
+  "perception/capture.py": "7d6f356cd3c37792a39c14fc092447caf1c2e605e6b3e568c3905126d046a95a",
+  "perception/registered_rgbd.py": "87337a4aaa2396347df9666f2e899fd17de8a93a9845b1c1b1ff1c2347809958",
+  "perception/people_projection.py": "f4a25eef831e49736b3d35f6cadc729ecf6e5042aa7309f75783fc6f46c43970",
+  "perception/service.py": "b61e6272cb24a795e6a8674cd5330e82cf325c68356a7c82c4fc3b7c65e8c075",
+  "observability/ros_view.py": "533b9341f33f5b467f6b1f0c2effbbe24b964465554bf654c884e430acd9d4d0",
+  "sim_io/runtime.py": "7f91497cb399967c3116e4d2e2fb28afa858896027bd8cb7d1758260c7a5411f"
+}

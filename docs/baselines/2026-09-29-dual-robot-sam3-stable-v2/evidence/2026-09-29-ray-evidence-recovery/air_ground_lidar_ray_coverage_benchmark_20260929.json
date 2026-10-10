@@ -1,0 +1,382 @@
+{
+  "samples_per_configuration": 8,
+  "warmups": 2,
+  "note": "Standalone production native map executable; timings include IPC and current host contention. Does not measure full live fusion scheduler. No source pointcloud saved.",
+  "results": [
+    {
+      "case": "go2_01_preview_not_full_scan",
+      "input_points": 3946,
+      "source": "existing <=5000 point preview; not full live fusion packet",
+      "measurements": {
+        "before": {
+          "hit_rays": 626,
+          "free_rays": 257,
+          "protected_hit_keys": 257,
+          "known_cells": 15729,
+          "request_bytes": 89520,
+          "response_bytes": 126355,
+          "timings": {
+            "prepare_ms": {
+              "p50": 1.6089744749478996,
+              "p95": 2.740022580837831
+            },
+            "fields_ms": {
+              "p50": 0.2196955610997975,
+              "p95": 0.4353800788521766
+            },
+            "request_ms": {
+              "p50": 10.934401012491435,
+              "p95": 17.300982319284227
+            },
+            "apply_ms": {
+              "p50": 2.4972285027615726,
+              "p95": 5.041533365147188
+            },
+            "total_ms": {
+              "p50": 15.629300964064896,
+              "p95": 24.476141261402514
+            },
+            "service_wait_ms": {
+              "p50": 10.168394481297582,
+              "p95": 16.130854893708598
+            }
+          }
+        },
+        "after": {
+          "hit_rays": 3685,
+          "free_rays": 261,
+          "protected_hit_keys": 257,
+          "known_cells": 15763,
+          "request_bytes": 275795,
+          "response_bytes": 126627,
+          "timings": {
+            "prepare_ms": {
+              "p50": 2.6883009704761207,
+              "p95": 3.4162946336437017
+            },
+            "fields_ms": {
+              "p50": 0.7708870689384639,
+              "p95": 8.264659595442929
+            },
+            "request_ms": {
+              "p50": 19.092912960331887,
+              "p95": 24.361775815486908
+            },
+            "apply_ms": {
+              "p50": 4.099540994502604,
+              "p95": 5.03482343046926
+            },
+            "total_ms": {
+              "p50": 25.52860853029415,
+              "p95": 40.828203334240236
+            },
+            "service_wait_ms": {
+              "p50": 15.161973016802222,
+              "p95": 20.08990489412099
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "uav_01_preview_not_full_scan",
+      "input_points": 3151,
+      "source": "existing <=5000 point preview; not full live fusion packet",
+      "measurements": {
+        "before": {
+          "hit_rays": 851,
+          "free_rays": 986,
+          "protected_hit_keys": 986,
+          "known_cells": 69858,
+          "request_bytes": 251855,
+          "response_bytes": 559387,
+          "timings": {
+            "prepare_ms": {
+              "p50": 1.6391454846598208,
+              "p95": 1.6832880151923746
+            },
+            "fields_ms": {
+              "p50": 0.4583760164678097,
+              "p95": 0.7483865600079298
+            },
+            "request_ms": {
+              "p50": 69.21581499045715,
+              "p95": 85.7527144893538
+            },
+            "apply_ms": {
+              "p50": 12.607889017090201,
+              "p95": 15.178864734480157
+            },
+            "total_ms": {
+              "p50": 84.35629401355982,
+              "p95": 102.34321918687782
+            },
+            "service_wait_ms": {
+              "p50": 66.22712942771614,
+              "p95": 82.67804570496081
+            }
+          }
+        },
+        "after": {
+          "hit_rays": 2155,
+          "free_rays": 996,
+          "protected_hit_keys": 986,
+          "known_cells": 69964,
+          "request_bytes": 333918,
+          "response_bytes": 560235,
+          "timings": {
+            "prepare_ms": {
+              "p50": 2.014926983974874,
+              "p95": 3.2688246574252844
+            },
+            "fields_ms": {
+              "p50": 1.4153054798953235,
+              "p95": 5.749710102099922
+            },
+            "request_ms": {
+              "p50": 78.85891501791775,
+              "p95": 93.24717348790728
+            },
+            "apply_ms": {
+              "p50": 12.582749011926353,
+              "p95": 32.64552458422258
+            },
+            "total_ms": {
+              "p50": 103.26588153839111,
+              "p95": 118.26465437188745
+            },
+            "service_wait_ms": {
+              "p50": 74.2903090431355,
+              "p95": 88.32815979840234
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "synthetic_100_distinct_near_rays",
+      "input_points": 100,
+      "source": "synthetic sphere; not a live sensor measurement",
+      "measurements": {
+        "before": {
+          "hit_rays": 100,
+          "free_rays": 0,
+          "protected_hit_keys": 0,
+          "known_cells": 4495,
+          "request_bytes": 5603,
+          "response_bytes": 36479,
+          "timings": {
+            "prepare_ms": {
+              "p50": 0.19409949891269207,
+              "p95": 0.2627624140586704
+            },
+            "fields_ms": {
+              "p50": 0.010737974662333727,
+              "p95": 0.013594055781140924
+            },
+            "request_ms": {
+              "p50": 2.045541477855295,
+              "p95": 2.238950174069032
+            },
+            "apply_ms": {
+              "p50": 0.721278483979404,
+              "p95": 0.8112096227705479
+            },
+            "total_ms": {
+              "p50": 2.9842124204151332,
+              "p95": 3.312578483019024
+            },
+            "service_wait_ms": {
+              "p50": 1.9679429824464023,
+              "p95": 2.1507217665202916
+            }
+          }
+        },
+        "after": {
+          "hit_rays": 100,
+          "free_rays": 0,
+          "protected_hit_keys": 0,
+          "known_cells": 4495,
+          "request_bytes": 5603,
+          "response_bytes": 36479,
+          "timings": {
+            "prepare_ms": {
+              "p50": 0.2268824609927833,
+              "p95": 0.2637393190525472
+            },
+            "fields_ms": {
+              "p50": 0.009540992323309183,
+              "p95": 0.0107079918961972
+            },
+            "request_ms": {
+              "p50": 1.9480509799905121,
+              "p95": 2.017766411881894
+            },
+            "apply_ms": {
+              "p50": 0.6823065341450274,
+              "p95": 0.7255337375681847
+            },
+            "total_ms": {
+              "p50": 2.8656034846790135,
+              "p95": 2.971843269187957
+            },
+            "service_wait_ms": {
+              "p50": 1.8769284361042082,
+              "p95": 1.9336201890837401
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "synthetic_1000_distinct_near_rays",
+      "input_points": 1000,
+      "source": "synthetic sphere; not a live sensor measurement",
+      "measurements": {
+        "before": {
+          "hit_rays": 1000,
+          "free_rays": 0,
+          "protected_hit_keys": 0,
+          "known_cells": 37299,
+          "request_bytes": 53442,
+          "response_bytes": 298914,
+          "timings": {
+            "prepare_ms": {
+              "p50": 0.612906995229423,
+              "p95": 0.9554886899422852
+            },
+            "fields_ms": {
+              "p50": 0.14252401888370514,
+              "p95": 1.1502390378154805
+            },
+            "request_ms": {
+              "p50": 27.2800155216828,
+              "p95": 48.309289099415764
+            },
+            "apply_ms": {
+              "p50": 9.585529041942209,
+              "p95": 14.319283695658669
+            },
+            "total_ms": {
+              "p50": 36.12176654860377,
+              "p95": 63.14780460088514
+            },
+            "service_wait_ms": {
+              "p50": 26.800132007338107,
+              "p95": 47.562655416550115
+            }
+          }
+        },
+        "after": {
+          "hit_rays": 1000,
+          "free_rays": 0,
+          "protected_hit_keys": 0,
+          "known_cells": 37299,
+          "request_bytes": 53442,
+          "response_bytes": 298914,
+          "timings": {
+            "prepare_ms": {
+              "p50": 0.8172795060090721,
+              "p95": 1.2260848889127374
+            },
+            "fields_ms": {
+              "p50": 0.17750554252415895,
+              "p95": 0.35992192570120096
+            },
+            "request_ms": {
+              "p50": 32.771181024145335,
+              "p95": 43.734860565746196
+            },
+            "apply_ms": {
+              "p50": 7.896406983491033,
+              "p95": 14.577175653539596
+            },
+            "total_ms": {
+              "p50": 41.912779037375,
+              "p95": 56.35667343740351
+            },
+            "service_wait_ms": {
+              "p50": 32.250121992547065,
+              "p95": 43.16075328388251
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "synthetic_24000_distinct_near_rays",
+      "input_points": 24000,
+      "source": "synthetic sphere; not a live sensor measurement",
+      "measurements": {
+        "before": {
+          "hit_rays": 14021,
+          "free_rays": 0,
+          "protected_hit_keys": 0,
+          "known_cells": 142294,
+          "request_bytes": 798543,
+          "response_bytes": 1138877,
+          "timings": {
+            "prepare_ms": {
+              "p50": 9.42633394151926,
+              "p95": 12.529356183949856
+            },
+            "fields_ms": {
+              "p50": 2.408363448921591,
+              "p95": 7.229102554265406
+            },
+            "request_ms": {
+              "p50": 196.88784005120397,
+              "p95": 231.3719285011757
+            },
+            "apply_ms": {
+              "p50": 34.56599893979728,
+              "p95": 50.23067637812346
+            },
+            "total_ms": {
+              "p50": 245.81503798253834,
+              "p95": 287.56544614443555
+            },
+            "service_wait_ms": {
+              "p50": 181.18387449067086,
+              "p95": 220.57910084258762
+            }
+          }
+        },
+        "after": {
+          "hit_rays": 24000,
+          "free_rays": 0,
+          "protected_hit_keys": 0,
+          "known_cells": 144279,
+          "request_bytes": 1365743,
+          "response_bytes": 1154757,
+          "timings": {
+            "prepare_ms": {
+              "p50": 16.125722497235984,
+              "p95": 16.68192191864364
+            },
+            "fields_ms": {
+              "p50": 3.811514063272625,
+              "p95": 13.460103137185795
+            },
+            "request_ms": {
+              "p50": 230.20266101229936,
+              "p95": 279.37569677014835
+            },
+            "apply_ms": {
+              "p50": 28.89651997247711,
+              "p95": 42.34114918508566
+            },
+            "total_ms": {
+              "p50": 278.7654779967852,
+              "p95": 333.50699091679417
+            },
+            "service_wait_ms": {
+              "p50": 210.45495854923502,
+              "p95": 260.3726319503039
+            }
+          }
+        }
+      }
+    }
+  ]
+}

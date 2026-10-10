@@ -1,0 +1,24 @@
+{
+  "epoch": "90e7717b4b934bb9aa65da763e7e8564",
+  "samples": 40,
+  "mean_map_display_age_s": 0.28802959751337764,
+  "max_map_display_age_s": 0.6247380636632442,
+  "fusion_mean_range_s": [
+    0.050919958511076405,
+    0.08173928977630567
+  ],
+  "samples_with_people": 29,
+  "samples_with_valid_velocity": 0,
+  "robot_progress": [
+    {
+      "robot_id": "go2_01",
+      "goals_delta": 2,
+      "distance_delta_m": 31.289095203529662
+    },
+    {
+      "robot_id": "uav_01",
+      "goals_delta": 2,
+      "distance_delta_m": 16.545192526036374
+    }
+  ]
+}

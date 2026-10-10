@@ -1,0 +1,21 @@
+{
+  "note": "Offline current-type captured 3895/3524-ray replay against434k savedmap; same revision pairs, steady-state afterwarmup; no live sensor subscription.",
+  "results": {
+    "full": {
+      "bytes": 501312,
+      "total_ms": 19.275828392710537,
+      "await_ms": 12.247339298482984,
+      "decode_ms": 6.985864986199886,
+      "changed": 21,
+      "refresh_keys": 47790
+    },
+    "presence_only": {
+      "bytes": 2415,
+      "total_ms": 0.257845816668123,
+      "await_ms": 0.1909986254759133,
+      "decode_ms": 0.030159682501107454,
+      "changed": 21,
+      "refresh_keys": 0
+    }
+  }
+}

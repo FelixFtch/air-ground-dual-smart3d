@@ -1,0 +1,55 @@
+{
+  "function": "perception.hazards.check_hazard_segment",
+  "source_sha256": "37439798017c68624103c667d99430490fbe5d77affc8eae2d2deb6dd85fe496",
+  "epoch": "1ddaeeef8d1848909e9161e65dbba5ad",
+  "rows": [
+    {
+      "robot": "go2_01",
+      "endpoint": "position_xyz",
+      "point": [
+        -8.537359237670898,
+        -2.8091933727264404,
+        0.330000011920929
+      ],
+      "sim_time": 15037.578687977975,
+      "all_people_blocker": "person-002075",
+      "without_false_person_blocker": null
+    },
+    {
+      "robot": "go2_01",
+      "endpoint": "goal_xyz",
+      "point": [
+        -8,
+        -8,
+        0.33
+      ],
+      "sim_time": 15037.578687977975,
+      "all_people_blocker": null,
+      "without_false_person_blocker": null
+    },
+    {
+      "robot": "uav_01",
+      "endpoint": "position_xyz",
+      "point": [
+        -8.218427658081055,
+        4.247015476226807,
+        2.458019046783447
+      ],
+      "sim_time": 15037.578687977975,
+      "all_people_blocker": null,
+      "without_false_person_blocker": null
+    },
+    {
+      "robot": "uav_01",
+      "endpoint": "goal_xyz",
+      "point": [
+        -8,
+        -3,
+        2.0
+      ],
+      "sim_time": 15037.578687977975,
+      "all_people_blocker": "person-002075",
+      "without_false_person_blocker": null
+    }
+  ]
+}

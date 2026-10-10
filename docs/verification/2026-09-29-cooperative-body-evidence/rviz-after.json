@@ -1,0 +1,1463 @@
+{
+  "wall_time": 1790709775.9064436,
+  "duration_s": 10.160343808005564,
+  "summary": {
+    "trees": {
+      "messages": 20,
+      "action_counts": {
+        "0": 39,
+        "2": 4,
+        "3": 0
+      },
+      "max_gap_s": 0.9525086610810831,
+      "last": [
+        {
+          "ns": "uav_01/tree/main",
+          "id": 0,
+          "action": 2,
+          "points": 0,
+          "alpha": 0.0,
+          "width_m": 0.0,
+          "lifetime_s": 0.0
+        },
+        {
+          "ns": "go2_01/tree/main",
+          "id": 0,
+          "action": 0,
+          "points": 14374,
+          "alpha": 0.3499999940395355,
+          "width_m": 0.025,
+          "lifetime_s": 3.0
+        },
+        {
+          "ns": "uav_01/tree/disconnected",
+          "id": 0,
+          "action": 0,
+          "points": 14858,
+          "alpha": 0.20000000298023224,
+          "width_m": 0.02,
+          "lifetime_s": 3.0
+        }
+      ]
+    },
+    "map": {
+      "messages": 39,
+      "action_counts": {
+        "0": 78,
+        "2": 0,
+        "3": 0
+      },
+      "max_gap_s": 0.532119847019203,
+      "last": [
+        {
+          "ns": "shared/occupied_floor",
+          "id": 0,
+          "action": 0,
+          "points": 6677,
+          "alpha": 0.11999999731779099,
+          "width_m": 0.25,
+          "lifetime_s": 3.0
+        },
+        {
+          "ns": "shared/occupied_obstacles",
+          "id": 0,
+          "action": 0,
+          "points": 359,
+          "alpha": 0.550000011920929,
+          "width_m": 0.25,
+          "lifetime_s": 3.0
+        }
+      ]
+    }
+  },
+  "samples": {
+    "trees": [
+      {
+        "elapsed_s": 0.08862826402764767,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 2,
+            "points": 0,
+            "alpha": 0.0,
+            "width_m": 0.0,
+            "lifetime_s": 0.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15220,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 0.1520975569728762,
+        "markers": [
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15214,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 0.8697506950702518,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14390,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15214,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 1.2282978589646518,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14394,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15198,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 1.8241725320694968,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14408,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15198,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 2.3743352940073237,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14408,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15272,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 2.900625984999351,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14410,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15340,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 3.306458589970134,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14394,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15340,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 3.7781346109695733,
+        "markers": [
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 2,
+            "points": 0,
+            "alpha": 0.0,
+            "width_m": 0.0,
+            "lifetime_s": 0.0
+          },
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14386,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/disconnected",
+            "id": 0,
+            "action": 0,
+            "points": 15208,
+            "alpha": 0.20000000298023224,
+            "width_m": 0.02,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 4.271242263028398,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14384,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/disconnected",
+            "id": 0,
+            "action": 0,
+            "points": 15208,
+            "alpha": 0.20000000298023224,
+            "width_m": 0.02,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 4.79829163197428,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14386,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/disconnected",
+            "id": 0,
+            "action": 0,
+            "points": 15130,
+            "alpha": 0.20000000298023224,
+            "width_m": 0.02,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 5.252420625067316,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14386,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/disconnected",
+            "id": 0,
+            "action": 0,
+            "points": 15130,
+            "alpha": 0.20000000298023224,
+            "width_m": 0.02,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 5.842984467046335,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14386,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/disconnected",
+            "id": 0,
+            "action": 0,
+            "points": 15130,
+            "alpha": 0.20000000298023224,
+            "width_m": 0.02,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 6.213393878075294,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14380,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15160,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/disconnected",
+            "id": 0,
+            "action": 0,
+            "points": 26,
+            "alpha": 0.20000000298023224,
+            "width_m": 0.02,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 6.802472981973551,
+        "markers": [
+          {
+            "ns": "uav_01/tree/disconnected",
+            "id": 0,
+            "action": 2,
+            "points": 0,
+            "alpha": 0.0,
+            "width_m": 0.0,
+            "lifetime_s": 0.0
+          },
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14354,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15280,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 7.754981643054634,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14354,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15188,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 8.256603189976886,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14352,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15188,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 8.874962516012602,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14386,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15126,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 9.342294830013998,
+        "markers": [
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14372,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 15126,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 9.74863137898501,
+        "markers": [
+          {
+            "ns": "uav_01/tree/main",
+            "id": 0,
+            "action": 2,
+            "points": 0,
+            "alpha": 0.0,
+            "width_m": 0.0,
+            "lifetime_s": 0.0
+          },
+          {
+            "ns": "go2_01/tree/main",
+            "id": 0,
+            "action": 0,
+            "points": 14374,
+            "alpha": 0.3499999940395355,
+            "width_m": 0.025,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "uav_01/tree/disconnected",
+            "id": 0,
+            "action": 0,
+            "points": 14858,
+            "alpha": 0.20000000298023224,
+            "width_m": 0.02,
+            "lifetime_s": 3.0
+          }
+        ]
+      }
+    ],
+    "map": [
+      {
+        "elapsed_s": 0.10739978600759059,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7836,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 579,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 0.26584761403501034,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7775,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 570,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 0.43495386105496436,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7861,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 514,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 0.8801177460700274,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7839,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 519,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 1.0631498000584543,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7838,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 544,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 1.3018094450235367,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7757,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 536,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 1.8339292920427397,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7817,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 485,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 2.0333607610082254,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7669,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 463,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 2.384043692960404,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7672,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 472,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 2.497678073006682,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7710,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 521,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 2.919591690064408,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7724,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 514,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 3.034652144066058,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7633,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 508,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 3.327943400014192,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7599,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 510,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 3.5150774780195206,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7657,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 497,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 3.8012170690344647,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7619,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 527,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 3.9951371969655156,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7595,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 550,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 4.2872888300335035,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7614,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 551,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 4.48736503906548,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7537,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 556,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 4.664072072017007,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7543,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 504,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 4.922228072071448,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7483,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 536,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 5.365677552064881,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7336,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 455,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 5.607042995980009,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7336,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 455,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 5.9184488740284,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7433,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 431,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 6.103191845002584,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7346,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 487,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 6.337029205984436,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7317,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 487,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 6.492493566009216,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7266,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 496,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 6.747233286965638,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7339,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 496,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 7.010752027039416,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7103,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 486,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 7.309826269047335,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7224,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 422,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 7.4768230189802125,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7235,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 422,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 7.817071135970764,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7256,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 408,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 8.07072431105189,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7290,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 352,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 8.454609686974436,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7153,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 385,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 8.697130133979954,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 7066,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 407,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 9.061180953984149,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 6907,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 424,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 9.352998740039766,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 6824,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 367,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 9.544901248067617,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 6918,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 375,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 9.97838026098907,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 6756,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 392,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      },
+      {
+        "elapsed_s": 10.16015430598054,
+        "markers": [
+          {
+            "ns": "shared/occupied_floor",
+            "id": 0,
+            "action": 0,
+            "points": 6677,
+            "alpha": 0.11999999731779099,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          },
+          {
+            "ns": "shared/occupied_obstacles",
+            "id": 0,
+            "action": 0,
+            "points": 359,
+            "alpha": 0.550000011920929,
+            "width_m": 0.25,
+            "lifetime_s": 3.0
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "frame_seq": 357382,
+  "raw_exact_sam3_mask_available": false,
+  "robot_pose_is_stationary_offline_snapshot": true,
+  "obb_padding_m": 0.08,
+  "rows": [
+    {
+      "mask_kind": "jpeg_tint_approximation",
+      "whole_valid_mask": {
+        "valid_n": 491,
+        "robot_n": 317,
+        "robot_fraction": 0.6456211812627292,
+        "remaining_n": 174,
+        "remaining_z_10_90_m": [
+          -0.019082994461059766,
+          -0.019054145812988477
+        ],
+        "remaining_z_span_10_90_m": 2.8848648071289062e-05,
+        "remaining_z_minmax_m": [
+          -0.01908370971679707,
+          -0.01904556274414082
+        ]
+      },
+      "eroded_core": {
+        "valid_n": 397,
+        "robot_n": 275,
+        "robot_fraction": 0.6926952141057935,
+        "remaining_n": 122,
+        "remaining_z_10_90_m": [
+          -0.019073934555053906,
+          -0.019054145812988477
+        ],
+        "remaining_z_span_10_90_m": 1.9788742065429688e-05,
+        "remaining_z_minmax_m": [
+          -0.01908370971679707,
+          -0.01904556274414082
+        ]
+      },
+      "original_depth_mad_m": {
+        "center": 6.7006354331970215,
+        "mad": 0.3377199172973633,
+        "tolerance": 0.55
+      },
+      "original_depth_mad_cluster": {
+        "valid_n": 300,
+        "robot_n": 275,
+        "robot_fraction": 0.9166666666666666,
+        "remaining_n": 25,
+        "remaining_z_10_90_m": [
+          -0.01905939102172871,
+          -0.019054384231567578
+        ],
+        "remaining_z_span_10_90_m": 5.0067901611328125e-06,
+        "remaining_z_minmax_m": [
+          -0.01905939102172871,
+          -0.019054384231567578
+        ]
+      },
+      "after_robot_filter_recomputed_mad": {
+        "valid_n": 97,
+        "robot_n": 0,
+        "robot_fraction": 0.0,
+        "remaining_n": 97,
+        "remaining_z_10_90_m": [
+          -0.01906392097473164,
+          -0.01904556274414082
+        ],
+        "remaining_z_span_10_90_m": 1.8358230590820312e-05,
+        "remaining_z_minmax_m": [
+          -0.01906845092773457,
+          -0.01904556274414082
+        ]
+      }
+    },
+    {
+      "mask_kind": "bbox_superset",
+      "whole_valid_mask": {
+        "valid_n": 493,
+        "robot_n": 319,
+        "robot_fraction": 0.6470588235294118,
+        "remaining_n": 174,
+        "remaining_z_10_90_m": [
+          -0.019082994461059766,
+          -0.019054145812988477
+        ],
+        "remaining_z_span_10_90_m": 2.8848648071289062e-05,
+        "remaining_z_minmax_m": [
+          -0.01908370971679707,
+          -0.01904556274414082
+        ]
+      },
+      "eroded_core": {
+        "valid_n": 405,
+        "robot_n": 283,
+        "robot_fraction": 0.6987654320987654,
+        "remaining_n": 122,
+        "remaining_z_10_90_m": [
+          -0.019073934555053906,
+          -0.019054145812988477
+        ],
+        "remaining_z_span_10_90_m": 1.9788742065429688e-05,
+        "remaining_z_minmax_m": [
+          -0.01908370971679707,
+          -0.01904556274414082
+        ]
+      },
+      "original_depth_mad_m": {
+        "center": 6.688833713531494,
+        "mad": 0.34332275390625,
+        "tolerance": 0.55
+      },
+      "original_depth_mad_cluster": {
+        "valid_n": 308,
+        "robot_n": 283,
+        "robot_fraction": 0.9188311688311688,
+        "remaining_n": 25,
+        "remaining_z_10_90_m": [
+          -0.01905939102172871,
+          -0.019054384231567578
+        ],
+        "remaining_z_span_10_90_m": 5.0067901611328125e-06,
+        "remaining_z_minmax_m": [
+          -0.01905939102172871,
+          -0.019054384231567578
+        ]
+      },
+      "after_robot_filter_recomputed_mad": {
+        "valid_n": 97,
+        "robot_n": 0,
+        "robot_fraction": 0.0,
+        "remaining_n": 97,
+        "remaining_z_10_90_m": [
+          -0.01906392097473164,
+          -0.01904556274414082
+        ],
+        "remaining_z_span_10_90_m": 1.8358230590820312e-05,
+        "remaining_z_minmax_m": [
+          -0.01906845092773457,
+          -0.01904556274414082
+        ]
+      }
+    }
+  ]
+}

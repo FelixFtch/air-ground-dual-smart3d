@@ -1,0 +1,3 @@
+{"protocol":"air_ground_smart3d.v1","op":"init","robot_id":"go2_01","session_id":"go2-example","dimension":2,"goal_revision":0,"start":[-2,0],"goal":[2,0],"ranges":[[-10,10],[-10,10]],"profile":{"profile_id":"go2-v1","body_half_extents_m":[0.43,0.43,0.28],"body_offset_m":[0,0,0],"planar_z":0.349},"map_snapshot":{"scene_id":"protocol_fixture","scene_epoch":"example1","content_version":"fixture-v1","frame_id":"map","resolution":0.25,"revision":0,"capture_sim_time_watermark":0,"cells":[]},"include_tree":false}
+{"op":"plan","robot_id":"go2_01","session_id":"go2-example","goal_revision":0,"current":[-2,0],"include_tree":false}
+{"op":"set_goal","robot_id":"go2_01","session_id":"go2-example","goal_revision":1,"current":[-2,0],"include_tree":false,"goal":[2,2]}

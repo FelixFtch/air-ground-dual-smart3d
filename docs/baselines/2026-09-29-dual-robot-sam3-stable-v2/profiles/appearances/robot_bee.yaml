@@ -1,0 +1,8 @@
+schema: air_ground.appearance/v1
+id: robot_bee
+asset: /Game/Robot_Bee/meshes/SK_Robot_Bee
+asset_type: skeletal_mesh
+visual_scale: 0.45
+center_from_mesh_bounds: true
+preferred_mobility: xyz_yaw
+runtime_status: preview_verified_not_actor_registered

@@ -1,0 +1,30 @@
+{
+  "scope": "External dependencies remain installed locally and are not included in these archives",
+  "environments": {
+    "robotics": {
+      "executable": "/data/robotics/ue58_ohz_test_go2/.venv/bin/python",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "packages": {
+        "carla": "0.10.0",
+        "numpy": "1.26.4",
+        "torch": "2.14.0+cu126",
+        "opencv-python": "4.11.0.86",
+        "PyYAML": "6.0.3"
+      }
+    },
+    "sam3": {
+      "executable": "/data/robotics/sam3_video_people/.venv/bin/python",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "packages": {
+        "numpy": "1.26.4",
+        "torch": "2.14.0+cu126",
+        "transformers": "5.17.0",
+        "PyYAML": "6.0.3"
+      }
+    }
+  },
+  "engine": "/data/sim/CARLA_UE58_Research/UnrealEngine5_carla58",
+  "ros": "/opt/ros/humble",
+  "sam3_model": "facebook/sam3",
+  "sam3_revision": "3c879f39826c281e95690f02c7821c4de09afae7"
+}

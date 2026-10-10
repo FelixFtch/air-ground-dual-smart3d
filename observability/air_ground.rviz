@@ -1,0 +1,190 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Background Color: 22; 27; 34
+    Fixed Frame: map
+    Frame Rate: 20
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: World reference grid
+      Enabled: true
+      Cell Size: 1
+      Plane Cell Count: 80
+      Alpha: 0.25
+      Color: 150; 150; 150
+      Reference Frame: <Fixed Frame>
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Robots and measured poses
+      Enabled: true
+      Topic:
+        Value: /air_ground/robot_markers
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Actual SMART tree edges
+      Enabled: true
+      Topic:
+        Value: /air_ground/tree_markers
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Actual planned paths
+      Enabled: true
+      Topic:
+        Value: /air_ground/path_markers
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Shared physical occupied voxels
+      Enabled: true
+      Topic:
+        Value: /air_ground/shared_map_markers
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+    - Class: rviz_default_plugins/Map
+      Name: Go2 ground projection from shared map
+      Enabled: true
+      Alpha: 0.5
+      Color Scheme: map
+      Draw Behind: true
+      Use Timestamp: false
+      Topic:
+        Value: /air_ground/ground_projection
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+    - Class: rviz_default_plugins/TF
+      Name: Instance transforms
+      Enabled: false
+      Frame Timeout: 5
+      Show Axes: true
+      Show Names: true
+      Show Arrows: false
+      Marker Scale: 0.6
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Go2 live measured LiDAR
+      Enabled: true
+      Topic:
+        Value: /air_ground/go2_01/lidar/points
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+      Style: Points
+      Size (Pixels): 3
+      Size (m): 0.035
+      Alpha: 0.95
+      Color Transformer: FlatColor
+      Color: 31; 199; 255
+      Position Transformer: XYZ
+      Decay Time: 0
+      Use Fixed Frame: true
+    - Class: rviz_default_plugins/PointCloud2
+      Name: UAV live measured LiDAR
+      Enabled: true
+      Topic:
+        Value: /air_ground/uav_01/lidar/points
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+      Style: Points
+      Size (Pixels): 3
+      Size (m): 0.035
+      Alpha: 0.95
+      Color Transformer: FlatColor
+      Color: 255; 158; 31
+      Position Transformer: XYZ
+      Decay Time: 0
+      Use Fixed Frame: true
+    - Class: rviz_default_plugins/Image
+      Name: Go2 RGB measured image
+      Enabled: true
+      Topic:
+        Value: /air_ground/go2_01/rgb/image
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+      Transport Hint: raw
+      Normalize Range: true
+      Median window: 5
+    - Class: rviz_default_plugins/Image
+      Name: UAV RGB measured image
+      Enabled: true
+      Topic:
+        Value: /air_ground/uav_01/rgb/image
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+      Transport Hint: raw
+      Normalize Range: true
+      Median window: 5
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Shared people and applied OHZ
+      Enabled: true
+      Topic:
+        Value: /air_ground/people_markers
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+    - Class: rviz_default_plugins/Image
+      Name: Go2 people masks and shared IDs (SAM3 or YOLO26)
+      Enabled: true
+      Topic:
+        Value: /air_ground/go2_01/people/image
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+      Transport Hint: raw
+      Normalize Range: true
+    - Class: rviz_default_plugins/Image
+      Name: UAV people masks and shared IDs (SAM3 or YOLO26)
+      Enabled: true
+      Topic:
+        Value: /air_ground/uav_01/people/image
+        Depth: 1
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+      Transport Hint: raw
+      Normalize Range: true
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Name: Shared air-ground world
+      Target Frame: map
+      Distance: 40
+      Pitch: 0.785398
+      Yaw: 0.8
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 2
+Window Geometry:
+  Width: 1500
+  Height: 950
+  X: 80
+  Y: 60
