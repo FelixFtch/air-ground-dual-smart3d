@@ -26,8 +26,8 @@ Everything first-party is in this repository: code, Rust planner, C++ map servic
 |---|---|---|
 | Author/edit UE scenes | Yes — your own CARLA UE 5.8 project + `ue/Content` import (see [`ue/README.md`](ue/README.md)); hand the `.umap` back | Yes, plus run it with robots |
 | Read/modify OHZ and planning code | Yes (editing only) | Yes, plus `cargo build` / `cmake` / pytest |
-| Run `./lab start --rviz` (full dual-robot stack) | No — needs systemd user units, ROS 2 Humble, and the Linux CARLA/UE install | Yes, after [`docs/SETUP_LINUX.md`](docs/SETUP_LINUX.md) |
-| See robots running | Via the Linux host (SSH / remote desktop / a machine set up with the guide) | Yes — RViz on ROS domain 45 |
+| Run `./lab start --rviz` (full dual-robot stack) | Not natively — but see [`docs/WINDOWS_TEAMMATE.md`](docs/WINDOWS_TEAMMATE.md): remote into a Linux host, or the proven hybrid (CARLA on Windows + Python stack in WSL2) | Yes, after [`docs/SETUP_LINUX.md`](docs/SETUP_LINUX.md) |
+| See robots running | Via a Linux host — remote desktop, SSH, or the hybrid setup above | Yes — RViz on ROS domain 45 |
 
 After cloning, build the two native components once on the Linux machine:
 
