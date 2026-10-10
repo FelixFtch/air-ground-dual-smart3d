@@ -1,6 +1,8 @@
-# Go2 + Fighter Drone / shared-map SMART3D
+# Go2 + Bee / shared-map SMART3D
 
-Dual-robot empty scene: Go2 runs a 2D tree, the Fighter Drone runs a 3D tree, both share one OctoMap. People perception is YOLO26 + MapTracker; SAM3 can still be swapped in with `./lab people sam3`. Bee applies an extra 0.35 m 3D inflation to clustered obstacles only — isolated single voxels are not inflated.
+Dual-robot empty scene: Go2 (a robot dog) runs a 2D tree, the Bee (a drone) runs a 3D tree, both share one OctoMap. People perception is YOLO26 + MapTracker; SAM3 can still be swapped in with `./lab people sam3`. The Bee applies an extra 0.35 m 3D inflation to clustered obstacles only — isolated single voxels are not inflated.
+
+> **Terminology.** The two robots are Go2 (ground robot dog) and Bee (the drone) throughout these docs. Some legacy identifiers still carry historical names — the team profile `go2_fighter.yaml`, the robot profile `fighter_uav.yaml`, and the UE actor class `robot.uav.fighter_drone` — they all refer to the same Bee.
 
 ## Quick start for teammates
 
@@ -51,14 +53,14 @@ cd /data/robotics/air_ground_smart3d
 
 UE runs off-screen by default and RViz shows on the desktop. To get a UE game window, stop this experiment first and use `./lab start --rviz --visible`. No new web console is started. Only the `air-ground-lab-*` services are managed; other projects and applications are never touched.
 
-The launcher brings up, in order: a standalone CARLA on port 2400 → both robots and sensors → one shared OcTree → per-robot SMART/controller → registered RGB-D sampling → one SAM3 model with two independent video sessions (or YOLO26) → ROS domain 45 / RViz. In the ROS graph the cyan tree is Go2's 2D tree and the orange one is the UAV's true 3D tree; gray edges are branches actually disconnected. Tree edges and paths come straight from the Rust parent-child relations — no edges are invented. The translucent body boxes in RViz are labeled collision envelopes; the actual Go2/Fighter looks live in UE.
+The launcher brings up, in order: a standalone CARLA on port 2400 → both robots and sensors → one shared OcTree → per-robot SMART/controller → registered RGB-D sampling → one SAM3 model with two independent video sessions (or YOLO26) → ROS domain 45 / RViz. In the ROS graph the cyan tree is Go2's 2D tree and the orange one is the UAV's true 3D tree; gray edges are branches actually disconnected. Tree edges and paths come straight from the Rust parent-child relations — no edges are invented. The translucent body boxes in RViz are labeled collision envelopes; the actual Go2/Bee looks live in UE.
 
 ## Layout
 
 | Directory | Purpose |
 |---|---|
 | `profiles/robots` | Motion dimension, body clearance, speeds, execution limits |
-| `profiles/appearances` | Go2, Fighter, Bee, Cute3, small Slime, AirSim fallback looks |
+| `profiles/appearances` | Go2 and the Bee mesh (`robot_bee`), plus `fighter_drone` / `cute_robot_3` / slime / AirSim fallback looks |
 | `profiles/sensors` | Extrinsics, calibration, pairing and fusion sampling parameters |
 | `profiles/scenes`, `profiles/teams` | Scene identity, ports, map bounds, instances and per-robot patrol points |
 | `sim_io` | Pose-at-capture bridge, real sensors, shared fusion, per-robot task lifecycle |

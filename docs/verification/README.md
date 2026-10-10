@@ -6,7 +6,7 @@ Date: 2026-09-29. These captures are verification evidence, not map or planner i
 
 - `air_ground_overview.png`: 960 × 720, frame 21524, existing `OHZTest_Daylight` exposure preset, observer ray tracing disabled.
 - `air_ground_overview_rt.png`: same view/settings with ray tracing enabled, frame 22933. This confirms the preset alone fixes washed-out RGB output.
-- Corresponding `.json` files include image capture simulation time, camera pose, and same-frame world snapshots of Go2, Fighter and all six people. Actor truth is recorded only in these verification files.
+- Corresponding `.json` files include image capture simulation time, camera pose, and same-frame world snapshots of Go2, the Bee and all six people. Actor truth is recorded only in these verification files.
 - The three saved collision objects are the red low wall, blue overhead beam and yellow box; flat colored squares belong to the base scene. Images are direct simulator captures, with no compositing or annotation.
 
 The standard RGB blueprint in this local UE5.8 CARLA build exposes `post_process_profile`, not individual ISO/shutter/exposure-mode attributes. The existing profile `Content/Carla/Config/PostProcess/OHZTest_Daylight.json` differs from `Default.json` only in exposure bounds and bias: override minimum/maximum enabled, range 10–12 instead of −10–20, bias 0 instead of 1.2. The default preset produced an almost completely white frame. Both ray-tracing settings produced a clear image using the daylight preset. Formal RGB sensors can therefore keep their existing ray-tracing choice and use `enable_postprocess_effects=true`, `post_process_profile=OHZTest_Daylight`; depth sensors remain unchanged.

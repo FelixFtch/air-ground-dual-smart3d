@@ -1,6 +1,6 @@
 # Go2 + UAV: Shared 3D Map and Multi-Robot SMART3D Implementation Plan
 
-Updated: 2026-09-29. Status: **Group 1 (Go2 + Fighter Drone + 6 pedestrians) is running verification in a standalone empty scene; 2D/true-3D SMART and the shared OctoMap are in place. Later phases are still accepted item by item as described below — Group 1's success must not be treated as completion of the whole plan.**
+Updated: 2026-09-29. Status: **Group 1 (Go2 + Bee + 6 pedestrians) is running verification in a standalone empty scene; 2D/true-3D SMART and the shared OctoMap are in place. Later phases are still accepted item by item as described below — Group 1's success must not be treated as completion of the whole plan.**
 
 The new project root is `/data/robotics/air_ground_smart3d/`; the simulation project is kept separately at `/data/sim/AirGroundLab_UE58/CarlaUnreal/`. Source code, profiles, launchers, and run verification already exist; Town10, Factory, and the original single-Go2 empty scene are preserved. Only the compiled engine and the read-only CARLA Python environment are shared.
 
@@ -8,9 +8,9 @@ The new project root is `/data/robotics/air_ground_smart3d/`; the simulation pro
 
 | Item | Current state and explicit boundaries |
 |---|---|
-| Appearance choice | Go2 + Fighter Drone is the primary choice; Robot Bee, Cute Robot 3, and Slime Creator moved into the appearance catalog. Slime target height 35 cm. AirSim QuadRotor1 kept as a model candidate; the AirSim planner is not installed |
+| Appearance choice | Go2 + the fighter_drone mesh is the primary choice; robot_bee (the Bee), Cute Robot 3, and Slime Creator moved into the appearance catalog. Slime target height 35 cm. AirSim QuadRotor1 kept as a model candidate; the AirSim planner is not installed |
 | Identity isolation | robot_id, role, TF, sensors, planning processes, and logs are independent; appearance and mobility are separated. In Group 1, go2_01 is XY/yaw, uav_01 is XYZ/yaw |
-| UE carrier | Fighter genuinely has XYZ motion, full-body sweep, velocity/acceleration/bounds checks, and actual pose feedback; 11 independent run tests passed. Kinematic flight — this does not represent PX4 physical flight control |
+| UE carrier | The Bee (UAV actor) genuinely has XYZ motion, full-body sweep, velocity/acceleration/bounds checks, and actual pose feedback; 11 independent run tests passed. Kinematic flight — this does not represent PX4 physical flight control |
 | Native SMART | Fixed-origin LINKS Lab Rust RRT*/SMART. Go2 is SMART<f32,2>, the UAV is SMART<f32,3>; the map-increment, 3D clearing-recovery, and retarget-reroot adaptations are recorded in planning/CORE_PROVENANCE.json and the README. Not a completely unmodified upstream |
 | Shared map | Real C++ OcTree probabilistic occupancy; per-robot capture sensor poses, multi-source rays, occupied/free/unknown, incremental revision, .ot snapshots; transient peer-position constraints kept separate from the long-term map |
 | Sensor calibration | Real floor worldZ=.20124996, map origin Z=.22; Go2 mapZ=.33 keeps worldZ=.55. Depth uses pixel-center u+.5/v+.5 and forward-X depth; ground mislabeling is not worked around by ignoring z=0 obstacles |

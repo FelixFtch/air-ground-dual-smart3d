@@ -44,7 +44,7 @@ The fast hit/miss flipping here targets the current zero-noise simulation and is
 
 ## 3. Robot motion and patrol routes
 
-| Parameter | Go2 | Fighter UAV |
+| Parameter | Go2 | Bee UAV |
 |---|---|---|
 | Identity | `go2_01` / `go2_ground_v1` | `uav_01` / `fighter_uav_v1` |
 | Motion/planning dimensions | XY + yaw; 2D SMART | XYZ + yaw; truly 3D SMART |
