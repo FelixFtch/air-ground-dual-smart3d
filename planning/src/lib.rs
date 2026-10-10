@@ -439,6 +439,14 @@ impl<const N: usize> Session<N> {
             self.core
                 .set_static_validity_checker(Box::new(full.clone()));
         }
+        // People and dynamic hazards are pruned node-wise above, but a moved
+        // hazard box can invalidate surviving tree edges whose endpoints both
+        // stay outside it. Break those edges now. Newly created edges are
+        // already validated against the full checker, so this pass only has
+        // to run when hazard geometry actually changed.
+        if people_changed || dynamic_changed {
+            self.core.cleanup_edges_against_checker(&full);
+        }
         let mut regions: Vec<_> = changes
             .cleared
             .iter()
