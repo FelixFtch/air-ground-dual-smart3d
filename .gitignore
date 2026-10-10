@@ -16,3 +16,5 @@
 secrets/
 *.uasset
 *.umap
+!ue/**/*.uasset
+!ue/**/*.umap

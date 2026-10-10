@@ -1,0 +1,6 @@
+<?xml version="1.0" standalone="yes"?>
+<OpenDRIVE>
+    <header revMajor="1" revMinor="4" name="OHZTest_Main" version="1.00" date="2026-08-30T00:00:00" north="0.0" south="0.0" east="0.0" west="0.0" vendor="CARLA">
+        <geoReference><![CDATA[+proj=tmerc +lat_0=0 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +geoidgrids=egm96_15.gtx +vunits=m +no_defs ]]></geoReference>
+    </header>
+</OpenDRIVE>

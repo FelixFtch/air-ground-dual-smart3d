@@ -4,7 +4,7 @@
 
 | 谁来用 | 看哪里 |
 |---|---|
-| 做新的 UE 场景 | `profiles/scenes`、`profiles/teams`、`profiles/robots`、`profiles/sensors`。UE 工程不在这个仓库里，在本机 `/data/sim/AirGroundLab_UE58` |
+| 做新的 UE 场景 | [`ue/README.md`](ue/README.md) 里的关卡和工程配置，以及 `profiles/scenes`、`profiles/teams`、`profiles/robots`、`profiles/sensors`。CARLA 城镇本体仍在本机 `/data/sim/AirGroundLab_UE58` |
 | 改人员 OHZ | [`ohz/README.md`](ohz/README.md)。现行椭圆在 `perception/hazards.py`，剪树在 `planning/` |
 | 规划、RRT*、LRZ | `planning/`，不要拆开 |
 
