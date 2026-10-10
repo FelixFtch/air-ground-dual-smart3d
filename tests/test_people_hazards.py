@@ -5,9 +5,11 @@ import unittest
 from perception.hazards import build_hazards, check_hazard_segment, hazard_segment_intersects
 
 
-def profile(n=3):
-    return dict(profile_id="test", dimension=n, body_half_extents_m=[.12,.12,.12],
-                body_offset_m=[0.,0.,0.], planar_z=.349)
+def profile(n=3, people_hazard=None):
+    p=dict(profile_id="test", dimension=n, body_half_extents_m=[.12,.12,.12],
+           body_offset_m=[0.,0.,0.], planar_z=.349)
+    if people_hazard is not None: p["people_hazard"]=people_hazard
+    return p
 
 
 def document(velocity=(1.,0.,0.)):
@@ -36,7 +38,7 @@ class PeopleHazards(unittest.TestCase):
 
     def test_speed_orientation_strict_ellipse_and_no_vertical_prediction(self):
         for n in (2,3):
-            h=build_hazards(document((.6,.8,0.)),profile(n),1.,"epoch1","test")[0]
+            h=build_hazards(document((.6,.8,0.)),profile(n,{"shape_kind":"ellipse"}),1.,"epoch1","test")[0]
             self.assertEqual(h["axes_xyz"][0],[.6,.8,0.])
             self.assertGreater(h["semi_axes_m"][0],h["semi_axes_m"][1])
             self.assertFalse(h["velocity_z_valid"])
@@ -44,7 +46,7 @@ class PeopleHazards(unittest.TestCase):
             self.assertTrue(h["prior"]["human_height_prior_applied"])
             self.assertEqual(h["measurement"]["half_extents_xyz"],[.2,.15,.4])
         d=document();d["people"][0]["velocity_xy_valid"]=False
-        h=build_hazards(d,profile(),1.,"epoch1","test")[0]
+        h=build_hazards(d,profile(3,{"shape_kind":"ellipse"}),1.,"epoch1","test")[0]
         self.assertEqual(h["center_xyz"],[0.,0.,1.])
         self.assertEqual(h["semi_axes_m"][0],h["semi_axes_m"][1])
         self.assertEqual(h["velocity_xyz"],[0.,0.,0.])
@@ -95,3 +97,46 @@ class PeopleHazards(unittest.TestCase):
 
 
 if __name__ == '__main__': unittest.main()
+
+
+class PeopleHazardsBox(unittest.TestCase):
+    def test_static_box_is_measured_extent_plus_unified_inflation(self):
+        d=document();d["people"][0]["velocity_xy_valid"]=False
+        for n in (2,3):
+            h=build_hazards(d,profile(n),1.,"epoch1","test")[0]
+            self.assertEqual(h["shape"],"box")
+            self.assertEqual(h["axes_xyz"][:2],[[1.,0.,0.],[0.,1.,0.]])
+            self.assertEqual(h["semi_axes_m"][:2],[.2+.35,.15+.35])
+            if n==2:
+                self.assertEqual(h["center_xyz"][2],.349); self.assertEqual(h["semi_axes_m"][2],0.)
+            else:
+                self.assertEqual(h["semi_axes_m"][2],.4+.35+.85)
+
+    def test_moving_box_stretches_forward_proportionally_to_speed(self):
+        for speed in (.5,1.,2.):
+            v=(speed,0.,0.)
+            h=build_hazards(document(v),profile(3),1.,"epoch1","test")[0]
+            self.assertEqual(h["shape"],"box")
+            self.assertEqual(h["axes_xyz"][0],[1.,0.,0.])
+            self.assertAlmostEqual(h["semi_axes_m"][0],.2+speed*.5+.35)
+            self.assertEqual(h["semi_axes_m"][1],.15+.35)
+            self.assertAlmostEqual(h["center_xyz"][0],speed*.5)
+            self.assertEqual(h["prior"]["inflation_m"],.35)
+
+    def test_box_segment_intersections_are_exact(self):
+        h=build_hazards(document((1.,0.,0.)),profile(3),1.,"epoch1","test")[0]
+        # half_u=.2+.5+.35=1.05 from center (.5,0,1); crossing hits, misses outside.
+        self.assertTrue(hazard_segment_intersects([0.,1.,1.],[0.,-1.,1.],h))
+        self.assertTrue(hazard_segment_intersects([-2.,0.,1.],[2.,0.,1.],h))
+        self.assertFalse(hazard_segment_intersects([2.,0.,3.],[2.,0.,2.6],h))
+        self.assertFalse(hazard_segment_intersects([1.56,0.,1.],[5.,0.,1.],h))
+
+    def test_ellipse_rollback_and_diagonal_box(self):
+        p=profile(3,{"shape_kind":"ellipse"})
+        h=build_hazards(document((1.,0.,0.)),p,1.,"epoch1","test")[0]
+        self.assertEqual(h["shape"],"ellipsoid")
+        self.assertIn("swept_ellipsoid",h["geometry_policy"])
+        h=build_hazards(document((.6,.8,0.)),profile(3),1.,"epoch1","test")[0]
+        self.assertEqual(h["axes_xyz"][0],[.6,.8,0.])
+        self.assertAlmostEqual(h["semi_axes_m"][0],.2*.6+.15*.8+.5+.35)
+        self.assertAlmostEqual(h["semi_axes_m"][1],.2*.8+.15*.6+.35)

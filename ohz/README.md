@@ -1,6 +1,8 @@
 # Changing the person hazard shape (OHZ)
 
-Today the OHZ (the keep-out area the planner avoids around a person) is an ellipse. This guide is for the person replacing that ellipse with the new shape. It shows you where the shape is made, where it is consumed, and what to change.
+The OHZ (the keep-out area the planner avoids around a person) is now a **velocity box**: the person's measured 3D box, inflated by the same margin the planner uses for clustered voxels (0.35 m by default, `cluster_inflation_m`), and stretched forward along the walking direction by half the predicted travel on each side of the shift. A standing person gets just the inflated box. This replaced the ellipse/ellipsoid on 2026-10-10.
+
+The legacy ellipse is still in the code as a rollback: set `people_hazard: {shape_kind: ellipse}` in a robot profile under `profiles/robots/`.
 
 One warning first. This pipeline runs live today. Do not touch the RRT* (the tree-growing path planner) or LRZ code in `planning/` unless the shape interface itself is too limiting.
 
@@ -33,16 +35,18 @@ Step by step:
 
 The robot's `dimension` field already splits 2D from 3D. Go2 reads the ground ellipse. Bee reads the ellipsoid.
 
-## The replacement shape (agreed spec)
+## The shape, as implemented
 
-**Person standing still.** No elongation. The zone is the person's radius plus this robot's radius. Go2 gets a disc on the ground. Bee gets a vertical cylinder of the same radius, with height.
+**Person standing still** (no reliable speed yet): the measured 3D box plus the unified inflation margin on every side. No elongation.
 
-**Person walking.** Pull a rectangle on the ground from the feet, along the walking direction. Width equals the person's diameter plus the robot's diameter. Length follows speed and grows forward from the feet. The whole rectangle prunes the tree. When the person stops, the rectangle disappears and only the disc or cylinder remains.
+**Person walking** (speed estimated): the same box, rotated so its long axis points along the walking direction, and stretched forward. The forward stretch grows linearly with speed: `speed x horizon_s`, applied as half the travel added on each side of the shifted center. Default horizon is 1 s, so a person at 1.4 m/s stretches the box 1.4 m ahead. When the person stops, the stretch collapses back to the standing box.
 
-## What to change
+Go2 (2D) reads the box's ground footprint at its plane; the Bee (3D) reads the full box. Z keeps the human-height prior (0.85 m per side) because depth only sees the near surface of a person.
 
-The rectangle is not wired in yet. `people.rs` currently rejects everything except the ellipse family. Rules for the change:
+Rules that stay in force:
 
-1. Add the new shape as a second output kind in `perception/hazards.py`. Keep the ellipse too, for side-by-side comparison.
-2. Teach `planning/src/people.rs` to accept the new kind.
-3. Never write people into the occupancy map.
+1. People are never written into the occupancy map. Tree pruning and reattachment keep using the dynamic clearing path.
+2. The shape is produced in `perception/hazards.py` (`shape: "box"`) and consumed by `planning/src/people.rs`, which now accepts both `box` and the legacy ellipse family.
+3. Rollback to the ellipse: `people_hazard: {shape_kind: ellipse}` in the robot profile.
+
+If you want to try a different shape (for example a ground-only rectangle), add it as a third kind in those two files. Do not quietly bend the box math.

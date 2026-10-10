@@ -61,7 +61,7 @@ def test_both_robots_use_one_current_document_and_reference(tmp_path,monkeypatch
     monkeypatch.setattr(Path,'read_text',read)
     reference,hazards=runtime.person_hazard_snapshot(('go2','uav'))
     assert len(reads)==1 and reference==10.2
-    for rid,shape in [('go2','ellipse'),('uav','ellipsoid')]:
+    for rid,shape in [('go2','box'),('uav','box')]:
         assert len(hazards[rid])==1
         assert hazards[rid][0]['shape']==shape
         assert hazards[rid][0]['position_reference_sim_time']==reference

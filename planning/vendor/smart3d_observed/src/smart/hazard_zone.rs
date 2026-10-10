@@ -29,6 +29,14 @@ pub enum HazardZone<F: Float, const N: usize> {
         semi_minor: f64,
         bound: StaticSphericalObstacle<F, N>,
     },
+    /// Fully specified oriented box (person extent swept along velocity).
+    /// Axes are orthonormal with half extents; slab clipping is exact.
+    OrientedBox {
+        center: [f64; N],
+        axes: [[f64; N]; N],
+        half: [f64; N],
+        bound: StaticSphericalObstacle<F, N>,
+    },
 }
 
 impl<F: Float, const N: usize> HazardZone<F, N> {
@@ -81,15 +89,31 @@ impl<F: Float, const N: usize> HazardZone<F, N> {
         Self::Ellipse { center, axis, semi_major, semi_minor, bound }
     }
 
+    /// Enclosing-sphere bound for an oriented box: the diagonal half extent,
+    /// rounded up like the ellipsoid bound so f32 broadphase never clips it.
+    pub fn oriented_box(center: [f64; N], axes: [[f64; N]; N], half: [f64; N]) -> Self {
+        let bound_center = RealVectorState::new(center.map(|v| F::from(v).unwrap()));
+        let rounding = center.iter().zip(bound_center.values()).map(|(a,b)|
+            (a-b.to_f64().unwrap()).powi(2)).sum::<f64>().sqrt();
+        let diagonal = half.iter().map(|h| h*h).sum::<f64>().sqrt();
+        let desired = diagonal + rounding;
+        let mut radius = F::from(desired).unwrap();
+        if radius.to_f64().unwrap() < desired { radius = radius + radius.abs()*F::epsilon(); }
+        Self::OrientedBox { center, axes, half,
+            bound: StaticSphericalObstacle::new(bound_center, radius) }
+    }
+
     pub fn center(&self) -> &RealVectorState<F, N> {
         match self { Self::Sphere(s) => s.center(),
-            Self::Capsule { bound, .. } | Self::Ellipse { bound, .. } | Self::Ellipsoid { bound, .. } => bound.center() }
+            Self::Capsule { bound, .. } | Self::Ellipse { bound, .. }
+            | Self::Ellipsoid { bound, .. } | Self::OrientedBox { bound, .. } => bound.center() }
     }
 
     /// Radius of the enclosing sphere, never a narrowphase collision predicate.
     pub fn radius(&self) -> F {
         match self { Self::Sphere(s) => s.radius(),
-            Self::Capsule { bound, .. } | Self::Ellipse { bound, .. } | Self::Ellipsoid { bound, .. } => bound.radius() }
+            Self::Capsule { bound, .. } | Self::Ellipse { bound, .. }
+            | Self::Ellipsoid { bound, .. } | Self::OrientedBox { bound, .. } => bound.radius() }
     }
 
     pub fn contains(&self, point: &RealVectorState<F, N>) -> bool {
@@ -102,6 +126,8 @@ impl<F: Float, const N: usize> HazardZone<F, N> {
             Self::Ellipse { center, axis, semi_major, semi_minor, .. } =>
                 ellipse_edge_distance_squared(point, point, center, axis, *semi_major, *semi_minor)
                     <= 1.0 + 1.0e-6,
+            Self::OrientedBox { center, axes, half, .. } =>
+                box_slab_intersects(point, point, center, axes, half),
         }
     }
 
@@ -115,6 +141,8 @@ impl<F: Float, const N: usize> HazardZone<F, N> {
             Self::Ellipse { center, axis, semi_major, semi_minor, .. } =>
                 ellipse_edge_distance_squared(a, b, center, axis, *semi_major, *semi_minor)
                     <= 1.0 + 1.0e-6,
+            Self::OrientedBox { center, axes, half, .. } =>
+                box_slab_intersects(a, b, center, axes, half),
         }
     }
 
@@ -126,9 +154,39 @@ impl<F: Float, const N: usize> HazardZone<F, N> {
         match self {
             Self::Sphere(s) => Self::Sphere(StaticSphericalObstacle::new(*s.center(),
                 (s.center().euclidean_distance(robot) - margin).max(F::zero()))),
-            Self::Capsule { .. } | Self::Ellipse { .. } | Self::Ellipsoid { .. } => self.clone(),
+            Self::Capsule { .. } | Self::Ellipse { .. } | Self::Ellipsoid { .. }
+            | Self::OrientedBox { .. } => self.clone(),
         }
     }
+}
+
+/// Exact closed segment / oriented box test by slab clipping in f64. Parallel
+/// per-axis cases fall back to interval containment; a zero-length segment
+/// degenerates to the point containment check. No sampling or discretization.
+fn box_slab_intersects<F: Float, const N: usize>(
+    a: &RealVectorState<F, N>, b: &RealVectorState<F, N>,
+    center: &[f64; N], axes: &[[f64; N]; N], half: &[f64; N],
+) -> bool {
+    let to_frame = |p: &RealVectorState<F, N>| std::array::from_fn::<_, N, _>(|i|
+        (0..N).map(|k| (p.values()[k].to_f64().unwrap()-center[k])*axes[i][k]).sum::<f64>());
+    let start = to_frame(a);
+    let end = to_frame(b);
+    let tolerance = 1.0e-9;
+    let (mut t0, mut t1) = (0.0_f64, 1.0_f64);
+    for i in 0..N {
+        let reach = half[i] + tolerance;
+        let d = end[i] - start[i];
+        if d.abs() < 1.0e-15 {
+            if start[i].abs() > reach { return false; }
+            continue;
+        }
+        let (mut lo, mut hi) = ((-reach - start[i]) / d, (reach - start[i]) / d);
+        if lo > hi { std::mem::swap(&mut lo, &mut hi); }
+        t0 = t0.max(lo);
+        t1 = t1.min(hi);
+        if t0 > t1 { return false; }
+    }
+    true
 }
 
 /// Exact affine segment-to-unit-ball minimum, matching perception/hazards.py.
@@ -217,6 +275,53 @@ mod tests {
     type State = RealVectorState<f32, 2>;
     fn p(x: f32, y: f32) -> State { State::new([x, y]) }
     fn sweep() -> HazardZone<f32, 2> { HazardZone::capsule(p(0., 0.), p(4., 0.), 1.) }
+
+    #[test]
+    fn oriented_box_contains_face_corners_and_rejects_outside() {
+        let h = HazardZone::oriented_box([0., 0.], [[1., 0.], [0., 1.]], [2., 1.]);
+        for xy in [[1.99, 0.99], [2., 1.], [0., 0.], [-2., -1.], [1., -0.999]] {
+            assert!(h.contains(&State::new(xy)), "{xy:?}");
+        }
+        for xy in [[2.01, 0.], [0., 1.01], [1.5, 1.001], [-2.01, -1.]] {
+            assert!(!h.contains(&State::new(xy)), "{xy:?}");
+        }
+    }
+
+    #[test]
+    fn oriented_box_edges_crossing_tangent_and_degenerate_are_exact() {
+        let h = HazardZone::oriented_box([0., 0.], [[1., 0.], [0., 1.]], [2., 1.]);
+        assert!(h.intersects_edge(&p(-3., 0.), &p(3., 0.)));
+        assert!(h.intersects_edge(&p(0., -5.), &p(0., 5.)));
+        assert!(h.intersects_edge(&p(-3., 1.), &p(3., 1.)));
+        assert!(!h.intersects_edge(&p(-3., 1.001), &p(3., 1.001)));
+        assert!(!h.intersects_edge(&p(3., 1.), &p(5., 1.)));
+        assert!(h.intersects_edge(&p(2., 1.), &p(2., 1.)));
+        assert!(!h.intersects_edge(&p(2.001, 1.), &p(2.001, 1.)));
+    }
+
+    #[test]
+    fn oriented_box_rotates_with_heading_and_bound_never_clips() {
+        let rotate = |q: State| p(10. + 0.6*q.values()[0] - 0.8*q.values()[1],
+            -5. + 0.8*q.values()[0] + 0.6*q.values()[1]);
+        // The rotated box's frame vectors are the columns of the rotation
+        // map (images of the original axes), not its rows.
+        let axes = [[0.6, 0.8], [-0.8, 0.6]];
+        let base = HazardZone::oriented_box([0., 0.], [[1., 0.], [0., 1.]], [2., 1.]);
+        let rotated = HazardZone::oriented_box([10., -5.], axes, [2., 1.]);
+        for (a, b) in [(p(-3., 0.), p(3., 0.)), (p(0., -5.), p(0., 5.)),
+            (p(-3., 1.001), p(3., 1.001)), (p(3., 0.), p(3., 0.))] {
+            assert_eq!(base.intersects_edge(&a, &b),
+                rotated.intersects_edge(&rotate(a), &rotate(b)));
+        }
+        // Interior of the rotated box stays inside; just outside does not.
+        // Exact corners are avoided: f32 rotation rounding exceeds the 1e-9
+        // closed-box tolerance, which only absorbs planner f32 state error.
+        assert!(rotated.contains(&rotate(p(1.9, 0.9))));
+        assert!(!rotated.contains(&rotate(p(1.9, 1.1))));
+        let c = rotated.center().values();
+        assert!((c[0] - 10.).abs() < 1.0e-5 && (c[1] + 5.).abs() < 1.0e-5);
+        assert!(rotated.radius() >= (2.0_f64*2.0 + 1.0).sqrt() as f32 - 1.0e-5);
+    }
 
     #[test]
     fn directed_sweep_contains_current_disk_and_forward_cap_but_not_backward_dilation() {

@@ -2,7 +2,10 @@
 
 Normalized centers are in robot-reference configuration space: body offset is
 subtracted and footprint already included. Do not inflate these shapes again.
-All narrowphase tests minimize affine segment distance to the unit sphere.
+Shape kinds: "box" (default; oriented box of the measured person extent swept
+along velocity) and "ellipse" (legacy affine ellipse/ellipsoid). Box
+narrowphase uses exact slab clipping; ellipse minimizes affine segment
+distance to the unit sphere.
 """
 from __future__ import annotations
 
@@ -11,6 +14,7 @@ from collections.abc import Mapping, Sequence
 
 SCHEMA = "air_ground.people_hazard/v1"
 CONTACT_TOLERANCE = 1e-6  # normalized squared distance; matches native f32 boundary
+BOX_TOLERANCE = 1e-9  # metres; closed-box boundary for f32 planner states
 
 
 def _number(value, name):
@@ -79,6 +83,13 @@ def build_hazards(people_document, robot_profile, sim_time, epoch, scene_id):
     vertical_padding = _number(policy.get("vertical_padding_m", .85), "vertical_padding_m")
     if not 0 <= horizon <= 3 or not 0 <= uncertainty <= 2 or not 0 <= vertical_padding <= 3:
         raise ValueError("people hazard policy out of bounds")
+    shape_kind = policy.get("shape_kind", "box")
+    if shape_kind not in ("box", "ellipse"):
+        raise ValueError("people hazard shape_kind must be box or ellipse")
+    inflation = _number(policy.get("inflation_m",
+        robot_profile.get("cluster_inflation_m", .35)), "inflation_m")
+    if not 0 <= inflation <= 2:
+        raise ValueError("people hazard inflation_m out of bounds")
     planar_z = _number(robot_profile.get("planar_z", 0.), "planar_z")
     seen, out = set(), []
     for record in records:
@@ -121,45 +132,70 @@ def build_hazards(people_document, robot_profile, sim_time, epoch, scene_id):
         measured_center = list(center)
         for i in range(2):
             center[i] += velocity[i] * extrapolation
-        half_z = measured_half[2] + vertical_padding + half[2]
-        if dimension == 2 and abs(planar_z + offset[2] - center[2]) > half_z:
-            continue
         speed = math.hypot(*velocity[:2]) if xy_valid else 0.
         direction = [velocity[0] / speed, velocity[1] / speed, 0.] if speed > 1e-8 else [1., 0., 0.]
         lateral = [-direction[1], direction[0], 0.]
         travel = speed * horizon
-        # Minkowski sum of circumscribed XY disks includes each footprint once.
-        rho = math.hypot(*measured_half[:2]) + math.hypot(*half[:2]) + uncertainty
-        # A cylinder (rho, half_z) fits a sqrt(2)-scaled ellipsoid. Affine
-        # normalization then gives the same conservative swept-ball ellipse:
-        # a=1+h, b=sqrt(1+h); support gap = h*(1-|c|)^2 >= 0.
-        base_xy = rho if dimension == 2 else math.sqrt(2.) * rho
-        base_z = half_z if dimension == 2 else math.sqrt(2.) * half_z
-        normalized_major = 1. + travel / (2. * base_xy)
-        semi_axes = [base_xy * normalized_major, base_xy * math.sqrt(normalized_major), base_z * math.sqrt(normalized_major)]
-        hazard_center = [center[i] + direction[i] * travel * .5 - offset[i] for i in range(3)]
-        if dimension == 2:
-            # Z is display-only for this explicitly planar risk geometry.
-            hazard_center[2] = planar_z
-            semi_axes[2] = 0.
+        if shape_kind == "box":
+            # The person's measured 3D box, uniformly inflated by the same
+            # margin the planner dilates clustered voxels with, then swept
+            # forward along velocity by travel/2 on each side of the shift.
+            half_z = measured_half[2] + inflation + vertical_padding
+            if dimension == 2 and abs(planar_z + offset[2] - center[2]) > half_z:
+                continue
+            if speed > 1e-8:
+                support = sum(measured_half[i] * abs(direction[i]) for i in range(2))
+                side = sum(measured_half[i] * abs(lateral[i]) for i in range(2))
+                axes = [direction, lateral, [0., 0., 1.]]
+            else:
+                support, side = measured_half[0], measured_half[1]
+                axes = [[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]
+            semi_axes = [support + travel * .5 + inflation, side + inflation,
+                         half_z if dimension == 3 else 0.]
+            hazard_center = [center[i] + direction[i] * travel * .5 - offset[i] for i in range(3)]
+            if dimension == 2:
+                # Z is display-only for this explicitly planar risk geometry.
+                hazard_center[2] = planar_z
+            shape_name, policy_tag = "box", "visible_extent_velocity_box/v1"
+        else:
+            axes = [direction, lateral, [0., 0., 1.]]
+            half_z = measured_half[2] + vertical_padding + half[2]
+            if dimension == 2 and abs(planar_z + offset[2] - center[2]) > half_z:
+                continue
+            # Minkowski sum of circumscribed XY disks includes each footprint once.
+            rho = math.hypot(*measured_half[:2]) + math.hypot(*half[:2]) + uncertainty
+            # A cylinder (rho, half_z) fits a sqrt(2)-scaled ellipsoid. Affine
+            # normalization then gives the same conservative swept-ball ellipse:
+            # a=1+h, b=sqrt(1+h); support gap = h*(1-|c|)^2 >= 0.
+            base_xy = rho if dimension == 2 else math.sqrt(2.) * rho
+            base_z = half_z if dimension == 2 else math.sqrt(2.) * half_z
+            normalized_major = 1. + travel / (2. * base_xy)
+            semi_axes = [base_xy * normalized_major, base_xy * math.sqrt(normalized_major), base_z * math.sqrt(normalized_major)]
+            hazard_center = [center[i] + direction[i] * travel * .5 - offset[i] for i in range(3)]
+            if dimension == 2:
+                hazard_center[2] = planar_z
+                semi_axes[2] = 0.
+            shape_name = "ellipse" if dimension == 2 else "ellipsoid"
+            policy_tag = "visible_extent_plus_profile_envelope_swept_ellipsoid/v1"
         out.append({
             "schema": SCHEMA, "id": identifier, "scene_epoch": epoch,
             "scene_id": scene_id, "profile_id": profile_id, "dimension": dimension,
-            "shape": "ellipse" if dimension == 2 else "ellipsoid",
-            "center_xyz": hazard_center, "axes_xyz": [direction, lateral, [0., 0., 1.]],
+            "shape": shape_name,
+            "center_xyz": hazard_center, "axes_xyz": axes,
             "semi_axes_m": semi_axes, "footprint_included": True,
             "capture_sim_time": capture, "position_reference_sim_time": now,
             "valid_until_sim_time": until, "horizon_s": horizon,
             "velocity_xyz": [velocity[0], velocity[1], 0.] if xy_valid else [0., 0., 0.],
             "velocity_xy_valid": xy_valid, "velocity_z_valid": False,
             "source_keys": sorted(set(source_keys)),
-            "geometry_policy": "visible_extent_plus_profile_envelope_swept_ellipsoid/v1",
+            "geometry_policy": policy_tag,
             "measurement": {"center_xyz": measured_center, "half_extents_xyz": measured_half,
                             "position_reference_sim_time": position_time,
                             "extent_kind": quality.get("extent_kind", "visible_surface_quantiles")},
             "prior": {"vertical_padding_each_side_m": vertical_padding,
                       "human_height_prior_applied": vertical_padding > 0,
                       "position_uncertainty_m": uncertainty,
+                      "inflation_m": inflation,
                       "calibration_status": "uncalibrated"},
             "robot_envelope": {"half_extents_xyz": half, "body_offset_m": offset},
         })
@@ -171,7 +207,8 @@ def validate_hazard(hazard):
     if not isinstance(hazard, Mapping) or hazard.get("schema") != SCHEMA:
         raise ValueError("people hazard schema mismatch")
     n = hazard.get("dimension")
-    if n not in (2, 3) or hazard.get("shape") != ("ellipse" if n == 2 else "ellipsoid"):
+    allowed = ("ellipse", "box") if n == 2 else ("ellipsoid", "box")
+    if n not in (2, 3) or hazard.get("shape") not in allowed:
         raise ValueError("hazard dimension/shape mismatch")
     if hazard.get("footprint_included") is not True:
         raise ValueError("hazard must include robot footprint")
@@ -193,9 +230,29 @@ def validate_hazard(hazard):
 
 
 def hazard_segment_intersects(start_xyz, end_xyz, hazard):
-    """Exact closed segment / affine ellipsoid test; no sample spacing."""
+    """Exact closed segment / oriented box or affine ellipsoid test; no sampling."""
     n, center, radii, axes = validate_hazard(hazard)
     a, b = _vector(start_xyz, "start_xyz"), _vector(end_xyz, "end_xyz")
+    if hazard.get("shape") == "box":
+        # Slab clipping in the box frame: exact for closed boxes, and a
+        # zero-length segment degenerates to the containment check.
+        to_frame = lambda p: [sum((p[k] - center[k]) * axes[i][k] for k in range(3)) for i in range(n)]
+        start, end = to_frame(a), to_frame(b)
+        t0, t1 = 0., 1.
+        for i in range(n):
+            reach = radii[i] + BOX_TOLERANCE
+            d = end[i] - start[i]
+            if abs(d) < 1e-15:
+                if abs(start[i]) > reach:
+                    return False
+                continue
+            lo, hi = (-reach - start[i]) / d, (reach - start[i]) / d
+            if lo > hi:
+                lo, hi = hi, lo
+            t0, t1 = max(t0, lo), min(t1, hi)
+            if t0 > t1:
+                return False
+        return True
     transform = lambda p: [sum((p[k] - center[k]) * axes[i][k] for k in range(n)) / radii[i] for i in range(n)]
     start, end = transform(a), transform(b)
     direction = [end[i] - start[i] for i in range(n)]

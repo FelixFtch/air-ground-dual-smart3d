@@ -208,6 +208,7 @@ fn checker(cells: Vec<J>, half: [f32; 3]) -> Checker<3> {
             half,
             offset: [0.; 3],
             planar_z: 0.,
+            cluster_inflation_m: 0.,
         },
         ranges: [(-10., 10.); 3],
         added_only: None,

@@ -49,8 +49,9 @@ pub fn parse<const N: usize>(v: &J, now: f64, identity: &Identity, profile: &Pro
             || h["profile_id"].as_str() != Some(&profile.id) {
             return Err(fail("schema/scene/profile identity mismatch"));
         }
+        let legacy_shape = if N == 2 {"ellipse"} else {"ellipsoid"};
         if h["dimension"].as_usize() != Some(N)
-            || h["shape"].as_str() != Some(if N == 2 {"ellipse"} else {"ellipsoid"})
+            || (h["shape"].as_str() != Some(legacy_shape) && h["shape"].as_str() != Some("box"))
             || h["footprint_included"].as_bool() != Some(true) {
             return Err(fail("dimension/shape/footprint mismatch"));
         }
@@ -101,9 +102,15 @@ pub fn parse<const N: usize>(v: &J, now: f64, identity: &Identity, profile: &Pro
             || (axes[0][1]-velocity[1]/speed).abs()>1e-6) {
             return Err(fail("heading axis disagrees with valid XY velocity"));
         }
-        let geometry = HazardZone::ellipsoid(std::array::from_fn(|i| center[i]),
-            std::array::from_fn(|i| std::array::from_fn(|j| axes[i][j])),
-            std::array::from_fn(|i| semi_axes[i]));
+        let geometry = if h["shape"].as_str() == Some("box") {
+            HazardZone::oriented_box(std::array::from_fn(|i| center[i]),
+                std::array::from_fn(|i| std::array::from_fn(|j| axes[i][j])),
+                std::array::from_fn(|i| semi_axes[i]))
+        } else {
+            HazardZone::ellipsoid(std::array::from_fn(|i| center[i]),
+                std::array::from_fn(|i| std::array::from_fn(|j| axes[i][j])),
+                std::array::from_fn(|i| semi_axes[i]))
+        };
         out.push(PeopleHazard {id, center, axes, semi_axes, until, geometry, wire:h.clone()});
     }
     out.sort_by(|a,b| a.id.cmp(&b.id));
