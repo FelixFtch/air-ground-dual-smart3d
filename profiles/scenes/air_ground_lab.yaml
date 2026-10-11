@@ -28,6 +28,22 @@ flight_bounds:
 - - 0.8
   - 6
 human_count: 6
+# Each pedestrian walks back and forth along one segment, in map XY metres.
+# To reroute them, edit the endpoints; a cube's coordinates in the UE editor
+# Details panel are a good source for values (remember y is negated here).
+pedestrian_routes:
+- - [-12, -6]
+  - [12, -6]
+- - [-12, 2]
+  - [12, 2]
+- - [-12, 6]
+  - [12, 6]
+- - [-6, -12]
+  - [-6, 12]
+- - [5, -12]
+  - [5, 12]
+- - [11, -12]
+  - [11, 12]
 human_speed_mps:
 - 0.5
 - 0.7

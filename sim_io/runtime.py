@@ -142,7 +142,7 @@ class Runtime:
                 state['sensors'].append((kind,sensor,np.array(local.get_matrix(),dtype=float)))
             self.event('robot_spawned',robot_id=rid,actor_id=actor.id,profile=cfg['profile_id'])
         self.tick_callback_id=self.world.on_tick(self.capture_robot_poses)
-        self.people=People(self.world,self.scene['human_count'],self.scene['human_speed_mps'])
+        self.people=People(self.world,self.scene['human_count'],self.scene['human_speed_mps'],self.scene.get('pedestrian_routes'))
         self.event('people_spawned',count=len(self.people.actors),truth_used_for_perception=False)
 
     def capture_robot_poses(self,snapshot):

@@ -47,3 +47,9 @@ The `EngineAssociation` in `CarlaUnreal.uproject` points at the CARLA engine on 
 3. Export or copy the `.umap`, plus any custom materials, back into `Content/AirGroundLab/Maps/` in the Linux machine's UE project at `/data/sim/AirGroundLab_UE58`.
 4. Add or edit a scene profile under `profiles/scenes/` (map name, origin, ground height, bounds, flight band, `human_count`) and a team profile under `profiles/teams/`.
 5. Start it with `./lab start --rviz --team <team>`.
+
+## The two everyday edits
+
+**Adding wall cubes.** Open `AirGroundLab_Main` (Option 1 above), drag Engine basic shape cubes from the Place Actors panel, scale and place them, and give them one of the materials in `Content/OHZTest/Materials`. Save and send the `.umap` back. That is the whole edit: the robots' lidar sees any solid geometry you add, so new walls become obstacles on the next restart, no other file needs changing.
+
+**Editing pedestrian walking routes.** Pedestrians are spawned by the runtime, not placed in the level, so their paths are not edited in UE. Each one walks back and forth along a segment listed in `profiles/scenes/air_ground_lab.yaml` under `pedestrian_routes` (map XY metres). To reroute them, edit the endpoint numbers. The UE editor helps you pick values: place a temporary cube where you want an endpoint, read its X/Y from the Details panel, and remember the scene file uses `y = -carla.y`. Keep roughly one route per pedestrian (`human_count`), and hand the edited file back with the `.umap`.
