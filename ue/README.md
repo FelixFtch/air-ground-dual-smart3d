@@ -52,4 +52,11 @@ The `EngineAssociation` in `CarlaUnreal.uproject` points at the CARLA engine on 
 
 **Adding wall cubes.** Open `AirGroundLab_Main` (Option 1 above), drag Engine basic shape cubes from the Place Actors panel, scale and place them, and give them one of the materials in `Content/OHZTest/Materials`. Save and send the `.umap` back. That is the whole edit: the robots' lidar sees any solid geometry you add, so new walls become obstacles on the next restart, no other file needs changing.
 
-**Editing pedestrian walking routes.** Pedestrians are spawned by the runtime, not placed in the level, so their paths are not edited in UE. Each one walks back and forth along a segment listed in `profiles/scenes/air_ground_lab.yaml` under `pedestrian_routes` (map XY metres). To reroute them, edit the endpoint numbers. The UE editor helps you pick values: place a temporary cube where you want an endpoint, read its X/Y from the Details panel, and remember the scene file uses `y = -carla.y`. Keep roughly one route per pedestrian (`human_count`), and hand the edited file back with the `.umap`.
+**Editing pedestrian walking routes (draw them like pen curves).** Pedestrians are spawned by the runtime, not placed in the level, but their paths are drawn in UE as splines:
+
+1. In the level, drag a **Spline** actor from the Place Actors panel. Alt+click the spline to add points, drag them around like a pen tool. Closed loops are fine.
+2. Rename each spline in the World Outliner to `PED1`, `PED2`, ... — one spline per pedestrian (`human_count`).
+3. Run the exporter: copy `tools/ue_export_ped_routes.py` from this repo into the project's `Content/Python/`, open the Output Log, switch the console to Python, and run `import ue_export_ped_routes; ue_export_ped_routes.export()`. It writes `pedestrian_routes.yaml` next to the script.
+4. Paste that fragment under `pedestrian_routes:` in `profiles/scenes/air_ground_lab.yaml` and commit it together with the `.umap`.
+
+Map coordinates equal UE world XY divided by 100, so the path you draw is the path they walk. Each route can also be edited as plain numbers in the scene file; a two-point route is a simple back-and-forth segment, longer routes loop through their points.
