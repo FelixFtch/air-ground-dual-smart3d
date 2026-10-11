@@ -1,0 +1,417 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+\title{Velocity-Stretched Occupied Hazard Zones for Dual-Robot Navigation with a Shared Occupancy Map}
+% affiliations: fill before submission
+\author{Shaunak Roy \and Tianchonghui Fang \and Toni Nguyen \and Shalabh Gupta}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We formalize the mathematics of a dual-robot navigation stack in which a ground robot working in the plane and an aerial robot working in three dimensions share one occupancy map and one people-perception document. The paper states the sensing equations, the robust person measurement, the tracking and association gates, the pairwise-slope velocity estimator, and the fusion gates between robots. The core object is the velocity-stretched occupied hazard zone: an oriented box obtained by adding a single inflation margin to the measured extent of a person, sweeping it forward along the estimated velocity over a fixed horizon, and padding it vertically. Collision predicates against the box are exact slab tests guarded by an enclosing-sphere broadphase. Person predictions never enter the occupancy map. The same hazard objects feed the planner, the execution guards, and the visualization.
+\end{abstract}
+
+\section{System setup and coordinate frames}
+
+The stack runs in a simulator that supplies per-tick ground-truth robot poses. Two robots operate in one scene. The ground robot Go2 plans in the plane. The aerial robot Bee plans in three dimensions. Both consume the same people document and the same occupancy map service.
+
+\begin{definition}[Robots and configuration dimension]\label{def:robots}
+The Go2 is a planar robot of configuration dimension 2 with body half extents $(0.43, 0.43, 0.28)$ meters, planar height $0.33$ meters, and self filter margin $0.30$ meters. The Bee is a spatial robot of configuration dimension 3 with body half extents $(0.45, 0.45, 0.25)$ meters, cluster inflation $0.35$ meters, and self filter margin $0.45$ meters. The body offset is $(0,0,0)$ for both robots.
+\end{definition}
+
+\begin{definition}[Map frame]\label{def:mapframe}
+A simulator world point $p = (x, y, z)$ is mapped into the map frame by
+\begin{equation}
+p_{\mathrm{m}} = (x,\; -y,\; z - 0.22).
+\end{equation}
+Equivalently $p_{\mathrm{m}} = B\,(p - o)$ with $B = \mathrm{diag}(1, -1, 1)$ and world origin $o = (0, 0, 0.22)$.
+\end{definition}
+
+\begin{remark}[Robot poses]\label{rem:pose}
+A callback registered on the simulator tick reads the transform of every robot actor once per tick, applies the map frame rule, and appends the result to a pose history bounded to 180 frames. The control loop forms
+\begin{equation}
+\Delta t = \min\bigl(0.075,\; \max(0.001,\; s_k - s_{k-1})\bigr), \qquad
+v_{\mathrm{rob}} = \|p_k - p_{k-1}\| / \Delta t,
+\end{equation}
+and negates the simulator yaw in radians. These poses serve the robots only. Perception never queries the latest actor pose to complete an older image: every RGB and depth measurement carries the transform it was captured with. Pedestrian ground truth steers the scenario actors and never reaches perception or planning; the only people input to planning is the perception output.
+\end{remark}
+
+\section{Sensing}
+
+\begin{definition}[Depth decoding]\label{def:depth}
+The depth attachment is an $H \times W \times 4$ unsigned byte raster with byte order B, G, R, A, where $W = 640$ and $H = 360$. The depth in meters is
+\begin{equation}
+z = \frac{R + 256\,G + 65536\,B}{16777215} \times 1000 .
+\end{equation}
+Transport validity requires $0.15 \le z \le 30$. The people pipeline keeps only samples with $0.3 \le z \le 15$.
+\end{definition}
+
+\begin{definition}[Intrinsics]\label{prop:intrinsics}
+With horizontal field of view $\theta$ in radians, the focal length and calibration matrix are
+\begin{equation}
+f = \frac{W}{2 \tan(\theta/2)}, \qquad
+K = \begin{pmatrix} f & 0 & W/2 \\ 0 & f & H/2 \\ 0 & 0 & 1 \end{pmatrix}.
+\end{equation}
+Pixels are square and the principal point sits at the image center.
+\end{definition}
+
+\begin{definition}[Unprojection]\label{def:unproj}
+Pixel centers are offset by one half, $u = i + 0.5$ and $v = j + 0.5$. With optical axes right, down, and forward, a pixel with depth $z$ is sent to the optical point
+\begin{equation}
+x_{\mathrm{opt}} = \frac{(u - W/2)\,z}{f}, \qquad
+y_{\mathrm{opt}} = \frac{(v - H/2)\,z}{f}, \qquad
+z_{\mathrm{opt}} = z .
+\end{equation}
+\end{definition}
+
+\begin{definition}[Composed camera to map transform]\label{def:cam2map}
+Let $S$ and $t_{\mathrm{sw}}$ be the rotation and translation of the measurement-time sensor-to-world matrix. The RGB and depth members of one pair must carry the same frame number and timestamp exactly, and transforms that agree to $10^{-5}$. With the optical-to-sensor matrix
+\begin{equation}
+O = \begin{pmatrix} 0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & -1 & 0 \end{pmatrix}
+\end{equation}
+and the basis $B$ and origin $o$ of Definition \ref{def:mapframe}, the camera-to-map transform is
+\begin{equation}
+R_{\mathrm{cm}} = B\,S\,O, \qquad t_{\mathrm{cm}} = B\,(t_{\mathrm{sw}} - o),
+\end{equation}
+and a registered optical point is mapped into the map frame by
+\begin{equation}
+p_{\mathrm{map}} = R_{\mathrm{cm}}\,p_{\mathrm{opt}} + t_{\mathrm{cm}} .
+\end{equation}
+The composition is rigid, with orthonormal rotation and unit determinant, and is re-validated at projection time; an invalid transform raises an error instead of a result.
+\end{definition}
+
+\section{Person measurement}
+
+With the YOLO26 back end the detector runs on the RGB frame for the person class at confidence 0.25 and image size 640, with instance masks binarized above 0.5; the SAM3 video back end is prompted with ``person'' and emits masks directly. In both cases at most 32 tracks per frame enter projection.
+
+\begin{definition}[Mask erosion and sampling]\label{def:erosion}
+A mask pixel $(i,j)$ survives one step of erosion with the four neighborhood iff
+\begin{equation}
+m_{i,j} \;\land\; m_{i-1,j} \;\land\; m_{i+1,j} \;\land\; m_{i,j-1} \;\land\; m_{i,j+1} .
+\end{equation}
+Surviving pixels are flattened in row order. When more than 2048 survive, a uniform subsample of exactly 2048 indices is kept. A sample is valid when all three registered coordinates are finite and $0.3 \le z \le 15$.
+\end{definition}
+
+\begin{remark}[Robot body exclusion]\label{rem:bodyexcl}
+Known robot bodies captured in the same frame are removed from the sample set with a padding of 0.08 m. A sample is dropped when every axis satisfies $|x^{\mathrm{body}}_i| \le h_i + 0.08$ in that body frame, where $x^{\mathrm{body}} = R_{\mathrm{body}}^{\top}(p - t_{\mathrm{body}}) - o_{\mathrm{body}}$ is the sample in body coordinates with origin at the body offset, $h$ the body half extents, and $o_{\mathrm{body}}$ the body offset. This filter uses capture-time geometry only. A person is never excluded by distance to a latest robot pose.
+\end{remark}
+
+\begin{definition}[Robust depth band]\label{def:mad}
+Let $z_1, \dots, z_n$ be the depths of the surviving samples and let
+\begin{equation}
+d_c = \mathrm{median}(z_i), \qquad
+\mathrm{mad} = \mathrm{median}\,|z_i - d_c|.
+\end{equation}
+Sample $i$ is an inlier iff
+\begin{equation}
+|z_i - d_c| \le \max\bigl(0.18,\; \min(0.55,\; 3\,\mathrm{mad})\bigr).
+\end{equation}
+\end{definition}
+
+\begin{definition}[Quantile box]\label{def:quantilebox}
+Let $P$ be the inlier cloud in map coordinates. For each axis $a$, let $l_a$ and $g_a$ be the $0.1$ and $0.9$ quantiles of $\{p_a : p \in P\}$, the 10 to 90 percent interval of the visible surface. The measured box is
+\begin{equation}
+c = \frac{l + g}{2}, \qquad h = \frac{g - l}{2},
+\end{equation}
+and the reported position is the per-axis median of $P$. The spread is $q_{0.9}(z) - q_{0.1}(z)$ over the inlier depths, where $q_\tau$ denotes the $\tau$-quantile function, and the position uncertainty is
+\begin{equation}
+\sigma = \max\bigl(0.08,\; \min(0.5,\; \mathrm{spread}/2)\bigr).
+\end{equation}
+\end{definition}
+
+\begin{definition}[Quality gates]\label{prop:gates}
+Write $n$ for the sample count, $\mathrm{frac}$ for the valid fraction, $n_{\mathrm{sel}}$ for the inlier count, and $\mathrm{cover}$ for the inlier fraction. The measurement is rejected when $n < 24$, or $\mathrm{frac} < 0.25$, or $n_{\mathrm{sel}} < 24$, or $\mathrm{cover} < 0.55$, or the planar diameter exceeds the gate,
+\begin{equation}
+\|(g - l)_{x,y}\| > 1.8,
+\end{equation}
+or robot-body samples were removed and the remaining vertical extent of the quantile box is below 0.05 meters (the mask then sees only the floor through boundary pixels). The quality level is good iff $n_{\mathrm{sel}} \ge 80$ and $\mathrm{frac} \ge 0.65$ and $\mathrm{cover} \ge 0.75$; otherwise it is limited.
+\end{definition}
+
+\begin{remark}
+The extents are visible-surface quantiles of the observed cloud. No full-body prior is applied and no human height prior is used. The uncertainty $\sigma$ is published with the measurement record; the hazard layer of Section 7 does not consume it.
+\end{remark}
+
+\section{Data association}
+
+One tracker runs per camera. A shared tracker would merge the two robots' video streams.
+
+\begin{definition}[Prediction gate]\label{def:gate}
+A track stores its last planar state $(x, v, t)$. For a detection with planar position $y$ at time $t_k$, let $\Delta t = \max(0,\, t_k - t)$ and let the prediction be
+\begin{equation}
+\hat{x} = x + v\,\min(\Delta t,\, 3).
+\end{equation}
+The pair is admissible only when
+\begin{equation}
+\|y - \hat{x}\| \le g, \qquad g = \min\bigl(0.5 + 1.5\,\Delta t,\; 5\bigr).
+\end{equation}
+\end{definition}
+
+\begin{definition}[Appearance]\label{def:appearance}
+An appearance requires at least 40 masked pixels. The masked pixels are converted into HSV and split at $\mathrm{saturation} \ge 40$ and $\mathrm{value} \ge 30$. Chromatic pixels fill $18 \times 8 = 144$ bins indexed by hue and saturation. Achromatic pixels fill 8 value bins. The concatenated 152-bin vector is normalized to unit sum. The similarity of histograms $a$ and $b$ is the Bhattacharyya coefficient
+\begin{equation}
+s_{\mathrm{app}}(a, b) = \sum_{k=1}^{152} \sqrt{a_k\, b_k}.
+\end{equation}
+\end{definition}
+
+\begin{definition}[Assignment]\label{def:hungarian}
+An admissible pair carries the cost
+\begin{equation}
+\mathrm{cost} = \frac{\|y - \hat{x}\|}{g} + 0.5\,\bigl(1 - s_{\mathrm{app}}\bigr),
+\end{equation}
+where $s_{\mathrm{app}} \in [0,1]$ is the appearance similarity of Definition \ref{def:appearance}; an absent appearance on either side contributes the neutral value $0.5$. An inadmissible pair costs $10^{6}$. The assignment is the Hungarian solution of the resulting matrix over usable detections and live tracks, and assignments of cost $10^{6}$ are dropped. Unmatched detections receive fresh sequential identities.
+\end{definition}
+
+\begin{remark}[Threshold rationale]\label{rem:thresholds}
+Erosion drops the mask's boundary pixel ring, where depth blends the person with the background. The MAD band is floored at 0.18 m so a nearly planar surface still yields inliers, and capped at 0.55 m so a mask that straddles two surfaces cannot. The color histogram splits chromatic from achromatic pixels because hue is meaningless for gray, black and white clothing, which are described by brightness instead.
+\end{remark}
+
+\begin{proposition}[Re-identification]\label{prop:reid}
+A track is live while $0 \le t_k - t \le 20$ seconds. When $\Delta t > 1.5$ seconds, the identity is reused only if both sides carry an appearance and $s_{\mathrm{app}} \ge 0.6$. So color re-identification applies for gaps in $(1.5, 20]$ seconds. After an assigned update that carries a new histogram, the stored appearance is the blend
+\begin{equation}
+a' = 0.8\,a + 0.2\,b
+\end{equation}
+renormalized to unit sum, with $a$ the stored and $b$ the new histogram; a missing stored appearance is replaced by $b$, and a missing new histogram leaves the stored one unchanged.
+\end{proposition}
+
+\begin{remark}[Track dynamics]\label{rem:trackdyn}
+On an assigned update with $0 < \Delta t \le 1.5$, the track velocity becomes
+\begin{equation}
+v' = 0.5\,v + 0.5\,\frac{y - x}{\Delta t},
+\end{equation}
+and otherwise it is set to zero. The stored position and time are then the new measurement.
+\end{remark}
+
+\section{Velocity estimation}
+
+\begin{definition}[History]\label{def:history}
+Each source key, comprising scene epoch, robot, camera, tracking session, and native track identity, owns a history of capacity 6 holding pairs $(t, x)$, where $x$ is the planar surface median. A new sample first clears the history when
+\begin{equation}
+\Delta t \le 0 \quad\text{or}\quad \Delta t > 1.5 \quad\text{or}\quad \|x - x_{\mathrm{prev}}\| > \max\bigl(0.6,\; 3\,\Delta t\bigr).
+\end{equation}
+The reset exists because a displacement across a long gap or a jump faster than 3 meters per second belongs to a different motion segment (or a different person under the same native identity); fitting through it would attribute the gap displacement to the person's velocity. After appending, the oldest entry is dropped while $t - t_0 > 4.5$. Histories whose last entry is older than 1.5 seconds, or whose last entry lies in the future relative to the incoming capture time, are purged each frame.
+\end{definition}
+
+\begin{definition}[Pairwise-slope estimator]\label{def:slopes}
+For every pair of entries $(a, b)$ in the window with $a$ earlier than $b$ and $t_b - t_a \ge 0.2$, form the slope
+\begin{equation}
+s_{ab} = \frac{x_b - x_a}{t_b - t_a} \in \mathbb{R}^2 .
+\end{equation}
+The velocity estimate is the componentwise median of the slopes, with residual
+\begin{equation}
+v = \mathrm{median}\{s_{ab}\}, \qquad \rho = \mathrm{median}\,\|s_{ab} - v\|.
+\end{equation}
+\end{definition}
+
+\begin{remark}[Why the median]\label{rem:median}
+The componentwise median discards outlier slopes produced by transient surface-median errors, so a single bad frame cannot steer the estimate; pairs from the same capture gap shorter than 0.2 seconds are dropped because their slope is dominated by quantization. The 4.5-second window and capacity six are sized for the measured 1 Hz per-camera capture rate, so four observations span about three seconds without extending the geometry lease or the prediction cap.
+\end{remark}
+
+\begin{definition}[Validity]\label{prop:velvalid}
+The estimate is published only when the window holds at least 4 observations, the span satisfies $t - t_0 \ge 0.3$ seconds, and at least 3 slopes survive the pair gap. It is rejected when a component is not finite, or $\|v\| > 3$ meters per second, or $\rho > 0.6$. When the projection quality is not good, the velocity is suppressed and the history is dropped.
+\end{definition}
+
+\begin{remark}[Horizontal only]\label{rem:planaronly}
+The estimator works in the plane. The published vertical component is the zero placeholder and the vertical validity flag is always false; the fusion layer rejects any record that claims otherwise. Time is simulation time at capture. Surfaces seen by different cameras are never mixed into one displacement fit.
+\end{remark}
+
+\section{Cross-robot fusion}
+
+\begin{definition}[Propagation to a reference]\label{def:prop}
+Each record is propagated to a reference time by
+\begin{equation}
+\tau = \max\bigl(0,\; \min(1,\; t_{\mathrm{ref}} - t_{\mathrm{cap}})\bigr), \qquad x' = x + v\,\tau,
+\end{equation}
+using the planar velocity when its flag is valid, and $\tau = 0$ otherwise. The extrapolation is capped at one second.
+\end{definition}
+
+\begin{definition}[Association gates]\label{prop:fusegates}
+Two person records produced by different cameras may share one global identity only when all of the following hold.
+(i) Each camera contributes at most one local track to a group.
+(ii) $|t_a - t_b| \le 0.75$ seconds.
+(iii) Both positions are propagated to the common reference $\max(t_a, t_b)$ and $\|x'_a - x'_b\| \le 0.65$ meters.
+(iv) $|z_a - z_b| \le 0.8$ meters.
+(v) When both velocities are valid, $\|v_a - v_b\| \le 0.75$ meters per second in the plane.
+(vi) Every member of the group has quality good.
+\end{definition}
+
+\begin{remark}[Merge rule]\label{rem:merge}
+An observation already linked to a global identity continues it. A new, unlinked observation joins an existing group only when the group is its only candidate and it is the group's only candidate; every other unlinked case creates a fresh identity. Ambiguous matches stay separate and are never reconciled later. The merged box is the componentwise minimum of the low corners and maximum of the high corners over the propagated members. The snapshot velocity is the mean over valid sources and is declared invalid when any pairwise planar difference exceeds 0.75 meters per second.
+\end{remark}
+
+\begin{remark}[Lease and single writer]\label{rem:writer}
+A record expires when $t_{\mathrm{ref}} \ge t_{\mathrm{cap}} + \mathrm{ttl}$, and the published lease is the minimum over sources,
+\begin{equation}
+t_{\mathrm{until}} = \min_i\,\bigl(t_{\mathrm{cap},i} + \mathrm{ttl}\bigr).
+\end{equation}
+The registry default is $\mathrm{ttl} = 1.5$ seconds and the deployed service launches with $\mathrm{ttl} = 2.0$ seconds. One writer, elected by an advisory lock on the worker lock file, publishes the shared people document atomically after each processed frame and at least every 0.2 seconds when idle.
+\end{remark}
+
+\section{The velocity-stretched occupied hazard zone}
+
+This section defines the core object of the paper.
+
+\begin{definition}[Inputs and policy]\label{def:ohzinputs}
+Each person record contributes its measured center $c$, its measured half extents $h = (h_x, h_y, h_z)$ from the quantile box of Definition \ref{def:quantilebox}, its planar velocity $v$ with validity flag, its capture time, its position reference time, and its lease. The policy has four parameters: a horizon of 1 second, a position uncertainty of 0.15 meters, a vertical padding $\eta = 0.85$ meters at each end, and an inflation margin $\gamma = 0.35$ meters. The domain bounds are $0 \le \mathrm{horizon} \le 3$, $0 \le \mathrm{uncertainty} \le 2$, $0 \le \eta \le 3$, and $0 \le \gamma \le 2$. Records whose lease has run out are omitted. The vertical padding is an uncalibrated profile allowance covering head and feet outside the visible quantile interval; the measurement itself carries no human height prior, and the published record declares the padding as such.
+\end{definition}
+
+\begin{definition}[Velocity frame]\label{def:velframe}
+Let $s = \|v\|$ when the velocity flag is valid and $s = 0$ otherwise. The heading axis is
+\begin{equation}
+u = \begin{cases} v / s, & s > 10^{-8}, \\ (1, 0, 0), & \text{else}, \end{cases}
+\end{equation}
+the lateral axis is $w = (-u_y,\; u_x,\; 0)$, and $e_z$ completes an orthonormal frame. The travel is
+\begin{equation}
+T = s \cdot \mathrm{horizon}.
+\end{equation}
+\end{definition}
+
+\begin{definition}[Velocity-stretched box]\label{def:ohz}
+Let
+\begin{equation}
+\mathrm{sup}_u = h_x\,|u_x| + h_y\,|u_y|, \qquad
+\mathrm{sup}_w = h_x\,|w_x| + h_y\,|w_y|
+\end{equation}
+be the supports of the measured box along the heading and lateral axes, summed over the two horizontal components. The occupied hazard zone is the oriented box with frame $(u, w, e_z)$, center
+\begin{equation}
+q = c + u\,T/2 - o_{\mathrm{body}},
+\end{equation}
+and semi-axes, in three dimensions,
+\begin{equation}
+r = \bigl( \mathrm{sup}_u + T/2 + \gamma,\;\; \mathrm{sup}_w + \gamma,\;\; h_z + \gamma + \eta \bigr),
+\end{equation}
+where $o_{\mathrm{body}}$ is the robot body offset of Definition \ref{def:robots}.
+\end{definition}
+
+The heading semi-axis is the support of the measured extent, plus half the travel, plus the margin. The lateral semi-axis drops the travel term and keeps the margin. The vertical semi-axis pads the measured half height by the margin and the vertical padding. The box is the measured extent swept forward along the velocity by half the travel on each side of the shift.
+
+\begin{definition}[Extrapolation cap]\label{def:cap}
+The registry has already projected the center to the position reference time. The hazard layer advances it once more by
+\begin{equation}
+\tau = \min\bigl(\max(t_{\mathrm{now}} - t_{\mathrm{ref}},\, 0),\;\; \max(t_{\mathrm{cap}} + 1 - t_{\mathrm{ref}},\, 0)\bigr)
+\end{equation}
+on the two horizontal components only, and only when the velocity flag is valid. The projection never carries a person beyond its capture time plus one second, even when a delayed reader keeps the lease alive.
+\end{definition}
+
+\begin{definition}[Planar projection]\label{prop:planar}
+For the planar robot the third semi-axis is set to zero, the center height is set to the planar height 0.33 meters, and the slab test runs over the two horizontal axes only; the vertical coordinate of the planar box is display-only. The person is skipped entirely when
+\begin{equation}
+\bigl|\,0.33 + o_{\mathrm{body},z} - c_z\,\bigr| > h_z + \gamma + \eta,
+\end{equation}
+that is, when the planar band does not meet the vertical extent of the person.
+\end{definition}
+
+\begin{remark}[One margin in place of a Minkowski sum]\label{rem:minkowski}
+The legacy shape of the same pipeline is an ellipse. It Minkowski-adds the circumscribed planar disks of the measured person extent, $\sqrt{h_x^2 + h_y^2}$, and of the robot, $\sqrt{h_{r,x}^2 + h_{r,y}^2}$, the position uncertainty of 0.15 meters, and vertically the measured half height, the padding $\eta$, and the robot vertical half extent; in three dimensions the result is scaled by $\sqrt{2}$ to fit an ellipsoid. The box of Definition \ref{def:ohz} replaces all of that with the single margin $\gamma$, the same constant the planner uses to dilate clustered static voxels, added to every axis of the measured extent. The published record declares the robot footprint already included, the native parser enforces the declaration, and the planner applies the semi-axes as given. The margin $\gamma = 0.35$ meters covers the robots' vertical envelope: it exceeds the vertical half extents of both robots, 0.28 meters for the Go2 and 0.25 meters for the Bee, so no separate vertical body term is needed. Laterally it reuses the planner's cluster-dilation constant so one constant governs static and dynamic inflation; it is 0.08 to 0.10 meters below the robots' planar half extents, an accepted approximation of the footprint declaration. The margin $\gamma$ is also the sole carrier of position uncertainty: the policy constant of 0.15 meters is absorbed into it rather than added separately.
+\end{remark}
+
+\section{Collision predicates}
+
+\begin{definition}[Slab clipping]\label{def:slab}
+Let a segment have endpoints $a$ and $b$. Express it in box coordinates,
+\begin{equation}
+s_i = \sum_k (a_k - q_k)\,A_{ik}, \qquad e_i = \sum_k (b_k - q_k)\,A_{ik}.
+\end{equation}
+Set $t_0 = 0$ and $t_1 = 1$. With tolerance $\varepsilon = 10^{-9}$ meters, repeat for each axis $i$. Let $\mathrm{reach} = r_i + \varepsilon$ and $d = e_i - s_i$. When $|d| < 10^{-15}$ the segment is parallel to the slab: return false if $|s_i| > \mathrm{reach}$, and continue to the next axis otherwise. When the segment is not parallel, let
+\begin{equation}
+t_{\mathrm{lo}} = \frac{-\mathrm{reach} - s_i}{d}, \qquad t_{\mathrm{hi}} = \frac{\mathrm{reach} - s_i}{d},
+\end{equation}
+swap them when $t_{\mathrm{lo}} > t_{\mathrm{hi}}$, then set $t_0 = \max(t_0, t_{\mathrm{lo}})$ and $t_1 = \min(t_1, t_{\mathrm{hi}})$, and return false as soon as $t_0 > t_1$. The segment meets the closed box exactly when all axes pass with $t_0 \le t_1$.
+\end{definition}
+
+\begin{definition}[Point containment]\label{def:contain}
+A point $p$ is contained in the box with center $q$, orthonormal axes $A$ with rows $A_0, A_1, A_2$, and half extents $r$ exactly when the segment test of Definition \ref{def:slab} returns true for the degenerate segment $(p, p)$.
+\end{definition}
+
+\begin{proposition}[Exactness]\label{prop:exact}
+The test is exact for closed boxes and uses no sampling or discretization. A zero-length segment degenerates to point containment. The tolerance of $10^{-9}$ meters only absorbs single-precision planner state error.
+\end{proposition}
+
+\begin{proof}
+The segment is the image of $[0,1]$ under the affine map $a + t\,(b - a)$. In box coordinates the closed box is $\prod_i [-r_i - \varepsilon,\; r_i + \varepsilon]$, so the segment meets it exactly when $[0,1]$ intersects every slab interval $\{t : |s_i + t\,d| \le r_i + \varepsilon\}$. Each slab interval is obtained from $s_i$ and $d$ by one division and a possible swap, and the running pair $(t_0, t_1)$ maintains the exact intersection of these intervals with $[0,1]$. No sampling or discretization enters, so the decision is exact up to the stated tolerance.
+\end{proof}
+
+\begin{definition}[Broadphase sphere]\label{def:broadphase}
+The enclosing sphere of the box has radius
+\begin{equation}
+R_{\mathrm{sph}} = \Bigl(\sum_i r_i^2\Bigr)^{1/2},
+\end{equation}
+the half diagonal of the box, plus a rounding term: the center is lifted to single precision, the norm of the rounding error is added, and the sum is rounded upward in single precision so the bound is never clipped by the broadphase. The sphere is a broadphase filter only and is never a collision predicate. Pruning candidates are gathered with the sphere; a node is pruned only when the exact box contains it. A second, inscribed sphere of radius $\min_i r_i$ accompanies the record and serves only as the conservative current-state collision predicate; it can never report a spurious collision.
+\end{definition}
+
+\section{Shared occupancy map}
+
+One map service is owned by the scene process, and both robots integrate into it. Each planner reads a cached consumer copy, never a second mapper. The resolution is 0.25 meters.
+
+\begin{definition}[Log-odds update]\label{def:logodds}
+With hit probability 0.9 and miss probability 0.1, a hit and a miss move the cell log-odds by
+\begin{equation}
+\ell_{\mathrm{hit}} = \ell + \log\frac{0.9}{0.1} = \ell + \log 9, \qquad
+\ell_{\mathrm{miss}} = \ell - \log 9,
+\end{equation}
+clamped to the interval
+\begin{equation}
+\log\frac{0.12}{0.88} \;\le\; \ell \;\le\; \log\frac{0.88}{0.12},
+\end{equation}
+whose endpoints are $\pm\log(22/3)$. A cell counts as occupied when its log-odds are positive.
+\end{definition}
+
+\begin{proposition}[Timestamp ordering]\label{prop:ordering}
+Let $t_{\mathrm{prev}}$ be the last accepted capture time of a cell. A free update is skipped when $t < t_{\mathrm{prev}} - 10^{-9}$, or when $|t - t_{\mathrm{prev}}| \le 10^{-9}$ and the cell is occupied. A hit update is skipped only when $t < t_{\mathrm{prev}} - 10^{-9}$. In particular, a hit wins a tie at equal capture time, also across separate sensors. The tie-break exists because arrival order is scheduling noise: without it, a free ray that happens to arrive after an equal-time hit would erase a just-marked surface, and occupancy would flicker with transport timing.
+\end{proposition}
+
+\begin{definition}[Ranges and protected far hits]\label{def:ranges}
+A return marks a hit when its distance is at most the sensor's mark range, 9 meters for the LiDAR and 6 meters for the depth cameras, and it lies inside the map bounds. A free ray of length $d$ is truncated to length $\min(d, R)$, with clearing range $R = 40$ meters for the LiDAR and 6 meters for depth, and is never extended. Returns closer than 0.05 meters are discarded; a clipped free ray also stops just inside the map boundary, and a LiDAR free ray never includes its endpoint voxel, so free evidence ends before any real return. Returns with distance above the mark range and up to the clearing range are protected far hits. Their keys are removed from the free set together with the ordinary hit keys before any mutation, and they add positive evidence only to cells that already carry near hits: a protected far hit can restore a cleared surface but cannot first mark an unseen far cell.
+\end{definition}
+
+\begin{definition}[Self body filter]\label{def:selffilter}
+A sensor-local return is expressed in body coordinates $b$ and kept only when some axis satisfies
+\begin{equation}
+|b_i - o_{\mathrm{body},i}| > h_i + m,
+\end{equation}
+with body offset $o_{\mathrm{body}}$ as in Definition \ref{def:robots}, body half extents $h$, and margin $m$ equal to 0.30 meters for the Go2 and 0.45 meters for the Bee. The margin swallows returns from parts that sit outside the configured body box, such as landing gear, sensor masts, and propellers. The filter runs at capture time on the same-frame sensor transform.
+\end{definition}
+
+\begin{definition}[Cluster inflation of static voxels]\label{def:cluster}
+For static voxels, the sweep expands each occupied cell $k$ into the axis-aligned box
+\begin{equation}
+\bigl[\,k_i\,\mathrm{res} - h_i - e,\;\; (k_i + 1)\,\mathrm{res} + h_i + e\,\bigr]_i
+\end{equation}
+with $\mathrm{res} = 0.25$ meters, robot half extents $h$, and $e = 0.35$ meters when one of the six face-adjacent cells is occupied, and $e = 0$ otherwise. A lone voxel stays at body size, so one speck does not become a large obstacle. Only the aerial robot configures the inflation; the planar path passes zero.
+\end{definition}
+
+\section{Transience, reattachment, and partner constraints}
+
+\begin{definition}[Geometry change and edge cleanup]\label{def:cleanup}
+Two hazard records share geometry when identity, center, axes, and semi-axes are all equal; the lease time is excluded. The people set changes when some record has no geometric equal in the previous set, or the converse. A change triggers node pruning and an edge cleanup pass: for every surviving node with a surviving parent, the parent edge is cut when the installed validity checker (static voxels, partner robot boxes, and people hazards) rejects it. A cut node receives a fresh tree identity, an infinite cumulative cost, and one immediate reconnection attempt against the best main-tree neighbor within 1.8 meters. A renewal that only extends the lease refreshes metadata and triggers neither pruning nor a clear event.
+\end{definition}
+
+\begin{definition}[Expiry and clear regions]\label{def:expiry}
+A hazard leaves the active set when its lease runs out, $t_{\mathrm{until}} \le t_{\mathrm{now}}$. The disappearance counts as a geometry change in the sense of Definition \ref{def:cleanup}, so it triggers pruning and edge cleanup, and for every vanished hazard one clear region is queued with the hazard center as center and the enclosing sphere radius of Definition \ref{def:broadphase} as radius. Duplicate regions are dropped by exact bit equality of center and radius. Nodes within a clear region expanded by the native reconnection neighborhood, the radius plus the larger of 1.8 meters and the longest remembered cut edge, are examined: isolated pruned nodes are revived as fresh tree roots, and remembered cut edges are revalidated exactly before restoration.
+\end{definition}
+
+\begin{definition}[Dynamic partner constraint]\label{def:partner}
+Every planner request carries one dynamic box per partner robot: the center is the partner position, the half extents are the partner body half extents with no margin, and the lease is the reference time plus 1.0 second. A state or an edge is rejected when it meets the axis-aligned box
+\begin{equation}
+\bigl[\,d_i - (h^{\mathrm{part}}_i + h_i),\;\; d_i + (h^{\mathrm{part}}_i + h_i)\,\bigr]_i
+\end{equation}
+where $d$ and $h^{\mathrm{part}}$ are the partner center and half extents and $h$ the planning robot half extents; the test is slab clipping with a $10^{-8}$ boundary tolerance. Before map integration, points that fall inside any partner pose box inflated by 0.08 meters are dropped: the partner body is a temporary cooperative constraint, never a permanent wall.
+\end{definition}
+
+\section{Closing remark}
+
+No person detection, identity, or velocity prediction is ever inserted into the occupancy map: the map integrates raw sensor returns only, so a person's measured surface can appear transiently as occupied cells until free rays clear it. Person geometry reaches the planner, the execution guards, and the visualization only as lease-bound hazard overlays: one shared people document is read once per reference time, and the same capture-valid document feeds all three consumers through one builder, so their geometry can differ only by the reference-time-capped extrapolation, never by evidence or shape policy.
+
+\end{document}
