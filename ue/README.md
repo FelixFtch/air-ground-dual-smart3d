@@ -52,11 +52,11 @@ The `EngineAssociation` in `CarlaUnreal.uproject` points at the CARLA engine on 
 
 **Adding wall cubes.** Open `AirGroundLab_Main` (Option 1 above), drag Engine basic shape cubes from the Place Actors panel, scale and place them, and give them one of the materials in `Content/OHZTest/Materials`. Save and send the `.umap` back. That is the whole edit: the robots' lidar sees any solid geometry you add, so new walls become obstacles on the next restart, no other file needs changing.
 
-**Editing pedestrian walking routes (draw them like pen curves).** Pedestrians are spawned by the runtime, not placed in the level, but their paths are drawn in UE as splines:
+**Editing pedestrian walking routes (draw them like pen curves).** Pedestrians are spawned by the runtime, not placed in the level. Draw one spline per person; that person walks that curve only.
 
-1. In the level, drag a **Spline** actor from the Place Actors panel. Alt+click the spline to add points, drag them around like a pen tool. Closed loops are fine.
-2. Rename each spline in the World Outliner to `PED1`, `PED2`, ... — one spline per pedestrian (`human_count`).
-3. Run the exporter: copy `tools/ue_export_ped_routes.py` from this repo into the project's `Content/Python/`, open the Output Log, switch the console to Python, and run `import ue_export_ped_routes; ue_export_ped_routes.export()`. It writes `pedestrian_routes.yaml` next to the script.
-4. Paste that fragment under `pedestrian_routes:` in `profiles/scenes/air_ground_lab.yaml` and commit it together with the `.umap`.
+1. In the level, drag a **Spline** actor onto the ground. Select it, Alt-drag a point to drop the next one, and move that point along the floor. Repeat for each bend. Spline height is ignored; only the floor position matters.
+2. Rename each spline in the World Outliner to `PED1`, `PED2`, ... One spline is one person. Set `human_count` in the scene profile to that same count, or extra people pile onto the last curves.
+3. Copy `tools/ue_export_ped_routes.py` into the project's `Content/Python/`. In the Output Log, switch the console to Python and run `import ue_export_ped_routes; ue_export_ped_routes.export()`.
+4. Replace the `pedestrian_routes:` block in `profiles/scenes/air_ground_lab.yaml` with the generated fragment, and restart the simulation.
 
-Map coordinates equal UE world XY divided by 100, so the path you draw is the path they walk. Each route can also be edited as plain numbers in the scene file; a two-point route is a simple back-and-forth segment, longer routes loop through their points.
+The person walks the curve from the first point to the next, about one metre at a time, then from the last point back to the first and repeats. PED1, PED3, PED5 follow the direction you drew. PED2, PED4, PED6 start at the last point and walk back toward the first. Map XY equals UE world XY divided by 100.
