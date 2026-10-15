@@ -52,10 +52,11 @@ The `EngineAssociation` in `CarlaUnreal.uproject` points at the CARLA engine on 
 
 **Adding wall cubes.** Open `AirGroundLab_Main` (Option 1 above), drag Engine basic shape cubes from the Place Actors panel, scale and place them, and give them one of the materials in `Content/OHZTest/Materials`. Save and send the `.umap` back. That is the whole edit: the robots' lidar sees any solid geometry you add, so new walls become obstacles on the next restart, no other file needs changing.
 
-**Editing pedestrian walking routes (draw them like pen curves).** Pedestrians are spawned by the runtime, not placed in the level. Draw one spline per person; that person walks that curve only.
+**Editing pedestrian walking routes.** UE already draws the curve. Open `AirGroundLab_Main`, look at the floor in the 3D viewport, and click the path onto that floor. One curve is one person.
 
-1. In the level, drag a **Spline** actor onto the ground. Select it, Alt-drag a point to drop the next one, and move that point along the floor. Repeat for each bend. Spline height is ignored; only the floor position matters.
-2. Rename each spline in the World Outliner to `PED1`, `PED2`, ... One spline is one person. Set `human_count` in the scene profile to that same count, or extra people pile onto the last curves.
+1. Switch the mode dropdown at the top left from **Selection** to **Modeling** (Shift+5). In the left tool panel choose **Create**, then **Draw Spline**.
+2. Click on the lab floor where the walk starts. Each following click drops the next point on the ground, and the curve appears between them. Press Enter to accept. The new actor shows up in the World Outliner.
+3. Rename that actor to `PED1`, `PED2`, ... One spline is one person. Set `human_count` in the scene profile to that same count, or extra people pile onto the last curves.
 3. Copy `tools/ue_export_ped_routes.py` into the project's `Content/Python/`. In the Output Log, switch the console to Python and run `import ue_export_ped_routes; ue_export_ped_routes.export()`.
 4. Replace the `pedestrian_routes:` block in `profiles/scenes/air_ground_lab.yaml` with the generated fragment, and restart the simulation.
 
