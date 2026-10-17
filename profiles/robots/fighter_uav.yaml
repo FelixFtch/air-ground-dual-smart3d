@@ -28,5 +28,7 @@ execution_guard:
   known_free_policy: retain_until_observed_occupied; require fresh robot lidar and
     latest occupied map
 notes: Actual UE collider half-size .48/.48/.34m, planner XY envelope covers yaw;
-  kinematic flight, not PX4.
-self_filter_margin_m: 0.45
+  kinematic flight, not PX4. Self filter covers one 0.25m voxel past the body
+  plus the 0.35m cluster inflation, so a prop return cannot mark the cell the
+  body then flies into.
+self_filter_margin_m: 0.75

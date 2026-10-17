@@ -141,8 +141,9 @@ fresh free evidence and current measured partner envelopes on the next segment.
 
 `tree_nodes` are `{id,xyz,tree_id,parent}` with MAIN=0, PRUNED=-1 and positive
 forest IDs. `tree_edges` are real currently valid `[child_id,parent_id]` pairs.
-Use these edges directly for visualization. A detected invalid parent edge
-returns no path and `tree_invariant_failed`. With include_tree=false, the arrays
+Use these edges directly for visualization. A validated candidate path is
+kept when some other tree edge is invalid. `tree_invariant_failed` is reported
+only when that check finds no executable path. With include_tree=false, the arrays
 are empty and tree_exported=false, but invariant checking remains active.
 
 `dynamic_changed` means geometric occupancy changed, while

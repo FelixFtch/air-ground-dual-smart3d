@@ -584,7 +584,9 @@ impl<const N: usize> Session<N> {
                 }
             }
         }
-        if invalid_edges > 0 {
+        // A validated candidate stays executable. Stray invalid edges are
+        // repaired in later updates; discarding the path freezes the robot.
+        if invalid_edges > 0 && path.is_none() {
             reason = "tree_invariant_failed";
         }
         self.path_seq += 1;
@@ -596,7 +598,7 @@ impl<const N: usize> Session<N> {
         metrics["total_wall_ms"] = (started.elapsed().as_secs_f64() * 1000.).into();
         metrics["repair_budget_ms"] = self.repair_ms.into();
         metrics["prune_reroot_finalize_export_outside_repair_budget"] = true.into();
-        json::object! {ok:true,protocol:"air_ground_smart3d.v1",robot_id:self.robot.clone(),session_id:self.session.clone(),tree_instance_id:self.instance,dimension:N,profile_id:self.profile.id.clone(),map:self.map.json_identity(),goal_revision:self.goal_revision,goal_xyz:json_state(&self.goal,&self.profile),current_xyz:json_state(&self.current,&self.profile),local_reaction_radius_m:LOCAL_REACTION_RADIUS_M,local_reaction_center_xyz:json_state(&self.current,&self.profile),sim_time:self.sim_time,dynamic_revision:self.dynamic_revision,dynamic_active_boxes:self.dynamic.len(),people_revision:self.people_revision,people_active_hazards:self.people.len(),people_hazards:J::Array(self.people.iter().map(|h| h.wire.clone()).collect()),path_id:format!("{}:{}:{}",self.session,self.goal_revision,self.path_seq),path_xyz:if invalid_edges>0{J::Null}else{path_json},path_status:reason,candidate_unknown_allowed:true,path_all_known_free:known_free,execution_authorized:false,tree_nodes:nodes,tree_edges:edges,tree_exported:include_tree,metrics:metrics}
+        json::object! {ok:true,protocol:"air_ground_smart3d.v1",robot_id:self.robot.clone(),session_id:self.session.clone(),tree_instance_id:self.instance,dimension:N,profile_id:self.profile.id.clone(),map:self.map.json_identity(),goal_revision:self.goal_revision,goal_xyz:json_state(&self.goal,&self.profile),current_xyz:json_state(&self.current,&self.profile),local_reaction_radius_m:LOCAL_REACTION_RADIUS_M,local_reaction_center_xyz:json_state(&self.current,&self.profile),sim_time:self.sim_time,dynamic_revision:self.dynamic_revision,dynamic_active_boxes:self.dynamic.len(),people_revision:self.people_revision,people_active_hazards:self.people.len(),people_hazards:J::Array(self.people.iter().map(|h| h.wire.clone()).collect()),path_id:format!("{}:{}:{}",self.session,self.goal_revision,self.path_seq),path_xyz:path_json,path_status:reason,candidate_unknown_allowed:true,path_all_known_free:known_free,execution_authorized:false,tree_nodes:nodes,tree_edges:edges,tree_exported:include_tree,metrics:metrics}
     }
 }
 pub enum Worker {

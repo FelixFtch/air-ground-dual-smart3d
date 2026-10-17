@@ -1,0 +1,18 @@
+---
+description: How to start the empty-lab Go2+Bee scene on this machine
+alwaysApply: true
+---
+
+# 空场景双机拉起
+
+在 `/data/robotics/air_ground_smart3d` 里用这一条：
+
+```bash
+./lab start --rviz
+```
+
+停止用 `./lab stop`。桌面上只开 RViz。仿真离屏跑（`-game -RenderOffScreen`），端口 2400，ROS domain 45，队伍 `go2_fighter`，人员后端读 `runtime/people_backend.json`（YOLO26）。
+
+不要加 `--visible`。那会打开 UE 5.8 编辑器窗口，多占显存。
+
+不要把仓库里 `ue/Content/AirGroundLab/Maps/AirGroundLab_Main.umap` 覆盖到正在用的关卡上。那份带额外的 `Cube2`，会挡住 Go2 和 Bee 的起点。正在用的关卡在 `/data/sim/AirGroundLab_UE58`。

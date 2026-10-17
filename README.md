@@ -69,7 +69,7 @@ cd /data/robotics/air_ground_smart3d
 ./lab start --rviz --resume-map /absolute/previous/run/shared/map.ot
 ```
 
-UE runs off-screen by default, and RViz shows on the desktop. To get a UE game window, stop the experiment first and run `./lab start --rviz --visible`. No new web console is started. The launcher manages only the `air-ground-lab-*` services and never touches other projects or applications.
+This is the launch that actually runs here. The desktop shows RViz only. `./lab start --rviz` starts CARLA off-screen (`-game -RenderOffScreen`) on port 2400, ROS domain 45, team `go2_fighter`, and the people backend saved in `runtime/people_backend.json` (YOLO26). Do not add `--visible`. That opens the UE 5.8 editor window and spends extra GPU memory. Do not copy `ue/Content/AirGroundLab/Maps/AirGroundLab_Main.umap` over the live level as part of startup: that git copy contains an extra `Cube2` and blocks both spawn points. The running level is the one already in `/data/sim/AirGroundLab_UE58`. No web console is started. The launcher manages only the `air-ground-lab-*` services.
 
 Startup order:
 

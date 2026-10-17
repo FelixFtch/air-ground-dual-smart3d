@@ -211,7 +211,10 @@ class Runtime:
                     if history:
                         for other,pose in history.items():
                             if other==rid:continue
-                            ocfg=self.robots[other]['instance']['robot_config'];half=np.array(ocfg['body_half_extents_m'])+.08
+                            ocfg=self.robots[other]['instance']['robot_config']
+                            # Same margin as that robot's own self filter. A tight
+                            # +8 cm box lets the other lidar paint props and gear.
+                            half=np.array(ocfg['body_half_extents_m'])+float(ocfg.get('self_filter_margin_m',.30))
                             points=points[np.any(np.abs(points-np.array(pose))>half,axis=1)]
                     free_map=transform_points(free,sensor_world,self.scene['carla_world_origin_m'])
                     ray_origin=to_map_xyz([m.transform.location.x,m.transform.location.y,m.transform.location.z],self.scene['carla_world_origin_m']).tolist()
@@ -563,6 +566,11 @@ class Runtime:
             with self.map_lock:cell=self.cache.cells.get(tuple(check['blocked_key']),{})
             check['last_observed_sim_time']=cell.get('last_observed_sim_time')
             check['observed_state']=cell.get('state','unknown')
+            # Ground robots clip the unscanned floor slab under the feet. That
+            # cell stays unknown inside a thick mesh and is not a wall.
+            if (check.get('reason')=='unknown' and cfg['dimension']==2
+                    and (int(check['blocked_key'][2])+1)*float(self.scene['resolution'])<=pos[2]):
+                check=dict(check,ok=True,reason='floor_unknown_below_center')
         if check['ok']:
             from execution.guard import _segment_box
             for other in self.dynamic_boxes(s['instance']['robot_id']):

@@ -5,43 +5,40 @@ robots:
 - robot_id: go2_01
   profile: go2
   spawn_map_xyz:
-  - -8
-  - -8
+  - 4
+  - -4
   - 0.33
   yaw: 0
   route:
-  - - -8
-    - -8
+  - - 4
+    - -4
     - 0.33
   - - 8
-    - -8
+    - -4
     - 0.33
   - - 8
-    - 8
+    - 4
     - 0.33
-  - - -8
-    - 8
+  - - 4
+    - 4
     - 0.33
   route_loop: true
 - robot_id: uav_01
   profile: fighter_uav
   spawn_map_xyz:
-  - -8
-  - -3
+  - 8
+  - -4
   - 2.0
   yaw: 0
   route:
   - - 8
-    - -3
+    - 0
+    - 2.0
+  - - 4
+    - -4
     - 2.0
   - - 8
-    - 7
-    - 3.2
-  - - -8
-    - 7
-    - 2.0
-  - - -8
-    - -3
+    - -4
     - 2.0
   route_loop: true
 shared_map: true
