@@ -48,6 +48,10 @@ The `EngineAssociation` in `CarlaUnreal.uproject` points at the CARLA engine on 
 4. Add or edit a scene profile under `profiles/scenes/` (map name, origin, ground height, bounds, flight band, `human_count`) and a team profile under `profiles/teams/`.
 5. Start it with `./lab start --rviz --team <team>`.
 
+## People in a box-built scene
+
+The pedestrian characters live in `People/`, separate from the cube maps. Read `People/README.md` for the copy into `Content/Carla` and how to drag one `BP_*` walker onto the floor.
+
 ## The two everyday edits
 
 **Adding wall cubes.** Open `AirGroundLab_Main` (Option 1 above), drag Engine basic shape cubes from the Place Actors panel, scale and place them, and give them one of the materials in `Content/OHZTest/Materials`. Save and send the `.umap` back. That is the whole edit: the robots' lidar sees any solid geometry you add, so new walls become obstacles on the next restart, no other file needs changing.
