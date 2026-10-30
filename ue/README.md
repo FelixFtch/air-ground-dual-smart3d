@@ -50,7 +50,7 @@ The `EngineAssociation` in `CarlaUnreal.uproject` points at the CARLA engine on 
 
 ## People in a box-built scene
 
-The pedestrian characters live in `People/`, separate from the cube maps. Read `People/README.md` for the copy into `Content/Carla` and how to drag one `BP_*` walker onto the floor.
+Pedestrian characters are in `People/`, separate from the cube maps. Toni: follow `People/README.md`. Copy `People/Carla` into the factory project's `Content`, then drag a `BP_*` from `Carla/Blueprints/Walkers` onto the floor.
 
 ## The two everyday edits
 
