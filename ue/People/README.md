@@ -2,7 +2,7 @@
 
 This folder is the pedestrian pack for a factory level built out of boxes. The characters are the same ones the lab spawns. They are already Unreal assets (meshes, clothes, skin, hair, and the walk animation). Do not run FBX Import on them.
 
-The pack is about 2.1 GB. Pull `main` and use commit `f94f6e4` or anything after it.
+The pack is about 2.1 GB. Pull the latest `main`. Felix Fang published it.
 
 ## 1. Check whether you already have them
 
