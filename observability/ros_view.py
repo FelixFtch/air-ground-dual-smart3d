@@ -220,9 +220,152 @@ def read_lidar_frame(path):
     return frame,stamp,points
 
 
-def scene_specs(state, display, *, max_edges=30000, max_voxels=100000, issues=(), include_trees=True):
+# Display only. The occupancy authority is unchanged. Walls stay latched;
+# cells that appear after the first snapshot stay on a separate live layer
+# until they have been occupied continuously, so a walking person does not
+# redraw the building.
+FLOOR_ALPHA = .42
+OBSTACLE_ALPHA = .90
+FLOOR_THICKNESS_M = .08
+FLOOR_Z_OFFSET_M = -.06
+CHUNK_M = 8.
+DYNAMIC_HOLD_S = 1.5
+
+
+def occupied_key(value):
+    if isinstance(value, (list, tuple)) and len(value) == 3 and all(type(v) is int for v in value):
+        return (value[0], value[1], value[2])
+    return None
+
+
+def _mix_key(key, salt):
+    x, y, z = key
+    mixed = (x + 0x9E3779B9) * 73856093 ^ (y + salt) * 19349663 ^ (z + 0x85EBCA6B) * 83492791
+    return mixed & 0xFFFFFFFFFFFFFFFF
+
+
+def partition_occupied(display):
+    """Split one display snapshot into floor keys and obstacle keys."""
+    resolution = float(display.get("resolution", .25))
+    if not math.isfinite(resolution) or resolution <= 0:
+        raise ValueError("invalid voxel resolution")
+    ground_z = float(display.get("ground_z", 0.))
+    if not math.isfinite(ground_z):
+        raise ValueError("invalid ground height")
+    ground_key = math.floor(ground_z / resolution)
+    floor, obstacles = set(), set()
+    for raw in display.get("occupied") or []:
+        key = occupied_key(raw)
+        if key is None:
+            continue
+        (floor if key[2] <= ground_key else obstacles).add(key)
+    return resolution, floor, obstacles
+
+
+def occupied_signature(floor, obstacles, resolution):
+    """Order-independent identity of the occupied set. File mtime is not geometry."""
+    checksum = alternate = 0
+    for key in floor:
+        checksum ^= _mix_key(key, 1)
+        alternate ^= _mix_key(key, 3)
+    for key in obstacles:
+        checksum ^= _mix_key(key, 2)
+        alternate ^= _mix_key(key, 4)
+    return (len(floor), len(obstacles), checksum, alternate, resolution)
+
+
+class VoxelMotion:
+    """Keys present in the first snapshot are walls. Later arrivals stay live."""
+
+    def __init__(self, hold_s=DYNAMIC_HOLD_S):
+        self.hold_s = float(hold_s)
+        self.appeared = {}
+        self.stable = set()
+        self.seen = False
+
+    def reset(self):
+        self.appeared.clear()
+        self.stable.clear()
+        self.seen = False
+
+    def due(self, now):
+        hold = self.hold_s
+        return any(now - started >= hold for started in self.appeared.values())
+
+    def dynamic_keys(self, obstacle_keys, now):
+        current = set(obstacle_keys)
+        if not self.seen:
+            self.seen = True
+            self.stable = set(current)
+            self.appeared.clear()
+            return frozenset()
+        self.stable &= current
+        for key in [key for key in self.appeared if key not in current]:
+            del self.appeared[key]
+        for key in current:
+            if key not in self.stable and key not in self.appeared:
+                self.appeared[key] = now
+        for key in [key for key, started in self.appeared.items() if now - started >= self.hold_s]:
+            del self.appeared[key]
+            self.stable.add(key)
+        return frozenset(self.appeared)
+
+
+def map_marker_specs(resolution, floor, obstacles, *, max_voxels, dynamic_keys=()):
+    """Opaque wall cubes and a thin floor. Over budget, drop floor, then tops."""
+    dynamic = {key for key in (occupied_key(item) for item in dynamic_keys) if key in obstacles}
+    stable = set(obstacles) - dynamic
+    floor = set(floor)
+    note = None
+    if len(floor) + len(stable) + len(dynamic) > max_voxels:
+        room = max_voxels - len(stable) - len(dynamic)
+        if room < len(floor):
+            floor = set(sorted(floor)[:max(0, room)])
+            note = "map display shortened the floor; authority unchanged"
+        if len(stable) + len(dynamic) > max_voxels:
+            room = max(0, max_voxels - len(dynamic))
+            stable = set(sorted(stable, key=lambda key: (key[2], key[0], key[1]))[:room])
+            note = "map display omitted the highest voxels; authority unchanged"
+        if len(dynamic) > max_voxels:
+            dynamic = set(sorted(dynamic, key=lambda key: (key[2], key[0], key[1]))[:max_voxels])
+    cells = max(1, int(round(CHUNK_M / resolution)))
+
+    def centers(keys, z_offset=0.):
+        return [[(key[0] + .5) * resolution, (key[1] + .5) * resolution, (key[2] + .5) * resolution + z_offset]
+                for key in sorted(keys)]
+
+    def by_chunk(keys):
+        groups = {}
+        for key in keys:
+            groups.setdefault((key[0] // cells, key[1] // cells), []).append(key)
+        return groups
+
+    latched, live = [], []
+    for (cx, cy), keys in sorted(by_chunk(floor).items()):
+        latched.append(dict(ns=f"shared/occupied_floor/{cx}_{cy}", kind="cube_list", points=centers(keys, FLOOR_Z_OFFSET_M),
+                            scale=[resolution, resolution, FLOOR_THICKNESS_M], color=(.48, .51, .55),
+                            alpha=FLOOR_ALPHA, lifetime_s=0.))
+    for (cx, cy), keys in sorted(by_chunk(stable).items()):
+        latched.append(dict(ns=f"shared/occupied_obstacles/{cx}_{cy}", kind="cube_list", points=centers(keys),
+                            scale=[resolution] * 3, color=(.92, .23, .18), alpha=OBSTACLE_ALPHA, lifetime_s=0.))
+    if dynamic:
+        live.append(dict(ns="shared/occupied_dynamic", kind="cube_list", points=centers(dynamic),
+                         scale=[resolution] * 3, color=(1., .72, .20), alpha=1., lifetime_s=0.))
+    return latched, live, note
+
+
+def marker_token(spec):
+    digest = hashlib.blake2s(digest_size=16)
+    digest.update(spec["ns"].encode())
+    digest.update(repr((spec.get("scale"), spec.get("color"), spec.get("alpha"), spec.get("lifetime_s", 3.))).encode())
+    for point in spec.get("points") or ():
+        digest.update(repr(tuple(point)).encode())
+    return digest.digest()
+
+
+def scene_specs(state, display, *, max_edges=30000, max_voxels=100000, issues=(), include_trees=True, dynamic_keys=()):
     """ROS-independent representation of truthful marker content."""
-    markers = {"robots": [], "paths": [], "trees": [], "map": [], "people": []}
+    markers = {"robots": [], "paths": [], "trees": [], "map": [], "people": [], "dynamic": []}
     transforms = []
     robot_ids = set()
     extra = list(issues)
@@ -331,28 +474,13 @@ def scene_specs(state, display, *, max_edges=30000, max_voxels=100000, issues=()
         markers['people'].append(dict(ns='people/'+pid+'/label',kind='text',position=[center[0],center[1],center[2]+1.1],
             scale=[0,0,.23],color=(.45,1.,.65),alpha=1.,text=pid+' | '+note+' | '+str(len(person.get('source_keys',[])))+' views'))
     if display is not None:
-        resolution = float(display.get("resolution", .25))
-        if not math.isfinite(resolution) or resolution <= 0:
-            raise ValueError("invalid voxel resolution")
-        occupied = display.get("occupied", [])
-        stride = max(1, math.ceil(len(occupied)/max_voxels))
-        ground_z = float(display.get("ground_z",0.))
-        if not math.isfinite(ground_z):
-            raise ValueError("invalid ground height")
-        ground_key = math.floor(ground_z/resolution)
-        floor_points, obstacle_points = [], []
-        for key in occupied[::stride]:
-            if isinstance(key, (list,tuple)) and len(key)==3 and all(isinstance(v,int) for v in key):
-                points = floor_points if key[2]<=ground_key else obstacle_points
-                points.append([(v+.5)*resolution for v in key])
-        if floor_points:
-            markers["map"].append(dict(ns="shared/occupied_floor",kind="cube_list",points=floor_points,
-                                       scale=[resolution]*3,color=(.48,.51,.55),alpha=.12))
-        if obstacle_points:
-            markers["map"].append(dict(ns="shared/occupied_obstacles",kind="cube_list",points=obstacle_points,
-                                       scale=[resolution]*3,color=(.92,.23,.18),alpha=.55))
-        if stride>1:
-            extra.append(f"map display sampled 1/{stride}; authority unchanged")
+        resolution, floor, obstacles = partition_occupied(display)
+        map_specs, dynamic_specs, note = map_marker_specs(
+            resolution, floor, obstacles, max_voxels=max_voxels, dynamic_keys=dynamic_keys)
+        markers["map"].extend(map_specs)
+        markers["dynamic"].extend(dynamic_specs)
+        if note:
+            extra.append(note)
     revision = display.get("revision", "?") if display else (state.get("map_summary") or {}).get("revision", "?")
     summary=f"{state.get('scene_id','?')} / {state.get('epoch','?')}\nsim {state.get('sim_time','?')} | shared map r{revision}"
     if extra:
@@ -417,7 +545,7 @@ def main(argv=None):
         def __init__(self):
             super().__init__("air_ground_readonly_view")
             qos=QoSProfile(depth=1,durability=DurabilityPolicy.TRANSIENT_LOCAL,reliability=ReliabilityPolicy.RELIABLE)
-            topics={"robots":"robot_markers","paths":"path_markers","trees":"tree_markers","map":"shared_map_markers","people":"people_markers"}
+            topics={"robots":"robot_markers","paths":"path_markers","trees":"tree_markers","map":"shared_map_markers","dynamic":"dynamic_map_markers","people":"people_markers"}
             self.publishers_by_kind={key:self.create_publisher(MarkerArray,"/air_ground/"+topic,qos) for key,topic in topics.items()}
             self.projection_pub=self.create_publisher(OccupancyGrid,"/air_ground/ground_projection",qos)
             self.tf=TransformBroadcaster(self)
@@ -442,6 +570,14 @@ def main(argv=None):
             self.map_signature=None
             self.cached_arrays={}
             self.marker_deltas={key:MarkerDeltaTracker() for key in topics}
+            self.motion=VoxelMotion()
+            self.voxel_signature=None
+            self.voxel_epoch=None
+            self.cached_map_specs=[]
+            self.cached_dynamic_specs=[]
+            self.persist_specs={}
+            self.persist_tokens={}
+            self.subscriber_counts={}
             self.cached_projection=None
             self.last_published={}
             # Large maps / trees must not serialize on the LiDAR timer or pose
@@ -558,7 +694,12 @@ def main(argv=None):
             marker.pose.position.x,marker.pose.position.y,marker.pose.position.z=map(float,spec.get("position",[0,0,0]))
             marker.scale.x,marker.scale.y,marker.scale.z=map(float,spec["scale"])
             marker.color.r,marker.color.g,marker.color.b=spec["color"];marker.color.a=spec["alpha"]
-            marker.lifetime=Duration(sec=3)
+            life=float(spec.get("lifetime_s",3.))
+            if life>0:
+                whole=int(life)
+                marker.lifetime=Duration(sec=whole,nanosec=int(round((life-whole)*1e9)))
+            else:
+                marker.lifetime=Duration()
             marker.text=spec.get("text","")
             for values in spec.get("points",[]):
                 p=Point();p.x,p.y,p.z=map(float,values);marker.points.append(p)
@@ -594,6 +735,42 @@ def main(argv=None):
                 message=MarkerArray(markers=prefix+message.markers)
             self.publishers_by_kind[kind].publish(message)
             self.last_published[kind]=now
+
+        def publish_persistent(self,kind,specs,stamp,epoch):
+            """Send only chunks whose points changed. Lifetime 0 keeps the rest."""
+            publisher=self.publishers_by_kind[kind]
+            tracker=self.marker_deltas[kind]
+            subscribers=publisher.get_subscription_count()
+            resync=subscribers>self.subscriber_counts.get(kind,0)
+            self.subscriber_counts[kind]=subscribers
+            if self.persist_specs.get(kind) is specs and tracker.epoch==epoch and not resync:
+                return
+            tokens={(spec["ns"],0):marker_token(spec) for spec in specs}
+            if self.persist_tokens.get(kind)==tokens and tracker.epoch==epoch and not resync:
+                self.persist_specs[kind]=specs
+                return
+            by_key={(spec["ns"],0):spec for spec in specs}
+            previous=self.persist_tokens.get(kind,{})
+            epoch_changed=tracker.epoch not in (None,epoch)
+            send_all=resync or epoch_changed or tracker.keys is None or kind not in self.persist_tokens
+            dirty=[by_key[key] for key,token in tokens.items() if previous.get(key)!=token]
+            clear_all,removed=tracker.update(tokens,epoch)
+            prefix=[]
+            if send_all or clear_all:
+                clear=Marker();clear.action=Marker.DELETEALL;clear.header.frame_id="map";clear.header.stamp=stamp
+                prefix.append(clear)
+                additions=[self.marker(spec,stamp) for spec in specs]
+            else:
+                additions=[self.marker(spec,stamp) for spec in dirty]
+                for namespace,identifier in removed:
+                    deletion=Marker();deletion.action=Marker.DELETE
+                    deletion.header.frame_id="map";deletion.header.stamp=stamp
+                    deletion.ns=namespace;deletion.id=identifier
+                    prefix.append(deletion)
+            if prefix or additions:
+                publisher.publish(MarkerArray(markers=prefix+additions))
+            self.persist_tokens[kind]=tokens
+            self.persist_specs[kind]=specs
 
         def cameras(self):
             state=self.state
@@ -636,28 +813,45 @@ def main(argv=None):
         def maps(self):
             state=self.state
             display=None
-            signature=None
+            file_signature=None
+            epoch=state.get("epoch") if state is not None else None
             if state is not None:
                 path=Path(state["_view_run_root"])/"shared/display.json"
                 try:
                     candidate=self.map_cache.read(path)
-                    if (candidate.get("scene_epoch",candidate.get("epoch"))==state.get("epoch")
+                    if (candidate.get("scene_epoch",candidate.get("epoch"))==epoch
                             and candidate.get("scene_id",state.get("scene_id"))==state.get("scene_id")):
                         display=candidate
-                        # File identity also handles a publisher correcting a
-                        # display projection without advancing map revision.
-                        signature=(state.get("epoch"),self.map_cache.entries[path][0])
+                        # Projection may change without the occupied voxel set.
+                        file_signature=(epoch,self.map_cache.entries[path][0])
                 except (OSError,ValueError,KeyError,TypeError):
                     pass
-            changed=signature!=self.map_signature or "map" not in self.cached_arrays
-            specs=[]
-            if changed:
+            epoch_changed=epoch!=self.voxel_epoch
+            if epoch_changed:
+                self.motion.reset()
+                self.voxel_epoch=epoch
+            resolution,floor,obstacles=None,set(),set()
+            if display is not None:
                 try:
-                    groups,_=scene_specs({},display,max_voxels=args.max_display_voxels,include_trees=False)
+                    resolution,floor,obstacles=partition_occupied(display)
+                except (ValueError,TypeError):
+                    display=None
+            signature=None if display is None else occupied_signature(floor,obstacles,resolution)
+            now=time.monotonic()
+            if epoch_changed or signature!=self.voxel_signature or self.motion.due(now) or "map" not in self.persist_specs:
+                dynamic=self.motion.dynamic_keys(obstacles,now) if display is not None else frozenset()
+                if display is None:
+                    self.cached_map_specs,self.cached_dynamic_specs=[],[]
+                else:
+                    self.cached_map_specs,self.cached_dynamic_specs,_note=map_marker_specs(
+                        resolution,floor,obstacles,max_voxels=args.max_display_voxels,dynamic_keys=dynamic)
+                self.voxel_signature=signature
+            projection_changed=file_signature!=self.map_signature or self.cached_projection is None
+            if projection_changed:
+                try:
                     projection=occupancy_projection(display) if display is not None else None
-                    specs=groups["map"]
                 except (ValueError,KeyError,TypeError):
-                    specs=[];projection=None
+                    projection=None
                 grid=OccupancyGrid();grid.header.frame_id="map"
                 grid.info.origin.orientation.w=1.
                 grid.info.resolution=.25;grid.info.width=1;grid.info.height=1;grid.data=[-1]
@@ -667,13 +861,14 @@ def main(argv=None):
                     grid.data=projection["data"]
                 self.cached_projection=grid
             stamp=self.get_clock().now().to_msg()
-            heartbeat=time.monotonic()-self.last_published.get("map",0.)>=1.
-            self.publish_specs("map",specs,stamp,changed,
-                               epoch=state.get("epoch") if state is not None else None)
-            if self.cached_projection is not None and (changed or heartbeat):
+            self.publish_persistent("map",self.cached_map_specs,stamp,epoch)
+            self.publish_persistent("dynamic",self.cached_dynamic_specs,stamp,epoch)
+            heartbeat=time.monotonic()-self.last_published.get("projection",0.)>=1.
+            if self.cached_projection is not None and (projection_changed or heartbeat):
                 self.cached_projection.header.stamp=stamp
                 self.projection_pub.publish(self.cached_projection)
-            self.map_signature=signature
+                self.last_published["projection"]=time.monotonic()
+            self.map_signature=file_signature
 
         def tick(self):
             try:

@@ -15,6 +15,7 @@ import carla
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from sim_io.config import carla_port, runtime_home
 from sim_io.geometry import transform_points,to_map_xyz
+from sim_io.semantic_lidar import select_static_points
 
 stop=threading.Event()
 signal.signal(signal.SIGTERM,lambda *_:stop.set());signal.signal(signal.SIGINT,lambda *_:stop.set())
@@ -37,7 +38,7 @@ def main():
                     subscribed={};latest={};written={};identity=pointer['epoch']
                 world=client.get_world()
                 if world.id!=state['world_id']:stop.wait(.2);continue
-                for sensor in world.get_actors().filter('sensor.lidar.ray_cast'):
+                for sensor in world.get_actors().filter('sensor.lidar.ray_cast_semantic'):
                     parent=sensor.parent
                     if parent and parent.attributes.get('role_name','').startswith('ag_'):
                         rid=parent.attributes['role_name'][3:]
@@ -46,7 +47,7 @@ def main():
                 with lock:frames=dict(latest)
                 for rid,m in frames.items():
                     if written.get(rid)==m.frame:continue
-                    points=np.frombuffer(m.raw_data,np.float32).reshape(-1,4)[:,:3]
+                    points,_dropped=select_static_points(m.raw_data)
                     if len(points)>5000:points=points[np.linspace(0,len(points)-1,5000,dtype=int)]
                     capture_origin=to_map_xyz([m.transform.location.x,m.transform.location.y,m.transform.location.z],scene['carla_world_origin_m'])
                     points=transform_points(points,m.transform.get_matrix(),scene['carla_world_origin_m']).astype(np.float32)

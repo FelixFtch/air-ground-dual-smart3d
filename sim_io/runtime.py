@@ -31,6 +31,7 @@ from sim_io.people import People
 from sim_io.fusion_schedule import choose_candidate
 from sim_io.fusion_apply import FusionFrame, OrderedApplyPipeline
 from sim_io.lidar_rays import prepare_lidar_frame, observed_xy_azimuth_span_deg
+from sim_io.semantic_lidar import select_static_points
 from mapping.client import OctomapClient,MapCache,MapError
 from execution.guard import check_path_segment
 from execution.path_follow import lookahead,bounded_step
@@ -128,9 +129,9 @@ class Runtime:
             definitions += [('depth_aux_'+str(i),c) for i,c in enumerate(sc.get('clearance_depth',[]))]
             for kind,c in definitions:
                 state['sensor_definitions'][kind]=c
-                sb=library.find('sensor.lidar.ray_cast' if kind=='lidar' else 'sensor.camera.'+('depth' if kind.startswith('depth') else 'rgb'))
+                sb=library.find('sensor.lidar.ray_cast_semantic' if kind=='lidar' else 'sensor.camera.'+('depth' if kind.startswith('depth') else 'rgb'))
                 attrs={'sensor_tick':c['sensor_tick']}
-                if kind=='lidar':attrs.update(channels=c['channels'],points_per_second=c['points_per_second'],rotation_frequency=c['rotation_frequency'],range=c['range_m'],upper_fov=c['upper_fov'],lower_fov=c['lower_fov'],noise_stddev=c['noise_stddev'],dropoff_general_rate=0.,dropoff_zero_intensity=0.)
+                if kind=='lidar':attrs.update(channels=c['channels'],points_per_second=c['points_per_second'],rotation_frequency=c['rotation_frequency'],range=c['range_m'],upper_fov=c['upper_fov'],lower_fov=c['lower_fov'])
                 else:attrs.update(image_size_x=c['width'],image_size_y=c['height'],fov=c['fov'])
                 if kind=='rgb':
                     for key in ('post_process_profile','use_ray_tracing','enable_postprocess_effects'):
@@ -190,7 +191,7 @@ class Runtime:
                     sensor_world=np.array(m.transform.get_matrix(),dtype=float)
                     max_range=sensor_cfg.get('effective_mapping_range_m',sc['lidar']['effective_mapping_range_m'])
                     if kind=='lidar':
-                        local=np.frombuffer(m.raw_data,dtype=np.float32).reshape(-1,4)[:,:3].astype(float)
+                        local,semantic_dropped=select_static_points(m.raw_data)
                         raw_return_span=observed_xy_azimuth_span_deg(local)
                         raw_return_count=len(local)
                         # All real return voxels remain eligible; ray preparation below
@@ -224,7 +225,7 @@ class Runtime:
                         points,free_map,ray_stats=lidar_frame.hit_points,lidar_frame.free_endpoints,lidar_frame.stats
                         # Observed support is not the emitted scan span: no-return beams are absent.
                         ray_stats.update(return_azimuth_span_deg=raw_return_span,raw_return_count=raw_return_count,
-                            scan_end_angle_rad=float(m.horizontal_angle))
+                            scan_end_angle_rad=float(m.horizontal_angle),semantic_dynamic_dropped=semantic_dropped)
                         far=np.zeros(len(free_map),dtype=bool);max_range=clear_range
                     else:ray_stats={}
                     fields=dict(scene_id=self.scene['scene_id'],scene_epoch=self.epoch,robot_id=rid,sensor_id=kind,frame_seq=int(m.frame),
@@ -234,6 +235,7 @@ class Runtime:
                     if kind=='lidar':
                         fields['protected_hit_points']=lidar_frame.protected_hit_points.tolist()
                         fields['mark_range_m']=float(sensor_cfg['effective_mapping_range_m'])
+                        fields['static_surface']=True
                         for ray in fields['free_rays']:ray['include_endpoint']=False
                     start=time.monotonic()
                     try:delta=self.mapper.request('integrate',**fields)

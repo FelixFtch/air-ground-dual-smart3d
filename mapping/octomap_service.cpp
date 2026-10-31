@@ -96,6 +96,9 @@ class Service {
   // far return may update one of these existing surfaces even after a miss has
   // changed it to free, but cannot initialize previously unmarked far space.
   std::set<Key> known_near_hits;
+  // Town10 static surfaces. A semantic-lidar hit stays occupied; later free
+  // rays may still open unknown space, but they no longer erase these cells.
+  std::set<Key> static_surfaces;
   std::map<std::pair<std::string,std::string>, Stream> streams;
   std::deque<Revision> history;
   size_t history_limit = 128;
@@ -323,7 +326,9 @@ class Service {
     // deduplication. Only unique keys are copied, never all ray steps.
     std::vector<Key> ordered_frees(frees.begin(),frees.end());
     std::sort(ordered_frees.begin(),ordered_frees.end());
+    const bool static_surface=req.value("static_surface",false);
     for(const auto& k:ordered_frees) {
+      if(static_surfaces.count(k)) continue;
       const auto previous=observed.find(k);
       if(previous!=observed.end() && (stamp<previous->second-1e-9 ||
           (std::abs(stamp-previous->second)<=1e-9 && state(k)==2))) { ++skipped_stale; continue; }
@@ -371,6 +376,7 @@ class Service {
       if(first_observation || before!=(tree->isNodeOccupied(after)?2:1)) classified.insert(k);
       if(hits.count(k)) {
         known_near_hits.insert(k);
+        if(static_surface) static_surfaces.insert(k);
       } else {
         ++refreshed_protected_hits;
         if(before!=2 && tree->isNodeOccupied(after)) ++recovered_far_hit_cells;
@@ -439,6 +445,7 @@ class Service {
     std::set<Key> changed;
     for(const auto& key:keys) {
       known_near_hits.erase(key);
+      static_surfaces.erase(key);
       if(tree->search(octo_key(key))) { tree->deleteNode(octo_key(key)); observed.erase(key); changed.insert(key); }
     }
     tree->updateInnerOccupancy(); return commit(changed,changed,req.value("compact",false),binary);
@@ -451,6 +458,7 @@ class Service {
     json meta=envelope(); meta["config"]=config; meta["observations"]=json::array();
     for(const auto& item:observed) meta["observations"].push_back({{"key",item.first},{"capture_sim_time",item.second}});
     meta["known_near_hit_keys"]=known_near_hits;
+    meta["static_surface_keys"]=static_surfaces;
     meta["format"]="OctoMap full probability .ot";
     meta["ot_sha256"]=sha256_file(temporary);
     std::ofstream stream(path.string()+".metadata.json.tmp"); stream<<meta.dump(2)<<'\n'; stream.close();
@@ -502,6 +510,21 @@ class Service {
     tree.reset(static_cast<octomap::OcTree*>(loaded.release()));
     observed=std::move(stamps);
     known_near_hits=std::move(restored_known_near_hits);
+    if(meta.contains("static_surface_keys")) {
+      const auto& saved=meta.at("static_surface_keys");
+      require(saved.is_array(),"restore_mismatch","Static surface history must be an array");
+      for(const auto& row:saved) {
+        require(row.is_array() && row.size()==3,"restore_mismatch","Static surface key must have three integers");
+        Key k{};
+        for(size_t i=0;i<3;++i) {
+          require(row[i].is_number_integer() && row[i]>=-32768 && row[i]<32768,
+            "restore_mismatch","Static surface key is outside signed OctoMap range");
+          k[i]=row[i].get<int>();
+        }
+        require(tree->search(octo_key(k)),"restore_mismatch","Static surface history references a missing map cell");
+        static_surfaces.insert(k);
+      }
+    }
     // Old episode timestamps cannot certify freshness in a new episode.
     observed.clear();
     revision=1; history.clear(); watermark=-1;

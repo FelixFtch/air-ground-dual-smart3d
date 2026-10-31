@@ -73,8 +73,37 @@ class ObservabilityTests(unittest.TestCase):
         self.assertEqual(markers["go2_01/name"]["text"],"GO2_01")
         self.assertEqual(markers["go2_01/body_envelope"]["position"],tuple(pose))
         self.assertEqual(transforms[0]["position"],tuple(pose))
-        self.assertEqual(len(markers["shared/occupied_floor"]["points"]),2)
-        self.assertEqual(markers["shared/occupied_obstacles"]["points"],[[.125,.125,.125]])
+        floor=[m for m in specs["map"] if m["ns"].startswith("shared/occupied_floor/")]
+        obstacles=[m for m in specs["map"] if m["ns"].startswith("shared/occupied_obstacles/")]
+        self.assertEqual(sum(len(m["points"]) for m in floor),2)
+        self.assertEqual(obstacles[0]["points"],[[.125,.125,.125]])
+        self.assertEqual(obstacles[0]["alpha"],view.OBSTACLE_ALPHA)
+        self.assertEqual(obstacles[0]["lifetime_s"],0.)
+        self.assertEqual(floor[0]["scale"][2],view.FLOOR_THICKNESS_M)
+
+    def test_vertical_wall_is_kept_when_the_floor_is_dropped(self):
+        floor=[[x,0,-1] for x in range(30)]
+        wall=[[0,0,z] for z in range(1,9)]
+        specs,_=view.scene_specs({},{"resolution":.25,"ground_z":0.,"occupied":floor+wall},max_voxels=8)
+        points=[tuple(point) for marker in specs["map"] if marker["ns"].startswith("shared/occupied_obstacles/")
+                for point in marker["points"]]
+        self.assertEqual(points,[(.125,.125,(z+.5)*.25) for z in range(1,9)])
+        self.assertFalse(any(marker["ns"].startswith("shared/occupied_floor/") for marker in specs["map"]))
+
+    def test_new_obstacle_stays_off_the_latched_wall(self):
+        motion=view.VoxelMotion(hold_s=1.5)
+        self.assertEqual(motion.dynamic_keys([(0,0,1),(0,0,2)],10.),frozenset())
+        self.assertEqual(motion.dynamic_keys([(0,0,1),(0,0,2),(1,0,1)],10.2),frozenset({(1,0,1)}))
+        self.assertFalse(motion.due(11.))
+        self.assertTrue(motion.due(11.7))
+        specs,_=view.scene_specs({},{"resolution":.25,"ground_z":0.,"occupied":[[0,0,1],[0,0,2],[1,0,1]]},
+                                 dynamic_keys={(1,0,1)})
+        wall=[tuple(point) for marker in specs["map"] if "obstacles" in marker["ns"] for point in marker["points"]]
+        live=[tuple(point) for marker in specs["dynamic"] for point in marker["points"]]
+        self.assertEqual(live,[(.375,.125,.375)])
+        self.assertNotIn((.375,.125,.375),wall)
+        self.assertEqual(motion.dynamic_keys([(0,0,1),(0,0,2),(1,0,1)],12.),frozenset())
+        self.assertIn((1,0,1),motion.stable)
 
     def test_image_sources_are_bound_to_runtime_episode(self):
         with tempfile.TemporaryDirectory() as folder:
